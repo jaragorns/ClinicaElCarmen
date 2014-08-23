@@ -1,5 +1,4 @@
         <section>
-            QWE
             <div id="carousel-example-generic" class="carousel carousel-mind slide" data-ride="carousel" data-interval="5000">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
