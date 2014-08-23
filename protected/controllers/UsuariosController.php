@@ -47,12 +47,12 @@ class UsuariosController extends Controller
 
 	/**
 	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
+	 * @param integer $userid the userid of the model to be displayed
 	 */
-	public function actionView($id)
+	public function actionView($userid)
 	{
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$this->loadModel($userid),
 		));
 	}
 
@@ -71,7 +71,7 @@ class UsuariosController extends Controller
 		{
 			$model->attributes=$_POST['Usuarios'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','userid'=>$model->userid));
 		}
 
 		$this->render('create',array(
@@ -82,11 +82,11 @@ class UsuariosController extends Controller
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
+	 * @param integer $userid the userid of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate($userid)
 	{
-		$model=$this->loadModel($id);
+		$model=$this->loadModel($userid);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -97,7 +97,7 @@ class UsuariosController extends Controller
 			$model->password=$model->hashPassword($_POST['Usuarios']['password'],$session=$model->generateSalt());
 			$model->session=$session;
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','userid'=>$model->userid));
 		}
 
 		$this->render('update',array(
@@ -108,11 +108,11 @@ class UsuariosController extends Controller
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
+	 * @param integer $userid the userid of the model to be deleted
 	 */
-	public function actionDelete($id)
+	public function actionDelete($userid)
 	{
-		$this->loadModel($id)->delete();
+		$this->loadModel($userid)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -148,13 +148,13 @@ class UsuariosController extends Controller
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer $id the ID of the model to be loaded
+	 * @param integer $userid the userid of the model to be loaded
 	 * @return Usuarios the loaded model
 	 * @throws CHttpException
 	 */
-	public function loadModel($id)
+	public function loadModel($userid)
 	{
-		$model=Usuarios::model()->findByPk($id);
+		$model=Usuarios::model()->findByPk($userid);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

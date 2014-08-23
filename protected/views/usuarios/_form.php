@@ -20,15 +20,15 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="media">
-			<?php echo $form->labelEx($model,'usuario'); ?>
-			<?php echo $form->textField($model,'usuario',array('placeholder'=>"maria.perez",'size'=>30,'maxlength'=>30)); ?>
-			<?php echo $form->error($model,'usuario'); ?>
+			<?php echo $form->labelEx($model,'username'); ?>
+			<?php echo $form->textField($model,'username',array('placeholder'=>"maria.perez",'size'=>30,'maxlength'=>30)); ?>
+			<?php echo $form->error($model,'username'); ?>
 	</div>
 
 	<div class="media">
-		<?php echo $form->labelEx($model,'clave'); ?>
-		<?php echo $form->passwordField($model,'clave',array('type'=>"password",'size'=>20,'maxlength'=>20)); ?>
-		<?php echo $form->error($model,'clave'); ?>
+		<?php echo $form->labelEx($model,'password'); ?>
+		<?php echo $form->passwordField($model,'password',array('type'=>"password",'size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->error($model,'password'); ?>
 	</div>
 
 	<div class="media">
@@ -59,6 +59,12 @@
 		<?php echo $form->labelEx($model,'email'); ?>
 		<?php echo $form->textField($model,'email',array('placeholder'=>"mariaperez@gmail.com",'size'=>30,'maxlength'=>30)); ?>
 		<?php echo $form->error($model,'email'); ?>
+	</div>
+
+	<div class="media">
+		<?php echo $form->labelEx($model,'session'); ?>
+		<?php echo $form->textField($model,'session',array('placeholder'=>"",'size'=>30,'maxlength'=>30)); ?>
+		<?php echo $form->error($model,'session'); ?>
 	</div>
 
 	<div class="buttons">

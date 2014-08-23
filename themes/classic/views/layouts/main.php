@@ -92,7 +92,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Entrar</a>
                         <div class="dropdown-menu dropdown-login animated fadeInUp">
-                            <form role="form" name="loginform" id="login-form" action="/yii/ClinicaElCarmen/site/login.html" method="post">
+                            <form role="form" name="loginform" id="login-form" action="/ClinicaElCarmen/site/login.html" method="post">
                                 <h4 class="section-title">Datos de Ingreso</h4>
                                 <div class="form-group">
                                     <div class="input-group login-input">
@@ -117,16 +117,16 @@
                             </form>      
                         </div>
                     </li> <!-- dropdown -->
-                     <li class="dropdown">
+                    <?php if(Yii::app()->user->getState('nombres')!=""){ ?>
+                    <li class="dropdown">
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Usuario</a>
                         <div class="dropdown-menu dropdown-profile animated fadeInUp">
-                            <h4> <?php if(Yii::app()->user->getState('nombres')!==""){
-                                        echo Yii::app()->user->getState('nombres').' '.Yii::app()->user->getState('apellidos');  ?>
-                            </h4>
-                            <h6>      <?php echo Yii::app()->user->getState('cargo'); } ?></h6>
+                            <h4><?php echo Yii::app()->user->getState('nombres').' '.Yii::app()->user->getState('apellidos');?></h4>
+                            <h6><?php echo Yii::app()->user->getState('cargo');?></h6>
                             <a href="profile.php">Perfil</a> | <a href="<?php echo Yii::app()->baseUrl;?>/site/logout"?>Salir</a>
                         </div>
                     </li> <!-- dropdown -->
+                    <?php } ?>
                 </ul> <!-- nav nabvar-nav -->
             </div> <!-- container -->
         </nav> <!-- navbar navbar-static-top navbar-mind -->

@@ -3,27 +3,27 @@
 /* @var $model Usuarios */
 
 $this->breadcrumbs=array(
-	'Usuarioses'=>array('index'),
-	$model->id,
+	'Usuarios'=>array('index'),
+	$model->userid,
 );
 
 $this->menu=array(
-	array('label'=>'List Usuarios', 'url'=>array('index')),
-	array('label'=>'Create Usuarios', 'url'=>array('create')),
-	array('label'=>'Update Usuarios', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Usuarios', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Usuarios', 'url'=>array('admin')),
+	array('label'=>'Lista Usuarios', 'url'=>array('index')),
+	array('label'=>'Crear Usuarios', 'url'=>array('create')),
+	array('label'=>'Actualizar Usuarios', 'url'=>array('update', 'userid'=>$model->userid)),
+	array('label'=>'Borrar Usuarios', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','userid'=>$model->userid),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Gestionar Usuarios', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Usuarios #<?php echo $model->id; ?></h1>
+<h1>Ver Usuario #<?php echo $model->userid; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
-		'usuario',
-		//'clave',
+		'userid',
+		'username',
+		//'password',
 		'cargo',
 		'nombres',
 		'apellidos',
