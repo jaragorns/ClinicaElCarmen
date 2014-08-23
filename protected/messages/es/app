@@ -1,0 +1,5 @@
+<?php
+return array(
+'QWE' => 'QWE2',
+'verifyCode' => 'Codigo de Verificación',
+);
