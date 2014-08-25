@@ -5,13 +5,13 @@
 $this->breadcrumbs=array(
 	'Usuarios'=>array('index'),
 	$model->userid=>array('view','userid'=>$model->userid),
-	'Update',
+	'Actualizar',
 );
 
 $this->menu=array(
 	array('label'=>'Listar Usuarios', 'url'=>array('index')),
 	array('label'=>'Crear Usuarios', 'url'=>array('create')),
-	array('label'=>'Ver Usuarios', 'url'=>array('view', 'userid'=>$model->userid)),
+	array('label'=>'Ver Usuario', 'url'=>array('view', 'userid'=>$model->userid)),
 	array('label'=>'Gestionar Usuarios', 'url'=>array('admin')),
 );
 ?>

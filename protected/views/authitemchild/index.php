@@ -1,18 +1,18 @@
 <?php
-/* @var $this UsuariosController */
+/* @var $this AuthitemchildController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Usuarios',
+	'Authitemchildren',
 );
 
 $this->menu=array(
-	array('label'=>'Crear Usuarios', 'url'=>array('create')),
-	array('label'=>'Gestionar Usuarios', 'url'=>array('admin')),
+	array('label'=>'Create Authitemchild', 'url'=>array('create')),
+	array('label'=>'Manage Authitemchild', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Usuarioses</h1>
+<h1>Authitemchildren</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

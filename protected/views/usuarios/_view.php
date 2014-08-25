@@ -37,8 +37,8 @@
 	<?php echo CHtml::encode($data->email); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('session')); ?>:</b>
-	<?php echo CHtml::encode($data->session); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('roles_id')); ?>:</b>
+	<?php echo CHtml::encode($data->roles_id); ?>
 	<br />
 
 

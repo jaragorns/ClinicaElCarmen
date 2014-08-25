@@ -1,15 +1,15 @@
 <?php
-/* @var $this UsuariosController */
-/* @var $model Usuarios */
+/* @var $this AuthassignmentController */
+/* @var $model Authassignment */
 
 $this->breadcrumbs=array(
-	'Usuarios'=>array('index'),
-	'Gestión',
+	'Authassignments'=>array('index'),
+	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Usuarios', 'url'=>array('index')),
-	array('label'=>'Crear Usuarios', 'url'=>array('create')),
+	array('label'=>'List Authassignment', 'url'=>array('index')),
+	array('label'=>'Create Authassignment', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#usuarios-grid').yiiGridView('update', {
+	$('#authassignment-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Gestión Usuarios</h1>
+<h1>Manage Authassignments</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -41,19 +41,14 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'usuarios-grid',
+	'id'=>'authassignment-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
+		'itemname',
 		'userid',
-		'username',
-		//'password',
-		'cargo',
-		'nombres',
-		'apellidos',
-		'telefono',
-		'email',
-		'roles_id',
+		'bizrule',
+		'data',
 		array(
 			'class'=>'CButtonColumn',
 		),

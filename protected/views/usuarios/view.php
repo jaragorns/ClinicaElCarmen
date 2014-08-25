@@ -8,10 +8,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Lista Usuarios', 'url'=>array('index')),
+	array('label'=>'Listar Usuarios', 'url'=>array('index')),
 	array('label'=>'Crear Usuarios', 'url'=>array('create')),
 	array('label'=>'Actualizar Usuarios', 'url'=>array('update', 'userid'=>$model->userid)),
-	array('label'=>'Borrar Usuarios', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','userid'=>$model->userid),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Borrar Usuario', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','userid'=>$model->userid),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Gestionar Usuarios', 'url'=>array('admin')),
 );
 ?>
@@ -29,6 +29,6 @@ $this->menu=array(
 		'apellidos',
 		'telefono',
 		'email',
-		//'session',
+		'roles_id',
 	),
 )); ?>

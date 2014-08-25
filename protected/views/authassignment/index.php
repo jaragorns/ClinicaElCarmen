@@ -1,18 +1,18 @@
 <?php
-/* @var $this UsuariosController */
+/* @var $this AuthassignmentController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Usuarios',
+	'Authassignments',
 );
 
 $this->menu=array(
-	array('label'=>'Crear Usuarios', 'url'=>array('create')),
-	array('label'=>'Gestionar Usuarios', 'url'=>array('admin')),
+	array('label'=>'Create Authassignment', 'url'=>array('create')),
+	array('label'=>'Manage Authassignment', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Usuarioses</h1>
+<h1>Authassignments</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

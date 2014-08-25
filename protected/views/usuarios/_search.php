@@ -18,12 +18,12 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'username'); ?>
-		<?php echo $form->textField($model,'username',array('size'=>30,'maxlength'=>30)); ?>
+		<?php echo $form->textField($model,'username',array('size'=>30,'maxlength'=>80)); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'password'); ?>
-		<?php echo $form->textField($model,'password',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($model,'password',array('size'=>30,'maxlength'=>255)); ?>
 	</div>
 
 	<div class="row">
@@ -52,8 +52,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'session'); ?>
-		<?php echo $form->textArea($model,'session',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->label($model,'roles_id'); ?>
+		<?php echo $form->textArea($model,'roles_id',array('rows'=>6, 'cols'=>50)); ?>
 	</div>
 
 	<div class="row buttons">

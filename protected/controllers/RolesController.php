@@ -1,6 +1,6 @@
 <?php
 
-class UsuariosController extends Controller
+class RolesController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -28,8 +28,16 @@ class UsuariosController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete'),
-				'roles'=>array('superadmin'),
+				'actions'=>array('index','view'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update'),
+				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete'),
+				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -39,12 +47,12 @@ class UsuariosController extends Controller
 
 	/**
 	 * Displays a particular model.
-	 * @param integer $userid the userid of the model to be displayed
+	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($userid)
+	public function actionView($id)
 	{
 		$this->render('view',array(
-			'model'=>$this->loadModel($userid),
+			'model'=>$this->loadModel($id),
 		));
 	}
 
@@ -54,20 +62,16 @@ class UsuariosController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Usuarios;
+		$model=new Roles;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Usuarios']))
+		if(isset($_POST['Roles']))
 		{
-			$model->attributes=$_POST['Usuarios'];
-			$model->password = crypt($model->password.'salt');
-			if($model->save()){
-				$auth=Yii::app()->authManager;
-				$auth->assign(Roles::model()->findByPk($model->roles_id)->description,$model->userid);
-				$this->redirect(array('view','userid'=>$model->userid));
-			}
+			$model->attributes=$_POST['Roles'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
@@ -78,21 +82,20 @@ class UsuariosController extends Controller
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $userid the userid of the model to be updated
+	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($userid)
+	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($userid);
+		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Usuarios']))
+		if(isset($_POST['Roles']))
 		{
-			$model->attributes=$_POST['Usuarios'];
-			$model->password = crypt($model->password.'salt');
+			$model->attributes=$_POST['Roles'];
 			if($model->save())
-				$this->redirect(array('view','userid'=>$model->userid));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('update',array(
@@ -103,11 +106,11 @@ class UsuariosController extends Controller
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $userid the userid of the model to be deleted
+	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionDelete($userid)
+	public function actionDelete($id)
 	{
-		$this->loadModel($userid)->delete();
+		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -119,7 +122,7 @@ class UsuariosController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Usuarios');
+		$dataProvider=new CActiveDataProvider('Roles');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -130,10 +133,10 @@ class UsuariosController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Usuarios('search');
+		$model=new Roles('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Usuarios']))
-			$model->attributes=$_GET['Usuarios'];
+		if(isset($_GET['Roles']))
+			$model->attributes=$_GET['Roles'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -143,13 +146,13 @@ class UsuariosController extends Controller
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer $userid the userid of the model to be loaded
-	 * @return Usuarios the loaded model
+	 * @param integer $id the ID of the model to be loaded
+	 * @return Roles the loaded model
 	 * @throws CHttpException
 	 */
-	public function loadModel($userid)
+	public function loadModel($id)
 	{
-		$model=Usuarios::model()->findByPk($userid);
+		$model=Roles::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -157,11 +160,11 @@ class UsuariosController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Usuarios $model the model to be validated
+	 * @param Roles $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='usuarios-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='roles-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

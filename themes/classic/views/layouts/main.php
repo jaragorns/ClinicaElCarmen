@@ -51,10 +51,10 @@
                     <li id="menu-item-1" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1 dropdown">
                         <a title="Inicio" href="#" data-toggle="dropdown" class="dropdown-toggle">Inicio <span class="caret"></span></a>
                         <ul role="menu" class=" dropdown-menu">
-                            <li id="menu-item-11" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-11 current_page_item menu-item-11 active">
+                            <li id="menu-item-11" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11">
                                 <a title="Misión y Visión" href="<?php echo Yii::app()->baseUrl;?>/site/MisionVision">Misión y Visión</a>
                             </li>
-                            <li id="menu-item-12" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2">
+                            <li id="menu-item-12" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12">
                                 <a title="Junta Directiva" href="<?php echo Yii::app()->baseUrl;?>/site/JuntaDirectiva">Junta Directiva</a>
                             </li>
                          </ul>
@@ -65,8 +65,7 @@
                     <li id="menu-item-3" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3 dropdown">
                         <a title="Directorio Médico" href="<?php echo Yii::app()->baseUrl;?>/site/DirectorioMedico" data-toggle="dropdown" class="dropdown-toggle">Directorio Médico<span class="caret"></span></a>
                         <ul role="menu" class=" dropdown-menu">
-                            <li role="presentation" class="dropdown-header">Panel de Usuarios
-                            </li>
+                            <li role="presentation" class="dropdown-header">Panel de Usuarios</li>
                             <li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31">
                                 <a title="Resgistrarse" href="#">Resgistrarse</a>
                             </li>
@@ -89,6 +88,16 @@
                     </li>
                 </ul> <!-- nav nabvar-nav -->
                 <ul class="nav navbar-nav navbar-right">
+                    <?php if(Yii::app()->user->getState('nombres')!=""){ ?>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Usuario</a>
+                        <div class="dropdown-menu dropdown-profile animated fadeInUp">
+                            <h4><?php echo Yii::app()->user->getState('nombres').' '.Yii::app()->user->getState('apellidos');?></h4>
+                            <h6><?php echo Yii::app()->user->getState('cargo').' -'.Yii::app()->user->role;?></h6>
+                            <a href="profile.php">Perfil</a> | <a href="<?php echo Yii::app()->baseUrl;?>/site/logout"?>Salir</a>
+                        </div>
+                    </li> <!-- dropdown -->
+                    <?php }else{ ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Entrar</a>
                         <div class="dropdown-menu dropdown-login animated fadeInUp">
@@ -117,16 +126,7 @@
                             </form>      
                         </div>
                     </li> <!-- dropdown -->
-                    <?php if(Yii::app()->user->getState('nombres')!=""){ ?>
-                    <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Usuario</a>
-                        <div class="dropdown-menu dropdown-profile animated fadeInUp">
-                            <h4><?php echo Yii::app()->user->getState('nombres').' '.Yii::app()->user->getState('apellidos');?></h4>
-                            <h6><?php echo Yii::app()->user->getState('cargo');?></h6>
-                            <a href="profile.php">Perfil</a> | <a href="<?php echo Yii::app()->baseUrl;?>/site/logout"?>Salir</a>
-                        </div>
-                    </li> <!-- dropdown -->
-                    <?php } ?>
+                    <?php }?>
                 </ul> <!-- nav nabvar-nav -->
             </div> <!-- container -->
         </nav> <!-- navbar navbar-static-top navbar-mind -->
