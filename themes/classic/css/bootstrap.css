@@ -760,7 +760,13 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
-.row {
+.rowcontact {
+  margin-right: -15px;
+  margin-left: -15px;
+  padding-left: 35px;
+  float: left;
+  width: 160px;
+}.row {
   margin-right: -15px;
   margin-left: -15px;
   padding-left: 15px;

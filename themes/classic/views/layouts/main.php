@@ -63,7 +63,8 @@
                         <a title="Nuestros Servicios" href="<?php echo Yii::app()->baseUrl;?>/site/NuestrosServicios">Servicios</a>
                     </li>
                     <li id="menu-item-3" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3 dropdown">
-                        <a title="Directorio Médico" href="<?php echo Yii::app()->baseUrl;?>/site/DirectorioMedico" data-toggle="dropdown" class="dropdown-toggle">Directorio Médico<span class="caret"></span></a>
+                        <a title="Directorio Médico" href="<?php echo Yii::app()->baseUrl;?>/site/DirectorioMedico">Directorio Médico</a>
+                        <!--JsM
                         <ul role="menu" class=" dropdown-menu">
                             <li role="presentation" class="dropdown-header">Panel de Usuarios</li>
                             <li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31">
@@ -76,6 +77,7 @@
                                 <a title="Perfil" href="#">Perfil</a>
                             </li>
                         </ul>
+                        JsM-->
                     </li>
                     <li id="menu-item-4" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-4 dropdown">
                         <a title="Seguros Asociados" href="<?php echo Yii::app()->baseUrl;?>/site/SegurosAsociados">Seguros </a>
@@ -93,7 +95,7 @@
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Usuario</a>
                         <div class="dropdown-menu dropdown-profile animated fadeInUp">
                             <h4><?php echo Yii::app()->user->getState('nombres').' '.Yii::app()->user->getState('apellidos');?></h4>
-                            <h6><?php echo Yii::app()->user->getState('cargo').' -'.Yii::app()->user->role;?></h6>
+                            <h6><?php echo Yii::app()->user->getState('cargo').' - '.Yii::app()->user->role;?></h6>
                             <a href="profile.php">Perfil</a> | <a href="<?php echo Yii::app()->baseUrl;?>/site/logout"?>Salir</a>
                         </div>
                     </li> <!-- dropdown -->

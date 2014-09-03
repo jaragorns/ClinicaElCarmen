@@ -37,32 +37,40 @@ Si tiene alguna consulta o preguntas, por favor, rellene el siguiente formulario
 
 	<?php echo $form->errorSummary($model,null,null,array("class"=>"alert alert-error")); ?>
 
-	<div>
-		<?php echo $form->labelEx($model,'nombre'); ?>
-		<?php echo $form->textField($model,'nombre'); ?>
-		<?php echo $form->error($model,'nombre'); ?>
+	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'nombre: *'); ?>
+	</div>
+	<div class="media">
+			<?php echo $form->textField($model,'nombre'); ?>
+			<?php echo $form->error($model,'nombre'); ?>
 	</div>
 
-	<div>
-		<?php echo $form->labelEx($model,'email'); ?>
+	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'email: *'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'email'); ?>
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 
-	<div>
-		<?php echo $form->labelEx($model,'asunto'); ?>
+	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'asunto: *'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'asunto',array('size'=>60,'maxlength'=>128)); ?>
 		<?php echo $form->error($model,'asunto'); ?>
 	</div>
 
-	<div>
-		<?php echo $form->labelEx($model,'cuerpo'); ?>
+	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'cuerpo: *'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textArea($model,'cuerpo',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'cuerpo'); ?>
 	</div>
 
 	<?php if(CCaptcha::checkRequirements()): ?>
-	<div>
+	<div class="media">
 		<?php echo $form->labelEx($model,'verifyCode'); ?>
 		<div>
 		<?php $this->widget('CCaptcha'); ?>
@@ -75,7 +83,7 @@ Si tiene alguna consulta o preguntas, por favor, rellene el siguiente formulario
 	</div>
 	<?php endif; ?>
 
-	<div class="buttons">
+	<div class="media">
 		<?php echo CHtml::submitButton('Enviar', array("class"=>"btn btn-primary btn-large")); ?>
 	</div>
 
