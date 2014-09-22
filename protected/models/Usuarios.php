@@ -51,6 +51,7 @@ class Usuarios extends CActiveRecord
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
+		return array('FK_ROLE' => array(self::BELONGS_TO,'roles','roles_id'));
 		return array(
 		);
 	}

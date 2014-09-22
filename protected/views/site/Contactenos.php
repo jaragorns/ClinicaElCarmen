@@ -3,13 +3,13 @@
 /* @var $model ContactForm */
 /* @var $form CActiveForm */
 
-$this->pageTitle=Yii::app()->name . ' - Contactenos';
+$this->pageTitle=Yii::app()->name . ' - Contáctenos';
 $this->breadcrumbs=array(
-	'Contactenos',
+	'Contáctenos',
 );
 ?>
 
-<h1>Contactenos</h1>
+<h1>Contáctenos</h1>
 
 <?php if(Yii::app()->user->hasFlash('contactenos')): ?>
 
@@ -71,7 +71,7 @@ Si tiene alguna consulta o preguntas, por favor, rellene el siguiente formulario
 
 	<?php if(CCaptcha::checkRequirements()): ?>
 	<div class="media">
-		<?php echo $form->labelEx($model,'verifyCode'); ?>
+		<?php echo $form->labelEx($model,Yii::t('app','verifyCode')); ?>
 		<div>
 		<?php $this->widget('CCaptcha'); ?>
 		<?php echo $form->textField($model,'verifyCode'); ?>

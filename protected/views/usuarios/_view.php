@@ -38,8 +38,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('roles_id')); ?>:</b>
-	<?php echo CHtml::encode($data->roles_id); ?>
+	<?php echo CHtml::encode($data->FK_ROLE->description); ?>
 	<br />
-
 
 </div>

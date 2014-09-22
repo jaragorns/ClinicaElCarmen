@@ -22,6 +22,40 @@
         
     <!-- icon -->
     <link href="<?php echo Yii::app()->theme->baseUrl;?>/img/favicon.jpg" rel="shortcut icon" type="image/x-icon" />
+    <style>
+      #map_canvas {
+        width: 420px;
+        height: 320px;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script>
+      function initialize() {
+
+       // var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+
+        var mapCanvas = document.getElementById('map_canvas');
+        var mapOptions = {
+            center: new google.maps.LatLng(8.032565, -72.262005),
+            zoom: 17,
+            zoomControlOptions: {
+                style: google.maps.ZoomControlStyle.DEFAULT 
+            },
+            scaleControl: true,
+            overviewMapControlOptions:{opened:true},
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+            
+        }
+        
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+        var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(8.032825, -72.262085),
+              map: map,
+              title: 'Clínica El Carmen C.A.'
+          });
+        }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 </head>
 
 <body>
@@ -45,7 +79,7 @@
                         <i class="fa fa-bars fa-inverse"></i>
                     </button>
                 </div>
-
+                <?php if(Yii::app()->user->getState('nombres')==""){ ?>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <ul id="menu-mainmenu" class="nav navbar-nav">
                     <li id="menu-item-1" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1 dropdown">
@@ -60,27 +94,13 @@
                          </ul>
                     </li>
                     <li id="menu-item-2" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2 dropdown">
-                        <a title="Nuestros Servicios" href="<?php echo Yii::app()->baseUrl;?>/site/NuestrosServicios">Servicios</a>
+                        <a title="Nuestros Servicios" href="<?php echo Yii::app()->baseUrl;?>/site/NuestrosServicios">Nuestros Servicios</a>
                     </li>
                     <li id="menu-item-3" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3 dropdown">
                         <a title="Directorio Médico" href="<?php echo Yii::app()->baseUrl;?>/site/DirectorioMedico">Directorio Médico</a>
-                        <!--JsM
-                        <ul role="menu" class=" dropdown-menu">
-                            <li role="presentation" class="dropdown-header">Panel de Usuarios</li>
-                            <li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31">
-                                <a title="Resgistrarse" href="#">Resgistrarse</a>
-                            </li>
-                            <li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-32">
-                                <a title="Iniciar Sesión" href="#">Iniciar Sesión</a>
-                            </li>
-                            <li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33">
-                                <a title="Perfil" href="#">Perfil</a>
-                            </li>
-                        </ul>
-                        JsM-->
                     </li>
                     <li id="menu-item-4" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-4 dropdown">
-                        <a title="Seguros Asociados" href="<?php echo Yii::app()->baseUrl;?>/site/SegurosAsociados">Seguros </a>
+                        <a title="Seguros Asociados" href="<?php echo Yii::app()->baseUrl;?>/site/SegurosAsociados">Seguros Asociados</a>
                     </li>
                     <li id="menu-item-5" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5">
                         <a title="Galeria" href="<?php echo Yii::app()->baseUrl;?>/site/Galeria">Galeria</a>
@@ -90,16 +110,6 @@
                     </li>
                 </ul> <!-- nav nabvar-nav -->
                 <ul class="nav navbar-nav navbar-right">
-                    <?php if(Yii::app()->user->getState('nombres')!=""){ ?>
-                    <li class="dropdown">
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Usuario</a>
-                        <div class="dropdown-menu dropdown-profile animated fadeInUp">
-                            <h4><?php echo Yii::app()->user->getState('nombres').' '.Yii::app()->user->getState('apellidos');?></h4>
-                            <h6><?php echo Yii::app()->user->getState('cargo').' - '.Yii::app()->user->role;?></h6>
-                            <a href="profile.php">Perfil</a> | <a href="<?php echo Yii::app()->baseUrl;?>/site/logout"?>Salir</a>
-                        </div>
-                    </li> <!-- dropdown -->
-                    <?php }else{ ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Entrar</a>
                         <div class="dropdown-menu dropdown-login animated fadeInUp">
@@ -128,8 +138,49 @@
                             </form>      
                         </div>
                     </li> <!-- dropdown -->
-                    <?php }?>
                 </ul> <!-- nav nabvar-nav -->
+                
+                <?php } if(Yii::app()->user->getState('nombres')!=""){ ?>
+                 <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Usuario</a>
+                        <div class="dropdown-menu dropdown-profile animated fadeInUp">
+                            <h4><?php echo Yii::app()->user->getState('nombres').' '.Yii::app()->user->getState('apellidos');?></h4>
+                            <h6><?php echo Yii::app()->user->getState('cargo').' - '.Yii::app()->user->role;?></h6>
+                            <a href="profile.php">Perfil</a> | <a href="<?php echo Yii::app()->baseUrl;?>/site/logout"?>Salir</a>
+                        </div>
+                    </li> <!-- dropdown -->
+                 </ul> <!-- nav nabvar-nav -->
+                
+                
+                <!-- Menu segun tareas, roles o usuario -->
+                <?php if(Yii::app()->user->role=="Superadmin"){ ?>
+                <ul id="menu-mainmenu" class="nav navbar-nav">
+                    <li id="menu-item-1" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1 dropdown">
+                        <a title="Inicio" href="#" data-toggle="dropdown" class="dropdown-toggle">Usuarios <span class="caret"></span></a>
+                        <ul role="menu" class=" dropdown-menu">
+                            <li id="menu-item-11" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11">
+                                <a title="Misión y Visión" href="<?php echo Yii::app()->baseUrl;?>/usuarios/create">Registrar Usuario</a>
+                            </li>
+                            <li id="menu-item-12" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12">
+                                <a title="Junta Directiva" href="<?php echo Yii::app()->baseUrl;?>/usuarios/admin">Gestionar Usuarios</a>
+                            </li>
+                         </ul>
+                    </li>
+                    <li id="menu-item-2" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-2 dropdown">
+                        <a title="Inicio" href="<?php echo Yii::app()->baseUrl;?>/roles" data-toggle="dropdown" class="dropdown-toggle">Roles <span class="caret"></span></a>
+                        <ul role="menu" class=" dropdown-menu">
+                            <li id="menu-item-11" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11">
+                                <a title="Misión y Visión" href="<?php echo Yii::app()->baseUrl;?>/roles/create">Agregar Roles</a>
+                            </li>
+                            <li id="menu-item-12" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12">
+                                <a title="Junta Directiva" href="<?php echo Yii::app()->baseUrl;?>/roles/admin">Gestionar Roles</a>
+                            </li>
+                         </ul>
+                    </li>
+
+                <?php } ?>
+                <?php } ?>
             </div> <!-- container -->
         </nav> <!-- navbar navbar-static-top navbar-mind -->
         <?php if(isset($this->breadcrumbs) and $this->breadcrumbs!==array()):?>
@@ -218,15 +269,8 @@
                     <div class="col-md-4">
                         <div class="footer-widget">
                             <h3 class="footer-widget-title">Mapa</h3>
-                            <div class="row"> 
-                                <iframe width="410" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
-                                    src="https://www.google.com/maps/ms?msa=0&amp;msid=215407373721012042226.0004ff52bae6b29070bf4&amp;
-                                    ie=UTF8&amp;t=m&amp;source=embed&amp;ll=8.032565,-72.262005&amp;spn=0.003187,0.003219&amp;z=17&amp;output=embed">
-                                </iframe>
-                                <br>Ver <a href="https://www.google.com/maps/ms?msa=0&amp;msid=215407373721012042226.0004ff52bae6b29070bf4&amp;
-                                ie=UTF8&amp;t=m&amp;source=embed&amp;ll=8.032565,-72.262005&amp;spn=0.003187,0.003219&amp;z=17" 
-                                style="color:#ff8129">Clínica El Carmen C.A.</a> en un mapa más grande
-                            </div>
+                            <div id="map_canvas"></div>
+                            
                         </div>
                     </div>
 

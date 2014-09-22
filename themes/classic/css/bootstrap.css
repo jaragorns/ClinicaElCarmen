@@ -5849,7 +5849,7 @@ div.view
 {
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #C9E0ED;
+  border: 1px solid #c1ffc1;
 }
 
 div.breadcrumbs
@@ -6169,7 +6169,7 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 
 .grid-view table.items tr.odd
 {
-  background: #E5F1F4;
+  background: #daffda;
 }
 
 .grid-view table.items tr.selected
