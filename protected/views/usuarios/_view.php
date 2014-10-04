@@ -5,8 +5,8 @@
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('userid')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->userid), array('view', 'userid'=>$data->userid)); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
+	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('username')); ?>:</b>
@@ -36,9 +36,9 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('email')); ?>:</b>
 	<?php echo CHtml::encode($data->email); ?>
 	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('roles_id')); ?>:</b>
-	<?php echo CHtml::encode($data->FK_ROLE->description); ?>
+<!--
+	<b><?php #echo CHtml::encode($data->getAttributeLabel('roles_id')); ?>:</b>
+	<?php #echo CHtml::encode($data->roles->description); ?>
 	<br />
-
+-->
 </div>

@@ -4,15 +4,15 @@
 
 $this->breadcrumbs=array(
 	'Roles'=>array('index'),
-	'Create',
+	'Crear',
 );
 
 $this->menu=array(
-	array('label'=>'List Roles', 'url'=>array('index')),
-	array('label'=>'Manage Roles', 'url'=>array('admin')),
+	array('label'=>'Listar Roles', 'url'=>array('index')),
+	array('label'=>'Gestionar Roles', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Roles</h1>
+<h1>Crear Roles</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

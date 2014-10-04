@@ -39,12 +39,12 @@ class UsuariosController extends Controller
 
 	/**
 	 * Displays a particular model.
-	 * @param integer $userid the userid of the model to be displayed
+	 * @param integer $id the id of the model to be displayed
 	 */
-	public function actionView($userid)
+	public function actionView($id)
 	{
 		$this->render('view',array(
-			'model'=>$this->loadModel($userid),
+			'model'=>$this->loadModel($id),
 		));
 	}
 
@@ -55,59 +55,96 @@ class UsuariosController extends Controller
 	public function actionCreate()
 	{
 		$model=new Usuarios;
+		$rol_user = new Authassignment;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Usuarios']))
+		//if(isset($_POST['Usuarios']))
+		if(!empty($_POST))
 		{
+			$rol_user->attributes=$_POST['Authassignment'][1];
 			$model->attributes=$_POST['Usuarios'];
+			$rol_user->userid = Yii::app()->user->id;
+			$valid=$rol_user->validate();
+			if($valid)
+	        { 
+	            $rol_user->save();
+	            $itemname = $rol_user->itemname;
+	 
+	            // Set saved Authassignment as user Authassignment id
+	            file_put_contents("archivo.txt", print_r(Roles::model()->find($itemname)->id,true));
+				
+
+	            $model->roles_id = Roles::model()->find($itemname)->id;
+
+	            $model->save();
+	            $this->redirect(array('view','id'=>$model->id));
+	        }
 			$model->password = crypt($model->password.'salt');
 			if($model->save()){
-				$auth=Yii::app()->authManager;
-				$auth->assign(Roles::model()->findByPk($model->roles_id)->description,$model->userid);
-				$this->redirect(array('view','userid'=>$model->userid));
+				Yii::app()->authManager->assign($rol_user->itemname,$model->id);
+				$this->redirect(array('view','id'=>$model->id));
 			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'rol_user'=>$rol_user,
 		));
+
 	}
 
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $userid the userid of the model to be updated
+	 * @param integer $id the id of the model to be updated
 	 */
-	public function actionUpdate($userid)
+	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($userid);
+		$model=$this->loadModel($id);
+
+	    $rol_user=Authassignment::model()->find($model->id);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['Usuarios']))
 		{
+	        $rol_user->attributes=$_POST['Authassignment'][1];
+
 			$model->attributes=$_POST['Usuarios'];
+
+			// Validate all three model
+	        $valid=$rol_user->validate(); 
+	        $valid=$model->validate() && $valid;
+	 
+	        if($valid)
+	        {       
+	            $rol_user->save();
+	            $model->save();
+	        }
+
 			$model->password = crypt($model->password.'salt');
 			if($model->save())
-				$this->redirect(array('view','userid'=>$model->userid));
+				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
+			'rol_user'=>$rol_user,
 		));
 	}
-
+		
+	    
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $userid the userid of the model to be deleted
+	 * @param integer $id the id of the model to be deleted
 	 */
-	public function actionDelete($userid)
+	public function actionDelete($id)
 	{
-		$this->loadModel($userid)->delete();
+		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -119,10 +156,17 @@ class UsuariosController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Usuarios');
+		$dataProvider=new CActiveDataProvider('Usuarios', array(
+		    'pagination'=>array(
+		        'pageSize'=>5,
+		    ),
+		));
+
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
+
+		
 	}
 
 	/**
@@ -130,13 +174,22 @@ class UsuariosController extends Controller
 	 */
 	public function actionAdmin()
 	{
+
 		$model=new Usuarios('search');
+		$rol_user=Authassignment::model()->find($model->id);
+		
 		$model->unsetAttributes();  // clear any default values
+		$rol_user->unsetAttributes();
+
 		if(isset($_GET['Usuarios']))
 			$model->attributes=$_GET['Usuarios'];
-
+			
+		/*if(isset($_GET['Authassignment']))
+			$rol_user->attributes=$_POST['itemname'][1];
+		*/
 		$this->render('admin',array(
 			'model'=>$model,
+			'rol_user'=>$rol_user,
 		));
 	}
 
@@ -147,9 +200,9 @@ class UsuariosController extends Controller
 	 * @return Usuarios the loaded model
 	 * @throws CHttpException
 	 */
-	public function loadModel($userid)
+	public function loadModel($id)
 	{
-		$model=Usuarios::model()->findByPk($userid);
+		$model=Usuarios::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

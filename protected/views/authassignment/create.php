@@ -4,15 +4,15 @@
 
 $this->breadcrumbs=array(
 	'Authassignments'=>array('index'),
-	'Create',
+	'Crear',
 );
 
 $this->menu=array(
-	array('label'=>'List Authassignment', 'url'=>array('index')),
-	array('label'=>'Manage Authassignment', 'url'=>array('admin')),
+	array('label'=>'Listar Authassignment', 'url'=>array('index')),
+	array('label'=>'Gestionar Authassignment', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Authassignment</h1>
+<h1>Crear Authassignment</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

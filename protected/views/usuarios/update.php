@@ -4,18 +4,18 @@
 
 $this->breadcrumbs=array(
 	'Usuarios'=>array('index'),
-	$model->userid=>array('view','userid'=>$model->userid),
+	$model->id=>array('view','id'=>$model->id),
 	'Actualizar',
 );
 
 $this->menu=array(
 	array('label'=>'Listar Usuarios', 'url'=>array('index')),
 	array('label'=>'Crear Usuarios', 'url'=>array('create')),
-	array('label'=>'Ver Usuario', 'url'=>array('view', 'userid'=>$model->userid)),
+	array('label'=>'Ver Usuario', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Gestionar Usuarios', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Actualizar Usuarios <?php echo $model->userid; ?></h1>
+<h1>Actualizar Usuarios <?php echo $model->id; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model, 'rol_user'=>$rol_user)); ?>

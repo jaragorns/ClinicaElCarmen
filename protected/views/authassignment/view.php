@@ -8,15 +8,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Authassignment', 'url'=>array('index')),
-	array('label'=>'Create Authassignment', 'url'=>array('create')),
-	array('label'=>'Update Authassignment', 'url'=>array('update', 'id'=>$model->itemname)),
-	array('label'=>'Delete Authassignment', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->itemname),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Authassignment', 'url'=>array('admin')),
+	array('label'=>'Listar Authassignment', 'url'=>array('index')),
+	array('label'=>'Crear Authassignment', 'url'=>array('create')),
+	array('label'=>'Actualizar Authassignment', 'url'=>array('update', 'id'=>$model->itemname)),
+	array('label'=>'Eliminar Authassignment', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->itemname),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Gestionar Authassignment', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Authassignment #<?php echo $model->itemname; ?></h1>
+<h1>Ver Authassignment #<?php echo $model->itemname; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

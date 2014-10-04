@@ -1,6 +1,6 @@
 <?php
 
-class UsersController extends Controller
+class BancosController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -28,16 +28,8 @@ class UsersController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('index','view','create','update','admin','delete'),
+				'roles'=>array('superadmin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -62,16 +54,19 @@ class UsersController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Users;
+		$model=new Bancos;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Users']))
+		//Yii::app()->db->createCommand("SET time_zone = '+00:00'")->execute(); //Opc1
+		
+		if(isset($_POST['Bancos']))
 		{
-			$model->attributes=$_POST['Users'];
+			$model->attributes=$_POST['Bancos'];
+			$model->fecha_actualizacion = new CDbExpression ('NOW()'); //Opc2
+			//$model->fecha_actualizacion = date_create()->format('Y-m-d H:i:s'); //Opc1
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->id_bancos));
 		}
 
 		$this->render('create',array(
@@ -90,12 +85,14 @@ class UsersController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+		Yii::app()->db->createCommand("SET time_zone = '+00:00'")->execute();
 
-		if(isset($_POST['Users']))
+		if(isset($_POST['Bancos']))
 		{
-			$model->attributes=$_POST['Users'];
+			$model->attributes=$_POST['Bancos'];
+			$model->fecha_actualizacion = date_create()->format('Y-m-d H:i:s');
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+				$this->redirect(array('view','id'=>$model->id_bancos));
 		}
 
 		$this->render('update',array(
@@ -122,7 +119,7 @@ class UsersController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Users');
+		$dataProvider=new CActiveDataProvider('Bancos');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -133,10 +130,10 @@ class UsersController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Users('search');
+		$model=new Bancos('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Users']))
-			$model->attributes=$_GET['Users'];
+		if(isset($_GET['Bancos']))
+			$model->attributes=$_GET['Bancos'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -147,12 +144,12 @@ class UsersController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Users the loaded model
+	 * @return Bancos the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Users::model()->findByPk($id);
+		$model=Bancos::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -160,11 +157,11 @@ class UsersController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Users $model the model to be validated
+	 * @param Bancos $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='users-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='bancos-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Roles', 'url'=>array('create')),
-	array('label'=>'Manage Roles', 'url'=>array('admin')),
+	array('label'=>'Crear Roles', 'url'=>array('create')),
+	array('label'=>'Gestionar Roles', 'url'=>array('admin')),
 );
 ?>
 

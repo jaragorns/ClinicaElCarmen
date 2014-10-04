@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Authassignment', 'url'=>array('create')),
-	array('label'=>'Manage Authassignment', 'url'=>array('admin')),
+	array('label'=>'Crear Authassignment', 'url'=>array('create')),
+	array('label'=>'Gestionar Authassignment', 'url'=>array('admin')),
 );
 ?>
 

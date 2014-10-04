@@ -8,15 +8,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Authitemchild', 'url'=>array('index')),
-	array('label'=>'Create Authitemchild', 'url'=>array('create')),
-	array('label'=>'Update Authitemchild', 'url'=>array('update', 'id'=>$model->parent)),
-	array('label'=>'Delete Authitemchild', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->parent),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Authitemchild', 'url'=>array('admin')),
+	array('label'=>'Listar Authitemchild', 'url'=>array('index')),
+	array('label'=>'Crear Authitemchild', 'url'=>array('create')),
+	array('label'=>'Actualizar Authitemchild', 'url'=>array('update', 'id'=>$model->parent)),
+	array('label'=>'Eliminar Authitemchild', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->parent),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Gestionar Authitemchild', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Authitemchild #<?php echo $model->parent; ?></h1>
+<h1>Ver Authitemchild #<?php echo $model->parent; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

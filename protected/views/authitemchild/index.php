@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Authitemchild', 'url'=>array('create')),
-	array('label'=>'Manage Authitemchild', 'url'=>array('admin')),
+	array('label'=>'Crear Authitemchild', 'url'=>array('create')),
+	array('label'=>'Gestionar Authitemchild', 'url'=>array('admin')),
 );
 ?>
 

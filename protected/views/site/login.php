@@ -3,13 +3,13 @@
 /* @var $model LoginForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - Login';
+$this->pageTitle=Yii::app()->name . ' - Logeo';
 $this->breadcrumbs=array(
-	'Login',
+	'Logeo',
 );
 ?>
 
-<h1>Login</h1>
+<h1>Logeo</h1>
 
 <p>Por favor llene el siguiente formulario con sus credenciales de inicio de sesión:</p>
 
@@ -42,7 +42,7 @@ $this->breadcrumbs=array(
 
 	<div class="rememberMe">
 		<?php echo $form->checkBox($model,'rememberMe'); ?>
-		<?php echo $form->label($model,'rememberMe'); ?>
+		<?php echo $form->label($model,Yii::t('app','rememberMe')); ?>
 		<?php echo $form->error($model,'rememberMe'); ?>
 	</div>
 

@@ -15,42 +15,56 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Campos con <span class="required">*</span> son requeridos.</p>
+	
+	<?php if($form->errorSummary($model)!=""){ ?>
+	<div class="alert alert-info">
+    	<strong><?php echo $form->errorSummary($model);?></strong> 
+    </div>
+	<?php } ?>
 
-	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>64)); ?>
+	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'name: *'); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'name',array('placeholder'=>"accionista",'size'=>30,'maxlength'=>64)); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'type'); ?>
-		<?php echo $form->textField($model,'type'); ?>
+	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'tipo: '); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'type',array('placeholder'=>"2,1,0;",'size'=>11,'maxlength'=>11)); ?>
 		<?php echo $form->error($model,'type'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50)); ?>
+	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'descripción: '); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textArea($model,'description',array('placeholder'=>"NULL;",'rows'=>2, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'description'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'bizrule'); ?>
-		<?php echo $form->textArea($model,'bizrule',array('rows'=>6, 'cols'=>50)); ?>
+	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'bizrule: '); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textArea($model,'bizrule',array('placeholder'=>"NULL;",'rows'=>2, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'bizrule'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'data'); ?>
-		<?php echo $form->textArea($model,'data',array('rows'=>6, 'cols'=>50)); ?>
+	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'data: '); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textArea($model,'data',array('placeholder'=>"NULL;",'rows'=>2, 'cols'=>50));?>
 		<?php echo $form->error($model,'data'); ?>
 	</div>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	<div class="media">
+		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : 'Save',  array("class"=>"btn btn-primary btn-large")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

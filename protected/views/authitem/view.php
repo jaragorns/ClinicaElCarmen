@@ -8,15 +8,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Authitem', 'url'=>array('index')),
-	array('label'=>'Create Authitem', 'url'=>array('create')),
-	array('label'=>'Update Authitem', 'url'=>array('update', 'id'=>$model->name)),
-	array('label'=>'Delete Authitem', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->name),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Authitem', 'url'=>array('admin')),
+	array('label'=>'Listar Authitem', 'url'=>array('index')),
+	array('label'=>'Crear Authitem', 'url'=>array('create')),
+	#array('label'=>'Actualizar Authitem', 'url'=>array('update', 'id'=>$model->id)),
+	#array('label'=>'Eliminar Authitem', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Administrar Authitem', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Authitem #<?php echo $model->name; ?></h1>
+<h1>Ver Authitem #<?php echo $model->name; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

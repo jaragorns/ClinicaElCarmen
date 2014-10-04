@@ -1,22 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "tbl_user".
+ * This is the model class for table "bancos".
  *
- * The followings are the available columns in table 'tbl_user':
- * @property integer $id
- * @property string $username
- * @property string $password
- * @property string $email
+ * The followings are the available columns in table 'bancos':
+ * @property integer $id_bancos
+ * @property string $nombre
+ * @property integer $saldo
+ * @property string $fecha_actualizacion
  */
-class TblUser extends CActiveRecord
+class Bancos extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'tbl_user';
+		return 'bancos';
 	}
 
 	/**
@@ -27,11 +27,12 @@ class TblUser extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, email', 'required'),
-			array('username, password, email', 'length', 'max'=>128),
+			array('nombre, saldo, fecha_actualizacion', 'required'),
+			array('saldo', 'numerical', 'integerOnly'=>true),
+			array('nombre', 'length', 'max'=>60),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, username, password, email', 'safe', 'on'=>'search'),
+			array('id_bancos, nombre, saldo, fecha_actualizacion', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -52,10 +53,10 @@ class TblUser extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'username' => 'Username',
-			'password' => 'Password',
-			'email' => 'Email',
+			'id_bancos' => 'Id Bancos',
+			'nombre' => 'Nombre',
+			'saldo' => 'Saldo',
+			'fecha_actualizacion' => 'Fecha Actualizacion',
 		);
 	}
 
@@ -74,13 +75,13 @@ class TblUser extends CActiveRecord
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
-
+		
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('username',$this->username,true);
-		$criteria->compare('password',$this->password,true);
-		$criteria->compare('email',$this->email,true);
+		$criteria->compare('id_bancos',$this->id_bancos);
+		$criteria->compare('nombre',$this->nombre,true);
+		$criteria->compare('saldo',$this->saldo);
+		$criteria->compare('fecha_actualizacion',$this->fecha_actualizacion,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -91,7 +92,7 @@ class TblUser extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return TblUser the static model class
+	 * @return Bancos the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

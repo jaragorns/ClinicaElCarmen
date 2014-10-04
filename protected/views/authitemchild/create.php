@@ -4,15 +4,15 @@
 
 $this->breadcrumbs=array(
 	'Authitemchildren'=>array('index'),
-	'Create',
+	'Crear',
 );
 
 $this->menu=array(
-	array('label'=>'List Authitemchild', 'url'=>array('index')),
-	array('label'=>'Manage Authitemchild', 'url'=>array('admin')),
+	array('label'=>'Listar Authitemchild', 'url'=>array('index')),
+	array('label'=>'Gestionar Authitemchild', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Authitemchild</h1>
+<h1>Crear Authitemchild</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

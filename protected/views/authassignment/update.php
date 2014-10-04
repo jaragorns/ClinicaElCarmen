@@ -5,17 +5,17 @@
 $this->breadcrumbs=array(
 	'Authassignments'=>array('index'),
 	$model->itemname=>array('view','id'=>$model->itemname),
-	'Update',
+	'Actualizar',
 );
 
 $this->menu=array(
-	array('label'=>'List Authassignment', 'url'=>array('index')),
-	array('label'=>'Create Authassignment', 'url'=>array('create')),
-	array('label'=>'View Authassignment', 'url'=>array('view', 'id'=>$model->itemname)),
-	array('label'=>'Manage Authassignment', 'url'=>array('admin')),
+	array('label'=>'Listar Authassignment', 'url'=>array('index')),
+	array('label'=>'Crear Authassignment', 'url'=>array('create')),
+	array('label'=>'Ver Authassignment', 'url'=>array('view', 'id'=>$model->itemname)),
+	array('label'=>'Gestionar Authassignment', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Authassignment <?php echo $model->itemname; ?></h1>
+<h1>Actualizar Authassignment <?php echo $model->itemname; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

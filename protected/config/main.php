@@ -12,6 +12,7 @@ return array(
 	'language' => 'es',
 	'sourceLanguage' => 'en',
 	'charset' => 'utf-8',
+	'timeZone'=>'GMT',
 	// preloading 'log' component
 	'preload'=>array('log'),
 
@@ -33,6 +34,9 @@ return array(
 
 	// application components
 	'components'=>array(
+		'localtime'=>array(
+        	'class'=>'LocalTime',
+        ),
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
@@ -55,6 +59,7 @@ return array(
 			'username' => 'root',
 			'password' => '',
 			'charset' => 'utf8',
+			'enableProfiling' => true,
 		),
 		'authManager' => array(
 			'class' => 'CDbAuthManager',
@@ -75,11 +80,10 @@ return array(
 					'levels'=>'error, warning',
 				),
 				// uncomment the following to show log messages on web pages
-				/*
+				
 				array(
 					'class'=>'CWebLogRoute',
 				),
-				*/
 			),
 		),
 	),

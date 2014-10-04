@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Authitem', 'url'=>array('create')),
-	array('label'=>'Manage Authitem', 'url'=>array('admin')),
+	array('label'=>'Crear Authitem', 'url'=>array('create')),
+	array('label'=>'Gestionar Authitem', 'url'=>array('admin')),
 );
 ?>
 

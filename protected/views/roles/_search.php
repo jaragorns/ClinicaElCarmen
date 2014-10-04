@@ -11,18 +11,22 @@
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'id'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'id'); ?>
 	</div>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'description'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>80)); ?>
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+		<?php echo CHtml::submitButton('Search', array("class"=>"btn btn-primary btn-large")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
