@@ -11,7 +11,7 @@ $this->menu=array(
 	array('label'=>'Listar Bancos', 'url'=>array('index')),
 	array('label'=>'Crear Bancos', 'url'=>array('create')),
 	array('label'=>'Actualizar Bancos', 'url'=>array('update', 'id'=>$model->id_bancos)),
-	array('label'=>'Eliminar Bancos', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_bancos),'confirm'=>'Are you sure you want to delete this item?')),
+	//array('label'=>'Eliminar Bancos', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_bancos),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Gestionar Bancos', 'url'=>array('admin')),
 );
 ?>

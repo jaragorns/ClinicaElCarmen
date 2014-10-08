@@ -11,7 +11,7 @@ $this->menu=array(
 	array('label'=>'Listar Comprobantes', 'url'=>array('index')),
 	array('label'=>'Crear Comprobantes', 'url'=>array('create')),
 	array('label'=>'Actualizar Comprobantes', 'url'=>array('update', 'id'=>$model->id_comprobante)),
-	array('label'=>'Eliminar Comprobantes', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_comprobante),'confirm'=>'Are you sure you want to delete this item?')),
+	//array('label'=>'Eliminar Comprobantes', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_comprobante),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Gestionar Comprobantes', 'url'=>array('admin')),
 );
 ?>

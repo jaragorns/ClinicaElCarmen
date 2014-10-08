@@ -11,7 +11,7 @@ $this->menu=array(
 	array('label'=>'Listar Authassignment', 'url'=>array('index')),
 	array('label'=>'Crear Authassignment', 'url'=>array('create')),
 	array('label'=>'Actualizar Authassignment', 'url'=>array('update', 'id'=>$model->itemname)),
-	array('label'=>'Eliminar Authassignment', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->itemname),'confirm'=>'Are you sure you want to delete this item?')),
+	//array('label'=>'Eliminar Authassignment', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->itemname),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Gestionar Authassignment', 'url'=>array('admin')),
 );
 ?>

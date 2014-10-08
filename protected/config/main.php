@@ -20,6 +20,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'application.modules.rights.components.dataproviders.*',
 	),
 
 	'modules'=>array(
@@ -47,9 +48,12 @@ return array(
 			'showScriptName'=>false,
 			'urlSuffix'=>'.html',
 			'rules'=>array(
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+        		'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+        		'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+        		'<controller:\w+>/<id:\d+>'=>'<controller>/view',
+				'gii'=>'gii',
+            	'gii/<controller:\w+>'=>'gii/<controller>',
+            	'gii/<controller:\w+>/<action:\w+>'=>'gii/<controller>/<action>',
 			),
 		),
 		'db'=>array(

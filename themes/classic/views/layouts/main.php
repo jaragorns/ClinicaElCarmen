@@ -14,11 +14,9 @@
     <link href="<?php echo Yii::app()->theme->baseUrl;?>/css/width-full.css" rel="stylesheet" media="screen" title="default">
     <link href="<?php echo Yii::app()->theme->baseUrl;?>/style.css" rel="stylesheet" media="screen">
     
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <script src="//use.edgefonts.net/cabin;source-sans-pro:n2,i2,n3,n4,n6,n7,n9.js"></script>
         
-        <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/slippry.min.js"></script>
-        <link href="<?php echo Yii::app()->theme->baseUrl;?>/css/slippry.css" rel="stylesheet" media="screen">
+    <?php Yii::app()->clientScript->registerCoreScript('jquery'); ?>
         
     <!-- icon -->
     <link href="<?php echo Yii::app()->theme->baseUrl;?>/img/favicon.jpg" rel="shortcut icon" type="image/x-icon" />
@@ -146,7 +144,7 @@
                         <a href="" class="dropdown-toggle" data-toggle="dropdown">Usuario</a>
                         <div class="dropdown-menu dropdown-profile animated fadeInUp">
                             <h4><?php echo Yii::app()->user->getState('nombres').' '.Yii::app()->user->getState('apellidos');?></h4>
-                            <h6><?php echo Yii::app()->user->getState('cargo')."\n".Yii::app()->user->role;?></h6>
+                            <h6><?php echo Yii::app()->user->getState('cargo')." - ".Yii::app()->user->role;?></h6>
                             <a href="<?php echo Yii::app()->baseUrl.'/usuarios/'.Yii::app()->user->id;?>">Perfil</a> | <a href="<?php echo Yii::app()->baseUrl;?>/site/logout"?>Salir</a>
                         </div>
                     </li> <!-- dropdown -->
@@ -164,6 +162,17 @@
                             </li>
                             <li id="menu-item-12" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12">
                                 <a title="Gestionar Usuarios" href="<?php echo Yii::app()->baseUrl;?>/usuarios/admin">Gestionar Usuarios</a>
+                            </li>
+                         </ul>
+                    </li>
+                    <li id="menu-item-2" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-2 dropdown">
+                        <a title="Roles" href="<?php echo Yii::app()->baseUrl;?>/roles" data-toggle="dropdown" class="dropdown-toggle">Roles <span class="caret"></span></a>
+                        <ul role="menu" class=" dropdown-menu">
+                            <li id="menu-item-21" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-21">
+                                <a title="Agregar Roles" href="<?php echo Yii::app()->baseUrl;?>/roles/create">Agregar Roles</a>
+                            </li>
+                            <li id="menu-item-22" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22">
+                                <a title="Gestionar Roles" href="<?php echo Yii::app()->baseUrl;?>/roles/admin">Gestionar Roles</a>
                             </li>
                          </ul>
                     </li>
@@ -333,7 +342,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery-1.10.2.min.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.cookie.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/bootstrap.min.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.mixitup.min.js"></script>
@@ -347,8 +356,7 @@
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/comment-reply.min.js?ver=3.9.1" type="text/javascript"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/devicepx-jetpack.js?ver=201430" type="text/javascript"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/e-201430.js" type="text/javascript"></script>
-    <script>
-        window.location.refresh()
-    </script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/slippry.js"></script>
+        <link href="<?php echo Yii::app()->theme->baseUrl;?>/css/slippry.css" rel="stylesheet" media="screen">
 </body>
 </html>

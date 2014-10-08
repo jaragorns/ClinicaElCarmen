@@ -68,7 +68,7 @@
 		<?php echo $form->labelEx($model,'teléfono :'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'telefono',array('placeholder'=>"04247801122",'size'=>12,'maxlength'=>12)); ?>
+		<?php echo $form->textField($model,'telefono',array('placeholder'=>"04247801122",'size'=>12,'maxlength'=>11)); ?>
 		<?php echo $form->error($model,'telefono'); ?>
 	</div>
 
@@ -76,7 +76,7 @@
 		<?php echo $form->labelEx($model,'email :'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'email',array('placeholder'=>"mariaperez@gmail.com",'size'=>30,'maxlength'=>30)); ?>
+		<?php echo $form->textField($model,'email',array('placeholder'=>"mariaperez@gmail.com",'size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 

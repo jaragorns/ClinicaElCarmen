@@ -36,9 +36,9 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('email')); ?>:</b>
 	<?php echo CHtml::encode($data->email); ?>
 	<br />
-<!--
-	<b><?php #echo CHtml::encode($data->getAttributeLabel('roles_id')); ?>:</b>
-	<?php #echo CHtml::encode($data->roles->description); ?>
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('Rol')); ?>:</b>
+	<?php echo CHtml::encode(Authassignment::model()->findByAttributes(array('userid'=>$data->id))->itemname); ?>
 	<br />
--->
+
 </div>

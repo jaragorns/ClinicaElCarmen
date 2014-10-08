@@ -15,7 +15,7 @@ class UsuariosController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+			//'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -69,23 +69,23 @@ class UsuariosController extends Controller
 			$valid=$rol_user->validate();
 			if($valid)
 	        { 
-	            $rol_user->save();
+	            //$rol_user->save();
 	            $itemname = $rol_user->itemname;
-	 
-	            // Set saved Authassignment as user Authassignment id
-	            file_put_contents("archivo.txt", print_r(Roles::model()->find($itemname)->id,true));
-				
+	
+	            $model->roles_id = Roles::model()->findByAttributes(array('description'=>$itemname))->id;
 
-	            $model->roles_id = Roles::model()->find($itemname)->id;
+	            $model->password = crypt($model->password.'salt');
 
 	            $model->save();
-	            $this->redirect(array('view','id'=>$model->id));
-	        }
-			$model->password = crypt($model->password.'salt');
-			if($model->save()){
+	            
+	            //$command = Yii::app()->db->createCommand('SHOW TABLE STATUS LIKE "usuarios"');
+				//$res=$command->queryRow();      
+				//$next_id=$res['Auto_increment'];
+
+				//file_put_contents("archivo.txt", print_r(),true);
 				Yii::app()->authManager->assign($rol_user->itemname,$model->id);
 				$this->redirect(array('view','id'=>$model->id));
-			}
+	        }
 		}
 
 		$this->render('create',array(
@@ -116,18 +116,20 @@ class UsuariosController extends Controller
 			$model->attributes=$_POST['Usuarios'];
 
 			// Validate all three model
+			$rol_user->userid = Yii::app()->user->id;
 	        $valid=$rol_user->validate(); 
 	        $valid=$model->validate() && $valid;
 	 
 	        if($valid)
 	        {       
-	            $rol_user->save();
+	            //$rol_user->save();
 	            $model->save();
 	        }
 
 			$model->password = crypt($model->password.'salt');
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			Yii::app()->authManager->revoke(Authassignment::model()->findByAttributes(array("userid"=>$model->id))->itemname,$model->id);
+			Yii::app()->authManager->assign($rol_user->itemname,$model->id);
+			$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('update',array(

@@ -15,7 +15,7 @@ class AuthitemController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+			//'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -29,7 +29,7 @@ class AuthitemController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','create','update','admin','delete'),
-				'users'=>array('*'),
+				'roles'=>array('superadmin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -41,10 +41,10 @@ class AuthitemController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($name)
+	public function actionView($id)
 	{
 		$this->render('view',array(
-			'model'=>$this->loadModel($name),
+			'model'=>$this->loadModel($id),
 		));
 	}
 

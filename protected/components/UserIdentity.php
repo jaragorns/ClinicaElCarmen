@@ -28,9 +28,9 @@ class UserIdentity extends CUserIdentity
 		{
 			$this->_id=$user->id;
 			//$role = Roles::model()->findByPk($user->roles_id);
-			$this->setState('role',$role->description);
-			$role = Authassignment::model()->find($user->id);
-			$this->setState('role',$role->itemname);
+			//$this->setState('role',$role->description);
+			$role = Authassignment::model()->findByAttributes(array('userid'=>$user->id))->itemname;
+			$this->setState('role',$role);
 			$this->setState('nombres',$user->nombres);
 			$this->setState('apellidos',$user->apellidos);
 			$this->setState('cargo',$user->cargo);

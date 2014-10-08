@@ -11,7 +11,7 @@ $this->menu=array(
 	array('label'=>'Listar Usuarios', 'url'=>array('index')),
 	array('label'=>'Crear Usuarios', 'url'=>array('create')),
 	array('label'=>'Actualizar Usuarios', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Eliminar Usuario', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	//array('label'=>'Eliminar Usuario', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Gestionar Usuarios', 'url'=>array('admin')),
 );
 ?>
@@ -31,3 +31,5 @@ $this->menu=array(
 		'email',
 	),
 )); ?>
+
+<script type="text/javascript"> $(function(){ alert ("lo que sea..." ); }); </script>

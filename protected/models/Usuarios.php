@@ -39,11 +39,12 @@ class Usuarios extends CActiveRecord
 			array('username, password, cargo, nombres, apellidos, telefono, email', 'required'),
 			array('username', 'length', 'max'=>64),
 			array('password', 'length', 'max'=>255),
-			array('cargo, nombres, apellidos, email', 'length', 'max'=>30),
-			array('telefono', 'length', 'max'=>12),
+			array('nombres, apellidos', 'length', 'max'=>30),
+			array('cargo, email', 'length', 'max'=>50),
+			array('telefono', 'length', 'max'=>11),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, username, password, cargo, nombres, apellidos, telefono, email', 'safe', 'on'=>'search'),
+			array('id, username, password, cargo, nombres, apellidos, telefono, email','safe', 'on'=>'search'),
 			array('description_role', 'safe', 'on'=>'search'),
 		);
 	}

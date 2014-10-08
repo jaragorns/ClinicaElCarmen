@@ -11,7 +11,7 @@ $this->menu=array(
 	array('label'=>'Listar Authitemchild', 'url'=>array('index')),
 	array('label'=>'Crear Authitemchild', 'url'=>array('create')),
 	array('label'=>'Actualizar Authitemchild', 'url'=>array('update', 'id'=>$model->parent)),
-	array('label'=>'Eliminar Authitemchild', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->parent),'confirm'=>'Are you sure you want to delete this item?')),
+	//array('label'=>'Eliminar Authitemchild', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->parent),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Gestionar Authitemchild', 'url'=>array('admin')),
 );
 ?>
