@@ -47,10 +47,10 @@
 	</div>
 <!--
 	<div class="rowcontact">
-		<?php echo $form->label($model,'detalle'); ?>
+		<?php //echo $form->label($model,'detalle'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'detalle',array('size'=>60,'maxlength'=>80)); ?>
+		<?php //echo $form->textField($model,'detalle',array('size'=>60,'maxlength'=>80)); ?>
 	</div>
 -->
 	<div class="rowcontact">
@@ -61,10 +61,10 @@
 	</div>
 <!--
 	<div class="rowcontact">
-		<?php echo $form->label($model,'usuarios_userid'); ?>
+		<?php //echo $form->label($model,'usuarios_username'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'usuarios_userid'); ?>
+		<?php //echo $form->textField($model,'usuarios_username'); ?>
 	</div>
 -->
 	<div class="rowcontact">

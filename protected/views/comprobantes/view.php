@@ -28,7 +28,10 @@ $this->menu=array(
 		'fecha',
 		'detalle',
 		'estado',
-		'usuarios_userid',
+		array(
+			'name' => 'usuarios_username',
+			'value' => Usuarios::model()->findByAttributes(array('id'=>$model->usuarios_username))->username
+		),
 		'bancos_id_bancos',
 	),
 )); ?>

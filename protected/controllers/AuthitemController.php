@@ -55,6 +55,7 @@ class AuthitemController extends Controller
 	public function actionCreate()
 	{
 		$model=new Authitem;
+		$rol = new Roles;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -62,13 +63,17 @@ class AuthitemController extends Controller
 		if(isset($_POST['Authitem']))
 		{
 			$model->attributes=$_POST['Authitem'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->name));
+			$rol->setAttribute("description",$model->name);
+			
+			if($rol->save())
+				if($model->save())
+					$this->redirect(array('view','id'=>$model->name));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
 		));
+
 	}
 
 	/**
@@ -78,6 +83,8 @@ class AuthitemController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+		$rol = new Roles;
+
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -86,8 +93,11 @@ class AuthitemController extends Controller
 		if(isset($_POST['Authitem']))
 		{
 			$model->attributes=$_POST['Authitem'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->name));
+			$rol->setAttribute("description",$model->name);
+
+			if($rol->save())
+				if($model->save())
+					$this->redirect(array('view','id'=>$model->name));
 		}
 
 		$this->render('update',array(

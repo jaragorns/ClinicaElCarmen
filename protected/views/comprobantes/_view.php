@@ -37,10 +37,6 @@
 	<?php echo CHtml::encode($data->usuariosUser->nombres.' '.$data->usuariosUser->apellidos); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('Rol')); ?>:</b>
-	<?php echo CHtml::encode($data->usuariosRolesRole->description); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('bancos_id_bancos')); ?>:</b>
 	<?php echo CHtml::encode($data->bancosIdBancos->nombre); ?>
 	<br />

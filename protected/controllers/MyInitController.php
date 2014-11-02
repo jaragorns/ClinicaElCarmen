@@ -16,14 +16,23 @@ class MyInitController extends Controller
  			$roles=$auth->createRole('superadmin');
  			$roles->addChild('createUsers');
  			$auth->assign('superadmin','1');
-			*/
+*/
+ 			$auth=Yii::app()->authManager;
+ 			
+ 			$auth->createOperation('RequestAdmExpenses','Aprobar o Rechazar gastos Administratios');
+
+ 			$roles=$auth->createRole('accionista');
+ 			$roles->addChild('RequestAdmExpenses');
+ 			$auth->assign('accionista','15');
+
  			echo "Listo!";
 		}
 
 		public function actionCheckAccess()
 		{
-			//echo Yii::app()->user->role;
-			if(Yii::app()->user->checkAccess('createUsers'))
+			echo Yii::app()->user->role;
+			echo " - ";
+			if(Yii::app()->user->checkAccess('RequestAdmExpensesMed'))
 			{
 				echo "Autorizado";
 			}else{

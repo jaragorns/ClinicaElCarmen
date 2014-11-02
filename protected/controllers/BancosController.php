@@ -91,8 +91,11 @@ class BancosController extends Controller
 		{
 			$model->attributes=$_POST['Bancos'];
 			$model->fecha_actualizacion = date_create()->format('Y-m-d H:i:s');
-			if($model->save())
+			if($model->save()){
+				Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
 				$this->redirect(array('view','id'=>$model->id_bancos));
+			}
+			Yii::app()->user->setFlash('error','Error al realizar la Actualización de Datos.');
 		}
 
 		$this->render('update',array(

@@ -13,6 +13,25 @@
     <link href="<?php echo Yii::app()->theme->baseUrl;?>/css/animate.min.css" rel="stylesheet" media="screen">
     <link href="<?php echo Yii::app()->theme->baseUrl;?>/css/width-full.css" rel="stylesheet" media="screen" title="default">
     <link href="<?php echo Yii::app()->theme->baseUrl;?>/style.css" rel="stylesheet" media="screen">
+
+     <!-- Scripts -->
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery-2.1.1.js"></script>
+    <!--<script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.js"></script>   -->
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.cookie.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/bootstrap.min.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.mixitup.min.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/lightbox-2.6.min.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/holder.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/app.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/styleswitcher.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/syntax/shCore.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/syntax/shBrushXml.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/syntax/shBrushJScript.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/comment-reply.min.js?ver=3.9.1" type="text/javascript"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/e-201430.js" type="text/javascript"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/slippry.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/eeditable.js"></script>
+        <link href="<?php echo Yii::app()->theme->baseUrl;?>/css/slippry.css" rel="stylesheet" media="screen">
     
         <script src="//use.edgefonts.net/cabin;source-sans-pro:n2,i2,n3,n4,n6,n7,n9.js"></script>
         
@@ -165,6 +184,7 @@
                             </li>
                          </ul>
                     </li>
+                    <!--
                     <li id="menu-item-2" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-2 dropdown">
                         <a title="Roles" href="<?php echo Yii::app()->baseUrl;?>/roles" data-toggle="dropdown" class="dropdown-toggle">Roles <span class="caret"></span></a>
                         <ul role="menu" class=" dropdown-menu">
@@ -176,6 +196,7 @@
                             </li>
                          </ul>
                     </li>
+                    -->
                     <li id="menu-item-3" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-3 dropdown">
                         <a title="Authitem" href="<?php echo Yii::app()->baseUrl;?>/authitem" data-toggle="dropdown" class="dropdown-toggle">Authitem <span class="caret"></span></a>
                         <ul role="menu" class=" dropdown-menu">
@@ -187,6 +208,7 @@
                             </li>
                          </ul>
                     </li>
+                    <!--
                     <li id="menu-item-4" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-4 dropdown">
                         <a title="Authassignment" href="<?php echo Yii::app()->baseUrl;?>/Authassignment" data-toggle="dropdown" class="dropdown-toggle">Authassignment <span class="caret"></span></a>
                         <ul role="menu" class=" dropdown-menu">
@@ -198,7 +220,7 @@
                             </li>
                          </ul>
                     </li>
-                    
+                    -->
                     <li id="menu-item-5" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-5 dropdown">
                         <a title="Authitemchild" href="<?php echo Yii::app()->baseUrl;?>/authitemchild" data-toggle="dropdown" class="dropdown-toggle">Authitemchild <span class="caret"></span></a>
                         <ul role="menu" class=" dropdown-menu">
@@ -237,6 +259,7 @@
                 <?php } ?>
             </div> <!-- container -->
         </nav> <!-- navbar navbar-static-top navbar-mind -->
+
         <?php if(isset($this->breadcrumbs) and $this->breadcrumbs!==array()):?>
             <div class="container">
                 <div class="row-fluid">
@@ -248,6 +271,19 @@
                 </div>
             </div>
         <?php endif ?>
+
+        <div class='info' style='text-align:left;'>
+            <?php 
+                $flashMessages = Yii::app()->user->getFlashes();
+                if($flashMessages){
+                    echo '<ul class="flashes">';
+                    foreach ($flashMessages as $key => $message) {
+                        echo '<li><div class="flash-' . $key . '">' . $message . "</div></li>\n";
+                    }
+                    echo '</ul>';
+                }
+            ?>          
+        </div>
         
         <?php echo $content;?>          
 
@@ -341,22 +377,13 @@
         <a href="#header"><i class="fa fa-chevron-up"></i></a>
     </div>
 
-    <!-- Scripts -->
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.cookie.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/bootstrap.min.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.mixitup.min.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/lightbox-2.6.min.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/holder.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/app.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/styleswitcher.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/syntax/shCore.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/syntax/shBrushXml.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/syntax/shBrushJScript.js"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/comment-reply.min.js?ver=3.9.1" type="text/javascript"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/devicepx-jetpack.js?ver=201430" type="text/javascript"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/e-201430.js" type="text/javascript"></script>
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/slippry.js"></script>
-        <link href="<?php echo Yii::app()->theme->baseUrl;?>/css/slippry.css" rel="stylesheet" media="screen">
+   
 </body>
 </html>
+<?php
+Yii::app()->clientScript->registerScript(
+    'myHideEffect',
+    '$(".info").animate({opacity: 1.0}, 10000).slideUp("slow");',
+    CClientScript::POS_READY
+);
+?>

@@ -58,8 +58,8 @@
 	                'model'=>$model,
 	                'value' => $model->fecha,
 	                'options'=>array (
-	                    'timeFormat'=>strtolower(Yii::app()->locale->timeFormat),
 	                    'showSecond'=>true,
+	                    'dateFormat'=>'yy-mm-dd',
 	                ),  
 	            )   
 	        );
@@ -87,19 +87,19 @@
 	</div>
 -->
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'usuarios_userid'); ?>
+		<?php echo $form->labelEx($model,'Usuario *'); ?>
 	</div>
 	<div class="media">
 		<?php 	$model->estado = 0; // 0 = EN ESPERA 	||	1 = APROBADO
-				$model->usuarios_userid = Yii::app()->user->getState('nombres').' '.Yii::app()->user->getState('apellidos');
-			  	echo $form->textField($model,'usuarios_userid' ,array('disabled'=>'true', 'size'=>40, 'maxlength'=>80)); 
-			  	$model->usuarios_userid = Yii::app()->user->id;
-				echo $form->error($model,'usuarios_userid'); 
+				$model->usuarios_username = Yii::app()->user->getState('nombres').' '.Yii::app()->user->getState('apellidos');
+			  	echo $form->textField($model,'usuarios_username' ,array('disabled'=>'true', 'size'=>40, 'maxlength'=>80)); 
+			  	$model->usuarios_username = Yii::app()->user->id;
+				echo $form->error($model,'usuarios_username'); 
 		?>
 	</div>
 
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'banco')." *"; ?>
+		<?php echo $form->labelEx($model,'banco *'); ?>
 	</div>
 	<div class="media">
 		<?php echo $form->dropDownList(

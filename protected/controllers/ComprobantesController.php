@@ -15,7 +15,7 @@ class ComprobantesController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			//'postOnly + delete', // we only allow deletion via POST request
+			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -29,10 +29,7 @@ class ComprobantesController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','create','update','admin','delete'),
-				'roles'=>array('superadmin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
+				'roles'=>array('superadmin','accionista'),
 			),
 		);
 	}
@@ -55,7 +52,6 @@ class ComprobantesController extends Controller
 	public function actionCreate()
 	{
 
-		
 		$model=new Comprobantes;
 
 		// Uncomment the following line if AJAX validation is needed
@@ -64,7 +60,8 @@ class ComprobantesController extends Controller
 		if(isset($_POST['Comprobantes']))
 		{
 			$model->attributes=$_POST['Comprobantes'];
-			$model->usuarios_userid = Yii::app()->user->id;
+			$model->usuarios_username = Yii::app()->user->id;
+			$model->estado = 0;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id_comprobante));
 		}
@@ -165,4 +162,46 @@ class ComprobantesController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function actionFlag($pk, $name, $value){
+		$model = $this->loadModel($pk);
+		$model->{$name} = $value;
+		$model->save(false);
+		if(!Yii::app()->request->isAjaxRequest){
+			$this->redirect('admin');
+		}
+	}
+
+	public function actionAjaxEditColumn(){
+		$keyvalue   = $_POST["keyvalue"];   // ie: 'userid123'
+        $name       = $_POST["name"];   // ie: 'firstname'
+        $old_value  = $_POST["old_value"];  // ie: 'patricia'
+        $new_value  = $_POST["new_value"];  // ie: '  paTTy '
+ 
+        // do some stuff here, and return the value to be displayed..
+
+        $model = Comprobantes::model()->findByPk($keyvalue);
+
+        //$model->updateAll(array('login_attempts'=>$user->login_attempts+1, 'last_login_attempt'=>time()), 'LOWER(user_name)=?', array($username));
+        if($name == "estado_med"){
+        	Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
+        	$model->saveAttributes(array('estado_med'=>$new_value));
+        }
+        if($name == "estado_pra"){
+        	Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
+        	$model->saveAttributes(array('estado_pra'=>$new_value));
+        }
+        
+        //$model->setAttributes(array('estado_pra', $new_update));
+/*
+        $model->estado_med = $new_value;
+        if($model->save()){
+        	Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
+        }
+        Yii::app()->user->setFlash('error','ESA MIEERRRDDAAA NOOOO ENTRA!!!.');
+*/
+		echo $new_value;			// Patty
+
+    }
+
 }

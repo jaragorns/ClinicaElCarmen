@@ -81,6 +81,14 @@ class Usuarios extends CActiveRecord
 	}
 
 	/**
+	 * @return array to obtain full name 
+	 */
+	public function getNombreCompleto()
+    {
+        return $this->nombres.' '.$this->apellidos;
+    }
+
+	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
 	 * Typical usecase:

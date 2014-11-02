@@ -29,7 +29,11 @@ $this->menu=array(
 		'apellidos',
 		'telefono',
 		'email',
+		array(
+			'name' => 'description_role',
+			'value' => CHtml::encode(Authassignment::model()->findByAttributes(array('userid'=>$model->id))->itemname)
+		),
 	),
 )); ?>
 
-<script type="text/javascript"> $(function(){ alert ("lo que sea..." ); }); </script>
+<!-- <script type="text/javascript"> $(function(){ alert ("lo que sea..." ); }); </script> -->

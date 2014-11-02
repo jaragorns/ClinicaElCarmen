@@ -26,7 +26,6 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-
 <h1>Gestionar Comprobantes</h1>
 
 <p>
@@ -41,24 +40,70 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 )); ?>
 </div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php
+    Yii::import('application.extensions.eeditable.*');
+	$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'comprobantes-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
+    'afterAjaxUpdate'=>new CJavaScriptExpression("function(id){ $('#'+id).EEditable(); }"),
 	'columns'=>array(
-		'id_comprobante',
-		'num_comprobante',
-		'num_cheque',
-		'monto',
-		'fecha',
-		'detalle',
-		'estado',
-		/*
-		'usuarios_userid',
-		*/
-		'bancos_id_bancos',
-		array(
+        array(
+            'name'  => 'id_comprobante',
+            'htmlOptions' => array('style'=>'width:20px;'),
+        ),
+        array(
+            'name'  => 'num_comprobante',
+            'htmlOptions' => array('style'=>'width:20px;'),
+        ),
+        array(
+            'name'  => 'num_cheque',
+            'htmlOptions' => array('style'=>'width:80px;'),
+        ),
+        array(
+            'name' => 'bancos_id_bancos',
+            'value' => 'Bancos::model()->findByAttributes(array("id_bancos"=>$data->bancos_id_bancos))->nombre'
+        ),
+        array(
+            'name'  => 'monto',
+            'htmlOptions' => array('style'=>'width:110px;'),
+        ),
+        array(
+            'name'  => 'fecha',
+            'htmlOptions' => array('style'=>'width:80px;'),
+        ),
+        'detalle',
+        array(
+            'name'  => 'estado',
+            'htmlOptions' => array('style'=>'width:80px;'),
+        ),
+        array(
+            'name'=>'estado_med',
+            'class'=>'EEditableColumn', 'editable_type'=>'editbox',
+            'action'=>array('Comprobantes/ajaxeditcolumn'),
+        ),
+        array(
+            'name'=>'estado_pra',
+            'class'=>'EEditableColumn', 'editable_type'=>'select',
+            'editable_options'=>array(-1=>'--SELECCIONE--','APROBADO'=>'APROBADO','RECHAZADO'=>'RECHAZADO'),
+            'action'=>array('Comprobantes/ajaxeditcolumn'),
+        ),
+        array(
 			'class'=>'CButtonColumn',
 		),
+        /*
+        'link_refuse'=>array(
+            'header'=>'APROBAR',
+            'type'=>'raw',
+            'value'=> 'CHtml::button("APROBAR",array("onclick"=>"document.location.href=\'".Yii::app()->controller->createUrl("controller/action",array("id_comprobante"=>$data->id_comprobante))."\'"))',
+        ),
+        'link_aprobe'=>array(
+            'header'=>'RECHAZAR',
+            'type'=>'raw',
+            'value'=> 'CHtml::button("RECHAZAR",array("onclick"=>"document.location.href=\'".Yii::app()->controller->createUrl("controller/action",array("id_comprobante"=>$data->id_comprobante))."\'"))',
+        ),
+        */
 	),
 )); ?>
+
+

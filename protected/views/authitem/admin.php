@@ -50,8 +50,10 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 		'description',
 		'bizrule',
 		'data',
+		/*
 		array(
 			'class'=>'CButtonColumn',
 		),
+		*/
 	),
 )); ?>
