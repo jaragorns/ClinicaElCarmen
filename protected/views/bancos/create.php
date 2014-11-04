@@ -3,7 +3,7 @@
 /* @var $model Bancos */
 
 $this->breadcrumbs=array(
-	'Bancoses'=>array('index'),
+	'Bancos'=>array('index'),
 	'Crear',
 );
 
@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear Bancos</h1>
+<h1>Crear Banco</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

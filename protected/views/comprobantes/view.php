@@ -8,9 +8,12 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Comprobantes', 'url'=>array('index')),
-	array('label'=>'Crear Comprobantes', 'url'=>array('create')),
-	array('label'=>'Actualizar Comprobantes', 'url'=>array('update', 'id'=>$model->id_comprobante)),
+	array('label'=>'Crear Comprobantes', 'url'=>array('create'), 
+        'visible'=>Yii::app()->user->role=="Superadmin", 
+        'visible'=>Yii::app()->user->role=="Administrador"),
+	array('label'=>'Actualizar Comprobantes', 'url'=>array('update', 'id'=>$model->id_comprobante), 
+		'visible'=>Yii::app()->user->role=="Superadmin",
+		'visible'=>Yii::app()->user->role=="Administrador"),
 	//array('label'=>'Eliminar Comprobantes', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_comprobante),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Gestionar Comprobantes', 'url'=>array('admin')),
 );
@@ -27,11 +30,15 @@ $this->menu=array(
 		'monto',
 		'fecha',
 		'detalle',
-		'estado',
+		'estado_med',
+		'estado_pra',
 		array(
 			'name' => 'usuarios_username',
 			'value' => Usuarios::model()->findByAttributes(array('id'=>$model->usuarios_username))->username
 		),
-		'bancos_id_bancos',
+		array(
+			'name' => 'bancos_id_bancos',
+			'value' => Bancos::model()->findByAttributes(array('id_bancos'=>$model->bancos_id_bancos))->nombre
+		),
 	),
 )); ?>

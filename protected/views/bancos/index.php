@@ -9,10 +9,11 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Crear Bancos', 'url'=>array('create')),
 	array('label'=>'Gestionar Bancos', 'url'=>array('admin')),
+	array('label'=>'Gestionar Comprobantes', 'url'=>array('/comprobantes/admin')),
 );
 ?>
 
-<h1>Bancoses</h1>
+<h1>Bancos</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

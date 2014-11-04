@@ -52,14 +52,6 @@
 	<div class="media">
 		<?php //echo $form->textField($model,'detalle',array('size'=>60,'maxlength'=>80)); ?>
 	</div>
--->
-	<div class="rowcontact">
-		<?php echo $form->label($model,'estado'); ?>
-	</div>
-	<div class="media">
-		<?php echo $form->textField($model,'estado'); ?>
-	</div>
-<!--
 	<div class="rowcontact">
 		<?php //echo $form->label($model,'usuarios_username'); ?>
 	</div>

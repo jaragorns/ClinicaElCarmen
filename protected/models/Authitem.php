@@ -36,7 +36,7 @@ class Authitem extends CActiveRecord
 			array('name, type', 'required'),
 			array('type', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>64),
-			array('description, bizrule, data', 'safe'),
+			array('name, description, bizrule, data', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('name, type, description, bizrule, data', 'safe', 'on'=>'search'),

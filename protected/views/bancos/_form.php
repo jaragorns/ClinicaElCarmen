@@ -15,30 +15,38 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Campos con <span class="required">*</span> son requeridos.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+	<?php if($form->errorSummary($model)!=""){ ?>
+	<div class="alert alert-info">
+    	<strong><?php echo $form->errorSummary($model);?></strong> 
+    </div>
+	<?php } ?>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->labelEx($model,'nombre'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'nombre',array('size'=>60,'maxlength'=>60)); ?>
 		<?php echo $form->error($model,'nombre'); ?>
 	</div>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->labelEx($model,'saldo'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'saldo'); ?>
 		<?php echo $form->error($model,'saldo'); ?>
 	</div>
 <!--JsM
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->labelEx($model,'fecha_actualizacion'); ?>
 		<?php echo $form->textField($model,'fecha_actualizacion'); ?>
 		<?php echo $form->error($model,'fecha_actualizacion'); ?>
 	</div>
 JsM-->
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	<div class="buttons">
+		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save'),  array("class"=>"btn btn-primary btn-large")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

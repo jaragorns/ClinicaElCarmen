@@ -4,19 +4,25 @@
 
 $this->breadcrumbs=array(
 	'Usuarios'=>array('index'),
-	$model->id,
+	$model->username,
 );
 
 $this->menu=array(
-	array('label'=>'Listar Usuarios', 'url'=>array('index')),
-	array('label'=>'Crear Usuarios', 'url'=>array('create')),
-	array('label'=>'Actualizar Usuarios', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Listar Usuarios', 'url'=>array('index'),
+		'visible'=>Yii::app()->user->role=="Superadmin", Yii::app()->user->role=="Administrador", 
+					Yii::app()->user->role=="Vicepresidente", Yii::app()->user->role=="Presidente"),
+	array('label'=>'Crear Usuarios', 'url'=>array('create'),
+		'visible'=>Yii::app()->user->role=="Superadmin", Yii::app()->user->role=="Administrador", 
+					Yii::app()->user->role=="Vicepresidente", Yii::app()->user->role=="Presidente"),
+	array('label'=>'Actualizar Usuario', 'url'=>array('update', 'id'=>$model->id)),
 	//array('label'=>'Eliminar Usuario', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Gestionar Usuarios', 'url'=>array('admin')),
+	array('label'=>'Gestionar Usuarios', 'url'=>array('admin'),
+		'visible'=>Yii::app()->user->role=="Superadmin", Yii::app()->user->role=="Administrador", 
+					Yii::app()->user->role=="Vicepresidente", Yii::app()->user->role=="Presidente"),
 );
 ?>
 
-<h1>Ver Usuario #<?php echo $model->id; ?></h1>
+<h1>Ver Usuario: <?php echo $model->nombres." ".$model->apellidos; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

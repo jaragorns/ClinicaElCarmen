@@ -29,7 +29,7 @@ class AuthitemController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','create','update','admin','delete'),
-				'roles'=>array('superadmin'),
+				'roles'=>array('Superadmin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -41,10 +41,10 @@ class AuthitemController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+	public function actionView($name)
 	{
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$this->loadModel($name),
 		));
 	}
 
@@ -66,9 +66,23 @@ class AuthitemController extends Controller
 			$rol->setAttribute("description",$model->name);
 			
 			if($rol->save())
-				if($model->save())
-					$this->redirect(array('view','id'=>$model->name));
-		}
+				if($model->save()){
+					Yii::app()->user->setFlash('success','Authitem Creado.');
+					$model=new Authitem('search');
+					$model->unsetAttributes();  // clear any default values
+					if(isset($_GET['Authitem']))
+						$model->attributes=$_GET['Authitem'];
+
+					$model=new Authitem('search');
+					$model->unsetAttributes();  // clear any default values
+					if(isset($_GET['Authitem']))
+						$model->attributes=$_GET['Authitem'];
+
+					$this->render('admin',array(
+						'model'=>$model,
+					));
+				}
+			}
 
 		$this->render('create',array(
 			'model'=>$model,
@@ -152,9 +166,13 @@ class AuthitemController extends Controller
 	 * @return Authitem the loaded model
 	 * @throws CHttpException
 	 */
-	public function loadModel($id)
+	public function loadModel($name)
 	{
-		$model=Authitem::model()->findByPk($id);
+		$criteria = new CDbCriteria;
+		$criteria->condition='name=:name';
+		$criteria->params=array(':name'=>$name);
+		$model = Authitem::model()->find($criteria);
+		$roles=Authitem::model()->findAll();
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

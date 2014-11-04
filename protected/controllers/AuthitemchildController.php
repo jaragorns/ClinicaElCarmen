@@ -29,7 +29,7 @@ class AuthitemchildController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','create','update','admin','delete'),
-				'roles'=>array('superadmin'),
+				'roles'=>array('Superadmin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -62,8 +62,9 @@ class AuthitemchildController extends Controller
 		if(isset($_POST['Authitemchild']))
 		{
 			$model->attributes=$_POST['Authitemchild'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->parent));
+			if($model->save()){
+				Yii::app()->user->setFlash('success','Authitemchild Creado Correactamente.');
+			}
 		}
 
 		$this->render('create',array(
@@ -144,6 +145,7 @@ class AuthitemchildController extends Controller
 	 */
 	public function loadModel($id)
 	{
+
 		$model=Authitemchild::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');

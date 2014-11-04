@@ -65,7 +65,6 @@
 	        );
 		
 		?>
-
 		<?php echo $form->error($model,'fecha'); ?>
 	</div>
 
@@ -76,21 +75,12 @@
 		<?php echo $form->textField($model,'detalle',array('size'=>60,'maxlength'=>80)); ?>
 		<?php echo $form->error($model,'detalle'); ?>
 	</div>
-<!--
-	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'estado'); ?>
-	</div>
-	<div class="media">
-		<?php echo $form->textField($model,'estado',array('disabled'=>'true')); ?>
-		<?php echo $form->error($model,'estado'); 
-			?>
-	</div>
--->
+
 	<div class="rowcontact">
 		<?php echo $form->labelEx($model,'Usuario *'); ?>
 	</div>
 	<div class="media">
-		<?php 	$model->estado = 0; // 0 = EN ESPERA 	||	1 = APROBADO
+		<?php 	
 				$model->usuarios_username = Yii::app()->user->getState('nombres').' '.Yii::app()->user->getState('apellidos');
 			  	echo $form->textField($model,'usuarios_username' ,array('disabled'=>'true', 'size'=>40, 'maxlength'=>80)); 
 			  	$model->usuarios_username = Yii::app()->user->id;

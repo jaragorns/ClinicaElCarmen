@@ -80,6 +80,7 @@
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 
+	<?php if(Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){ ?>
 	<div class="rowcontact"> 
 		<?php echo $form->labelEx($rol_user,'[1]itemname : '); ?>
 	</div>
@@ -88,7 +89,7 @@
 				$rol_user,
 				'[1]itemname',
 				CHtml::listData(
-					Authitem::model()->findAll(),
+					$roles=Authitem::model()->findAll(array('condition'=>'type=:type','params'=>array(':type'=>2),)),
 					'name',
 					'name'),
 				array(
@@ -104,9 +105,9 @@
 		?> 
 		<?php echo $form->error($model,'[1]itemname'); ?>
 	</div>
-
+	<?php } ?>
 	<div class="buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : 'Save',  array("class"=>"btn btn-primary btn-large")); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save'),  array("class"=>"btn btn-primary btn-large")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

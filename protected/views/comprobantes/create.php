@@ -8,7 +8,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Comprobantes', 'url'=>array('index')),
 	array('label'=>'Gestionar Comprobantes', 'url'=>array('admin')),
 );
 ?>

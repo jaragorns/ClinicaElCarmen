@@ -19,20 +19,58 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->labelEx($model,'parent'); ?>
-		<?php echo $form->textField($model,'parent',array('size'=>60,'maxlength'=>64)); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->dropDownList(
+				$model,
+				'parent',
+				CHtml::listData(
+					$roles=Authitem::model()->findAll(),
+					'name',
+					'name'),
+				array(
+					'class' => 'my-drop-down',
+					'empty'=>'-- Seleccione un Rol --',
+					'options' => array(
+						'2' => array(
+							'selected' => "selected"
+						)
+					)
+				)
+			);
+		?> 
 		<?php echo $form->error($model,'parent'); ?>
 	</div>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->labelEx($model,'child'); ?>
-		<?php echo $form->textField($model,'child',array('size'=>60,'maxlength'=>64)); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->dropDownList(
+				$model,
+				'child',
+				CHtml::listData(
+					$roles=Authitem::model()->findAll(),
+					'name',
+					'name'),
+				array(
+					'class' => 'my-drop-down',
+					'empty'=>'-- Seleccione un Rol --',
+					'options' => array(
+						'2' => array(
+							'selected' => "selected"
+						)
+					)
+				)
+			);
+		?> 
 		<?php echo $form->error($model,'child'); ?>
 	</div>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+	<div class="buttons">
+		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save'),  array("class"=>"btn btn-primary btn-large")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

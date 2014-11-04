@@ -10,11 +10,10 @@
  * @property integer $monto
  * @property string $fecha
  * @property string $detalle
- * @property integer $estado
- * @property integer $usuarios_username
- * @property integer $bancos_id_bancos
  * @property string $estado_med
  * @property string $estado_pra
+ * @property integer $usuarios_username
+ * @property integer $bancos_id_bancos
  * The followings are the available model relations:
  * @property Bancos $bancosIdBancos
  * @property Usuarios $usuariosUser
@@ -39,15 +38,15 @@ class Comprobantes extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('num_comprobante, num_cheque, monto, fecha, detalle, estado, usuarios_username, bancos_id_bancos', 'required'),
-			array('monto, estado, estado_pra, bancos_id_bancos', 'numerical', 'integerOnly'=>true),
+			array('num_comprobante, num_cheque, monto, fecha, detalle, usuarios_username, bancos_id_bancos', 'required'),
+			array('monto, bancos_id_bancos', 'numerical', 'integerOnly'=>true),
 			array('num_comprobante', 'length', 'max'=>10),
 			array('num_cheque', 'length', 'max'=>20),
-			array('estado, estado_med', 'length', 'max'=>30),
+			array('estado_med, estado_pra', 'length', 'max'=>30),
 			array('detalle', 'length', 'max'=>80),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_comprobante, num_comprobante, num_cheque, monto, fecha, detalle, estado, estado_med, estado_pra, usuarios_username, bancos_id_bancos', 'safe', 'on'=>'search'),
+			array('id_comprobante, num_comprobante, num_cheque, monto, fecha, detalle, estado_med, estado_pra, usuarios_username, bancos_id_bancos', 'safe', 'on'=>'search'),
 			array('usuario', 'safe', 'on'=>'search'),
 		);
 	}
@@ -77,7 +76,6 @@ class Comprobantes extends CActiveRecord
 			'monto' => 'Monto',
 			'fecha' => 'Fecha',
 			'detalle' => 'Detalle',
-			'estado' => 'Estado',
 			'estado_med' => 'Grupo Medina',
 			'estado_pra' => 'Grupo Prada',
 			'usuarios_username' => 'Usuario',
@@ -109,7 +107,6 @@ class Comprobantes extends CActiveRecord
 		$criteria->compare('monto',$this->monto);
 		$criteria->compare('fecha',$this->fecha,true);
 		$criteria->compare('detalle',$this->detalle,true);
-		$criteria->compare('estado',$this->estado);
 		$criteria->compare('estado_med',$this->estado_med);
 		$criteria->compare('estado_pra',$this->estado_pra);
 		$criteria->compare('usuarios_username',$this->usuarios_username);

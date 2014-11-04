@@ -11,7 +11,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Listar Bancos', 'url'=>array('index')),
 	array('label'=>'Crear Bancos', 'url'=>array('create')),
-	array('label'=>'Ver Bancos', 'url'=>array('view', 'id'=>$model->id_bancos)),
+	array('label'=>'Ver Banco', 'url'=>array('view', 'id'=>$model->id_bancos)),
 	array('label'=>'Gestionar Bancos', 'url'=>array('admin')),
 );
 ?>

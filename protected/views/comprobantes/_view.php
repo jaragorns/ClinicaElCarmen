@@ -29,8 +29,12 @@
 	<?php echo CHtml::encode($data->detalle); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('estado')); ?>:</b>
-	<?php echo CHtml::encode($data->estado); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('estado_med')); ?>:</b>
+	<?php echo CHtml::encode($data->estado_med); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('estado_pra')); ?>:</b>
+	<?php echo CHtml::encode($data->estado_pra); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('Usuario')); ?>:</b>

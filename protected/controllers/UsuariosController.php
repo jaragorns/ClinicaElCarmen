@@ -29,7 +29,15 @@ class UsuariosController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','create','update','admin','delete'),
-				'roles'=>array('superadmin'),
+				'roles'=>array('Superadmin','Presidente','Vicepresidente'),
+			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view','create','admin'),
+				'roles'=>array('Administrador'),
+			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('view','update'),
+				'roles'=>array('Enfermeria'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -43,9 +51,15 @@ class UsuariosController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
+		if($id == Yii::app()->user->id || Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){
+			$this->render('view',array(
+				'model'=>$this->loadModel($id),
+			));
+		}else{
+			$this->render('view',array(
+				'model'=>$this->loadModel(Yii::app()->user->id),
+			));
+		}
 	}
 
 	/**
@@ -84,10 +98,11 @@ class UsuariosController extends Controller
 
 				//file_put_contents("archivo.txt", print_r(),true);
 				Yii::app()->authManager->assign($rol_user->itemname,$model->id);
+				Yii::app()->user->setFlash('success','Usuario creado.');
 				$this->redirect(array('view','id'=>$model->id));
 	        }
 		}
-
+		
 		$this->render('create',array(
 			'model'=>$model,
 			'rol_user'=>$rol_user,
@@ -102,40 +117,49 @@ class UsuariosController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
+		if($id == Yii::app()->user->id || Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){
+			$model=$this->loadModel($id);
 
-	    $rol_user=Authassignment::model()->find($model->id);
+		    $rol_user=Authassignment::model()->find($model->id);
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+			// Uncomment the following line if AJAX validation is needed
+			// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Usuarios']))
-		{
-	        $rol_user->attributes=$_POST['Authassignment'][1];
+			if(isset($_POST['Usuarios']))
+			{
+				if(Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){
+		        	$rol_user->attributes=$_POST['Authassignment'][1];
+		        }
+				$model->attributes=$_POST['Usuarios'];
 
-			$model->attributes=$_POST['Usuarios'];
+				// Validate all three model
+				$rol_user->userid = Yii::app()->user->id;
+		        $valid=$rol_user->validate(); 
+		        $valid=$model->validate() && $valid;
+		 
+		        if($valid){       
+		            //$rol_user->save();
+		            $model->save();
+		        }
 
-			// Validate all three model
-			$rol_user->userid = Yii::app()->user->id;
-	        $valid=$rol_user->validate(); 
-	        $valid=$model->validate() && $valid;
-	 
-	        if($valid)
-	        {       
-	            //$rol_user->save();
-	            $model->save();
-	        }
-
-			$model->password = crypt($model->password.'salt');
-			Yii::app()->authManager->revoke(Authassignment::model()->findByAttributes(array("userid"=>$model->id))->itemname,$model->id);
-			Yii::app()->authManager->assign($rol_user->itemname,$model->id);
-			$this->redirect(array('view','id'=>$model->id));
+				$model->password = crypt($model->password.'salt');
+				if(Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){
+					Yii::app()->authManager->revoke(Authassignment::model()->findByAttributes(array("userid"=>$model->id))->itemname,$model->id);
+					Yii::app()->authManager->assign($rol_user->itemname,$model->id);
+				}
+				Yii::app()->user->setFlash('success','Modificación Satisfactoria.');
+				$this->redirect(array('view','id'=>$model->id));
+			}
+			$this->render('update',array(
+				'model'=>$model,
+				'rol_user'=>$rol_user,
+			));
+		}else{
+			Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
+			$this->render('view',array(
+				'model'=>$this->loadModel(Yii::app()->user->id),
+			));
 		}
-
-		$this->render('update',array(
-			'model'=>$model,
-			'rol_user'=>$rol_user,
-		));
 	}
 		
 	    

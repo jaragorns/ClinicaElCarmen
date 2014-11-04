@@ -7,7 +7,9 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Crear Comprobantes', 'url'=>array('create')),
+	array('label'=>'Crear Comprobantes', 'url'=>array('create'), 
+        'visible'=>Yii::app()->user->role=="Superadmin", 
+        'visible'=>Yii::app()->user->role=="Administrador"),
 	array('label'=>'Gestionar Comprobantes', 'url'=>array('admin')),
 );
 ?>

@@ -29,7 +29,14 @@ class ComprobantesController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','create','update','admin','delete'),
-				'roles'=>array('superadmin','accionista'),
+				'roles'=>array('Superadmin'),
+			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view','admin','AjaxEditColumn'),
+				'roles'=>array('Presidente', 'Vicepresidente'),
+			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
 			),
 		);
 	}
@@ -183,12 +190,12 @@ class ComprobantesController extends Controller
         $model = Comprobantes::model()->findByPk($keyvalue);
 
         //$model->updateAll(array('login_attempts'=>$user->login_attempts+1, 'last_login_attempt'=>time()), 'LOWER(user_name)=?', array($username));
-        if($name == "estado_med"){
-        	Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
+        if($name == "estado_med" && Yii::app()->user->checkAccess('RequestAdmExpensesMedina')){
+        	//Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
         	$model->saveAttributes(array('estado_med'=>$new_value));
         }
-        if($name == "estado_pra"){
-        	Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
+        if($name == "estado_pra" && Yii::app()->user->checkAccess('RequestAdmExpensesPrada')){
+        	//Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
         	$model->saveAttributes(array('estado_pra'=>$new_value));
         }
         

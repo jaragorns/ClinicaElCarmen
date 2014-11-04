@@ -8,8 +8,9 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Comprobantes', 'url'=>array('index')),
-	array('label'=>'Crear Comprobantes', 'url'=>array('create')),
+	array('label'=>'Crear Comprobantes', 'url'=>array('create'), 
+        'visible'=>Yii::app()->user->role=="Superadmin", 
+        'visible'=>Yii::app()->user->role=="Administrador"),
 	array('label'=>'Ver Saldos en Bancos', 'url'=>array('/bancos/index')),
 );
 
@@ -74,33 +75,25 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
         ),
         'detalle',
         array(
-            'name'  => 'estado',
-            'htmlOptions' => array('style'=>'width:80px;'),
-        ),
-        array(
             'name'=>'estado_med',
-            'class'=>'EEditableColumn', 'editable_type'=>'editbox',
+            'class'=>'EEditableColumn', 'editable_type'=>'select',
+            'editable_options'=>array(-0=>'-ELEGIR-','APROBADO'=>'APROBADO','RECHAZADO'=>'RECHAZADO'),
             'action'=>array('Comprobantes/ajaxeditcolumn'),
         ),
         array(
             'name'=>'estado_pra',
             'class'=>'EEditableColumn', 'editable_type'=>'select',
-            'editable_options'=>array(-1=>'--SELECCIONE--','APROBADO'=>'APROBADO','RECHAZADO'=>'RECHAZADO'),
+            'editable_options'=>array(-0=>'-ELEGIR-','APROBADO'=>'APROBADO','RECHAZADO'=>'RECHAZADO'),
             'action'=>array('Comprobantes/ajaxeditcolumn'),
         ),
         array(
 			'class'=>'CButtonColumn',
 		),
-        /*
-        'link_refuse'=>array(
-            'header'=>'APROBAR',
-            'type'=>'raw',
-            'value'=> 'CHtml::button("APROBAR",array("onclick"=>"document.location.href=\'".Yii::app()->controller->createUrl("controller/action",array("id_comprobante"=>$data->id_comprobante))."\'"))',
-        ),
-        'link_aprobe'=>array(
-            'header'=>'RECHAZAR',
-            'type'=>'raw',
-            'value'=> 'CHtml::button("RECHAZAR",array("onclick"=>"document.location.href=\'".Yii::app()->controller->createUrl("controller/action",array("id_comprobante"=>$data->id_comprobante))."\'"))',
+        /*EDITBOX
+        array(
+            'name'=>'estado_med',
+            'class'=>'EEditableColumn', 'editable_type'=>'editbox',
+            'action'=>array('Comprobantes/ajaxeditcolumn'),
         ),
         */
 	),
