@@ -4257,11 +4257,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .pager .next > a,
 .pager .next > span {
-  float: right;
+  float: inherit;
 }
 .pager .previous > a,
 .pager .previous > span {
-  float: left;
+  float: inherit;
 }
 .pager .disabled > a,
 .pager .disabled > a:hover,

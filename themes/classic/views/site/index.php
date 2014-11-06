@@ -65,9 +65,9 @@
                                         <div class="carousel-text">
                                            <h1 class="animated fadeInDownBig">En Clínica El Carmen contamos con:</h1>
                                            <ul class="list-unstyled carousel-list"><!--  fa-female  -->
-                                               <li class="animated bounceInLeft"><i class="fa fa-female"></i><span>Ginecología y Maternidad</span></li>
-                                               <li class="animated bounceInLeft"><i class="fa fa-stethoscope"></i><span>Urología</span></li>
-                                               <li class="animated bounceInLeft"><i class="fa fa-medkit"></i><span>Ecografía</span></li>
+                                               <li class="animated bounceInLeft"><i class="fa fa-female"></i><span>Ginecología y Obstetricia</span></li>
+                                               <li class="animated bounceInLeft"><i class="fa fa-stethoscope"></i><span>Medicina Interna</span></li>
+                                               <li class="animated bounceInLeft"><i class="fa fa-child"></i><span>Pediatría</span></li>
                                            </ul>
                                        </div>
                                     </div>

@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 ?>
 <div class="col-md-12" >
 	<dl>
-		<dt><h1 class="center-title" style="text-align:left;">Visión</h1></dt>
+		<dt><h1 class="center-title" style="text-align:center;">Visión</h1></dt>
 		
 		<dd>Brindar a la comunidad servicios médicos con eficiencia y calidad a la población de la zona norte del Estado Táchira; 
 		contamos con un equipo calificado y comprometido, con el fin de impulsar el capital social y humano, 

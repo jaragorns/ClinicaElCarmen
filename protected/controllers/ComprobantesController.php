@@ -186,7 +186,6 @@ class ComprobantesController extends Controller
         $new_value  = $_POST["new_value"];  // ie: '  paTTy '
  
         // do some stuff here, and return the value to be displayed..
-
         $model = Comprobantes::model()->findByPk($keyvalue);
 
         //$model->updateAll(array('login_attempts'=>$user->login_attempts+1, 'last_login_attempt'=>time()), 'LOWER(user_name)=?', array($username));
@@ -199,14 +198,6 @@ class ComprobantesController extends Controller
         	$model->saveAttributes(array('estado_pra'=>$new_value));
         }
         
-        //$model->setAttributes(array('estado_pra', $new_update));
-/*
-        $model->estado_med = $new_value;
-        if($model->save()){
-        	Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
-        }
-        Yii::app()->user->setFlash('error','ESA MIEERRRDDAAA NOOOO ENTRA!!!.');
-*/
 		echo $new_value;			// Patty
 
     }

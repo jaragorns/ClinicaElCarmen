@@ -115,7 +115,7 @@
                             <a title="Nuestros Servicios" href="<?php echo Yii::app()->baseUrl;?>/site/NuestrosServicios">Nuestros Servicios</a>
                         </li>
                         <li id="menu-item-3" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-3 dropdown">
-                            <a title="Directorio Médico" href="<?php echo Yii::app()->baseUrl;?>/site/DirectorioMedico">Directorio Médico</a>
+                            <a title="Directorio Médico" href="<?php echo Yii::app()->baseUrl;?>/medicos/admin">Directorio Médico</a>
                         </li>
                         <li id="menu-item-4" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-4 dropdown">
                             <a title="Seguros Asociados" href="<?php echo Yii::app()->baseUrl;?>/site/SegurosAsociados">Seguros Asociados</a>
@@ -167,7 +167,7 @@
                             <div class="dropdown-menu dropdown-profile animated fadeInUp">
                                 <h4><?php echo Yii::app()->user->getState('nombres').' '.Yii::app()->user->getState('apellidos');?></h4>
                                 <h6><?php echo Yii::app()->user->getState('cargo')." - ".Yii::app()->user->role;?></h6>
-                                <a href="<?php echo Yii::app()->baseUrl.'/usuarios/'.Yii::app()->user->id;?>">Perfil</a> | <a href="<?php echo Yii::app()->baseUrl;?>/site/logout"?>Salir</a>
+                                <a href="<?php echo Yii::app()->baseUrl.'/usuarios/view/'.Yii::app()->user->id;?>">Perfil</a> | <a href="<?php echo Yii::app()->baseUrl;?>/site/logout"?>Salir</a>
                             </div>
                         </li> <!-- dropdown -->
                      </ul> <!-- nav nabvar-nav -->
@@ -187,18 +187,18 @@
                                     </li>
                                  </ul>
                             </li>
-                            <!--
                             <li id="menu-item-2" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-2 dropdown">
-                                <a title="Roles" href="<?php echo Yii::app()->baseUrl;?>/roles" data-toggle="dropdown" class="dropdown-toggle">Roles <span class="caret"></span></a>
+                                <a title="Médico" href="<?php echo Yii::app()->baseUrl;?>/medicos" data-toggle="dropdown" class="dropdown-toggle">Directorio Médico <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li id="menu-item-21" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-21">
-                                        <a title="Agregar Roles" href="<?php echo Yii::app()->baseUrl;?>/roles/create">Agregar Roles</a>
+                                        <a title="Agregar Médico" href="<?php echo Yii::app()->baseUrl;?>/medicos/create">Agregar Médico</a>
                                     </li>
                                     <li id="menu-item-22" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22">
-                                        <a title="Gestionar Roles" href="<?php echo Yii::app()->baseUrl;?>/roles/admin">Gestionar Roles</a>
+                                        <a title="Gestionar Médicos" href="<?php echo Yii::app()->baseUrl;?>/medicos/admin">Gestionar Médicos</a>
                                     </li>
                                  </ul>
                             </li>
+                            <!--
                             <li id="menu-item-3" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-3 dropdown">
                                 <a title="Authitem" href="<?php echo Yii::app()->baseUrl;?>/authitem" data-toggle="dropdown" class="dropdown-toggle">Authitem <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
@@ -257,7 +257,7 @@
                             </li>
                         </ul>
                     <?php 
-                    }if(Yii::app()->user->role=="Presidente"){ ?>
+                    }if(Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){ ?>
                         <ul id="menu-mainmenu" class="nav navbar-nav">
                             <li id="menu-item-1" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1 dropdown">
                                 <a title="Usuarios" href="<?php echo Yii::app()->baseUrl;?>" data-toggle="dropdown" class="dropdown-toggle">Usuarios <span class="caret"></span></a>
@@ -284,6 +284,32 @@
                             <li id="menu-item-7" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-7 dropdown">
                                 <a title="Comprobantes" href="<?php echo Yii::app()->baseUrl;?>/comprobantes" data-toggle="dropdown" class="dropdown-toggle">Comprobantes <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-72" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72">
+                                        <a title="Gestionar Comprobantes" href="<?php echo Yii::app()->baseUrl;?>/comprobantes/admin">Gestionar Comprobantes</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    <?php 
+                    }if(Yii::app()->user->role=="Administrador"){ ?>
+                        <ul id="menu-mainmenu" class="nav navbar-nav">
+                            <li id="menu-item-1" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1 dropdown">
+                                <a title="Usuarios" href="<?php echo Yii::app()->baseUrl;?>" data-toggle="dropdown" class="dropdown-toggle">Usuarios <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-11" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11">
+                                        <a title="Registrar Usuario" href="<?php echo Yii::app()->baseUrl;?>/usuarios/create">Registrar Usuario</a>
+                                    </li>
+                                    <li id="menu-item-12" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12">
+                                        <a title="Gestionar Usuarios" href="<?php echo Yii::app()->baseUrl;?>/usuarios/admin">Gestionar Usuarios</a>
+                                    </li>
+                                 </ul>
+                            </li>
+                            <li id="menu-item-7" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-7 dropdown">
+                                <a title="Comprobantes" href="<?php echo Yii::app()->baseUrl;?>/comprobantes" data-toggle="dropdown" class="dropdown-toggle">Comprobantes <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71">
+                                        <a title="Agregar Comprobante" href="<?php echo Yii::app()->baseUrl;?>/comprobantes/create">Agregar Comprobantes</a>
+                                    </li>
                                     <li id="menu-item-72" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72">
                                         <a title="Gestionar Comprobantes" href="<?php echo Yii::app()->baseUrl;?>/comprobantes/admin">Gestionar Comprobantes</a>
                                     </li>
@@ -350,7 +376,7 @@
                         <h3 class="footer-widget-title">Dirección</h3>
                         <address>
                             <p>Carrera 6 Nª 6-55 y 6-65.<br> San Juan de Colón.<br> Estado Táchira - Venezuela.<br>
-                            <i class="fa fa-envelope"></i><a href="mailto:clinicaelcarmen.ca@gmail.com"> clinicaelcarmen.ca@gmail.com</a><br>
+                            <i class="fa fa-envelope"></i><a href="mailto:clinicarmen.ca@gmail.com"> clinicarmen.ca@gmail.com</a><br>
                             TELEFONOS:<br>
                             <i class="fa fa-phone"></i> <a href="callto://+(58)2772913292">(0277) 291-3292</a><br>
                             <i class="fa fa-phone"></i> <a href="callto://+(58)2772911558">(0277) 291-1558</a><br>
@@ -379,7 +405,7 @@
                                 <li class="media">
                                     <div class="media-body">
                                         <p title="Departamento de Cobranza de la Clinica El Carmen C.A.">
-                                            <i class="fa fa-user"></i> Persona Contacto: Lorena Medina 
+                                            <i class="fa fa-user"></i> Persona Contacto: Lcda. Lorena Medina 
                                             <br><i class="fa fa-envelope"></i><a href="mailto:cobranzascecca@gmail.com"> cobranzascecca@gmail.com</a>  
                                             <br>TELEFONOS:<br>
                                             <i class="fa fa-phone"></i> <a href="callto://+(58)2772915610">(0277) 291-5610</a><br>
@@ -412,7 +438,6 @@
         <a href="#header"><i class="fa fa-chevron-up"></i></a>
     </div>
 
-   
 </body>
 </html>
 <?php
