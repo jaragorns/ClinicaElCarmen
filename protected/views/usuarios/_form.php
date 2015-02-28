@@ -15,7 +15,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Campos con <span class="required">*</span> son requeridos.</p>
+	<p class="note">Todos los campos son requeridos.</p>
 
 	<?php if($form->errorSummary($model)!=""){ ?>
 	<div class="alert alert-info">
@@ -25,7 +25,7 @@
 
 	<div class="rowcontact">
 		<?php //echo Yii::app()->user->role; ?>
-		<?php echo $form->labelEx($model,'username :'); ?>
+		<?php echo $form->labelEx($model,'usuario :'); ?>
 	</div>
 	<div class="media">
 		<?php echo $form->textField($model,'username',array('placeholder'=>"maria.perez",'size'=>30,'maxlength'=>80)); ?>
@@ -33,7 +33,7 @@
 	</div>
 
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'password :'); ?>
+		<?php echo $form->labelEx($model,'contrase&ntilde;a :'); ?>
 	</div>
 	<div class="media">
 		<?php echo $form->passwordField($model,'password',array('type'=>"password",'size'=>30,'maxlength'=>255)); ?>
@@ -82,7 +82,7 @@
 
 	<?php if(Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){ ?>
 	<div class="rowcontact"> 
-		<?php echo $form->labelEx($rol_user,'[1]itemname : '); ?>
+		<?php echo $form->labelEx($rol_user,'[1]Rol : '); ?>
 	</div>
 	<div class="media">
 		<?php echo $form->dropDownList(

@@ -12,6 +12,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear Comprobantes</h1>
+<h1>Crear Comprobante</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

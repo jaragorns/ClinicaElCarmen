@@ -69,8 +69,10 @@ class ComprobantesController extends Controller
 			$model->attributes=$_POST['Comprobantes'];
 			$model->usuarios_username = Yii::app()->user->id;
 			$model->estado = 0;
-			if($model->save())
+			if($model->save()){
+				Yii::app()->user->setFlash('success','Comprobante creado.');
 				$this->redirect(array('view','id'=>$model->id_comprobante));
+			}
 		}
 
 		$this->render('create',array(
@@ -93,8 +95,10 @@ class ComprobantesController extends Controller
 		if(isset($_POST['Comprobantes']))
 		{
 			$model->attributes=$_POST['Comprobantes'];
-			if($model->save())
+			if($model->save()){
+				Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
 				$this->redirect(array('view','id'=>$model->id_comprobante));
+			}
 		}
 
 		$this->render('update',array(

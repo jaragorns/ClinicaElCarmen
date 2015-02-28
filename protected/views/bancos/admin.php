@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Listar Bancos', 'url'=>array('index')),
-	array('label'=>'Crear Bancos', 'url'=>array('create')),
+	array('label'=>'Crear Banco', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "

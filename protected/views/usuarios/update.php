@@ -12,7 +12,7 @@ $this->menu=array(
 	array('label'=>'Listar Usuarios', 'url'=>array('index'),
 		'visible'=>Yii::app()->user->role=="Superadmin", Yii::app()->user->role=="Administrador", 
 					Yii::app()->user->role=="Vicepresidente", Yii::app()->user->role=="Presidente"),
-	array('label'=>'Crear Usuarios', 'url'=>array('create'),
+	array('label'=>'Crear Usuario', 'url'=>array('create'),
 		'visible'=>Yii::app()->user->role=="Superadmin", Yii::app()->user->role=="Administrador", 
 					Yii::app()->user->role=="Vicepresidente", Yii::app()->user->role=="Presidente"),
 	array('label'=>'Ver Usuario', 'url'=>array('view', 'id'=>$model->id)),

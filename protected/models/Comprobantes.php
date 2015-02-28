@@ -76,8 +76,8 @@ class Comprobantes extends CActiveRecord
 			'monto' => 'Monto',
 			'fecha' => 'Fecha',
 			'detalle' => 'Detalle',
-			'estado_med' => 'Grupo Medina',
-			'estado_pra' => 'Grupo Prada',
+			'estado_med' => 'Vicepresidente',
+			'estado_pra' => 'Presidente',
 			'usuarios_username' => 'Usuario',
 			'bancos_id_bancos' => 'Banco',
 		);

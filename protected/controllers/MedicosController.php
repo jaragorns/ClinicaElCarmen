@@ -66,8 +66,10 @@ class MedicosController extends Controller
 		if(isset($_POST['Medicos']))
 		{
 			$model->attributes=$_POST['Medicos'];
-			if($model->save())
+			if($model->save()){
+				Yii::app()->user->setFlash('success','Médico creado.');
 				$this->redirect(array('view','id'=>$model->id_medico));
+			}
 		}
 
 		$this->render('create',array(
@@ -90,8 +92,10 @@ class MedicosController extends Controller
 		if(isset($_POST['Medicos']))
 		{
 			$model->attributes=$_POST['Medicos'];
-			if($model->save())
+			if($model->save()){
+				Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
 				$this->redirect(array('view','id'=>$model->id_medico));
+			}
 		}
 
 		$this->render('update',array(
@@ -118,6 +122,12 @@ class MedicosController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$dataProvider=new CActiveDataProvider('Medicos', array(
+		    'pagination'=>array(
+		        'pageSize'=>10,
+		    ),
+		));
+
 		$dataProvider=new CActiveDataProvider('Medicos');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
@@ -129,6 +139,7 @@ class MedicosController extends Controller
 	 */
 	public function actionAdmin()
 	{
+		
 		$model=new Medicos('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Medicos']))

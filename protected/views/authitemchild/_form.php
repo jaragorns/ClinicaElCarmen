@@ -15,9 +15,13 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
-
-	<?php echo $form->errorSummary($model); ?>
+	<p class="note">Campos con <span class="required">*</span> son requeridos.</p>
+	
+	<?php if($form->errorSummary($model)!=""){ ?>
+	<div class="alert alert-info">
+    	<strong><?php echo $form->errorSummary($model);?></strong> 
+    </div>
+	<?php } ?>
 
 	<div class="rowcontact">
 		<?php echo $form->labelEx($model,'parent'); ?>

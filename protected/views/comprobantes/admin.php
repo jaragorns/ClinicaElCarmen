@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Crear Comprobantes', 'url'=>array('create'), 
+	array('label'=>'Crear Comprobante', 'url'=>array('create'), 
         'visible'=>Yii::app()->user->role=="Superadmin", 
         'visible'=>Yii::app()->user->role=="Administrador"),
 	array('label'=>'Ver Saldos en Bancos', 'url'=>array('/bancos/index')),
@@ -77,13 +77,13 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
         array(
             'name'=>'estado_med',
             'class'=>'EEditableColumn', 'editable_type'=>'select',
-            'editable_options'=>array(-0=>'-ELEGIR-','APROBADO'=>'APROBADO','RECHAZADO'=>'RECHAZADO'),
+            'editable_options'=>array('EN ESPERA'=>'-ELEGIR-','APROBADO'=>'APROBADO','RECHAZADO'=>'RECHAZADO'),
             'action'=>array('Comprobantes/ajaxeditcolumn'),
         ),
         array(
             'name'=>'estado_pra',
             'class'=>'EEditableColumn', 'editable_type'=>'select',
-            'editable_options'=>array(-0=>'-ELEGIR-','APROBADO'=>'APROBADO','RECHAZADO'=>'RECHAZADO'),
+            'editable_options'=>array('EN ESPERA'=>'-ELEGIR-','APROBADO'=>'APROBADO','RECHAZADO'=>'RECHAZADO'),
             'action'=>array('Comprobantes/ajaxeditcolumn'),
         ),
         array(

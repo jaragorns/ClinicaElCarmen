@@ -10,7 +10,7 @@ if(Yii::app()->user==NULL){
 	if(Yii::app()->user->role=="Superadmin"){
 		$this->menu=array(
 			array('label'=>'Listar Médicos', 'url'=>array('index')),
-			array('label'=>'Crear Médicos', 'url'=>array('create')),
+			array('label'=>'Crear Médico', 'url'=>array('create')),
 		);
 	}
 }
@@ -47,9 +47,9 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 </div><!-- search-form -->
 <?php } 
 }?>
-<dd>Nos complace brindar para usted y para su mayor comodidad nuestro directorio médico, en donde puede realizar búsquedas y 
-	visualizar los días de consultas disponibles en nuestras instalaciones. Si desea mayor información comuniquese con nosotros
-	a cualquiera de nuestros números telefonicos. </br></br>Clínica El Carmen C.A. eficiencia y calidad a la población de la zona norte del Estado Táchira.</dd>
+<dd>Nos complace brindar para usted y para su mayor comodidad nuestro directorio médico, en donde puede visualizar los días de 
+	consultas en nuestras instalaciones. Si desea mayor información comuníquese con nosotros a cualquiera de nuestros números telefónicos. 
+</br></br>Clínica El Carmen C.A. eficiencia y calidad a la población de la zona norte del Estado Táchira.</dd>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'medicos-grid',
 	'dataProvider'=>$model->search(),

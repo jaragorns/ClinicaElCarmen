@@ -31,26 +31,15 @@
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/e-201430.js" type="text/javascript"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/slippry.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/eeditable.js"></script>
-        <link href="<?php echo Yii::app()->theme->baseUrl;?>/css/slippry.css" rel="stylesheet" media="screen">
-    
-        <script src="//use.edgefonts.net/cabin;source-sans-pro:n2,i2,n3,n4,n6,n7,n9.js"></script>
-        
+    <link href="<?php echo Yii::app()->theme->baseUrl;?>/css/slippry.css" rel="stylesheet" media="screen">
+    <script src="//use.edgefonts.net/cabin;source-sans-pro:n2,i2,n3,n4,n6,n7,n9.js"></script>
     <?php Yii::app()->clientScript->registerCoreScript('jquery'); ?>
         
     <!-- icon -->
     <link href="<?php echo Yii::app()->theme->baseUrl;?>/img/favicon.jpg" rel="shortcut icon" type="image/x-icon" />
-    <style>
-      #map_canvas {
-        width: 420px;
-        height: 320px;
-      }
-    </style>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
     <script>
-      function initialize() {
-
-       // var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
-
+    function initialize() {
         var mapCanvas = document.getElementById('map_canvas');
         var mapOptions = {
             center: new google.maps.LatLng(8.032565, -72.262005),
@@ -62,16 +51,39 @@
             overviewMapControlOptions:{opened:true},
             mapTypeId: google.maps.MapTypeId.ROADMAP
             
-        }
-        
+        };
+        var request = {
+            placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
+        };
+        var contentString = 
+            '<div id="content">'+
+                '<h5 id="firstHeading" class="firstHeading">Clínica El Carmen C.A.</h5>'+
+                '<div id="bodyContent"><p><b>J-09001746-1</b> San Juan de Colón - Edo. Táchira</p></div>'+
+            '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString,
+            maxWidth: 200
+        });
         var map = new google.maps.Map(mapCanvas, mapOptions);
         var marker = new google.maps.Marker({
               position: new google.maps.LatLng(8.032825, -72.262085),
               map: map,
-              title: 'Clínica El Carmen C.A.'
-          });
-        }
-      google.maps.event.addDomListener(window, 'load', initialize);
+              title: 'Clínica El Carmen C.A. </br>J-09001746-1 </br> San Juan de Colón - Edo. Táchira'
+        });
+
+        var service = new google.maps.places.PlacesService(map);
+        service.getDetails(request, function(place, status) {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                google.maps.event.addListener(marker, 'click', function() {
+                    //infowindow.setContent(marker.title);
+                    infowindow.open(map, this);
+                    infowindow.set
+                });
+            }
+        });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 </head>
 
@@ -81,7 +93,7 @@
             <div class="container">
                 <div id="header-title">
                     <h1 class="animated fadeInDown"><a href="<?php echo Yii::app()->baseUrl;?>/index.php">Clínica <span>El Carmen C.A.</span></a></h1>
-                    <p class="animated fadeInLeft">J-09001746-1 San Juan de Cólon - Edo. Táchira</p>
+                    <p class="animated fadeInLeft">J-09001746-1 San Juan de Colón - Edo. Táchira</p>
                 </div>
             </div> <!-- container -->
         </header> <!-- header -->
@@ -100,8 +112,11 @@
                 if(Yii::app()->user->getState('nombres')==""){ ?>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <ul id="menu-mainmenu" class="nav navbar-nav">
+                        <li id="menu-item-2" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-0 dropdown">
+                            <a title="Inicio" href="<?php echo Yii::app()->baseUrl;?>">Inicio</a>
+                        </li>
                         <li id="menu-item-1" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1 dropdown">
-                            <a title="Inicio" href="#" data-toggle="dropdown" class="dropdown-toggle">Inicio <span class="caret"></span></a>
+                            <a title="La Empresa" href="#" data-toggle="dropdown" class="dropdown-toggle">La Empresa <span class="caret"></span></a>
                             <ul role="menu" class=" dropdown-menu">
                                 <li id="menu-item-11" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11">
                                     <a title="Misión y Visión" href="<?php echo Yii::app()->baseUrl;?>/site/MisionVision">Misión y Visión</a>
@@ -121,7 +136,7 @@
                             <a title="Seguros Asociados" href="<?php echo Yii::app()->baseUrl;?>/site/SegurosAsociados">Seguros Asociados</a>
                         </li>
                         <li id="menu-item-5" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5">
-                            <a title="Galeria" href="<?php echo Yii::app()->baseUrl;?>/site/Galeria">Galeria</a>
+                            <a title="Galería" href="<?php echo Yii::app()->baseUrl;?>/site/Galeria">Galería</a>
                         </li>
                         <li id="menu-item-6" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6">
                             <a title="Contáctenos" href="<?php echo Yii::app()->baseUrl;?>/site/Contactenos">Contáctenos</a>
@@ -146,7 +161,7 @@
                                         </div>
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox"  name="rememberme" id="rememberme" value="forever" tabindex="90"> Recuerdame
+                                                <input type="checkbox"  name="rememberme" id="rememberme" value="forever" tabindex="90"> Recuérdame
                                             </label>
                                         </div>
                                         <input type="hidden" name="redirect_to" value="#" />
@@ -166,7 +181,7 @@
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">Usuario</a>
                             <div class="dropdown-menu dropdown-profile animated fadeInUp">
                                 <h4><?php echo Yii::app()->user->getState('nombres').' '.Yii::app()->user->getState('apellidos');?></h4>
-                                <h6><?php echo Yii::app()->user->getState('cargo')." - ".Yii::app()->user->role;?></h6>
+                                <h6><?php echo Yii::app()->user->role." - ".Yii::app()->user->getState('cargo');?></h6>
                                 <a href="<?php echo Yii::app()->baseUrl.'/usuarios/view/'.Yii::app()->user->id;?>">Perfil</a> | <a href="<?php echo Yii::app()->baseUrl;?>/site/logout"?>Salir</a>
                             </div>
                         </li> <!-- dropdown -->
@@ -198,41 +213,6 @@
                                     </li>
                                  </ul>
                             </li>
-                            <!--
-                            <li id="menu-item-3" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-3 dropdown">
-                                <a title="Authitem" href="<?php echo Yii::app()->baseUrl;?>/authitem" data-toggle="dropdown" class="dropdown-toggle">Authitem <span class="caret"></span></a>
-                                <ul role="menu" class=" dropdown-menu">
-                                    <li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31">
-                                        <a title="Agregar Authitem" href="<?php echo Yii::app()->baseUrl;?>/authitem/create">Agregar Authitem</a>
-                                    </li>
-                                    <li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-32">
-                                        <a title="Gestionar Authitem" href="<?php echo Yii::app()->baseUrl;?>/authitem/admin">Gestionar Authitem</a>
-                                    </li>
-                                 </ul>
-                            </li>
-                            <li id="menu-item-4" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-4 dropdown">
-                                <a title="Authassignment" href="<?php echo Yii::app()->baseUrl;?>/Authassignment" data-toggle="dropdown" class="dropdown-toggle">Authassignment <span class="caret"></span></a>
-                                <ul role="menu" class=" dropdown-menu">
-                                    <li id="menu-item-41" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-41">
-                                        <a title="Agregar Authassignment" href="<?php echo Yii::app()->baseUrl;?>/authassignment/create">Agregar Authassignment</a>
-                                    </li>
-                                    <li id="menu-item-42" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-42">
-                                        <a title="Gestionar Authassignment" href="<?php echo Yii::app()->baseUrl;?>/authassignment/admin">Gestionar Authassignment</a>
-                                    </li>
-                                 </ul>
-                            </li>
-                            <li id="menu-item-5" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-5 dropdown">
-                                <a title="Authitemchild" href="<?php echo Yii::app()->baseUrl;?>/authitemchild" data-toggle="dropdown" class="dropdown-toggle">Authitemchild <span class="caret"></span></a>
-                                <ul role="menu" class=" dropdown-menu">
-                                    <li id="menu-item-51" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-51">
-                                        <a title="Agregar Authitemchild" href="<?php echo Yii::app()->baseUrl;?>/authitemchild/create">Agregar Authitemchild</a>
-                                    </li>
-                                    <li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52">
-                                        <a title="Gestionar Authitemchild" href="<?php echo Yii::app()->baseUrl;?>/authitemchild/admin">Gestionar Authitemchild</a>
-                                    </li>
-                                 </ul>
-                            </li>
-                            -->
                             <li id="menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-6 dropdown">
                                 <a title="Bancos" href="<?php echo Yii::app()->baseUrl;?>/bancos" data-toggle="dropdown" class="dropdown-toggle">Bancos <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
@@ -352,7 +332,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <h3 class="footer-widget-title">Sitemap</h3>
+                        <h3 class="footer-widget-title">MAPA DEL SITIO</h3>
                             <ul id="menu-footer" class="list-unstyled three_cols">
                                 <li id="menu-item-100" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-100">
                                     <a title="Inicio"href="<?php echo Yii::app()->baseUrl;?>/index.php">Inicio</a>
@@ -367,17 +347,17 @@
                                     <a title="Seguros Asociados" href="<?php echo Yii::app()->baseUrl;?>/site/SegurosAsociados">Seguros</a>
                                 </li>
                                 <li id="menu-item-500" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-500">
-                                    <a title="Galeria" href="<?php echo Yii::app()->baseUrl;?>/site/Galeria">Galeria</a>
+                                    <a title="Galería" href="<?php echo Yii::app()->baseUrl;?>/site/Galeria">Galería</a>
                                 </li>
                                 <li id="menu-item-600" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-600">
-                                    <a title="Contáctenos" href="<?php echo Yii::app()->baseUrl;?>/site/Contactenos">Contactenos</a>
+                                    <a title="Contáctenos" href="<?php echo Yii::app()->baseUrl;?>/site/Contactenos">Contáctenos</a>
                                 </li>
                             </ul>                    
                         <h3 class="footer-widget-title">Dirección</h3>
                         <address>
                             <p>Carrera 6 Nª 6-55 y 6-65.<br> San Juan de Colón.<br> Estado Táchira - Venezuela.<br>
                             <i class="fa fa-envelope"></i><a href="mailto:clinicarmen.ca@gmail.com"> clinicarmen.ca@gmail.com</a><br>
-                            TELEFONOS:<br>
+                            TELÉFONOS:<br>
                             <i class="fa fa-phone"></i> <a href="callto://+(58)2772913292">(0277) 291-3292</a><br>
                             <i class="fa fa-phone"></i> <a href="callto://+(58)2772911558">(0277) 291-1558</a><br>
                             <i class="fa fa-phone"></i> <a href="callto://+(58)2772915610">(0277) 291-5610</a><br>
@@ -407,7 +387,7 @@
                                         <p title="Departamento de Cobranza de la Clinica El Carmen C.A.">
                                             <i class="fa fa-user"></i> Persona Contacto: Lcda. Lorena Medina 
                                             <br><i class="fa fa-envelope"></i><a href="mailto:cobranzascecca@gmail.com"> cobranzascecca@gmail.com</a>  
-                                            <br>TELEFONOS:<br>
+                                            <br>TELÉFONOS:<br>
                                             <i class="fa fa-phone"></i> <a href="callto://+(58)2772915610">(0277) 291-5610</a><br>
                                             <i class="fa fa-phone"></i> <a href="callto://+(58)4247577856">(0424) 757-7856</a><br>
                                         </p>
@@ -430,7 +410,7 @@
         </aside> <!-- footer-widgets -->
 
         <footer id="footer">
-            <p>© 2014 <a href="https://www.linkedin.com/in/jsm1108">Jaragorns</a>, Inc. All rights reserved.</p>
+            <p>© 2015 <a href="https://www.linkedin.com/in/jsm1108">Jaragorns</a>, Inc. All rights reserved.</p>
         </footer>
     </div> <!-- boxed -->
 

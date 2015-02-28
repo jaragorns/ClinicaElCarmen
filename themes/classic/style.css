@@ -838,7 +838,7 @@ body{
 	border-radius:0;
 	background-color:#ddd
 }.carousel-mind{
-	background-image:url(img/back33.jpg);
+	background-image:url(img/fondo2.jpg);
 	background-size:cover
 }.carousel-mind-back-2{
 	background-image:url(img/back2.jpg);
@@ -920,13 +920,13 @@ body{
 	border:solid 1px #ccc;
 	position:relative;
 	overflow:hidden;
-	height:240px;
+	height:280px;
 	margin:0 auto;
 	margin-bottom:20px;
 	width:90%
 }.mind-features-item .item-icon{
 	text-align:center;
-	padding:20px
+	padding:40px
 }.mind-features-item i{
 	color:#ff8129; /* Color Iconos Box VERDE: 006600   NARANJA: FF8129*/
 	font-size:9em
@@ -937,10 +937,10 @@ body{
 	background-color:#006600; /* Color Box Centrales VERDE: 006600   NARANJA: FF8129*/
 	color:#fff;
 	padding:20px;
-	height:240px;
+	height:280px;
 	position:absolute;
 	z-index:10;
-	top:175px;
+	top:214px;
 	left:0;
 	-webkit-transition:all .4s linear;
 	-moz-transition:all .4s linear;
@@ -1074,6 +1074,10 @@ body{
 }.footer-widget small{
 	color:#bbb;
 	font-style:oblique
+}#map_canvas {
+        width: 420px;
+        height: 320px;
+        color: black;
 }.footer-widget .thumbnail{
 	border-color:#3c5177
 }.coming{

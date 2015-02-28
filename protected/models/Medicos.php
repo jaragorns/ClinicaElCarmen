@@ -60,11 +60,11 @@ class Medicos extends CActiveRecord
 	{
 		return array(
 			'id_medico' => 'Id Médico',
-			'nombre_completo' => 'NOMBRE DEL MEDICO',
+			'nombre_completo' => 'Nombre del médico',
 			'cedula' => 'C.I',
-			'especialidad' => 'ESPECIALIDAD',
+			'especialidad' => 'Especialidad',
 			'rif' => 'RIF',
-			'consulta' => 'DIAS DE CONSULTA',
+			'consulta' => 'Días de consulta',
 		);
 	}
 

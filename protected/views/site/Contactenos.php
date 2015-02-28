@@ -20,7 +20,7 @@ $this->breadcrumbs=array(
 <?php else: ?>
 
 <p>
-Si tiene alguna consulta o preguntas, por favor, rellene el siguiente formulario para contactarse con nosotros. Gracias.
+Si tiene alguna consulta o pregunta, por favor, rellene el siguiente formulario para contactarse con nosotros. Gracias.
 </p>
 
 <div class="form">
@@ -33,12 +33,12 @@ Si tiene alguna consulta o preguntas, por favor, rellene el siguiente formulario
 	),
 )); ?>
 
-	<p class="note">Campos con <span class="required">*</span> son requeridos.</p>
+	<p class="note">Todos los campos son requeridos.</p>
 
 	<?php echo $form->errorSummary($model,null,null,array("class"=>"alert alert-error")); ?>
 
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'nombre: *'); ?>
+		<?php echo $form->labelEx($model,'nombre:'); ?>
 	</div>
 	<div class="media">
 			<?php echo $form->textField($model,'nombre'); ?>
@@ -46,7 +46,7 @@ Si tiene alguna consulta o preguntas, por favor, rellene el siguiente formulario
 	</div>
 
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'email: *'); ?>
+		<?php echo $form->labelEx($model,'email:'); ?>
 	</div>
 	<div class="media">
 		<?php echo $form->textField($model,'email'); ?>
@@ -54,7 +54,7 @@ Si tiene alguna consulta o preguntas, por favor, rellene el siguiente formulario
 	</div>
 
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'asunto: *'); ?>
+		<?php echo $form->labelEx($model,'asunto:'); ?>
 	</div>
 	<div class="media">
 		<?php echo $form->textField($model,'asunto',array('size'=>60,'maxlength'=>128)); ?>
@@ -62,7 +62,7 @@ Si tiene alguna consulta o preguntas, por favor, rellene el siguiente formulario
 	</div>
 
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'cuerpo: *'); ?>
+		<?php echo $form->labelEx($model,'cuerpo:'); ?>
 	</div>
 	<div class="media">
 		<?php echo $form->textArea($model,'cuerpo',array('rows'=>6, 'cols'=>50)); ?>

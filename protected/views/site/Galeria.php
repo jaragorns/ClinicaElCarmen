@@ -1,50 +1,180 @@
 <?php
-$this->pageTitle=Yii::app()->name . ' - Galeria';
+$this->pageTitle=Yii::app()->name . ' - Galería';
 $this->breadcrumbs=array(
-	'Galeria',
+	'Galería',
 );
 ?>
 	<div class="row">
-		<h1 class="center-title">Galeria</h1>
+		<h1 class="center-title">Galería</h1>
 			<ul id="jquery-demo">
 			  	<li>
 					<a href="#slide1">
-				    	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/cecca11.jpg" alt="Vista 1 del Patio Central">
+				    	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Frente.jpg" alt="Clinica El Carmen C.A.">
 				    </a>
 				</li>
 				<li>
 					<a href="#slide2">
-				    	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/cecca2.jpg"  alt="Vista 2 del Patio Central.">
+				    	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Sala_espera.jpg"  alt="Sala de Espera - Emergencia.">
 				    </a>
 				</li>
 				<li>
 				    <a href="#slide3">
-				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/cecca3.jpg" alt="Vista 3 del Patio Central.">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Pasillo9.jpg" alt="Patio Central - Vista Superior.">
 				    </a>
 				</li>
 				<li>
 				    <a href="#slide4">
-				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/cecca4.jpg" alt="Sala de Espera - Emergencia.">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Pasillo7.jpg" alt="Patio Central - Vista Inferior.">
 				    </a>
 				</li>
 				<li>
 				    <a href="#slide5">
-				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/cecca5.jpg" alt="Pasillo Lateral 1 - Oficinas Administrativas.">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Pasillo6.jpg" alt="Patio Central - Consultorios y Habitaciones">
 				    </a>
 				</li>
 				<li>
 				    <a href="#slide6">
-				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/cecca6.jpg" alt="Sala de Espera - Emergencia.">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Pasillo10.jpg" alt="Pasillo Lateral - Oficinas Administrativas.">
 				    </a>
 				</li>
 				<li>
 				    <a href="#slide7">
-				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/cecca7.jpg" alt="Vista 4 del Patio Central.">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Pasillo5.jpg" alt="Vista General Superior - Habitaciones.">
 				    </a>
 				</li>
 				<li>
 				    <a href="#slide8">
-				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/cecca8.jpg" alt="Pasillo Piso 3 - Habitaciones.">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Pasillo4.jpg" alt="Pasillo Lateral - Habitaciones.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide9">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Pasillo3.jpg" alt="Pasillo Central Superior - Habitaciones.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide10">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Pasillo2.jpg" alt="Pasillo Central Inferior - Consultorios.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide11">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Pasillo1.jpg" alt="Pasillo Central Inferior - Consultorios.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide12">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Sala_parto.jpg" alt="Sala de Parto.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide13">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Retén1.jpg" alt="Retén de Bebes.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide14">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Retén2.jpg" alt="Retén de Bebes.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide15">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/RayosX1.jpg" alt="Rayos X.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide16">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/RayosX2.jpg" alt="Rayos X.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide17">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Habitación1.jpg" alt="Habitación.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide18">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Habitación2.jpg" alt="Habitación.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide19">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Habitación3.jpg" alt="Habitación.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide20">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Enfermería4.jpg" alt="Enfermería.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide21">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Enfermería2.jpg" alt="Enfermería.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide22">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Laboratorio1.jpg" alt="Laboratorio - Equipos.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide23">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Laboratorio2.jpg" alt="Laboratorio - Equipos.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide24">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Laboratorio3.jpg" alt="Laboratorio - Equipos.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide25">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Laboratorio4.jpg" alt="Laboratorio - Equipos.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide26">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Laboratorio5.jpg" alt="Laboratorio - Equipos.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide27">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Laboratorio6.jpg" alt="Laboratorio - Equipos.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide28">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Laboratorio7.jpg" alt="Laboratorio - Equipos.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide29">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Laboratorio8.jpg" alt="Laboratorio - Equipos.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide30">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Odontología.jpg" alt="Odontología.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide31">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Ecografía1.jpg" alt="Ecografía.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide32">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Ecografía2.jpg" alt="Ecografía.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide31">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Ambulancia.jpg" alt="Ambulancia.">
+				    </a>
+				</li>
+				<li>
+				    <a href="#slide32">
+				      	<img src="<?php echo Yii::app()->theme->baseUrl;?>/img/fotos/Planta_eléctrica.jpg" alt="Planta Eléctrica.">
 				    </a>
 				</li>
 			</ul>

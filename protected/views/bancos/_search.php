@@ -11,29 +11,37 @@
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'id_bancos'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'id_bancos'); ?>
 	</div>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'nombre'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'nombre',array('size'=>60,'maxlength'=>60)); ?>
 	</div>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'saldo'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'saldo'); ?>
 	</div>
-
-	<div class="row">
+<!--
+	<div class="rowcontact">
 		<?php echo $form->label($model,'fecha_actualizacion'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'fecha_actualizacion'); ?>
 		$criteria->compare('fecha_actualizacion',Yii::app()->dateFormatter->formatDateTime($this->fecha_actualizacion, 'short'),true);
 	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+-->
+	<div class="buttons">
+		<?php echo CHtml::submitButton(Yii::t('app','Search'),  array("class"=>"btn btn-primary btn-large")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

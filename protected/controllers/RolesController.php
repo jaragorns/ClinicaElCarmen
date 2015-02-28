@@ -62,8 +62,10 @@ class RolesController extends Controller
 		if(isset($_POST['Roles']))
 		{
 			$model->attributes=$_POST['Roles'];
-			if($model->save())
+			if($model->save()){
+				Yii::app()->user->setFlash('success','Rol creado exitosamente.');
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(
@@ -86,8 +88,10 @@ class RolesController extends Controller
 		if(isset($_POST['Roles']))
 		{
 			$model->attributes=$_POST['Roles'];
-			if($model->save())
+			if($model->save()){
+				Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(

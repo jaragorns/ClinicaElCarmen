@@ -8,10 +8,10 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Crear Comprobantes', 'url'=>array('create'), 
+	array('label'=>'Crear Comprobante', 'url'=>array('create'), 
         'visible'=>Yii::app()->user->role=="Superadmin", 
         'visible'=>Yii::app()->user->role=="Administrador"),
-	array('label'=>'Actualizar Comprobantes', 'url'=>array('update', 'id'=>$model->id_comprobante), 
+	array('label'=>'Actualizar Comprobante', 'url'=>array('update', 'id'=>$model->id_comprobante), 
 		'visible'=>Yii::app()->user->role=="Superadmin",
 		'visible'=>Yii::app()->user->role=="Administrador"),
 	//array('label'=>'Eliminar Comprobantes', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_comprobante),'confirm'=>'Are you sure you want to delete this item?')),

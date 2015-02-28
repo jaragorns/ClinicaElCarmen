@@ -3,11 +3,11 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Bancoses',
+	'Bancos',
 );
 
 $this->menu=array(
-	array('label'=>'Crear Bancos', 'url'=>array('create')),
+	array('label'=>'Crear Banco', 'url'=>array('create')),
 	array('label'=>'Gestionar Bancos', 'url'=>array('admin')),
 	array('label'=>'Gestionar Comprobantes', 'url'=>array('/comprobantes/admin')),
 );

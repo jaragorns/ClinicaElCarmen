@@ -15,7 +15,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Campos con <span class="required">*</span> son requeridos.</p>
+	<p class="note">Todos los campos son requeridos.</p>
 
 	<?php if($form->errorSummary($model)!=""){ ?>
 	<div class="alert alert-info">

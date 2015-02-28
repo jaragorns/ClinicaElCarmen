@@ -10,12 +10,12 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Listar Roles', 'url'=>array('index')),
-	array('label'=>'Crear Roles', 'url'=>array('create')),
-	array('label'=>'Ver Roles', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Crear Rol', 'url'=>array('create')),
+	array('label'=>'Ver Rol', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Gestionar Roles', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Actualizar Roles <?php echo $model->id; ?></h1>
+<h1>Actualizar Rol <?php echo $model->description; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

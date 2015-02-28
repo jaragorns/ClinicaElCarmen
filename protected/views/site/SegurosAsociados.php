@@ -8,9 +8,9 @@ $this->breadcrumbs=array(
 	<dl>
 		<dt><h1 class="center-title">Seguros Asociados</h1></dt>
 		
-		<dd>En la Clínica El Carmen C.A. trabajamos para mantener actualizados los enlaces con las compañias de seguros del pais, logrando que 
-			nuestros clientes se sientan tranquilos y respaldados por su compañia de seguros. Si usted no ve su compañia de seguros, comuniquese con nosotros
-			que gustosamente le atenderemos. </dd>
+		<dd>En la Clínica El Carmen C.A. trabajamos para mantener actualizados los enlaces con las compañías de seguros del país, logrando que 
+			nuestros clientes se sientan tranquilos y respaldados por su compañía de seguros. Si usted no ve su compañía de seguros, 
+			comuníquese con nosotros que gustosamente le atenderemos. </dd>
 
 		<div class="table-responsive">
 	      	<table class="table">

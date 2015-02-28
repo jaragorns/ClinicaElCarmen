@@ -69,8 +69,10 @@ class BancosController extends Controller
 			$model->attributes=$_POST['Bancos'];
 			$model->fecha_actualizacion = new CDbExpression ('NOW()'); //Opc2
 			//$model->fecha_actualizacion = date_create()->format('Y-m-d H:i:s'); //Opc1
-			if($model->save())
+			if($model->save()){
+				Yii::app()->user->setFlash('success','Banco creado.');
 				$this->redirect(array('view','id'=>$model->id_bancos));
+			}
 		}
 
 		$this->render('create',array(

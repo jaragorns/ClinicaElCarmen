@@ -147,7 +147,7 @@ class UsuariosController extends Controller
 					Yii::app()->authManager->revoke(Authassignment::model()->findByAttributes(array("userid"=>$model->id))->itemname,$model->id);
 					Yii::app()->authManager->assign($rol_user->itemname,$model->id);
 				}
-				Yii::app()->user->setFlash('success','Modificación Satisfactoria.');
+				Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
 				$this->redirect(array('view','id'=>$model->id));
 			}
 			$this->render('update',array(
@@ -172,7 +172,6 @@ class UsuariosController extends Controller
 	{
 		Yii::app()->authManager->revoke(Authassignment::model()->findByAttributes(array("userid"=>$id))->itemname,$id);
 		$this->loadModel($id)->delete();
-
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
