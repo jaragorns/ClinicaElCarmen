@@ -48,7 +48,7 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 <?php } 
 }?>
 <dd>Nos complace brindar para usted y para su mayor comodidad nuestro directorio médico, en donde puede visualizar los días de 
-	consultas en nuestras instalaciones. Si desea mayor información comuníquese con nosotros a cualquiera de nuestros números telefónicos. 
+	consultas. Si desea mayor información comuníquese con nosotros a cualquiera de nuestros números telefónicos. 
 </br></br>Clínica El Carmen C.A. eficiencia y calidad a la población de la zona norte del Estado Táchira.</dd>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'medicos-grid',

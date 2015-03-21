@@ -25,7 +25,7 @@ $this->breadcrumbs=array(
 					<li>Otorrinolaringología</li>
 					<li>Ginecología y Obstetricia</li>
 					<li>Pediatría</li>
-					<li>Pediatría - Neonatologo</li>
+					<li>Pediatría - Neonatólogo</li>
 					<li>Gastroenterología</li>
 				</ol>
 			</div>

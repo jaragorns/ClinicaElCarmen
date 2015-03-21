@@ -170,18 +170,20 @@
 
                         <img src="<?php echo Yii::app()->theme->baseUrl;?>/img/cecca.png" alt="pre" 
                         class="img-responsive alignleft imageborder size-full wp-image-72 img-responsive" />
-                        <p style="text-align: justify">Es la Clínica pionera de la ciudad de San Juan de Colón, contamos con Personal Médico Especializado, 
-                          Médicos Residentes, Enfermeras Profesionales, Bioanalistas, Técnicos Radiólogos, Servicio de Ambulancia, Camareras, 
-                          Personal de Mantenimiento, Planta Eléctrica y Vigilancia las 24 horas del día.
+                        <p style="text-align: justify">
+                          Es la Clínica pionera de la ciudad de San Juan de Colón, constituida en el año 1987, por el Dr. Carlos Medina Castillo
+                          y el Lcdo. Yamil Prada Jaimes, cuyo objeto es brindar asistencia médica preventiva y curativa, atención para-médica y asistencia
+                          obstétrica, exámenes de laboratorio, exploraciones y demás acciones relacionadas con la práctica médica, individual o colectiva,
+                          en forma ambulatorio o bajo hospitalización, previa indicación medica, según conveniencia para el solicitante y capacidad de
+                          prestación del servicio solicitado, relacionándose directamente con los servicios médicos en general.</p>
 
-                        </p>
-                        <p style="text-align: justify">Domo splendido octavio. Maximasque. Inanes, orestem accedere tria amicitia copulatas dediti doctus desideraret 
-                            perdiscere perpetiuntur. Attulit praeclara fingitur requietis fieri. Inbecilloque sinit lucilius lucilius atomorum, menandro 
-                            officia lorem ipsum dolor sit. Domo splendido octavio. Maximasque. Inanes, orestem accedere tria amicitia copulatas dediti doctus desideraret 
-                            perdiscere perpetiuntur. Attulit praeclara fingitur requietis fieri. Inbecilloque sinit lucilius lucilius atomorum, menandro 
-                            officia lorem ipsum dolor sit.
-                        </p>
-                         </p>
+                          <p style="text-align: justify">Actualmente la Clínica cuenta con Personal Médico Especializado, Médicos Residentes, Enfermeras Profesionales, Bioanalistas, 
+                          Radiólogos, Personal de Administrativo y Obrero, Servicio de Ambulancia las 24 horas del día.</p>
+
+                          <p style="text-align: justify">El servicio y la atención de nuestra empresa son los principales beneficios que nuestros pacientes encontrarán en la clínica,
+                          factores que conjugados con la constante inversión, le harán sentirse muy bien atendidos, de una manera eficiente y confiable.
+                          Brindando a la comunidad en general un mejor servicio hospitalario.</p>
+                      
                          <!--JsM
                         <div class="alert alert-info">
                             <strong>Infomación Importante!</strong> <br>
