@@ -34,7 +34,8 @@ $this->menu=array(
 		'estado_pra',
 		array(
 			'name' => 'usuarios_username',
-			'value' => Usuarios::model()->findByAttributes(array('id'=>$model->usuarios_username))->username
+			'value' => Usuarios::model()->findByAttributes(array('id'=>$model->usuarios_username))->nombres.' '.
+						Usuarios::model()->findByAttributes(array('id'=>$model->usuarios_username))->apellidos
 		),
 		array(
 			'name' => 'bancos_id_bancos',

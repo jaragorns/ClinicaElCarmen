@@ -32,8 +32,16 @@ class ComprobantesController extends Controller
 				'roles'=>array('Superadmin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','admin','AjaxEditColumn'),
-				'roles'=>array('Presidente', 'Vicepresidente'),
+				'actions'=>array('create','view', 'admin','update'),
+				'roles'=>array('Administrador'),
+			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view','admin','AjaxEditColumnMedina'),
+				'roles'=>array('Vicepresidente'),
+			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view','admin','AjaxEditColumnPrada'),
+				'roles'=>array('Presidente'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -68,7 +76,8 @@ class ComprobantesController extends Controller
 		{
 			$model->attributes=$_POST['Comprobantes'];
 			$model->usuarios_username = Yii::app()->user->id;
-			$model->estado = 0;
+			$model->estado_med = "EN ESPERA";
+			$model->estado_pra = "EN ESPERA";
 			if($model->save()){
 				Yii::app()->user->setFlash('success','Comprobante creado.');
 				$this->redirect(array('view','id'=>$model->id_comprobante));
@@ -183,7 +192,7 @@ class ComprobantesController extends Controller
 		}
 	}
 
-	public function actionAjaxEditColumn(){
+	public function actionAjaxEditColumnMedina(){
 		$keyvalue   = $_POST["keyvalue"];   // ie: 'userid123'
         $name       = $_POST["name"];   // ie: 'firstname'
         $old_value  = $_POST["old_value"];  // ie: 'patricia'
@@ -197,6 +206,20 @@ class ComprobantesController extends Controller
         	//Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
         	$model->saveAttributes(array('estado_med'=>$new_value));
         }
+        
+		echo $new_value;			// Patty
+
+    }
+
+    public function actionAjaxEditColumnPrada(){
+		$keyvalue   = $_POST["keyvalue"];   // ie: 'userid123'
+        $name       = $_POST["name"];   // ie: 'firstname'
+        $old_value  = $_POST["old_value"];  // ie: 'patricia'
+        $new_value  = $_POST["new_value"];  // ie: '  paTTy '
+ 
+        // do some stuff here, and return the value to be displayed..
+        $model = Comprobantes::model()->findByPk($keyvalue);
+
         if($name == "estado_pra" && Yii::app()->user->checkAccess('RequestAdmExpensesPrada')){
         	//Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
         	$model->saveAttributes(array('estado_pra'=>$new_value));

@@ -41,5 +41,3 @@ $this->menu=array(
 		),
 	),
 )); ?>
-
-<!-- <script type="text/javascript"> $(function(){ alert ("lo que sea..." ); }); </script> -->

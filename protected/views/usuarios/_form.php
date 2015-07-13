@@ -65,7 +65,7 @@
 	</div>
 
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'teléfono :'); ?>
+		<?php echo $form->labelEx($model,'tel&eacute;fono :'); ?>
 	</div>
 	<div class="media">
 		<?php echo $form->textField($model,'telefono',array('placeholder'=>"04247801122",'size'=>12,'maxlength'=>11)); ?>

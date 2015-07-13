@@ -20,8 +20,10 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('monto')); ?>:</b>
 	<?php echo CHtml::encode($data->monto); ?>
 	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha')); ?>:</b>
+	<?php 
+		echo $originalDate = $data->getAttributeLabel('fecha');
+		$newDate = date("d-m-Y", strtotime($originalDate)); ?>
+	<b><?php echo CHtml::encode($newDate); ?>:</b>
 	<?php echo CHtml::encode($data->fecha); ?>
 	<br />
 

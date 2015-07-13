@@ -28,7 +28,7 @@ class MedicosController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete'),
+				'actions'=>array('index','view','create','update','admin','adminedit','delete'),
 				'roles'=>array('Superadmin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
@@ -83,6 +83,32 @@ class MedicosController extends Controller
 	 * @param integer $id the ID of the model to be updated
 	 */
 	public function actionUpdate($id)
+	{
+		$model=$this->loadModel($id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Medicos']))
+		{
+			$model->attributes=$_POST['Medicos'];
+			if($model->save()){
+				Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
+				$this->redirect(array('view','id'=>$model->id_medico));
+			}
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionAdminEdit($id)
 	{
 		$model=$this->loadModel($id);
 

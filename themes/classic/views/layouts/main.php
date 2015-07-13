@@ -85,6 +85,8 @@
     }
     google.maps.event.addDomListener(window, 'load', initialize);
     </script>
+
+
 </head>
 
 <body>
@@ -95,6 +97,7 @@
                     <h1 class="animated fadeInDown"><a href="<?php echo Yii::app()->baseUrl;?>/index.php">Clínica <span>El Carmen C.A.</span></a></h1>
                     <p class="animated fadeInLeft">J-09001746-1 San Juan de Colón - Edo. Táchira</p>
                 </div>
+                <?php //echo Yii::getVersion(); ?>
             </div> <!-- container -->
         </header> <!-- header -->
 
@@ -175,7 +178,7 @@
                     </ul> <!-- nav nabvar-nav -->
                 
                 <?php 
-                }if(Yii::app()->user->getState('nombres')!=""){ ?>
+                }if(Yii::app()->user->getState('nombres')!=""){ ?>                
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">Usuario</a>
@@ -400,8 +403,8 @@
                     <div class="col-md-4">
                         <div class="footer-widget">
                             <h3 class="footer-widget-title">Mapa</h3>
-                            <div id="map_canvas"></div>
-                            
+                            <!-- <div id="map_canvas"></div> -->
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.66527054762!2d-72.26135099999999!3d8.033405000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e666112a3204eb7%3A0xacf8a749a1e1b3cb!2sCl%C3%ADnica+El+Carmen+C.A.!5e0!3m2!1ses!2sve!4v1436237080652" width="400" height="320" frameborder="2" style="border:2" allowfullscreen></iframe>
                         </div>
                     </div>
 

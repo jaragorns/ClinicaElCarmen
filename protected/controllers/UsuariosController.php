@@ -44,7 +44,7 @@ class UsuariosController extends Controller
 			),
 		);
 	}
-
+ 
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the id of the model to be displayed
