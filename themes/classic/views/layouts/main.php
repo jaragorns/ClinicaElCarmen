@@ -238,6 +238,42 @@
                                     </li>
                                 </ul>
                             </li>
+                           <li id="menu-item-8" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-8 dropdown">
+                                <a title="Turnos" href="<?php echo Yii::app()->baseUrl;?>/turnos" data-toggle="dropdown" class="dropdown-toggle">Turnos<span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-81" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-81">
+                                        <a title="Agregar Turno" href="<?php echo Yii::app()->baseUrl;?>/turnos/create">Agregar Turno</a>
+                                    </li>
+                                    <li id="menu-item-82" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-82">
+                                        <a title="Gestionar Turnos" href="<?php echo Yii::app()->baseUrl;?>/turnos/admin">Gestionar Turnos</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="menu-item-9" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-9 dropdown">
+                                <a title="Vacaciones" href="<?php echo Yii::app()->baseUrl;?>/vacaciones" data-toggle="dropdown" class="dropdown-toggle">Vacaciones<span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-91" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-91">
+                                        <a title="Agregar Turno" href="<?php echo Yii::app()->baseUrl;?>/vacaciones/create">Agregar Vacaciones</a>
+                                    </li>
+                                    <li id="menu-item-92" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-92">
+                                        <a title="Gestionar Vacaciones" href="<?php echo Yii::app()->baseUrl;?>/vacaciones/admin">Gestionar Vacaciones</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-12 dropdown">
+                                <a title="Estaciones" href="<?php echo Yii::app()->baseUrl;?>/estaciones" data-toggle="dropdown" class="dropdown-toggle">Estaciones<span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-121" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-121">
+                                        <a title="Agregar Estacion" href="<?php echo Yii::app()->baseUrl;?>/estaciones/create">Agregar estación</a>
+                                    </li>
+                                    <li id="menu-item-122" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-122">
+                                        <a title="Gestionar Estaciones" href="<?php echo Yii::app()->baseUrl;?>/estaciones/admin">Gestionar Estaciones</a>
+                                    </li>
+                                </ul>
+                            </li>
+                                </ul>
+                            </li>
+                            
                         </ul>
                     <?php 
                     }if(Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){ ?>

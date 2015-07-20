@@ -66,7 +66,7 @@
 		<?php echo $form->textField($model,'bancos_id_bancos'); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="buttons">
 		<?php echo CHtml::submitButton('Search', array("class"=>"btn btn-primary btn-large")); ?>
 	</div>
 
