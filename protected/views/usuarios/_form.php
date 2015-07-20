@@ -25,7 +25,16 @@
 
 	<div class="rowcontact">
 		<?php //echo Yii::app()->user->role; ?>
-		<?php echo $form->labelEx($model,'usuario :'); ?>
+		<?php echo $form->labelEx($model,'id'); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'id',array('placeholder'=>"19123876",'size'=>30,'maxlength'=>8)); ?>
+		<?php echo $form->error($model,'id'); ?>
+	</div>
+
+	<div class="rowcontact">
+		<?php //echo Yii::app()->user->role; ?>
+		<?php echo $form->labelEx($model,'username'); ?>
 	</div>
 	<div class="media">
 		<?php echo $form->textField($model,'username',array('placeholder'=>"maria.perez",'size'=>30,'maxlength'=>80)); ?>
@@ -33,7 +42,7 @@
 	</div>
 
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'contrase&ntilde;a :'); ?>
+		<?php echo $form->labelEx($model,'password'); ?>
 	</div>
 	<div class="media">
 		<?php echo $form->passwordField($model,'password',array('type'=>"password",'size'=>30,'maxlength'=>255)); ?>
@@ -41,7 +50,7 @@
 	</div>
 
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'cargo :'); ?>
+		<?php echo $form->labelEx($model,'cargo'); ?>
 	</div>
 	<div class="media">
 		<?php echo $form->textField($model,'cargo',array('placeholder'=>"Enfermera",'size'=>30,'maxlength'=>30)); ?>
@@ -49,7 +58,7 @@
 	</div>
 
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'nombres :'); ?>
+		<?php echo $form->labelEx($model,'nombres'); ?>
 	</div>
 	<div class="media">
 		<?php echo $form->textField($model,'nombres',array('placeholder'=>"Maria",'size'=>30,'maxlength'=>30)); ?>
@@ -57,7 +66,7 @@
 	</div>
 
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'apellidos :'); ?>
+		<?php echo $form->labelEx($model,'apellidos'); ?>
 	</div>
 	<div class="media">
 		<?php echo $form->textField($model,'apellidos',array('placeholder'=>"Perez",'size'=>30,'maxlength'=>30)); ?>
@@ -65,7 +74,7 @@
 	</div>
 
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'tel&eacute;fono :'); ?>
+		<?php echo $form->labelEx($model,'telefono'); ?>
 	</div>
 	<div class="media">
 		<?php echo $form->textField($model,'telefono',array('placeholder'=>"04247801122",'size'=>12,'maxlength'=>11)); ?>

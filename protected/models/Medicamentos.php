@@ -37,6 +37,11 @@ class Medicamentos extends CActiveRecord
 			array('nombre, componente', 'length', 'max'=>45),
 			array('unidad_medida', 'length', 'max'=>20),
 			array('precio_contado, precio_seguro', 'length', 'max'=>9),
+     		array('nombre', 'unique', 
+     			'className' => 'Medicamentos',
+        		'attributeName' => 'nombre',
+        		'message'=>'Este medicamento ya existe.'
+        	),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_medicamento, nombre, componente, unidad_medida, precio_contado, precio_seguro', 'safe', 'on'=>'search'),

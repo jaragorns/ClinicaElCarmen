@@ -35,6 +35,11 @@ class Proveedores extends CActiveRecord
 			array('nombre, rif, telefono, direccion', 'required'),
 			array('nombre, telefono, direccion, email', 'length', 'max'=>45),
 			array('rif', 'length', 'max'=>10),
+			array('rif', 'unique', 
+     			'className' => 'Proveedores',
+        		'attributeName' => 'rif',
+        		'message'=>'Este RIF ya existe.'
+        	),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_proveedor, nombre, rif, telefono, direccion, email', 'safe', 'on'=>'search'),

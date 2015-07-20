@@ -260,17 +260,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-12 dropdown">
-                                <a title="Estaciones" href="<?php echo Yii::app()->baseUrl;?>/estaciones" data-toggle="dropdown" class="dropdown-toggle">Estaciones<span class="caret"></span></a>
-                                <ul role="menu" class=" dropdown-menu">
-                                    <li id="menu-item-121" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-121">
-                                        <a title="Agregar Estacion" href="<?php echo Yii::app()->baseUrl;?>/estaciones/create">Agregar estación</a>
-                                    </li>
-                                    <li id="menu-item-122" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-122">
-                                        <a title="Gestionar Estaciones" href="<?php echo Yii::app()->baseUrl;?>/estaciones/admin">Gestionar Estaciones</a>
-                                    </li>
-                                </ul>
-                            </li>
                             <li id="menu-item-10" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-10 dropdown">
                                 <a title="Proveedores" href="<?php echo Yii::app()->baseUrl;?>/proveedores" data-toggle="dropdown" class="dropdown-toggle">Proveedores <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
@@ -290,6 +279,19 @@
                                     </li>
                                     <li id="menu-item-112" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112">
                                         <a title="Gestionar Facturas" href="<?php echo Yii::app()->baseUrl;?>/facturas/admin">Gestionar Facturas</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul id="menu-mainmenu" class="nav navbar-nav">
+                            <li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-12 dropdown">
+                                <a title="Estaciones" href="<?php echo Yii::app()->baseUrl;?>/estaciones" data-toggle="dropdown" class="dropdown-toggle">Estaciones<span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-121" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-121">
+                                        <a title="Agregar Estacion" href="<?php echo Yii::app()->baseUrl;?>/estaciones/create">Agregar estación</a>
+                                    </li>
+                                    <li id="menu-item-122" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-122">
+                                        <a title="Gestionar Estaciones" href="<?php echo Yii::app()->baseUrl;?>/estaciones/admin">Gestionar Estaciones</a>
                                     </li>
                                 </ul>
                             </li>
