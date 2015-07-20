@@ -238,7 +238,6 @@
                                     </li>
                                 </ul>
                             </li>
-<<<<<<< HEAD
                            <li id="menu-item-8" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-8 dropdown">
                                 <a title="Turnos" href="<?php echo Yii::app()->baseUrl;?>/turnos" data-toggle="dropdown" class="dropdown-toggle">Turnos<span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
@@ -272,10 +271,6 @@
                                     </li>
                                 </ul>
                             </li>
-                                </ul>
-                            </li>
-                            
-=======
                             <li id="menu-item-10" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-10 dropdown">
                                 <a title="Proveedores" href="<?php echo Yii::app()->baseUrl;?>/proveedores" data-toggle="dropdown" class="dropdown-toggle">Proveedores <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
@@ -309,7 +304,6 @@
                                     </li>
                                 </ul>
                             </li>
->>>>>>> bd94441a1cc78c0f5250b81086296d467ccd447c
                         </ul>
                     <?php 
                     }if(Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){ ?>
