@@ -104,11 +104,6 @@
 				array(
 					'class' => 'my-drop-down',
 					'empty'=>'-- Seleccione un Rol --',
-					'options' => array(
-						'2' => array(
-							'selected' => "selected"
-						)
-					)
 				)
 			);
 		?> 

@@ -38,7 +38,10 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('Rol')); ?>:</b>
-	<?php echo CHtml::encode(Authassignment::model()->findByAttributes(array('userid'=>$data->id))->itemname); ?>
+	<?php $itemname = strval($data->id); 
+	$val = Authassignment::model()->findByAttributes(array('userid'=>$data->id));
+	print_r($val['itemname']);
+	?>
 	<br />
 
 </div>

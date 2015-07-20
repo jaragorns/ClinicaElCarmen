@@ -83,10 +83,9 @@ class UsuariosController extends Controller
 			$valid=$rol_user->validate();
 			if($valid)
 	        { 
-	            //$rol_user->save();
+	           
 	            $itemname = $rol_user->itemname;
-	
-	            $model->roles_id = Roles::model()->findByAttributes(array('description'=>$itemname))->id;
+	            $model->itemname = $itemname;
 
 	            $model->password = crypt($model->password.'salt');
 

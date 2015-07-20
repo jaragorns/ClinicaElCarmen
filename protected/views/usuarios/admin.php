@@ -56,7 +56,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
 		'email',
 		array(
 			'name' => 'description_role',
-			'value' => 'Authassignment::model()->findByAttributes(array("userid"=>$data->id))->itemname',
+			'value' => 'Authassignment::model()->findByAttributes(array("userid"=>$data->id))["itemname"]',
 		),
 		array(
 			'class'=>'CButtonColumn',
