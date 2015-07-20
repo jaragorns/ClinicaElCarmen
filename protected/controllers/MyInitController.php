@@ -19,6 +19,10 @@ class MyInitController extends Controller
 			$auth->createOperation('CrearComprobante','Crear comprobantes (Con los Datos del comprobante original)');
 			$auth->createOperation('ModificarComprobante','Modificar comprobante (En caso de necesitar una modificación)');
 			$auth->createOperation('EliminarComprobante','Eliminar comprobante (En caso necesario)');
+
+			$auth->createOperation('CrearComprobante','Crear comprobantes (Con los Datos del comprobante original)');
+			$auth->createOperation('CrearComprobante','Crear comprobantes (Con los Datos del comprobante original)');
+			$auth->createOperation('CrearComprobante','Crear comprobantes (Con los Datos del comprobante original)');
 			 
 			/////////////////////////////TAREAS////////////////////////////////////////
 			$task=$auth->createTask('RequestAdmExpenses','Aprobacion o Rechazo de Gatos Administrativos',"NULL");
@@ -52,34 +56,40 @@ class MyInitController extends Controller
 			//$role->addChild('CrearUsuario');
 			//$role->addChild('ModificarUsuario');
 
-			$role=$auth->createRole('Administrador'); //Jefe Administracion
+			$role=$auth->createRole('Administrador_Admin'); //Jefe Administracion
 			$role->addChild('GestionComprobantes');
 
-			$role=$auth->createRole('Asis.Administrativo');
+			$role=$auth->createRole('Asistente_Admin');
 			$role->addChild('CrearComprobante');
 
-			$role=$auth->createRole('Administrativo');		//CONTADOR, SECRETARIAS, ASISTENTES...
+			$role=$auth->createRole('Administrador_Farmacia');		//CONTADOR, SECRETARIAS, ASISTENTES...
 			//$role->addChild('NADA');
 			
 			$role=$auth->createRole('Medico');
 			//$role->addChild('reader');
 			//$role->addChild('updatePost');
 
-			$role=$auth->createRole('Enfermeria');
+			$role=$auth->createRole('Estacion');
+			//$role->addChild('reader');
+			//$role->addChild('updatePost');
+
+			$role=$auth->createRole('Farmaceuta');
 			//$role->addChild('reader');
 			//$role->addChild('updatePost');
 			 
 			$role=$auth->createRole('Superadmin');
-			$role->addChild('Administrador');
+			$role->addChild('Administrador_Admin');
+			$role->addChild('Administrador_Farmacia');
 			$role->addChild('Presidente');
 			$role->addChild('Vicepresidente');
 			$role->addChild('Accionista');
 			$role->addChild('Medico');
-			$role->addChild('Enfermeria');
+			$role->addChild('Farmaceuta');
+			$role->addChild('Estacion');
 			 
-			$auth->assign('Superadmin','1');
+			$auth->assign('Superadmin','18716856');
 			$auth->assign('Presidente','16');
-			$auth->assign('Vicepresidente','17');
+			$auth->assign('Vicepresidente','9221736');
 			$auth->assign('GerenteEjecutivo','18');
 
  			echo "Listo!";

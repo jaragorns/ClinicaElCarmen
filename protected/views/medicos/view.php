@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Médicos'=>array('index'),
-	$model->id_medico,
+	$model->nombre_completo,
 );
 
 $this->menu=array(
@@ -12,7 +12,7 @@ $this->menu=array(
 	array('label'=>'Crear Médicos', 'url'=>array('create')),
 	array('label'=>'Actualizar Médico', 'url'=>array('update', 'id'=>$model->id_medico)),
 	array('label'=>'Borrar Médico', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_medico),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Gestionar Médicos', 'url'=>array('admin')),
+	array('label'=>'Gestionar Médicos', 'url'=>array('administrar')),
 );
 ?>
 
@@ -21,7 +21,7 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id_medico',
+		//'id_medico',
 		'nombre_completo',
 		'cedula',
 		'especialidad',

@@ -101,7 +101,6 @@ class BancosController extends Controller
 				Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
 				$this->redirect(array('view','id'=>$model->id_bancos));
 			}
-			Yii::app()->user->setFlash('error','Error al realizar la Actualización de Datos.');
 		}
 
 		$this->render('update',array(

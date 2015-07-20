@@ -24,11 +24,11 @@
 	<?php } ?>
 <!--
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'id_medico'); ?>
+		<?php #echo $form->labelEx($model,'id_medico'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'id_medico'); ?>
-		<?php echo $form->error($model,'id_medico'); ?>
+		<?php #echo $form->textField($model,'id_medico'); ?>
+		<?php #echo $form->error($model,'id_medico'); ?>
 	</div>
 -->
 	<div class="rowcontact">

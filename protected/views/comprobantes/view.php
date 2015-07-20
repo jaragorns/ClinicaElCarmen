@@ -19,12 +19,12 @@ $this->menu=array(
 );
 ?>
 
-<h1>Ver Comprobantes #<?php echo $model->id_comprobante; ?></h1>
+<h1>Comprobante #<?php echo $model->num_comprobante; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id_comprobante',
+		//'id_comprobante',
 		'num_comprobante',
 		'num_cheque',
 		'monto',

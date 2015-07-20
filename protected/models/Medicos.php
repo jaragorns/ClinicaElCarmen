@@ -59,12 +59,12 @@ class Medicos extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_medico' => 'Id Médico',
-			'nombre_completo' => 'Nombre del médico',
+			'id_medico' => 'Id M&eacute;dico',
+			'nombre_completo' => 'Nombre del m&eacute;dico',
 			'cedula' => 'C.I',
 			'especialidad' => 'Especialidad',
 			'rif' => 'RIF',
-			'consulta' => 'Días de consulta',
+			'consulta' => 'D&iacute;as de consulta',
 		);
 	}
 

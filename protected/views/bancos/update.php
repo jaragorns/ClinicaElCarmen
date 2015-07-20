@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Bancos'=>array('index'),
-	$model->id_bancos=>array('view','id'=>$model->id_bancos),
+	$model->nombre,
 	'Actualizar',
 );
 

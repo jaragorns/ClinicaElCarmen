@@ -40,9 +40,9 @@
 	</div>
 <!--JsM
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'fecha_actualizacion'); ?>
-		<?php echo $form->textField($model,'fecha_actualizacion'); ?>
-		<?php echo $form->error($model,'fecha_actualizacion'); ?>
+		<?php #echo $form->labelEx($model,'fecha_actualizacion'); ?>
+		<?php #echo $form->textField($model,'fecha_actualizacion'); ?>
+		<?php #echo $form->error($model,'fecha_actualizacion'); ?>
 	</div>
 JsM-->
 	<div class="buttons">

@@ -22,12 +22,12 @@ $this->menu=array(
 );
 ?>
 
-<h1>Ver Usuario: <?php echo $model->nombres." ".$model->apellidos; ?></h1>
+<h1>Usuario: <?php echo $model->nombres." ".$model->apellidos; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
+		//'id',
 		'username',
 		//'password',
 		'cargo',

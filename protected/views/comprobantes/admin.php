@@ -50,10 +50,6 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
     'afterAjaxUpdate'=>new CJavaScriptExpression("function(id){ $('#'+id).EEditable(); }"),
 	'columns'=>array(
         array(
-            'name'  => 'id_comprobante',
-            'htmlOptions' => array('style'=>'width:20px;'),
-        ),
-        array(
             'name'  => 'num_comprobante',
             'htmlOptions' => array('style'=>'width:20px;'),
         ),

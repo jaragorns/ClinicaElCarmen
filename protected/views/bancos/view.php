@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Bancos'=>array('index'),
-	$model->id_bancos,
+	$model->nombre,
 );
 
 $this->menu=array(
@@ -23,7 +23,7 @@ $this->menu=array(
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id_bancos',
+		//'id_bancos',
 		'nombre',
 		'saldo',
 		'fecha_actualizacion',

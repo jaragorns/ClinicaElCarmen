@@ -4,15 +4,15 @@
 
 $this->breadcrumbs=array(
 	'Médicos'=>array('index'),
-	$model->id_medico=>array('view','id'=>$model->id_medico),
-	'Update',
+	$model->nombre_completo,
+	'Actualizar',
 );
 
 $this->menu=array(
 	array('label'=>'Listar Médicos', 'url'=>array('index')),
 	array('label'=>'Crear Médico', 'url'=>array('create')),
 	array('label'=>'Ver Médico', 'url'=>array('view', 'id'=>$model->id_medico)),
-	array('label'=>'Gestionar Médicos', 'url'=>array('admin')),
+	array('label'=>'Gestionar Médicos', 'url'=>array('administrar')),
 );
 ?>
 

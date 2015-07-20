@@ -4,7 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Comprobantes'=>array('index'),
-	$model->id_comprobante=>array('view','id'=>$model->id_comprobante),
+	$model->num_comprobante,
 	'Actualizar',
 );
 

@@ -1,1 +1,10 @@
 (#E5F1F4 to #c8ffc8 and #F8F8F8 to #e2ffe2)
+
+006600 Verde Logo
+daffda Verde intermedio tabla
+f8f8f8 Gris tabla intermedio
+bce774 Verde seleccionado tabla
+ecfbd4 Verde hoover tabla
+ccff66 Verde hoover seleccionado tabla
+
+acacac Gris Numero Menu

@@ -10,14 +10,14 @@
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
-
+<!--
 	<div class="rowcontact">
 		<?php echo $form->label($model,'id'); ?>
 	</div>
 	<div class="media">
 		<?php echo $form->textField($model,'id'); ?>
 	</div>
-
+-->
 	<div class="rowcontact">
 		<?php echo $form->label($model,'username'); ?>
 	</div>

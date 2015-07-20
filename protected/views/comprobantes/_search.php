@@ -67,7 +67,11 @@
 	</div>
 
 	<div class="buttons">
+<<<<<<< HEAD
 		<?php echo CHtml::submitButton('Search', array("class"=>"btn btn-primary btn-large")); ?>
+=======
+		<?php echo CHtml::submitButton(Yii::t('app','Search'),  array("class"=>"btn btn-primary btn-large")); ?>
+>>>>>>> bd94441a1cc78c0f5250b81086296d467ccd447c
 	</div>
 
 <?php $this->endWidget(); ?>
