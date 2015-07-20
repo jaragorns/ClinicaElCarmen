@@ -11,37 +11,35 @@
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id_medico'); ?>
-		<?php echo $form->textField($model,'id_medico'); ?>
-	</div>
-
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'nombre_completo'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'nombre_completo',array('size'=>60,'maxlength'=>80)); ?>
 	</div>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'cedula'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'cedula'); ?>
 	</div>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'especialidad'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'especialidad',array('size'=>40,'maxlength'=>40)); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'rif'); ?>
-		<?php echo $form->textField($model,'rif',array('size'=>13,'maxlength'=>13)); ?>
-	</div>
-
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'consulta'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'consulta',array('size'=>60,'maxlength'=>60)); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="buttons">
 		<?php echo CHtml::submitButton(Yii::t('app','Search'),  array("class"=>"btn btn-primary btn-large")); ?>
 	</div>
 

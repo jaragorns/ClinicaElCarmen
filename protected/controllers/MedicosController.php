@@ -28,7 +28,7 @@ class MedicosController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete'),
+				'actions'=>array('index','view','create','update','admin','delete','administrar'),
 				'roles'=>array('Superadmin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
@@ -67,7 +67,7 @@ class MedicosController extends Controller
 		{
 			$model->attributes=$_POST['Medicos'];
 			if($model->save()){
-				Yii::app()->user->setFlash('success','Médico creado.');
+				Yii::app()->user->setFlash('success','M&eacute;dico creado.');
 				$this->redirect(array('view','id'=>$model->id_medico));
 			}
 		}
@@ -146,6 +146,22 @@ class MedicosController extends Controller
 			$model->attributes=$_GET['Medicos'];
 
 		$this->render('admin',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Manages all models.
+	 */
+	public function actionAdministrar()
+	{
+		
+		$model=new Medicos('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Medicos']))
+			$model->attributes=$_GET['Medicos'];
+
+		$this->render('administrar',array(
 			'model'=>$model,
 		));
 	}

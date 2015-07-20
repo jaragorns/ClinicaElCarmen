@@ -21,7 +21,7 @@
 		<?php echo $form->textField($model,'child',array('size'=>60,'maxlength'=>64)); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="buttons">
 		<?php echo CHtml::submitButton(Yii::t('app','Search'),  array("class"=>"btn btn-primary btn-large")); ?>
 	</div>
 

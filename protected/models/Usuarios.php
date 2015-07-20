@@ -74,7 +74,7 @@ class Usuarios extends CActiveRecord
 			'cargo' => 'Cargo',
 			'nombres' => 'Nombres',
 			'apellidos' => 'Apellidos',
-			'telefono' => 'Telefono',
+			'telefono' => 'Tel&eacute;fono',
 			'email' => 'Email',
 			'description_role' => 'Rol',
 		);

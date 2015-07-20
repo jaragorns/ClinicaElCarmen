@@ -56,7 +56,7 @@ class Bancos extends CActiveRecord
 			'id_bancos' => 'Id Bancos',
 			'nombre' => 'Nombre',
 			'saldo' => 'Saldo',
-			'fecha_actualizacion' => 'Fecha Actualizacion',
+			'fecha_actualizacion' => 'Fecha Actualización',
 		);
 	}
 

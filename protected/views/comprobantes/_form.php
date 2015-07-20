@@ -57,6 +57,7 @@
 					'attribute'=>'fecha',
 	                'model'=>$model,
 	                'value' => $model->fecha,
+	                'language'=>'es',
 	                'options'=>array (
 	                    'showSecond'=>true,
 	                    'dateFormat'=>'yy-mm-dd',
@@ -102,11 +103,6 @@
 				array(
 					'class' => 'my-drop-down',
 					'empty'=>'-- Seleccione un Banco --',
-					'options' => array(
-						'2' => array(
-							'selected' => "selected"
-						)
-					)
 				)
 			);
 		?> 

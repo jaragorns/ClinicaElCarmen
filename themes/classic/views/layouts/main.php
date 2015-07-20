@@ -16,7 +16,7 @@
 
      <!-- Scripts -->
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery-2.1.1.js"></script>
-    <!--<script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.js"></script>   -->
+    <!--<script src="<?php #echo Yii::app()->theme->baseUrl;?>/js/jquery.js"></script>   -->
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.cookie.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/bootstrap.min.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.mixitup.min.js"></script>
@@ -212,7 +212,7 @@
                                         <a title="Agregar Médico" href="<?php echo Yii::app()->baseUrl;?>/medicos/create">Agregar Médico</a>
                                     </li>
                                     <li id="menu-item-22" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-22">
-                                        <a title="Gestionar Médicos" href="<?php echo Yii::app()->baseUrl;?>/medicos/admin">Gestionar Médicos</a>
+                                        <a title="Gestionar Médicos" href="<?php echo Yii::app()->baseUrl;?>/medicos/administrar">Gestionar Médicos</a>
                                     </li>
                                  </ul>
                             </li>
@@ -220,7 +220,7 @@
                                 <a title="Bancos" href="<?php echo Yii::app()->baseUrl;?>/bancos" data-toggle="dropdown" class="dropdown-toggle">Bancos <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li id="menu-item-61" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-61">
-                                        <a title="Agregar Bancos" href="<?php echo Yii::app()->baseUrl;?>/bancos/create">Agregar Bancos</a>
+                                        <a title="Agregar Banco" href="<?php echo Yii::app()->baseUrl;?>/bancos/create">Agregar Banco</a>
                                     </li>
                                     <li id="menu-item-62" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-62">
                                         <a title="Gestionar Bancos" href="<?php echo Yii::app()->baseUrl;?>/bancos/admin">Gestionar Bancos</a>
@@ -231,10 +231,43 @@
                                 <a title="Comprobantes" href="<?php echo Yii::app()->baseUrl;?>/comprobantes" data-toggle="dropdown" class="dropdown-toggle">Comprobantes <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li id="menu-item-71" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-71">
-                                        <a title="Agregar Comprobante" href="<?php echo Yii::app()->baseUrl;?>/comprobantes/create">Agregar Comprobantes</a>
+                                        <a title="Agregar Comprobante" href="<?php echo Yii::app()->baseUrl;?>/comprobantes/create">Agregar Comprobante</a>
                                     </li>
                                     <li id="menu-item-72" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72">
                                         <a title="Gestionar Comprobantes" href="<?php echo Yii::app()->baseUrl;?>/comprobantes/admin">Gestionar Comprobantes</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="menu-item-10" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-10 dropdown">
+                                <a title="Proveedores" href="<?php echo Yii::app()->baseUrl;?>/proveedores" data-toggle="dropdown" class="dropdown-toggle">Proveedores <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-101" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-101">
+                                        <a title="Agregar Proveedor" href="<?php echo Yii::app()->baseUrl;?>/proveedores/create">Agregar Proveedor</a>
+                                    </li>
+                                    <li id="menu-item-102" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-102">
+                                        <a title="Gestionar Proveedores" href="<?php echo Yii::app()->baseUrl;?>/proveedores/admin">Gestionar Proveedores</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="menu-item-11" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Facturas" href="<?php echo Yii::app()->baseUrl;?>/facturas" data-toggle="dropdown" class="dropdown-toggle">Factura <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111">
+                                        <a title="Agregar Factura" href="<?php echo Yii::app()->baseUrl;?>/facturas/create">Agregar Factura</a>
+                                    </li>
+                                    <li id="menu-item-112" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112">
+                                        <a title="Gestionar Facturas" href="<?php echo Yii::app()->baseUrl;?>/facturas/admin">Gestionar Facturas</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/medicamentos" data-toggle="dropdown" class="dropdown-toggle">Medicamentos <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-131" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-131">
+                                        <a title="Agregar Medicamento" href="<?php echo Yii::app()->baseUrl;?>/medicamentos/create">Agregar Medicamento</a>
+                                    </li>
+                                    <li id="menu-item-132" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-132">
+                                        <a title="Gestionar Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/medicamentos/admin">Gestionar Medicamentos</a>
                                     </li>
                                 </ul>
                             </li>
@@ -344,7 +377,7 @@
                                     <a title="Nuestros Servicios" href="<?php echo Yii::app()->baseUrl;?>/site/NuestrosServicios">Servicios</a>
                                 </li>
                                 <li id="menu-item-300" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-300">
-                                    <a title="Directorio Médico" href="<?php echo Yii::app()->baseUrl;?>/site/DirectorioMedico">Directorio</a>
+                                    <a title="Directorio Médico" href="<?php echo Yii::app()->baseUrl;?>/medicos/admin">Directorio</a>
                                 </li>
                                 <li id="menu-item-400" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-400">
                                     <a title="Seguros Asociados" href="<?php echo Yii::app()->baseUrl;?>/site/SegurosAsociados">Seguros</a>
