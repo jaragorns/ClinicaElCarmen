@@ -1,26 +1,34 @@
 <?php
 
 /**
- * This is the model class for table "estaciones".
+ * This is the model class for table "inventario".
  *
- * The followings are the available columns in table 'estaciones':
+ * The followings are the available columns in table 'inventario':
+ * @property integer $id_inventario
+ * @property integer $cantidad
+ * @property string $precio_compra
+ * @property integer $id_factura
+ * @property integer $id_usuario
+ * @property integer $id_medicamento
  * @property integer $id_estacion
- * @property string $nombre
  *
  * The followings are the available model relations:
- * @property Guardias[] $guardiases
- * @property Inventario[] $inventarios
- * @property Solicitudes[] $solicitudes
- * @property Stock[] $stocks
+ * @property Facturas $idFactura
+ * @property Usuarios $idUsuario
+ * @property Medicamentos $idMedicamento
+ * @property Estaciones $idEstacion
  */
-class Estaciones extends CActiveRecord
+class Inventario extends CActiveRecord
 {
+
+	public $usuario;
+	
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'estaciones';
+		return 'inventario';
 	}
 
 	/**
@@ -31,11 +39,13 @@ class Estaciones extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre', 'required'),
-			array('nombre', 'length', 'max'=>25),
+			array('cantidad, precio_compra, id_factura, id_usuario, id_medicamento, id_estacion', 'required'),
+			array('cantidad, id_factura, id_usuario, id_medicamento, id_estacion', 'numerical', 'integerOnly'=>true),
+			array('precio_compra', 'length', 'max'=>8),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_estacion, nombre', 'safe', 'on'=>'search'),
+			array('id_inventario, cantidad, precio_compra, id_factura, id_usuario, id_medicamento, id_estacion', 'safe', 'on'=>'search'),
+			array('usuario', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -47,10 +57,10 @@ class Estaciones extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'guardias' => array(self::HAS_MANY, 'Guardias', 'id_estacion'),
-			'inventarios' => array(self::HAS_MANY, 'Inventario', 'id_estacion'),
-			'solicitudes' => array(self::HAS_MANY, 'Solicitudes', 'estacion_id_estacion'),
-			'stocks' => array(self::HAS_MANY, 'Stock', 'id_estacion'),
+			'idFactura' => array(self::BELONGS_TO, 'Facturas', 'id_factura'),
+			'idUsuario' => array(self::BELONGS_TO, 'Usuarios', 'id_usuario'),
+			'idMedicamento' => array(self::BELONGS_TO, 'Medicamentos', 'id_medicamento'),
+			'idEstacion' => array(self::BELONGS_TO, 'Estaciones', 'id_estacion'),
 		);
 	}
 
@@ -60,8 +70,13 @@ class Estaciones extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_estacion' => 'Id Estación',
-			'nombre' => 'nombre',
+			'id_inventario' => 'Id Inventario',
+			'cantidad' => 'Cantidad',
+			'precio_compra' => 'Precio de Compra',
+			'id_factura' => 'Factura',
+			'id_usuario' => 'Usuario',
+			'id_medicamento' => 'Medicamento',
+			'id_estacion' => 'Estación',
 		);
 	}
 
@@ -83,8 +98,16 @@ class Estaciones extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->compare('id_inventario',$this->id_inventario);
+		$criteria->compare('cantidad',$this->cantidad);
+		$criteria->compare('precio_compra',$this->precio_compra,true);
+		$criteria->compare('id_factura',$this->id_factura);
+		$criteria->compare('id_usuario',$this->id_usuario);
+		$criteria->compare('id_medicamento',$this->id_medicamento);
 		$criteria->compare('id_estacion',$this->id_estacion);
-		$criteria->compare('nombre',$this->nombre,true);
+
+		$criteria->with = array('idUsuario');
+		$criteria->compare('idUsuario.username', $this->usuario, true );
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -95,7 +118,7 @@ class Estaciones extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Estaciones the static model class
+	 * @return Inventario the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

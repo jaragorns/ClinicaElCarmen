@@ -57,11 +57,8 @@
 					'attribute'=>'fecha',
 	                'model'=>$model,
 	                'value' => $model->fecha,
-<<<<<<< HEAD
 	                'language'=> Yii::app()->language,
-=======
 	                'language'=>'es',
->>>>>>> bd94441a1cc78c0f5250b81086296d467ccd447c
 	                'options'=>array (
 	                    'showSecond'=>true,
 	                    'dateFormat'=>'yy-mm-dd',

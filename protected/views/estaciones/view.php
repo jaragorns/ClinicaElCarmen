@@ -15,12 +15,12 @@ $this->menu=array(
 );
 ?>
 
-<h1>Ver Estación #<?php echo $model->id_estacion; ?></h1>
+<h1>Estación <?php echo $model->nombre; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id_estacion',
+		//'id_estacion',
 		'nombre',
 	),
 )); ?>

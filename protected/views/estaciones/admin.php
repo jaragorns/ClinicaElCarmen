@@ -46,7 +46,7 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id_estacion',
+		//'id_estacion',
 		'nombre',
 		array(
 			'class'=>'CButtonColumn',

@@ -1,26 +1,28 @@
 <?php
 
 /**
- * This is the model class for table "estaciones".
+ * This is the model class for table "stock".
  *
- * The followings are the available columns in table 'estaciones':
+ * The followings are the available columns in table 'stock':
+ * @property integer $id_stock
+ * @property integer $cantidad
  * @property integer $id_estacion
- * @property string $nombre
+ * @property integer $id_medicamento
  *
  * The followings are the available model relations:
- * @property Guardias[] $guardiases
- * @property Inventario[] $inventarios
+ * @property BitacoraDescargas[] $bitacoraDescargases
  * @property Solicitudes[] $solicitudes
- * @property Stock[] $stocks
+ * @property Estaciones $idEstacion
+ * @property Medicamentos $idMedicamento
  */
-class Estaciones extends CActiveRecord
+class Stock extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'estaciones';
+		return 'stock';
 	}
 
 	/**
@@ -31,11 +33,11 @@ class Estaciones extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre', 'required'),
-			array('nombre', 'length', 'max'=>25),
+			array('cantidad, id_estacion, id_medicamento', 'required'),
+			array('cantidad, id_estacion, id_medicamento', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_estacion, nombre', 'safe', 'on'=>'search'),
+			array('id_stock, cantidad, id_estacion, id_medicamento', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -47,10 +49,10 @@ class Estaciones extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'guardias' => array(self::HAS_MANY, 'Guardias', 'id_estacion'),
-			'inventarios' => array(self::HAS_MANY, 'Inventario', 'id_estacion'),
-			'solicitudes' => array(self::HAS_MANY, 'Solicitudes', 'estacion_id_estacion'),
-			'stocks' => array(self::HAS_MANY, 'Stock', 'id_estacion'),
+			'bitacoraDescargases' => array(self::HAS_MANY, 'BitacoraDescargas', 'id_stock'),
+			'solicitudes' => array(self::HAS_MANY, 'Solicitudes', 'stock_id_stock'),
+			'idEstacion' => array(self::BELONGS_TO, 'Estaciones', 'id_estacion'),
+			'idMedicamento' => array(self::BELONGS_TO, 'Medicamentos', 'id_medicamento'),
 		);
 	}
 
@@ -60,8 +62,10 @@ class Estaciones extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_estacion' => 'Id Estación',
-			'nombre' => 'nombre',
+			'id_stock' => 'Id Stock',
+			'cantidad' => 'Cantidad',
+			'id_estacion' => 'Estación',
+			'id_medicamento' => 'Medicamento',
 		);
 	}
 
@@ -83,8 +87,10 @@ class Estaciones extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->compare('id_stock',$this->id_stock);
+		$criteria->compare('cantidad',$this->cantidad);
 		$criteria->compare('id_estacion',$this->id_estacion);
-		$criteria->compare('nombre',$this->nombre,true);
+		$criteria->compare('id_medicamento',$this->id_medicamento);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -95,7 +101,7 @@ class Estaciones extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Estaciones the static model class
+	 * @return Stock the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

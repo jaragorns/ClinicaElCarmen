@@ -1,15 +1,15 @@
 <?php
-/* @var $this RolesController */
-/* @var $model Roles */
+/* @var $this UnidadMedidasController */
+/* @var $model UnidadMedidas */
 
 $this->breadcrumbs=array(
-	'Roles'=>array('index'),
+	'Unidad de Medidas'=>array('index'),
 	'Gestionar',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Roles', 'url'=>array('index')),
-	array('label'=>'Crear Roles', 'url'=>array('create')),
+	array('label'=>'Listar Unidad de Medidas', 'url'=>array('index')),
+	array('label'=>'Crear Unidad de Medidas', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#roles-grid').yiiGridView('update', {
+	$('#unidad-medidas-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Gestionar Roles</h1>
+<h1>Gestionar Unidad de Medidas</h1>
 
 <p>
 También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -41,12 +41,13 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'roles-grid',
+	'id'=>'unidad-medidas-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
-		'description',
+		//'id_unidad_medidas',
+		'descripcion',
+		'abreviatura',
 		array(
 			'class'=>'CButtonColumn',
 		),

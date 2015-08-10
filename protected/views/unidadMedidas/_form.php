@@ -1,13 +1,13 @@
 <?php
-/* @var $this RolesController */
-/* @var $model Roles */
+/* @var $this UnidadMedidasController */
+/* @var $model UnidadMedidas */
 /* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'roles-form',
+	'id'=>'unidad-medidas-form',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
@@ -23,14 +23,24 @@
     </div>
 	<?php } ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>80)); ?>
-		<?php echo $form->error($model,'description'); ?>
+	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'descripcion'); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'descripcion',array('size'=>60,'maxlength'=>80)); ?>
+		<?php echo $form->error($model,'descripcion'); ?>
+	</div>
+
+	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'abreviatura'); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'abreviatura',array('size'=>25,'maxlength'=>25)); ?>
+		<?php echo $form->error($model,'abreviatura'); ?>
 	</div>
 
 	<div class="buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save'),  array("class"=>"btn btn-primary btn-large")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

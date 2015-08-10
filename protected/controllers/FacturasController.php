@@ -31,6 +31,9 @@ class FacturasController extends Controller
 				'actions'=>array('index','view','create','update','admin','delete'),
 				'roles'=>array('Superadmin'),
 			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
 		);
 	}
 
@@ -59,11 +62,20 @@ class FacturasController extends Controller
 		if(isset($_POST['Facturas']))
 		{
 			$model->attributes=$_POST['Facturas'];
-			if($model->save())
-			{
-				$this->redirect(array('view','id'=>$model->id_factura));
-				Yii::app()->user->setFlash('success','Factura creada.');
+			$consulta = "SELECT * FROM facturas WHERE num_factura = $model->num_factura	AND id_proveedor = $model->id_proveedor";
+			
+			if(Facturas::model()->findAllBySql($consulta)){
+				/* Si consigue el mismo num_factura de un mismo id_proveedor */
+				Yii::app()->user->setFlash('error','Ya existe ese NUMERO DE FACTURA para ese PROVEEDOR. Por favor revisar los datos suministrados.');
+				
+			}else{
+				if($model->save())
+				{
+					$this->redirect(array('view','id'=>$model->id_factura));
+					Yii::app()->user->setFlash('success','Factura creada.');
+				}
 			}
+			
 		}
 
 		$this->render('create',array(

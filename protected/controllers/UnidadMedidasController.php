@@ -1,6 +1,6 @@
 <?php
 
-class RolesController extends Controller
+class UnidadMedidasController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -54,18 +54,16 @@ class RolesController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Roles;
+		$model=new UnidadMedidas;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Roles']))
+		if(isset($_POST['UnidadMedidas']))
 		{
-			$model->attributes=$_POST['Roles'];
-			if($model->save()){
-				Yii::app()->user->setFlash('success','Rol creado exitosamente.');
-				$this->redirect(array('view','id'=>$model->id));
-			}
+			$model->attributes=$_POST['UnidadMedidas'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id_unidad_medidas));
 		}
 
 		$this->render('create',array(
@@ -85,13 +83,11 @@ class RolesController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Roles']))
+		if(isset($_POST['UnidadMedidas']))
 		{
-			$model->attributes=$_POST['Roles'];
-			if($model->save()){
-				Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
-				$this->redirect(array('view','id'=>$model->id));
-			}
+			$model->attributes=$_POST['UnidadMedidas'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id_unidad_medidas));
 		}
 
 		$this->render('update',array(
@@ -118,7 +114,7 @@ class RolesController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Roles');
+		$dataProvider=new CActiveDataProvider('UnidadMedidas');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -129,10 +125,10 @@ class RolesController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Roles('search');
+		$model=new UnidadMedidas('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Roles']))
-			$model->attributes=$_GET['Roles'];
+		if(isset($_GET['UnidadMedidas']))
+			$model->attributes=$_GET['UnidadMedidas'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -143,12 +139,12 @@ class RolesController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Roles the loaded model
+	 * @return UnidadMedidas the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Roles::model()->findByPk($id);
+		$model=UnidadMedidas::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -156,11 +152,11 @@ class RolesController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Roles $model the model to be validated
+	 * @param UnidadMedidas $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='roles-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='unidad-medidas-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
