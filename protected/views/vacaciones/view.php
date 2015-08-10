@@ -4,8 +4,7 @@
 
 $this->breadcrumbs=array(
 	'Vacaciones'=>array('index'),
-	Usuarios::model()->findByAttributes(array('id'=>$model->id_usuario))->nombres.' '.
-	Usuarios::model()->findByAttributes(array('id'=>$model->id_usuario))->apellidos 
+	Usuarios::model()->findByAttributes(array('id'=>$model->id_usuario))->NombreCompleto
 );
 
 $this->menu=array(
@@ -16,8 +15,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Ver Vacaciones de <?php echo  Usuarios::model()->findByAttributes(array('id'=>$model->id_usuario))->nombres.' '.
-						Usuarios::model()->findByAttributes(array('id'=>$model->id_usuario))->apellidos ?></h1>
+<h1>Vacaciones de <?php echo  Usuarios::model()->findByAttributes(array('id'=>$model->id_usuario))->NombreCompleto ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

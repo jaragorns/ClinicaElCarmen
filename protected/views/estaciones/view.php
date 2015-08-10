@@ -15,7 +15,11 @@ $this->menu=array(
 );
 ?>
 
+<<<<<<< HEAD
 <h1>Estación <?php echo $model->nombre; ?></h1>
+=======
+<h1>Estación #<?php echo $model->id_estacion; ?></h1>
+>>>>>>> origin/master
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

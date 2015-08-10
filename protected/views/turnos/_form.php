@@ -31,6 +31,14 @@
 		<?php echo $form->error($model,'descripcion'); ?>
 	</div>
 
+	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'abreviatura'); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'abreviatura'); ?>
+		<?php echo $form->error($model,'abreviatura'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save'),  array("class"=>"btn btn-primary btn-large")); ?>
 		

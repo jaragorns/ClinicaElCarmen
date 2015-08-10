@@ -13,5 +13,9 @@
 	<?php echo CHtml::encode($data->descripcion); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('abreviatura')); ?>:</b>
+	<?php echo CHtml::encode($data->abreviatura); ?>
+	<br />
+
 
 </div>
