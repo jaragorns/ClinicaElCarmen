@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'turnos':
  * @property integer $id_turno
  * @property string $descripcion
+ * @property string $abreviatura
  *
  * The followings are the available model relations:
  * @property Guardias[] $guardiases
@@ -28,11 +29,12 @@ class Turnos extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('descripcion', 'required'),
+			array('descripcion, abreviatura', 'required'),
 			array('descripcion', 'length', 'max'=>45),
+			array('abreviatura', 'length', 'max'=>4),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_turno, descripcion', 'safe', 'on'=>'search'),
+			array('id_turno, descripcion, abreviatura', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,6 +58,7 @@ class Turnos extends CActiveRecord
 		return array(
 			'id_turno' => 'Id Turno',
 			'descripcion' => 'Descripción',
+			'abreviatura' => 'Abreviatura',
 		);
 	}
 
@@ -79,6 +82,7 @@ class Turnos extends CActiveRecord
 
 		$criteria->compare('id_turno',$this->id_turno);
 		$criteria->compare('descripcion',$this->descripcion,true);
+		$criteria->compare('abreviatura',$this->abreviatura,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

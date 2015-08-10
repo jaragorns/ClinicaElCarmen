@@ -31,6 +31,9 @@ class EstacionesController extends Controller
 				'actions'=>array('index','view','create','update','admin','delete'),
 				'roles'=>array('Superadmin'),
 			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
 		);
 	}
 

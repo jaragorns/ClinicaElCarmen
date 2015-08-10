@@ -1,0 +1,21 @@
+.ancho{
+	width: 100%;
+	border: 1px solid #000;
+}
+.izq{
+	width: 15%;
+	text-align: center;
+	border-right: 1px solid #000;
+}
+.der{
+	width: 85%;
+	text-align: center;
+}
+.izq2{
+	width: 15%;
+	text-align: center;
+}
+.dia{
+	width: 2.74%;
+	text-align: center;
+}

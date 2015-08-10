@@ -15,12 +15,13 @@ $this->menu=array(
 );
 ?>
 
-<h1>Ver Turno #<?php echo $model->id_turno; ?></h1>
+<h1>Turno #<?php echo $model->id_turno; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id_turno',
 		'descripcion',
+		'abreviatura',
 	),
 )); ?>

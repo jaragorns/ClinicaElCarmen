@@ -47,6 +47,7 @@ Tambi&eacute;n puede escribir un operador de comparaci&oacute;n  (<b>&lt;</b>, <
 	'columns'=>array(
 		'id_turno',
 		'descripcion',
+		'abreviatura',
 		array(
 			'class'=>'CButtonColumn',
 		),

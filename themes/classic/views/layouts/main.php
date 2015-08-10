@@ -306,6 +306,20 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-14 dropdown">
+                                <a title="Guardias" href="<?php echo Yii::app()->baseUrl;?>/guardias" data-toggle="dropdown" class="dropdown-toggle">Guardias <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-141" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141">
+                                        <a title="Agregar Guardia" href="<?php echo Yii::app()->baseUrl;?>/guardias/create">Agregar Guardia</a>
+                                    </li>
+                                    <li id="menu-item-142" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-142">
+                                        <a title="Gestionar Guardias" href="<?php echo Yii::app()->baseUrl;?>/guardias/admin">Gestionar Guardias</a>
+                                    </li>
+                                    <li id="menu-item-143" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-143">
+                                        <a title="Imprimir Guardias" href="<?php echo Yii::app()->baseUrl;?>/guardias/imprimir">Imprimir Guardias</a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     <?php 
                     }if(Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){ ?>

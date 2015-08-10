@@ -24,6 +24,13 @@
 	<div class="media">
 		<?php echo $form->textField($model,'descripcion',array('size'=>45,'maxlength'=>45)); ?>
 	</div>
+	
+	<div class="rowcontact">
+		<?php echo $form->label($model,'abreviatura'); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'abreviatura',array('size'=>4,'maxlength'=>4)); ?>
+	</div>
 
 	<div class="buttons">
 		<?php echo CHtml::submitButton(Yii::t('app','Search'),  array("class"=>"btn btn-primary btn-large")); ?>

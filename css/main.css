@@ -153,6 +153,13 @@ div.search-form
 	background: #eee;
 }
 
+div.imprimir-form
+{
+	padding: 10px;
+	margin: 10px 0;
+	background: #eee;
+}
+
 .portlet
 {
 
