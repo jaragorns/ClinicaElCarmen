@@ -60,7 +60,7 @@ class Estaciones extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_estacion' => 'Id Estación',
+			'id_estacion' => 'Id Servicio',
 			'nombre' => 'Nombre',
 		);
 	}

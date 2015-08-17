@@ -3,19 +3,19 @@
 /* @var $model Estaciones */
 
 $this->breadcrumbs=array(
-	'Estaciones'=>array('index'),
+	'Servicios'=>array('index'),
 	$model->id_estacion,
 );
 
 $this->menu=array(
-	array('label'=>'Listar Estaciones', 'url'=>array('index')),
-	array('label'=>'Crear Estación', 'url'=>array('create')),
-	array('label'=>'Modificar Estación', 'url'=>array('update', 'id'=>$model->id_estacion)),
-	array('label'=>'Gestionar Estaciones', 'url'=>array('admin')),
+	array('label'=>'Listar Servicios', 'url'=>array('index')),
+	array('label'=>'Crear Servicio', 'url'=>array('create')),
+	array('label'=>'Modificar Servicio', 'url'=>array('update', 'id'=>$model->id_estacion)),
+	array('label'=>'Gestionar Servicios', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Estación #<?php echo $model->id_estacion; ?></h1>
+<h1>Servicio #<?php echo $model->id_estacion; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

@@ -3,13 +3,13 @@
 /* @var $model Estaciones */
 
 $this->breadcrumbs=array(
-	'Estaciones'=>array('index'),
+	'Servicios'=>array('index'),
 	'Gestionar',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Estaciones', 'url'=>array('index')),
-	array('label'=>'Crear Estación', 'url'=>array('create')),
+	array('label'=>'Listar Servicios', 'url'=>array('index')),
+	array('label'=>'Crear Servicio', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Gestionar Estaciones</h1>
+<h1>Gestionar Servicios</h1>
 
 <p>
 También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>

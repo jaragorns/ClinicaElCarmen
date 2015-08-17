@@ -158,10 +158,78 @@ class GuardiasController extends Controller
 		if(isset($_POST['Guardias']))
 		{
 			$model->attributes=$_POST['Guardias'];
-			if($model->save()){
-				Yii::app()->user->setFlash('success','Guardia Modificada.');
-				$this->redirect(array('admin','mes'=>$model->mes,'ano'=>$model->ano));
-			}
+
+			if ($model->validate()) {
+				$sql="SELECT fecha_inicio, fecha_fin, datediff(fecha_fin, fecha_inicio) as dias, day(fecha_inicio) as diaIni, 
+						 day(fecha_fin) as diaFin, month(fecha_inicio) as mesIni, month(fecha_fin) as mesFin, 
+						 year(fecha_inicio) as anoIni, year(fecha_fin) as anoFin  
+				  FROM vacaciones
+				  WHERE id_usuario = ".$model->id_usuario."
+				  		AND ".$model->mes." IN( select 
+													DATE_FORMAT(m1, '%m')
+													from
+													(
+													select 
+													(fecha_inicio - INTERVAL DAYOFMONTH(fecha_inicio)-1 DAY) 
+													+INTERVAL m MONTH as m1
+													from
+													(
+													select @rownum:=@rownum+1 as m from
+													    (select 1 union select 2 union select 3 union select 4) t1,
+													    (select 1 union select 2 union select 3 union select 4) t2,
+													    (select 1 union select 2 union select 3 union select 4) t3,
+													    (select 1 union select 2 union select 3 union select 4) t4,
+													    (select @rownum:=-1) t0
+													) d1,vacaciones where id_usuario=".$model->id_usuario."
+													) d2 , vacaciones
+													where m1<=fecha_fin AND id_usuario=".$model->id_usuario."
+													order by m1)
+				  		AND ( year(fecha_inicio)=".$model->ano." OR year(fecha_fin)=".$model->ano.") ";	
+
+				
+			$vaca = Yii::app()->db->createCommand($sql)->queryRow();
+			
+			$Finicio = date_format(date_create($vaca['fecha_inicio']), 'd-m-Y');
+			$Ffin = date_format(date_create($vaca['fecha_fin']), 'd-m-Y');
+
+			$band=false; 
+
+				if($vaca['dias']>0){//si esta de vaciones 
+					Yii::app()->user->setFlash('notice','Enfermera de VACACIONES del '.$Finicio.' al '.$Ffin);
+					if($vaca['mesIni'] == $vaca['mesFin'] && $vaca['anoIni']==$vaca['anoFin']){//meses iguales años iguales
+						for ($i=$vaca['diaIni']; $i <=$vaca['diaFin'] ; $i++) { 
+							$var = "dia_".$i;	
+							$model->$var = 8; 
+						}				
+						$band = true;	
+					}else{//meses diferentes
+						if($model->mes==$vaca['mesIni'] && $model->ano==$vaca['anoIni'] ){ //primer mes de vaciones 
+							for ($i=$vaca['diaIni']; $i <=31 ; $i++) { 
+								$var = "dia_".$i;	
+								$model->$var = 8; 
+							}	
+							$band = true;
+						}elseif($model->mes==$vaca['mesFin'] && $model->ano==$vaca['anoFin']){//segundo mes 
+							for ($i=1; $i <=$vaca['diaFin'] ; $i++) { 
+								$var = "dia_".$i;	
+								$model->$var = 8; 
+							}
+							$band = true;
+						}
+					}
+									
+					if ($band==true) {
+						$model->save();
+						Yii::app()->user->setFlash('success','Guardia Modificada.');
+						$this->redirect(array('admin','mes'=>$model->mes,'ano'=>$model->ano));
+					}
+				}else{
+					$model->save();
+					Yii::app()->user->setFlash('success','Guardia Modificada.');
+					$this->redirect(array('admin','mes'=>$model->mes,'ano'=>$model->ano));
+				}
+				
+			}	
 		}
 
 		$this->render('update',array(
@@ -226,7 +294,7 @@ class GuardiasController extends Controller
 
 	public function actionImprimir()
 	{
-		if(isset($_GET['mes']) && isset($_GET['ano'])){
+		if(isset($_GET['mes']) && isset($_GET['ano']) && !empty($_GET['mes']) && !empty($_GET['ano'])){
 		
 		$mes = $_GET['mes'];
 		$ano = $_GET['ano'];
@@ -289,26 +357,36 @@ class GuardiasController extends Controller
 		$dataH2 = Yii::app()->db->createCommand($sqlH2)->queryAll();
 		$numRegistrosH2 = sizeof($dataH2);
 
+		//estacion reserva
+		$sqlR = "SELECT * FROM guardias INNER JOIN usuarios ON id_usuario = id
+									   INNER JOIN estaciones ON guardias.id_estacion = estaciones.id_estacion
+						WHERE mes=".$mes." AND ano=".$ano." AND guardias.id_estacion = 7
+						ORDER by guardias.id_estacion ";
+		$dataR = Yii::app()->db->createCommand($sqlR)->queryAll();
+		$numRegistrosR = sizeof($dataR);
+
 
 		$sqlTurnos = "SELECT abreviatura FROM turnos"; 
 		$dataTurnos = Yii::app()->db->createCommand($sqlTurnos)->queryAll();
-				
+		
 		$html='
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
 				<tr>
-					<td class="izq">Clínica el Carmen C.A <br> RIF J-09001746-1</td>
-					<td class="der">Horario de Trabajo <br> Enfermeria '.$nomMes.' - '.$ano.'</td>
+					<td class="izq"><b>Clínica el Carmen C.A <br> RIF J-09001746-1<b></td>
+					<td class="der"><b>Horario de Trabajo <br> Enfermeria '.$nomMes.' - '.$ano.'</b></td>
 				</tr>
-			</table>
+			</table>';
+		if(!empty($dataEn)){
+		$html.='
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
-				<tr><td class="izq2">'.$dataEn[0]['nombre'].'</td></tr>
+				<tr><td class="estacion"><b>'.$dataEn[0]['nombre'].'</b></td></tr>
 			</table>
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
 				<tr>
-					<td class="izq2">NOMBRE:</td>';
+					<td class="nombre">NOMBRE:</td>';
 						for ($j=1; $j <= $cantDias ; $j++) { //coord. Enfermeria
 							$html.='
-								<td class="dia">'.$j.'</td>
+								<td class="diaN">'.$j.'</td>
 							';
 						}
 					$html.='
@@ -329,16 +407,23 @@ class GuardiasController extends Controller
 					';
 				}
 			$html.='
-			</table>
+			</table>';
+			}else{
+				$html.='<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
+						<tr><td class="dia">No hay enfermeras asignadas para Coord. de Enfermeria</td></tr>
+						</table>';
+			}
+			if(!empty($dataP)){
+			$html.='
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
-				<tr><td class="izq2">'.$dataP[0]['nombre'].'</td></tr>
+				<tr><td class="estacion"><b>'.$dataP[0]['nombre'].'</b></td></tr>
 			</table>
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
 				<tr>
-					<td class="izq2">NOMBRE:</td>';
+					<td class="nombre">NOMBRE:</td>';
 						for ($j=1; $j <= $cantDias ; $j++) { //pabellon
 							$html.='
-								<td class="dia">'.$j.'</td>
+								<td class="diaN">'.$j.'</td>
 							';
 						}
 					$html.='
@@ -359,16 +444,23 @@ class GuardiasController extends Controller
 					';
 				}
 			$html.='
-			</table>
+			</table>';
+			}else{
+				$html.='<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
+						<tr><td class="dia">No hay enfermeras asignadas al servicio Pabellón</td></tr>
+						</table>';
+			}
+			if(!empty($dataEm)){
+			$html.='
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
-				<tr><td class="izq2">'.$dataEm[0]['nombre'].'</td></tr>
+				<tr><td class="estacion"><b>'.$dataEm[0]['nombre'].'</b></td></tr>
 			</table>
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
 				<tr>
-					<td class="izq2">NOMBRE:</td>';
+					<td class="nombre">NOMBRE:</td>';
 						for ($j=1; $j <= $cantDias ; $j++) { //Emergencia
 							$html.='
-								<td class="dia">'.$j.'</td>
+								<td class="diaN">'.$j.'</td>
 							';
 						}
 					$html.='
@@ -389,16 +481,23 @@ class GuardiasController extends Controller
 					';
 				}
 			$html.='
-			</table>
+			</table>';
+			}else{
+				$html.='<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
+						<tr><td class="dia">No hay enfermeras asignadas al servicio Emergencia</td></tr>
+						</table>';
+			}
+			if(!empty($dataH1)){
+			$html.='
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
-				<tr><td class="izq2">'.$dataH1[0]['nombre'].'</td></tr>
+				<tr><td class="estacion"><b>'.$dataH1[0]['nombre'].'</b></td></tr>
 			</table>
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
 				<tr>
-					<td class="izq2">NOMBRE:</td>';
+					<td class="nombre">NOMBRE:</td>';
 						for ($j=1; $j <= $cantDias ; $j++) { //Hospitalizacion1
 							$html.='
-								<td class="dia">'.$j.'</td>
+								<td class="diaN">'.$j.'</td>
 							';
 						}
 					$html.='
@@ -419,16 +518,23 @@ class GuardiasController extends Controller
 					';
 				}
 			$html.='
-			</table>
+			</table>';
+			}else{
+				$html.='<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
+						<tr><td class="dia">No hay enfermeras asignadas al servicio Hospitalizacion 1</td></tr>
+						</table>';
+			}
+			if(!empty($dataH2)){
+			$html.='
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
-				<tr><td class="izq2">'.$dataH2[0]['nombre'].'</td></tr>
+				<tr><td class="estacion"><b>'.$dataH2[0]['nombre'].'</b></td></tr>
 			</table>
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
 				<tr>
-					<td class="izq2">NOMBRE:</td>';
+					<td class="nombre">NOMBRE:</td>';
 						for ($j=1; $j <= $cantDias ; $j++) { //Hospitalizacion2
 							$html.='
-								<td class="dia">'.$j.'</td>
+								<td class="diaN">'.$j.'</td>
 							';
 						}
 					$html.='
@@ -449,16 +555,59 @@ class GuardiasController extends Controller
 					';
 				}
 			$html.='
+			</table>';
+			}else{
+				$html.='<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
+						<tr><td class="dia">No hay enfermeras asignadas al servicio Hospitalizacion 2</td></tr>
+						</table>';
+			}
+			if(!empty($dataR)){
+			$html.='
+			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
+				<tr><td class="estacion"><b>'.$dataR[0]['nombre'].'</b></td></tr>
+			</table>
+			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
+				<tr>
+					<td class="nombre">NOMBRE:</td>';
+						for ($j=1; $j <= $cantDias ; $j++) { //Refuerzo
+							$html.='
+								<td class="diaN">'.$j.'</td>
+							';
+						}
+					$html.='
+				</tr>
+			</table>
+			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">';
+				for ($i=0; $i < $numRegistrosR; $i++) { //Refuerzo
+					$html.='
+					<tr>
+						<td class="izq2">'.$dataR[$i]['nombres'].' '.$dataR[$i]['apellidos'].'</td>';
+						for ($j=1; $j <= $cantDias ; $j++) { 					
+							$html.='
+								<td class="dia">'.turno($dataR[$i]['dia_'.$j],$dataTurnos).'</td>
+							';
+						}
+					$html.='
+					</tr>
+					';
+				}
+			$html.='
 			</table>
 			';
-
-		$mPDF1 = Yii::app()->ePdf->mpdf('landscape', 'A2','','',15,15,15,'','','');
+			}else{
+				$html.='<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
+						<tr><td class="dia">No hay enfermeras de Refuerzo</td></tr>
+						</table>';
+			}
+			
+		$mPDF1 = Yii::app()->ePdf->mpdf('','A4-L',9,'',15,15,15,15,'','');
 		$stylesheet = file_get_contents(Yii::getPathOfAlias('webroot.css') . '/guardias.css');
+		$nombre = "Guardias_".strtolower($nomMes).$ano.".pdf";
         $mPDF1->WriteHTML($stylesheet, 1);
 		$mPDF1->WriteHTML($html);
-		$mPDF1->Output(); 
+		$mPDF1->Output($nombre,'I'); 
 		}else
-			$this->render('imprimir');
+			$this->render('imprimir');			
 	}
 
 	/**

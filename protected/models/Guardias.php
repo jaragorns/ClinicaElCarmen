@@ -96,7 +96,7 @@ class Guardias extends CActiveRecord
 		return array(
 			'id_guardia' => 'Id Guardia',
 			'id_usuario' => 'Enfermera:',
-			'id_estacion' => 'Estación:',
+			'id_estacion' => 'Servicio:',
 			'dia_1' => '1',
 			'dia_2' => '2',
 			'dia_3' => '3',
@@ -160,7 +160,7 @@ class Guardias extends CActiveRecord
 		}	
 		
 		$sort = new CSort();
-		$sort->defaultOrder = 'id_estacion ASC';
+		$sort->defaultOrder = 'mes ASC, ano ASC, id_estacion ASC';
 
 		$criteria->compare('id_guardia',$this->id_guardia);
 		$criteria->compare('id_usuario',$this->id_usuario);

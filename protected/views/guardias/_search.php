@@ -34,7 +34,7 @@
 				<?php echo $form->label($model,'id_estacion'); ?>
 				<?php echo $form->dropDownList($model,'id_estacion',
 				CHtml::listData(
-					Estaciones::model()->findAll(),'id_estacion','nombre'),	array('class' => 'my-drop-down','prompt'=>'Estación:',)); ?>	
+					Estaciones::model()->findAll(),'id_estacion','nombre'),	array('class' => 'my-drop-down','prompt'=>'Servicio:',)); ?>	
 			</td>
 		</tr>
 	</table>

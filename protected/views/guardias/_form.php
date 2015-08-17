@@ -53,7 +53,6 @@
 					<td><?php echo $form->labelEx($model,'dia_'.$i); ?>
 			</td>	
 			<?php } ?>	
-			 
 		</tr>
 		<tr>
 			<td>
@@ -68,12 +67,14 @@
 				$sql2 = 'SELECT * FROM Estaciones WHERE nombre!="Farmacia"'; 
 				echo $form->dropDownList($model,'id_estacion',
 				CHtml::listData(
-					Estaciones::model()->findAllBySql($sql2),'id_estacion','nombre'),	array('class' => 'my-drop-down','prompt'=>'Estación:',)); ?> 
+					Estaciones::model()->findAllBySql($sql2),'id_estacion','nombre'),	array('class' => 'my-drop-down','prompt'=>'Servicio:',)); ?> 
 			</td>
-			<?php for ($i=1; $i <=31 ; $i++) { ?>
+			<?php 
+				$sql3 ="SELECT * FROM Turnos WHERE abreviatura!='V'";
+			for ($i=1; $i <=31 ; $i++) { ?>
 					<td><?php echo $form->dropDownList($model,'dia_'.$i,
 				CHtml::listData(
-					Turnos::model()->findAll(),'id_turno','abreviatura'),	array('class' => 'my-drop-down')); ?> 
+					Turnos::model()->findAllBySql($sql3),'id_turno','abreviatura'),	array('class' => 'my-drop-down')); ?> 
 			</td>	
 			<?php } ?>	
 		</tr>
