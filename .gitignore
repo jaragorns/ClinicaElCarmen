@@ -217,3 +217,5 @@ pip-log.txt
 
 /assets
 protected/runtime/application.log
+protected/models/Estaciones.php
+protected/views/estaciones/view.php

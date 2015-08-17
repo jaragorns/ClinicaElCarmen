@@ -1,6 +1,6 @@
 <?php
 
-class FacturasController extends Controller
+class StockController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -54,28 +54,16 @@ class FacturasController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Facturas;
+		$model=new Stock;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Facturas']))
+		if(isset($_POST['Stock']))
 		{
-			$model->attributes=$_POST['Facturas'];
-			$consulta = "SELECT * FROM facturas WHERE num_factura = $model->num_factura	AND id_proveedor = $model->id_proveedor";
-			
-			if(Facturas::model()->findAllBySql($consulta)){
-				/* Si consigue el mismo num_factura de un mismo id_proveedor */
-				Yii::app()->user->setFlash('error','Ya existe ese NUMERO DE FACTURA para ese PROVEEDOR. Por favor revisar los datos suministrados.');
-				
-			}else{
-				if($model->save())
-				{
-					$this->redirect(array('view','id'=>$model->id_factura));
-					Yii::app()->user->setFlash('success','Factura creada.');
-				}
-			}
-			
+			$model->attributes=$_POST['Stock'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->id_stock));
 		}
 
 		$this->render('create',array(
@@ -95,14 +83,11 @@ class FacturasController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Facturas']))
+		if(isset($_POST['Stock']))
 		{
-			$model->attributes=$_POST['Facturas'];
+			$model->attributes=$_POST['Stock'];
 			if($model->save())
-			{
-				$this->redirect(array('view','id'=>$model->id_factura));
-				Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
-			}
+				$this->redirect(array('view','id'=>$model->id_stock));
 		}
 
 		$this->render('update',array(
@@ -129,7 +114,7 @@ class FacturasController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Facturas');
+		$dataProvider=new CActiveDataProvider('Stock');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -140,10 +125,10 @@ class FacturasController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Facturas('search');
+		$model=new Stock('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Facturas']))
-			$model->attributes=$_GET['Facturas'];
+		if(isset($_GET['Stock']))
+			$model->attributes=$_GET['Stock'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -154,12 +139,12 @@ class FacturasController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Facturas the loaded model
+	 * @return Stock the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Facturas::model()->findByPk($id);
+		$model=Stock::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -167,11 +152,11 @@ class FacturasController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Facturas $model the model to be validated
+	 * @param Stock $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='facturas-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='stock-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

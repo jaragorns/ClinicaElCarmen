@@ -320,6 +320,39 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li id="menu-item-15" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Unidad de Medidas" href="<?php echo Yii::app()->baseUrl;?>/unidadMedidas" data-toggle="dropdown" class="dropdown-toggle">Unidad de Medidas <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-151">
+                                        <a title="Agregar Unidad de Medidas" href="<?php echo Yii::app()->baseUrl;?>/unidadMedidas/create">Agregar Unidad de Medidas</a>
+                                    </li>
+                                    <li id="menu-item-152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152">
+                                        <a title="Gestionar Unidad de Medidas" href="<?php echo Yii::app()->baseUrl;?>/unidadMedidas/admin">Gestionar Unidad de Medidas</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Inventario" href="<?php echo Yii::app()->baseUrl;?>/inventario" data-toggle="dropdown" class="dropdown-toggle">Inventario <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-161" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-161">
+                                        <a title="Agregar Inventario" href="<?php echo Yii::app()->baseUrl;?>/inventario/createSimple">Agregar Inventario</a>
+                                    </li>
+                                    <li id="menu-item-162" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-162">
+                                        <a title="Gestionar Inventario" href="<?php echo Yii::app()->baseUrl;?>/inventario/admin">Gestionar Inventario</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Stock" href="<?php echo Yii::app()->baseUrl;?>/stock" data-toggle="dropdown" class="dropdown-toggle">Stock <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-171" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-171">
+                                        <a title="Agregar Stock" href="<?php echo Yii::app()->baseUrl;?>/stock/create">Agregar Stock</a>
+                                    </li>
+                                    <li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172">
+                                        <a title="Gestionar Stock" href="<?php echo Yii::app()->baseUrl;?>/stock/admin">Gestionar Stock</a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     <?php 
                     }if(Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){ ?>
@@ -486,7 +519,7 @@
                         <div class="footer-widget">
                             <h3 class="footer-widget-title">Mapa</h3>
                             <!-- <div id="map_canvas"></div> -->
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.66527054762!2d-72.26135099999999!3d8.033405000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e666112a3204eb7%3A0xacf8a749a1e1b3cb!2sCl%C3%ADnica+El+Carmen+C.A.!5e0!3m2!1ses!2sve!4v1436237080652" width="400" height="320" frameborder="2" style="border:2" allowfullscreen></iframe>
+                            <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.66527054762!2d-72.26135099999999!3d8.033405000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e666112a3204eb7%3A0xacf8a749a1e1b3cb!2sCl%C3%ADnica+El+Carmen+C.A.!5e0!3m2!1ses!2sve!4v1436237080652" width="400" height="320" frameborder="2" style="border:2" allowfullscreen></iframe> -->
                         </div>
                     </div>
 

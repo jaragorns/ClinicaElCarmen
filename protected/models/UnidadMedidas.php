@@ -1,20 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "roles".
+ * This is the model class for table "unidad_medidas".
  *
- * The followings are the available columns in table 'roles':
- * @property integer $id
- * @property string $description
+ * The followings are the available columns in table 'unidad_medidas':
+ * @property integer $id_unidad_medidas
+ * @property string $descripcion
+ * @property string $abreviatura
+ *
+ * The followings are the available model relations:
+ * @property Medicamentos[] $medicamentoses
  */
-class Roles extends CActiveRecord
+class UnidadMedidas extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'roles';
+		return 'unidad_medidas';
 	}
 
 	/**
@@ -25,11 +29,12 @@ class Roles extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('description', 'required'),
-			array('description', 'length', 'max'=>80),
+			array('descripcion, abreviatura', 'required'),
+			array('descripcion', 'length', 'max'=>80),
+			array('abreviatura', 'length', 'max'=>25),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, description', 'safe', 'on'=>'search'),
+			array('id_unidad_medidas, descripcion, abreviatura', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -41,6 +46,7 @@ class Roles extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'medicamentoses' => array(self::HAS_MANY, 'Medicamentos', 'unidad_medida'),
 		);
 	}
 
@@ -50,8 +56,9 @@ class Roles extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
-			'description' => 'Descripci&oacute;n',
+			'id_unidad_medidas' => 'Id Unidad Medidas',
+			'descripcion' => 'Descripción',
+			'abreviatura' => 'Abreviatura',
 		);
 	}
 
@@ -73,8 +80,9 @@ class Roles extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('description',$this->description,true);
+		$criteria->compare('id_unidad_medidas',$this->id_unidad_medidas);
+		$criteria->compare('descripcion',$this->descripcion,true);
+		$criteria->compare('abreviatura',$this->abreviatura,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -85,7 +93,7 @@ class Roles extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Roles the static model class
+	 * @return UnidadMedidas the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

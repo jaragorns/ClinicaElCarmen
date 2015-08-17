@@ -1,18 +1,18 @@
 <?php
-/* @var $this RolesController */
+/* @var $this StockController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Roles',
+	'Stocks',
 );
 
 $this->menu=array(
-	array('label'=>'Crear Rol', 'url'=>array('create')),
-	array('label'=>'Gestionar Roles', 'url'=>array('admin')),
+	array('label'=>'Create Stock', 'url'=>array('create')),
+	array('label'=>'Manage Stock', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Roles</h1>
+<h1>Stocks</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

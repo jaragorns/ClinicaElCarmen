@@ -1,27 +1,28 @@
 <?php
 
 /**
- * This is the model class for table "facturas".
+ * This is the model class for table "stock".
  *
- * The followings are the available columns in table 'facturas':
- * @property integer $id_factura
- * @property string $num_factura
- * @property string $fecha
- * @property integer $monto
- * @property integer $id_proveedor
+ * The followings are the available columns in table 'stock':
+ * @property integer $id_stock
+ * @property integer $cantidad
+ * @property integer $id_estacion
+ * @property integer $id_medicamento
  *
  * The followings are the available model relations:
- * @property Proveedores $idProveedor
- * @property Inventario[] $inventarios
+ * @property BitacoraDescargas[] $bitacoraDescargases
+ * @property Solicitudes[] $solicitudes
+ * @property Estaciones $idEstacion
+ * @property Medicamentos $idMedicamento
  */
-class Facturas extends CActiveRecord
+class Stock extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'facturas';
+		return 'stock';
 	}
 
 	/**
@@ -32,13 +33,11 @@ class Facturas extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('num_factura, fecha, monto, id_proveedor', 'required'),
-			array('id_proveedor', 'numerical', 'integerOnly'=>true),
-			array('monto', 'length', 'max'=>15),
-			array('num_factura', 'length', 'max'=>20),
+			array('cantidad, id_estacion, id_medicamento', 'required'),
+			array('cantidad, id_estacion, id_medicamento', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_factura, num_factura, fecha, monto, id_proveedor', 'safe', 'on'=>'search'),
+			array('id_stock, cantidad, id_estacion, id_medicamento', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -50,8 +49,10 @@ class Facturas extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idProveedor' => array(self::BELONGS_TO, 'Proveedores', 'id_proveedor'),
-			'inventarios' => array(self::HAS_MANY, 'Inventario', 'id_factura'),
+			'bitacoraDescargases' => array(self::HAS_MANY, 'BitacoraDescargas', 'id_stock'),
+			'solicitudes' => array(self::HAS_MANY, 'Solicitudes', 'stock_id_stock'),
+			'idEstacion' => array(self::BELONGS_TO, 'Estaciones', 'id_estacion'),
+			'idMedicamento' => array(self::BELONGS_TO, 'Medicamentos', 'id_medicamento'),
 		);
 	}
 
@@ -61,11 +62,10 @@ class Facturas extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_factura' => 'Id Factura',
-			'num_factura' => 'Num Factura',
-			'fecha' => 'Fecha',
-			'monto' => 'Monto',
-			'id_proveedor' => 'Proveedor',
+			'id_stock' => 'Id Stock',
+			'cantidad' => 'Cantidad',
+			'id_estacion' => 'Estación',
+			'id_medicamento' => 'Medicamento',
 		);
 	}
 
@@ -87,11 +87,10 @@ class Facturas extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id_factura',$this->id_factura);
-		$criteria->compare('num_factura',$this->num_factura,true);
-		$criteria->compare('fecha',$this->fecha,true);
-		$criteria->compare('monto',$this->monto);
-		$criteria->compare('id_proveedor',$this->id_proveedor);
+		$criteria->compare('id_stock',$this->id_stock);
+		$criteria->compare('cantidad',$this->cantidad);
+		$criteria->compare('id_estacion',$this->id_estacion);
+		$criteria->compare('id_medicamento',$this->id_medicamento);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -102,7 +101,7 @@ class Facturas extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Facturas the static model class
+	 * @return Stock the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
