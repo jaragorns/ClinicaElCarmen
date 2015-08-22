@@ -5,11 +5,11 @@
  *
  * The followings are the available columns in table 'facturas':
  * @property integer $id_factura
+ * @property string control_factura
  * @property string $num_factura
  * @property string $fecha
  * @property integer $monto
  * @property integer $id_proveedor
- *
  * The followings are the available model relations:
  * @property Proveedores $idProveedor
  * @property Inventario[] $inventarios
@@ -32,13 +32,13 @@ class Facturas extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('num_factura, fecha, monto, id_proveedor', 'required'),
+			array('num_factura, control_factura, fecha_factura, fecha_vencimiento ,fecha_entrada, monto, id_proveedor', 'required'),
 			array('id_proveedor', 'numerical', 'integerOnly'=>true),
 			array('monto', 'length', 'max'=>15),
 			array('num_factura', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_factura, num_factura, fecha, monto, id_proveedor', 'safe', 'on'=>'search'),
+			array('id_factura, num_factura, fecha_factura, fecha_entrada, fecha_vencimiento, monto, id_proveedor', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,8 +62,11 @@ class Facturas extends CActiveRecord
 	{
 		return array(
 			'id_factura' => 'Id Factura',
+			'control_factura' => 'Control Fact.',
 			'num_factura' => 'Num Factura',
-			'fecha' => 'Fecha',
+			'fecha_factura' => 'Fecha Fact.',
+			'fecha_entrada' => 'Fecha Entra.',
+			'fecha_vencimiento' => 'Fecha Venc.',
 			'monto' => 'Monto',
 			'id_proveedor' => 'Proveedor',
 		);
@@ -88,8 +91,11 @@ class Facturas extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_factura',$this->id_factura);
+		$criteria->compare('control_factura',$this->control_factura,true);
 		$criteria->compare('num_factura',$this->num_factura,true);
-		$criteria->compare('fecha',$this->fecha,true);
+		$criteria->compare('fecha_factura',$this->fecha_factura,true);
+		$criteria->compare('fecha_entrada',$this->fecha_entrada,true);
+		$criteria->compare('fecha_vencimiento',$this->fecha_vencimiento,true);
 		$criteria->compare('monto',$this->monto);
 		$criteria->compare('id_proveedor',$this->id_proveedor);
 

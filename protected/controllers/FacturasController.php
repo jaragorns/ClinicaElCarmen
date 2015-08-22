@@ -54,32 +54,98 @@ class FacturasController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Facturas;
+		$model = new Facturas;
+		$items_1 = new Inventario;
+		$items_2 = new Inventario;
+		$items_3 = new Inventario;
+		$items_4 = new Inventario;
+		$items_5 = new Inventario;
+		$items_6 = new Inventario;
+		$items_7 = new Inventario;
+		$items_8 = new Inventario;
+		$items_9 = new Inventario;
+		$items_10 = new Inventario;
+		$items_11 = new Inventario;
+		$items_12 = new Inventario;
+		$items_13 = new Inventario;
+		$items_14 = new Inventario;
+		$items_15 = new Inventario;
+		$items_16 = new Inventario;
+		$items_17 = new Inventario;
+		$items_18 = new Inventario;
+		$items_19 = new Inventario;
+		$items_20 = new Inventario;
+		$items_21 = new Inventario;
+		$items_22 = new Inventario;
+		$items_23 = new Inventario;
+		$items_24 = new Inventario;
+		$items_25 = new Inventario;
+		$items_26 = new Inventario;
+		$items_27 = new Inventario;
+		$items_28 = new Inventario;
+		$items_29 = new Inventario;
+		$items_30 = new Inventario;
 
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($items_1);
+		
 
 		if(isset($_POST['Facturas']))
 		{
-			$model->attributes=$_POST['Facturas'];
-			$consulta = "SELECT * FROM facturas WHERE num_factura = $model->num_factura	AND id_proveedor = $model->id_proveedor";
-			
-			if(Facturas::model()->findAllBySql($consulta)){
-				/* Si consigue el mismo num_factura de un mismo id_proveedor */
-				Yii::app()->user->setFlash('error','Ya existe ese NUMERO DE FACTURA para ese PROVEEDOR. Por favor revisar los datos suministrados.');
-				
-			}else{
-				if($model->save())
-				{
-					$this->redirect(array('view','id'=>$model->id_factura));
-					Yii::app()->user->setFlash('success','Factura creada.');
+			$model->attributes = $_POST['Facturas'];
+
+			if($model->validate())
+			{
+				$consulta = "SELECT * FROM facturas WHERE num_factura = $model->num_factura	AND id_proveedor = $model->id_proveedor";
+		
+				if(Facturas::model()->findAllBySql($consulta)){
+					// Si consigue el mismo num_factura de un mismo id_proveedor
+					Yii::app()->user->setFlash('error','Ya existe ese NUMERO DE FACTURA para ese PROVEEDOR. Por favor revisar los datos suministrados.');
+					
+				}else{
+					if($model->save())
+					{
+						$this->redirect(array('view','id'=>$model->id_factura));
+						Yii::app()->user->setFlash('success','Factura creada.');
+					}
 				}
+
 			}
-			
+
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'items_1'=>$items_1,
+			'items_2'=>$items_2,
+			'items_3'=>$items_1,
+			'items_4'=>$items_1,
+			'items_5'=>$items_1,
+			'items_6'=>$items_1,
+			'items_7'=>$items_1,
+			'items_8'=>$items_1,
+			'items_9'=>$items_1,
+			'items_10'=>$items_1,
+			'items_11'=>$items_1,
+			'items_12'=>$items_1,
+			'items_13'=>$items_1,
+			'items_14'=>$items_1,
+			'items_15'=>$items_1,
+			'items_16'=>$items_1,
+			'items_17'=>$items_1,
+			'items_18'=>$items_1,
+			'items_19'=>$items_1,
+			'items_20'=>$items_1,
+			'items_21'=>$items_1,
+			'items_22'=>$items_1,
+			'items_23'=>$items_1,
+			'items_24'=>$items_1,
+			'items_25'=>$items_1,
+			'items_26'=>$items_1,
+			'items_27'=>$items_1,
+			'items_28'=>$items_1,
+			'items_29'=>$items_1,
+			'items_30'=>$items_1,
 		));
 	}
 
@@ -173,6 +239,7 @@ class FacturasController extends Controller
 	{
 		if(isset($_POST['ajax']) && $_POST['ajax']==='facturas-form')
 		{
+			
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}

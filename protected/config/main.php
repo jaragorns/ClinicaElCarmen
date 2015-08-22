@@ -61,6 +61,9 @@ return array(
             ),
         ),
     	),
+		'EJqCalculator'=>array(
+            'class'=>'application.extensions.EJqCalculator.EJqCalculator',
+        ),
 		'localtime'=>array(
         	'class'=>'LocalTime',
         ),

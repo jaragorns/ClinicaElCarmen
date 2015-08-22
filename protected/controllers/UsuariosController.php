@@ -99,6 +99,9 @@ class UsuariosController extends Controller
 				Yii::app()->authManager->assign($rol_user->itemname,$model->id);
 				Yii::app()->user->setFlash('success','Usuario creado.');
 				$this->redirect(array('view','id'=>$model->id));
+	        }else{
+	        	$model->validate();
+	        	$rol_user->validate();
 	        }
 		}
 		

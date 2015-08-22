@@ -39,12 +39,13 @@ class Inventario extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cantidad, precio_compra, id_factura, id_usuario, id_medicamento, id_estacion', 'required'),
+			array('cantidad, precio_compra, id_factura, id_usuario, id_medicamento, id_estacion, total', 'required'),
 			array('cantidad, id_factura, id_usuario, id_medicamento, id_estacion', 'numerical', 'integerOnly'=>true),
 			array('precio_compra', 'length', 'max'=>8),
+			array('total', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_inventario, cantidad, precio_compra, id_factura, id_usuario, id_medicamento, id_estacion', 'safe', 'on'=>'search'),
+			array('id_inventario, cantidad, precio_compra, id_factura, id_usuario, id_medicamento, id_estacion, total', 'safe', 'on'=>'search'),
 			array('usuario', 'safe', 'on'=>'search'),
 		);
 	}
@@ -73,6 +74,7 @@ class Inventario extends CActiveRecord
 			'id_inventario' => 'Id Inventario',
 			'cantidad' => 'Cantidad',
 			'precio_compra' => 'Precio de Compra',
+			'total' => 'Total',
 			'id_factura' => 'Factura',
 			'id_usuario' => 'Usuario',
 			'id_medicamento' => 'Medicamento',

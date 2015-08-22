@@ -2,7 +2,7 @@
 /* @var $this GuardiasController */
 /* @var $data Guardias */
 ?>
-
+<?php //echo "Mes: ".$_GET['mes']." - Año: ".$_GET['ano'];?>
 <p class="note">Campos con <span class="required">*</span> son requeridos.</p>
 
 <form method="get" action="Imprimir">

@@ -15,7 +15,7 @@
     <link href="<?php echo Yii::app()->theme->baseUrl;?>/style.css" rel="stylesheet" media="screen">
 
      <!-- Scripts -->
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery-2.1.1.js"></script>
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery-2.1.4.js"></script>
     <!--<script src="<?php #echo Yii::app()->theme->baseUrl;?>/js/jquery.js"></script>   -->
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.cookie.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/bootstrap.min.js"></script>
@@ -39,6 +39,7 @@
     <link href="<?php echo Yii::app()->theme->baseUrl;?>/img/favicon.jpg" rel="shortcut icon" type="image/x-icon" />
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
     <script>
+    /*
     function initialize() {
         var mapCanvas = document.getElementById('map_canvas');
         var mapOptions = {
@@ -84,6 +85,7 @@
         });
     }
     google.maps.event.addDomListener(window, 'load', initialize);
+    */
     </script>
 
 
