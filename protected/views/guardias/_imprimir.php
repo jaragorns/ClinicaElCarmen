@@ -2,8 +2,13 @@
 /* @var $this GuardiasController */
 /* @var $data Guardias */
 ?>
+<<<<<<< HEAD
 <?php //echo "Mes: ".$_GET['mes']." - Año: ".$_GET['ano'];?>
 <p class="note">Campos con <span class="required">*</span> son requeridos.</p>
+=======
+
+<p class="note"><b>Debe seleccionar Mes y Año</b></p>
+>>>>>>> origin/master
 
 <form method="get" action="Imprimir">
 <div class="_form">
@@ -12,7 +17,7 @@
 	</div>
 	<div class="media">
 		<select name="mes">
-		   <option selected>--Mes--</option>
+		   <option selected value="">--Mes--</option>
 		   <option value="1">Enero</option> 
 		   <option value="2">Febrero</option> 
 		   <option value="3">Marzo</option>

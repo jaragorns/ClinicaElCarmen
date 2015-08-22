@@ -63,7 +63,7 @@ class EstacionesController extends Controller
 		{
 			$model->attributes=$_POST['Estaciones'];
 			if($model->save()){
-				Yii::app()->user->setFlash('success','Estación agregada.');	
+				Yii::app()->user->setFlash('success','Servicio agregado.');	
 				$this->redirect(array('view','id'=>$model->id_estacion));
 			}
 		}
@@ -89,7 +89,7 @@ class EstacionesController extends Controller
 		{
 			$model->attributes=$_POST['Estaciones'];
 			if($model->save()){
-				Yii::app()->user->setFlash('success','Estación Modificada.');	
+				Yii::app()->user->setFlash('success','Servicio Modificado.');	
 				$this->redirect(array('view','id'=>$model->id_estacion));
 			}
 		}

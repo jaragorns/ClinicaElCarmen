@@ -13,9 +13,24 @@
 }
 .izq2{
 	width: 15%;
-	text-align: center;
+	text-align: left;
 }
 .dia{
 	width: 2.74%;
 	text-align: center;
+}
+.estacion{
+	width: 15%;
+	text-align: center;
+	background-color: #DAFFDA;
+}
+.diaN{
+	width: 2.74%;
+	text-align: center;
+	background-color: #DBDBDB;
+}
+.nombre{
+	width: 15%;
+	text-align: center;
+	background-color: #DBDBDB;
 }

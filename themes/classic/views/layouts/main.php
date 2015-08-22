@@ -287,13 +287,13 @@
                         </ul>
                         <ul id="menu-mainmenu" class="nav navbar-nav">
                             <li id="menu-item-12" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-12 dropdown">
-                                <a title="Estaciones" href="<?php echo Yii::app()->baseUrl;?>/estaciones" data-toggle="dropdown" class="dropdown-toggle">Estaciones<span class="caret"></span></a>
+                                <a title="Servicios" href="<?php echo Yii::app()->baseUrl;?>/estaciones" data-toggle="dropdown" class="dropdown-toggle">Servicios<span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li id="menu-item-121" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-121">
-                                        <a title="Agregar Estacion" href="<?php echo Yii::app()->baseUrl;?>/estaciones/create">Agregar estación</a>
+                                        <a title="Agregar Servicio" href="<?php echo Yii::app()->baseUrl;?>/estaciones/create">Agregar Servicio</a>
                                     </li>
                                     <li id="menu-item-122" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-122">
-                                        <a title="Gestionar Estaciones" href="<?php echo Yii::app()->baseUrl;?>/estaciones/admin">Gestionar Estaciones</a>
+                                        <a title="Gestionar Servicios" href="<?php echo Yii::app()->baseUrl;?>/estaciones/admin">Gestionar Servicios</a>
                                     </li>
                                 </ul>
                             </li>
