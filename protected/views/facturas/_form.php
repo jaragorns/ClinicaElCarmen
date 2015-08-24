@@ -12,7 +12,7 @@
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>true,
+	'enableAjaxValidation'=>false,
 )); ?>
 
 	<p class="note">Campos con <span class="required">*</span> son requeridos.</p>
@@ -145,180 +145,7 @@
 				<td><?php echo $form->textField($items_1,'precio_compra', array('size'=>20)); ?></td>	
 				<td><?php echo $form->textField($items_1,'total', array('size'=>30)); ?></td>
 			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_2,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_2,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_2,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_2,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_3,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_3,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_3,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_3,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_4,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_4,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_4,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_4,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_5,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_5,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_5,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_5,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_6,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_6,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_6,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_6,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_7,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_7,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_7,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_7,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_8,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_8,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_8,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_8,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_9,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_9,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_9,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_9,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_10,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_10,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_10,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_10,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_11,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_11,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_11,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_11,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_12,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_12,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_12,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_12,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_13,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_13,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_13,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_13,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_14,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_14,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_14,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_14,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_15,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_15,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_15,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_15,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_16,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_16,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_16,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_16,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_17,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_17,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_17,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_17,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_18,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_18,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_18,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_18,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_19,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_19,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_19,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_19,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_20,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_20,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_20,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_20,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_21,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_21,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_21,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_21,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_22,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_22,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_22,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_22,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_23,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_23,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_23,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_23,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_24,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_24,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_24,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_24,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_25,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_25,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_25,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_25,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_26,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_26,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_26,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_26,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_27,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_27,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_27,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_27,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_28,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_28,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_28,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_28,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_29,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_29,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_29,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_29,'total', array('size'=>30)); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo $form->textField($items_30,'id_medicamento', array('size'=>60)); ?></td>
-				<td><?php echo $form->textField($items_30,'cantidad', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_30,'precio_compra', array('size'=>20)); ?></td>
-				<td><?php echo $form->textField($items_30,'total', array('size'=>30)); ?></td>
-			</tr>
+			
 			
 		</table>
 
@@ -329,6 +156,19 @@
 			<?php echo $form->textField($model,'monto'); ?>
 			<?php echo $form->error($model,'monto'); ?>
 		</div>
+		<?php 
+				$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+    				'name'=>'medicamento',
+    				'value'=>'',
+    				//'source'=>array('ac1', 'ac2', 'ac3'),
+    				'source'=>$this->createUrl('Facturas/Ajax3'),
+    				// additional javascript options for the autocomplete plugin
+    				'options'=>array(
+    					'minLength'=>'1',
+            			'showAnim'=>'fold',
+    				),
+				));
+			?>
 		
 		<div class="buttons">
 			<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save'),  array("class"=>"btn btn-primary btn-large")); ?>
