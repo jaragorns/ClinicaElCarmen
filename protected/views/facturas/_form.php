@@ -140,16 +140,45 @@
 				<th><?php echo $form->labelEx($items_1,'[0]total'); ?></th>
 			</tr>
 			<tr>
-				<td><?php echo $form->textField($items_1,'[0]id_medicamento', array('size'=>60)); ?></td>
+				<td>
+					<?php 
+						$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+		    				'name'=>'Inventario_0_id_medicamento',
+		    				'value'=>'',
+		    				'source'=>$this->createUrl('Facturas/Ajax'),
+		    				// additional javascript options for the autocomplete plugin
+		    				'options'=>array(
+		    					'minLength'=>'1',
+		            			'showAnim'=>'fold',
+		    				),
+		    				'htmlOptions'=>array(
+        						'style'=>'width:436px;',
+    						),
+						));
+					?>
+				</td>
 				<td><?php echo $form->textField($items_1,'[0]cantidad', array('id'=>'items_1_cantidad','size'=>20, 'onblur'=>'checkval(1)')); ?></td>
 				<td><?php echo $form->textField($items_1,'[0]precio_compra', array('id'=>'items_1_precio','size'=>20, 'onblur'=>'checkval(1)')); ?></td>	
 				<td><?php echo $form->textField($items_1,'[0]total', array('id'=>'items_1_total','size'=>30, 'readonly'=>'disable')); ?></td>
 			</tr>
-<<<<<<< HEAD
-			
-=======
 			<tr>
-				<td><?php echo $form->textField($items_2,'[1]id_medicamento', array('size'=>60)); ?></td>
+				<td>
+					<?php 
+						$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+		    				'name'=>'Inventario_1_id_medicamento',
+		    				'value'=>'',
+		    				'source'=>$this->createUrl('Facturas/Ajax'),
+		    				// additional javascript options for the autocomplete plugin
+		    				'options'=>array(
+		    					'minLength'=>'1',
+		            			'showAnim'=>'fold',
+		    				),
+		    				'htmlOptions'=>array(
+        						'style'=>'width:436px;',
+    						),
+						));
+					?>
+				</td>
 				<td><?php echo $form->textField($items_2,'[1]cantidad', array('id'=>'items_2_cantidad', 'size'=>20, 'onblur'=>'checkval(2)')); ?></td>
 				<td><?php echo $form->textField($items_2,'[1]precio_compra', array('id'=>'items_2_precio','size'=>20, 'onblur'=>'checkval(2)')); ?></td>
 				<td><?php echo $form->textField($items_2,'[1]total', array('id'=>'items_2_total','size'=>30, 'readonly'=>'disable')); ?></td>
@@ -322,8 +351,6 @@
 				<td><?php echo $form->textField($items_30,'[29]precio_compra', array('id'=>'items_30_precio','size'=>20, 'onblur'=>'checkval(30)')); ?></td>
 				<td><?php echo $form->textField($items_30,'[29]total', array('id'=>'items_30_total','size'=>30, 'readonly'=>'disable')); ?></td>
 			</tr>
->>>>>>> origin/master
-			
 		</table>
 
 		<div class="rowcontact">
@@ -333,19 +360,7 @@
 			<?php echo $form->textField($model,'monto'); ?>
 			<?php echo $form->error($model,'monto'); ?>
 		</div>
-		<?php 
-				$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-    				'name'=>'medicamento',
-    				'value'=>'',
-    				//'source'=>array('ac1', 'ac2', 'ac3'),
-    				'source'=>$this->createUrl('Facturas/Ajax3'),
-    				// additional javascript options for the autocomplete plugin
-    				'options'=>array(
-    					'minLength'=>'1',
-            			'showAnim'=>'fold',
-    				),
-				));
-			?>
+			
 		
 		<div class="buttons">
 			<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save'),  array("class"=>"btn btn-primary btn-large")); ?>

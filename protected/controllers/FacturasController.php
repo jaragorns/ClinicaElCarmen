@@ -514,7 +514,7 @@ public function actionAjax2() {
     $res =array();
     if (isset($_GET['term'])) {
         // http://www.yiiframework.com/doc/guide/database.dao
-        $qtxt ="SELECT nombre FROM {{medicamentos}} WHERE nombre LIKE :name";
+        $qtxt ="SELECT nombre FROM {{medicamentos}} WHERE nombre LIKE :nombre";
         $command =Yii::app()->db->createCommand($qtxt);
         $command->bindValue(":nombre", '%'.$_GET['term'].'%', PDO::PARAM_STR);
         $res =$command->queryColumn();
@@ -525,16 +525,21 @@ public function actionAjax2() {
 }
 
 public function actionAjax(){
-	echo "HOLA MUNDOOOOOOOOOOOOo";
-    $request=trim($_GET['term']);
-    if($request!=''){
-        $model=Medicamentos::model()->findAll(array("condition"=>"nombre LIKE '$request%'"));
-        $data=array();
+
+    $request = trim($_GET['term']);
+
+    if($request!='')
+    {
+
+        $model = Medicamentos::model()->findAll(array("condition"=>"nombre LIKE '$request%'"));
+        $data = array();
         foreach($model as $get){
             $data[]=$get->nombre;
         }
+
         $this->layout='empty';
         echo json_encode($data);
+        
     }
 }
 
