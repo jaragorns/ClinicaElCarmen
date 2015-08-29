@@ -28,7 +28,7 @@ class FacturasController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete','ajax','ajax2','ajax3'),
+				'actions'=>array('index','view','create','update','admin','delete','autocomplete'),
 				'roles'=>array('Superadmin'),
 			),
 			array('deny',  // deny all users
@@ -491,57 +491,36 @@ class FacturasController extends Controller
 		}
 	}
 
-	public function actionAjax3($term) {
-
+	public function actionAutocomplete($term) 
+	{
 		$criteria = new CDbCriteria;
-		$criteria->condition = "LOWER(nombre) like LOWER(:term)";
-		$criteria->params = array(':term'=> '%'.$_GET['term'].'%');
-		$criteria->limit = 30;
+		$criteria->compare('LOWER(nombre)', strtolower($_GET['term']), true);
+		$criteria->order = 'nombre';
+		$criteria->limit = 10; 
 		$data = Medicamentos::model()->findAll($criteria);
-		$arr = array();
-		foreach ($data as $item) {
-			$arr[] = array(
-				'id' => $item->id,
-				'value' => $item->nombre,
-				'label' => $item->nombre,
-			);
-		}
+
+		if (!empty($data))
+		{
+  			$arr = array();
+  			foreach ($data as $item) {
+	   			$arr[] = array(
+	    			'id_medicamento' => $item->id_medicamento,
+	    			'nombre_medicamento' => $item->nombre,
+	    			'value' => $item->nombre,
+	    			'iva' => $item->iva,
+	   			);
+  			}
+	 	}else{
+	  		$arr = array();
+	  		$arr[] = array(
+	   			'id' => '',
+	   			'value' => 'El medicamento no existe, por favor verifíque.',
+	   			'label' => 'El medicamento no existe, por favor verifíque.',
+	   			'iva' => '',
+	  		);
+	 	}
+  
 		echo CJSON::encode($arr);
 	}
-
-public function actionAjax2() {
-	echo "HOLA MUNDOOOOOOOOOOOOo";
-    $res =array();
-    if (isset($_GET['term'])) {
-        // http://www.yiiframework.com/doc/guide/database.dao
-        $qtxt ="SELECT nombre FROM {{medicamentos}} WHERE nombre LIKE :nombre";
-        $command =Yii::app()->db->createCommand($qtxt);
-        $command->bindValue(":nombre", '%'.$_GET['term'].'%', PDO::PARAM_STR);
-        $res =$command->queryColumn();
-    }
-
-    echo CJSON::encode($res);
-    Yii::app()->end();
-}
-
-public function actionAjax(){
-
-    $request = trim($_GET['term']);
-
-    if($request!='')
-    {
-
-        $model = Medicamentos::model()->findAll(array("condition"=>"nombre LIKE '$request%'"));
-        $data = array();
-        foreach($model as $get){
-            $data[]=$get->nombre;
-        }
-
-        $this->layout='empty';
-        echo json_encode($data);
-        
-    }
-}
-
 
 }

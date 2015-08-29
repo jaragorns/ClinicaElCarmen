@@ -81,7 +81,7 @@ class InventarioController extends Controller
 			$model_factura = Facturas::model()->findByAttributes(array("id_factura"=>$id_factura));
 			$model->id_factura = $model_factura->id_factura;
 
-			$model->id_estacion = Estaciones::model()->findByAttributes(array('id_estacion'=>"7"))->id_estacion;
+			$model->id_estacion = Estaciones::model()->findByAttributes(array('id_estacion'=>"6"))->id_estacion;
 
 			$existe = Inventario::model()->findAll(array('condition'=>'id_medicamento=:id_medicamento',
 					'params'=>array(':id_medicamento'=>$model->id_medicamento),));
