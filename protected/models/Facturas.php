@@ -32,13 +32,13 @@ class Facturas extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('num_factura, control_factura, fecha_factura, fecha_vencimiento ,fecha_entrada, monto, id_proveedor', 'required'),
+			array('num_factura, control_factura, fecha_factura, fecha_vencimiento ,fecha_entrada, monto, id_proveedor, retencion', 'required'),
 			array('id_proveedor', 'numerical', 'integerOnly'=>true),
 			array('monto', 'length', 'max'=>15),
 			array('num_factura', 'length', 'max'=>20),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_factura, num_factura, fecha_factura, fecha_entrada, fecha_vencimiento, monto, id_proveedor', 'safe', 'on'=>'search'),
+			array('id_factura, num_factura, fecha_factura, fecha_entrada, fecha_vencimiento, monto, id_proveedor, retencion', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -68,6 +68,7 @@ class Facturas extends CActiveRecord
 			'fecha_entrada' => 'Fecha Entra.',
 			'fecha_vencimiento' => 'Fecha Venc.',
 			'monto' => 'Monto',
+			'retencion' => 'Retención',
 			'id_proveedor' => 'Proveedor',
 		);
 	}
@@ -97,6 +98,7 @@ class Facturas extends CActiveRecord
 		$criteria->compare('fecha_entrada',$this->fecha_entrada,true);
 		$criteria->compare('fecha_vencimiento',$this->fecha_vencimiento,true);
 		$criteria->compare('monto',$this->monto);
+		$criteria->compare('retencion',$this->retencino);
 		$criteria->compare('id_proveedor',$this->id_proveedor);
 
 		return new CActiveDataProvider($this, array(
