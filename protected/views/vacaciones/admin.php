@@ -49,8 +49,14 @@ Tambi&eacute;n puede escribir un operador de comparaci&oacute;n  (<b>&lt;</b>, <
             'name' => 'id_usuario',
             'value' => 'Usuarios::model()->findByAttributes(array("id"=>$data->id_usuario))->NombreCompleto', 
         ),
-		'fecha_inicio',
-		'fecha_fin',
+		array(
+            'name' => 'fecha_inicio',
+            'value' => 'date_format(date_create($data->fecha_inicio), "d-m-Y")'
+        ),
+		array(
+            'name' => 'fecha_fin',
+            'value' => 'date_format(date_create($data->fecha_fin), "d-m-Y")'
+        ),
 		
 		array(
 			'class'=>'CButtonColumn',

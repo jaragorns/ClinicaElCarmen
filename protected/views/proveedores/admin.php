@@ -47,7 +47,10 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 	'columns'=>array(
 		//'id_proveedor',
 		'nombre',
-		'rif',
+		array(
+			'name' => 'rif',
+			'value' => 'substr_replace($data->rif, "-", 1, 0)',
+		),
 		'telefono',
 		'direccion',
 		'email',

@@ -48,7 +48,7 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 		//'id_inventario',
 		array(
 			'name' => 'id_factura',
-			//'value' => 'Facturas::model()->findByAttributes(array("id_factura"=>$data->id_factura))->num_factura'
+			'value' => 'Facturas::model()->findByAttributes(array("id_factura"=>$data->id_factura))->num_factura'
 		),
 		array(
 			'name' => 'id_estacion',
@@ -59,7 +59,10 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 			'value' => 'Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data->id_medicamento))->nombre'
 		),
 		'cantidad',
-		'precio_compra',
+		array(
+            'name' => 'precio_compra',
+            'value' => 'str_replace(".",",",$data->precio_compra)',
+        ),
 		//'id_usuario',
 		array(
         	'class'=>'CButtonColumn',

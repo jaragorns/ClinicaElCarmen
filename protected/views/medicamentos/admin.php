@@ -48,9 +48,18 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 		//'id_medicamento',
 		'nombre',
 		'componente',
-		'unidad_medida',
-		'precio_contado',
-		'precio_seguro',
+		array(
+            'name' => 'unidad_medida',
+            'value' => 'UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>$data->unidad_medida))->abreviatura'
+        ),
+        array(
+            'name' => 'precio_contado',
+            'value' => 'str_replace(".",",",$data->precio_contado)',
+        ),
+		array(
+            'name' => 'precio_seguro',
+            'value' => 'str_replace(".",",",$data->precio_seguro)',
+        ),
 		array(
 			'class'=>'CButtonColumn',
 		),

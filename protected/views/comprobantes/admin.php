@@ -63,11 +63,13 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
         ),
         array(
             'name'  => 'monto',
-            'htmlOptions' => array('style'=>'width:110px;'),
+            'value' => 'str_replace(".",",",$data->monto)',
+            'htmlOptions' => array('style'=>'text-align: right;'),
         ),
         array(
             'name'  => 'fecha',
-            'htmlOptions' => array('style'=>'width:80px;'),
+            'value' => 'date_format(date_create($data->fecha), "d-m-Y")',
+            'htmlOptions' => array('style'=>'text-align: right;'),
         ),
         'detalle',
         array(

@@ -47,8 +47,16 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 	'columns'=>array(
 		//'id_bancos',
 		'nombre',
-		'saldo',
-		'fecha_actualizacion',
+		array(
+            'name'  => 'saldo',
+            'value' => 'str_replace(".",",",$data->saldo)',
+            'htmlOptions' => array('style'=>'text-align: right;'),
+        ),
+		array(
+            'name' => 'fecha_actualizacion',
+            'value' => 'date_format(date_create($data->fecha_actualizacion), "d-m-Y")',
+            'htmlOptions' => array('style'=>'text-align: right;'),
+        ),
 		array(
 			'class'=>'CButtonColumn',
 		),

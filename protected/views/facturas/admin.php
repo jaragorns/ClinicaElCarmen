@@ -48,6 +48,10 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 		//'id_factura',
 		'num_factura',
 		array(
+            'name' => 'id_proveedor',
+            'value' => 'Proveedores::model()->findByAttributes(array("id_proveedor"=>$data->id_proveedor))->nombre'
+        ),
+		array(
             'name' => 'fecha_factura',
             'value' => 'date_format(date_create($data->fecha_factura), "d-m-Y")'
         ),
@@ -59,10 +63,15 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
             'name' => 'fecha_vencimiento',
             'value' => 'date_format(date_create($data->fecha_vencimiento), "d-m-Y")'
         ),
-		'monto',
 		array(
-            'name' => 'id_proveedor',
-            'value' => 'Proveedores::model()->findByAttributes(array("id_proveedor"=>$data->id_proveedor))->nombre'
+            'name' => 'monto',
+            'value' => 'str_replace(".",",",$data->monto)',
+            'htmlOptions' => array('style'=>'width:120px; text-align: right;'),
+        ),
+		
+        array(
+            'name' => 'retencion',
+            'htmlOptions' => array('style'=>'width:70px;'),
         ),
 		array(
 			'class'=>'CButtonColumn',

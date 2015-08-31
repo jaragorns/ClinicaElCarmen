@@ -10,6 +10,7 @@
  * @property string $fecha
  * @property integer $monto
  * @property integer $id_proveedor
+ * @property string $retencion
  * The followings are the available model relations:
  * @property Proveedores $idProveedor
  * @property Inventario[] $inventarios
@@ -98,7 +99,7 @@ class Facturas extends CActiveRecord
 		$criteria->compare('fecha_entrada',$this->fecha_entrada,true);
 		$criteria->compare('fecha_vencimiento',$this->fecha_vencimiento,true);
 		$criteria->compare('monto',$this->monto);
-		$criteria->compare('retencion',$this->retencino);
+		$criteria->compare('retencion',$this->retencion);
 		$criteria->compare('id_proveedor',$this->id_proveedor);
 
 		return new CActiveDataProvider($this, array(
