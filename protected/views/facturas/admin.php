@@ -47,7 +47,18 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 	'columns'=>array(
 		//'id_factura',
 		'num_factura',
-		'fecha',
+		array(
+            'name' => 'fecha_factura',
+            'value' => 'date_format(date_create($data->fecha_factura), "d-m-Y")'
+        ),
+        array(
+            'name' => 'fecha_entrada',
+            'value' => 'date_format(date_create($data->fecha_entrada), "d-m-Y")'
+        ),
+		array(
+            'name' => 'fecha_vencimiento',
+            'value' => 'date_format(date_create($data->fecha_vencimiento), "d-m-Y")'
+        ),
 		'monto',
 		array(
             'name' => 'id_proveedor',

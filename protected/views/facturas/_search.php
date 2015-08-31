@@ -26,10 +26,24 @@
 	</div>
 
 	<div class="rowcontact">
-		<?php echo $form->label($model,'fecha'); ?>
+		<?php echo $form->label($model,'fecha_factura'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'fecha',array('placeholder'=>'YYYY-MM-DD')); ?>
+		<?php echo $form->textField($model,'fecha_factura',array('placeholder'=>'YYYY-MM-DD')); ?>
+	</div>
+
+	<div class="rowcontact">
+		<?php echo $form->label($model,'fecha_entrada'); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'fecha_entrada',array('placeholder'=>'YYYY-MM-DD')); ?>
+	</div>
+
+	<div class="rowcontact">
+		<?php echo $form->label($model,'fecha_vencimiento'); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'fecha_vencimiento',array('placeholder'=>'YYYY-MM-DD')); ?>
 	</div>
 
 	<div class="rowcontact">

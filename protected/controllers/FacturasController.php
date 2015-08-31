@@ -230,8 +230,31 @@ class FacturasController extends Controller
 					
 				}else{					
 					if($items_1->validate()){
+
 						$items_1->save(); 
 						$cont++; 
+
+						$existe = Stock::model()->findAll(array('condition'=>'id_medicamento=:id_medicamento',
+								'params'=>array(':id_medicamento'=>$items_1->id_medicamento),));
+
+						if($existe)
+						{ // Como el medicamento EXISTE debo ACTUALIZAR la CANTIDAD en STOCK
+							$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$items_1->id_medicamento;
+							$cant_stock = Stock::model()->findAllBySql($sql);
+							$cantidad_nueva = $cant_stock['0']['cantidad'] + $items_1->cantidad;
+							$sql = "UPDATE `stock` SET `cantidad`=".$cantidad_nueva." WHERE `id_medicamento` =".$items_1->id_medicamento;
+							$execute = Yii::app()->db->createCommand($sql)->execute();
+							
+						}else{
+							// Como el medicamente NO existe lo agrego en STOCK
+							$model_stock = new Stock;
+							$model_stock->id_medicamento = $items_1->id_medicamento;
+							$model_stock->id_estacion = $items_1->id_estacion;
+							$model_stock->cantidad = $items_1->cantidad;
+							$model_stock->save();
+							
+						}
+						
 					}
 					if($items_2->validate()){
 						$items_2->save(); 
@@ -505,7 +528,6 @@ class FacturasController extends Controller
   			foreach ($data as $item) {
 	   			$arr[] = array(
 	    			'id_medicamento' => $item->id_medicamento,
-	    			'nombre_medicamento' => $item->nombre,
 	    			'value' => $item->nombre,
 	    			'iva' => $item->iva,
 	   			);

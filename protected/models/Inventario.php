@@ -6,13 +6,12 @@
  * The followings are the available columns in table 'inventario':
  * @property integer $id_inventario
  * @property integer $cantidad
- * @property integer $iva
  * @property string $precio_compra
  * @property integer $id_factura
  * @property integer $id_usuario
  * @property integer $id_medicamento
- * @property string $nombre_medicamento
  * @property integer $id_estacion
+  * @property string $total
  *
  * The followings are the available model relations:
  * @property Facturas $idFactura
@@ -41,13 +40,13 @@ class Inventario extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cantidad, iva, precio_compra, id_factura, id_usuario, id_medicamento, nombre_medicamento, id_estacion, total, iva', 'required'),
-			array('cantidad, iva, id_factura, id_usuario, id_medicamento, id_estacion', 'numerical', 'integerOnly'=>true),
+			array('cantidad, precio_compra, id_factura, id_usuario, id_medicamento, id_estacion, total', 'required'),
+			array('cantidad, id_factura, id_usuario, id_medicamento, id_estacion', 'numerical', 'integerOnly'=>true),
 			array('precio_compra', 'length', 'max'=>8),
 			array('total', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_inventario, cantidad, iva, precio_compra, id_factura, id_usuario, id_medicamento, nombre_medicamento, id_estacion, total', 'safe', 'on'=>'search'),
+			array('id_inventario, cantidad, precio_compra, id_factura, id_usuario, id_medicamento, id_estacion, total', 'safe', 'on'=>'search'),
 			array('usuario', 'safe', 'on'=>'search'),
 		);
 	}
@@ -75,10 +74,8 @@ class Inventario extends CActiveRecord
 		return array(
 			'id_inventario' => 'Id Inventario',
 			'cantidad' => 'Cantidad',
-			'iva' => 'IVA',
 			'precio_compra' => 'Precio de Compra',
 			'total' => 'Total',
-			'nombre_medicamento' => 'Medicamento',
 			'id_factura' => 'Factura',
 			'id_usuario' => 'Usuario',
 			'id_medicamento' => 'Medicamento',
@@ -106,12 +103,10 @@ class Inventario extends CActiveRecord
 
 		$criteria->compare('id_inventario',$this->id_inventario);
 		$criteria->compare('cantidad',$this->cantidad);
-		$criteria->compare('iva',$this->iva);
 		$criteria->compare('precio_compra',$this->precio_compra,true);
 		$criteria->compare('id_factura',$this->id_factura);
 		$criteria->compare('id_usuario',$this->id_usuario);
 		$criteria->compare('id_medicamento',$this->id_medicamento);
-		$criteria->compare('nombre_medicamento',$this->nombre_medicamento);
 		$criteria->compare('id_estacion',$this->id_estacion);
 
 		$criteria->with = array('idUsuario');
