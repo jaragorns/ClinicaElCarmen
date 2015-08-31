@@ -1257,6 +1257,15 @@
 			</tr>
 		</table>
 
+		<br><br>
+
+		<table>
+			<tr>
+				<td><?php echo $form->labelEx($model,'retencion'); ?></td>
+				<td><?php echo $form->radioButtonList($model,'retencion',array('1'=>'75 %','2'=>'100 %','3'=>'Sin Retención'),array('labelOptions'=>array('style'=>'display:inline'),'separator'=>'<br> ',)); ?></td>
+			</tr>
+		</table>
+		
 		<div class="rowcontact">
 			<?php echo $form->labelEx($model,'monto'); ?>
 		</div>
