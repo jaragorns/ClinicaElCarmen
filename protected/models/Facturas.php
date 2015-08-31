@@ -67,7 +67,7 @@ class Facturas extends CActiveRecord
 			'fecha_factura' => 'Fecha Fact.',
 			'fecha_entrada' => 'Fecha Entra.',
 			'fecha_vencimiento' => 'Fecha Venc.',
-			'monto' => 'Monto',
+			'monto' => 'Total Factura:',
 			'retencion' => 'Retención',
 			'id_proveedor' => 'Proveedor',
 		);

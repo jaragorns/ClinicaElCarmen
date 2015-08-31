@@ -1255,26 +1255,22 @@
 				<td><?php echo $form->textField($items_30,'[29]precio_compra', array('id'=>'items_30_precio','size'=>20, 'onblur'=>'checkval(30)')); ?></td>
 				<td><?php echo $form->textField($items_30,'[29]total', array('id'=>'items_30_total','size'=>30, 'readonly'=>'disable')); ?></td>
 			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td align="right"><?php echo $form->labelEx($model,'monto'); ?></td>
+				<td><?php echo $form->textField($model,'monto', array('id'=>'items_30_total','size'=>30, 'readonly'=>'disable')); ?></td>				
+			</tr>
 		</table>
-
-		<br><br>
-
 		<table>
 			<tr>
 				<td><?php echo $form->labelEx($model,'retencion'); ?></td>
 				<td><?php echo $form->radioButtonList($model,'retencion',array('1'=>'75 %','2'=>'100 %','3'=>'Sin Retención'),array('labelOptions'=>array('style'=>'display:inline'),'separator'=>'<br> ',)); ?></td>
 			</tr>
 		</table>
-		
-		<div class="rowcontact">
-			<?php echo $form->labelEx($model,'monto'); ?>
-		</div>
-		<div class="media">
-			<?php echo $form->textField($model,'monto'); ?>
-			<?php echo $form->error($model,'monto'); ?>
-		</div>
-			
-		
+
+		<br><br>
 		<div class="buttons">
 			<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save'),  array("class"=>"btn btn-primary btn-large")); ?>
 		</div>
@@ -1290,14 +1286,28 @@
 <script type="text/javascript">
 
 	function checkval(num) {
-		var val1 = document.querySelector('#items_'+num+'_cantidad').value;
-		var val2 = document.querySelector('#items_'+num+'_precio').value;
+		var val1 = document.querySelector('#items_'+num+'_cantidad').value.replace(',','.');
+		var val2 = document.querySelector('#items_'+num+'_precio').value.replace(',','.');
+		var porcentajeIva = document.getElementById('Inventario_'+(num-1)+'_iva').value.replace(',','.'); 
 
-		if(val1!="" && val2!=""){
-			var total = val1 * val2;
-			$("#items_"+num+"_total").val(total);	
-		}
-		
+		if (isNaN(val1) || isNaN(val2)) {
+			alert("Debe Ingresar un valor numérico");
+		}else{
+			if(val1!="" && val2!=""){
+				if(porcentajeIva>0){
+					var iva = (val1 * val2) * (porcentajeIva/100);
+					var total = (val1 * val2) + iva;
+					total = (Math.round(total * 10) / 10).toFixed(2);
+
+				}else{
+					var total = (val1 * val2);
+				}
+				
+				$("#items_"+num+"_total").val(total);	
+			}else{
+				$("#items_"+num+"_total").val('');	
+			}
+		}		
 	}
 
 	
