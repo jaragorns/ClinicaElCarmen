@@ -769,7 +769,7 @@
 						));
 					?>
 				</td>
-				<td><td><?php echo Chtml::textField('[16]iva', '', array('id'=>'Inventario_16_iva','size'=>5, 'title'=>'Si el IVA no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
+				<td><?php echo Chtml::textField('[16]iva', '', array('id'=>'Inventario_16_iva','size'=>5, 'title'=>'Si el IVA no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
 				<td><?php echo $form->textField($items_17,'[16]cantidad', array('id'=>'items_17_cantidad', 'size'=>20, 'onblur'=>'checkval(17)')); ?></td>
 				<td><?php echo $form->textField($items_17,'[16]precio_compra', array('id'=>'items_17_precio','size'=>20, 'onblur'=>'checkval(17)')); ?></td>
 				<td><?php echo $form->textField($items_17,'[16]total', array('id'=>'items_17_total','size'=>30, 'readonly'=>'disable')); ?></td>
