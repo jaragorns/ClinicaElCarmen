@@ -27,5 +27,6 @@ $this->menu=array(
 		'unidad_medida',
 		'precio_contado',
 		'precio_seguro',
+		'iva',
 	),
 )); ?>

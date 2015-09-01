@@ -51,6 +51,13 @@
 		<?php echo $form->textField($model,'precio_seguro',array('size'=>20,'maxlength'=>10)); ?>
 	</div>
 
+	<div class="rowcontact">
+		<?php echo $form->label($model,'iva'); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'iva',array('size'=>5,'maxlength'=>5)); ?>
+	</div>
+
 	<div class="buttons">
 		<?php echo CHtml::submitButton(Yii::t('app','Search'),  array("class"=>"btn btn-primary btn-large")); ?>
 	</div>

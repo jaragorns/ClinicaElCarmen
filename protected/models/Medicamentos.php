@@ -10,6 +10,7 @@
  * @property string $unidad_medida
  * @property string $precio_contado
  * @property string $precio_seguro
+ * @property double $iva
  *
  * The followings are the available model relations:
  * @property Inventario[] $inventarios
@@ -33,9 +34,10 @@ class Medicamentos extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nombre, unidad_medida, precio_contado, precio_seguro', 'required'),
+			array('nombre, unidad_medida, precio_contado, precio_seguro, iva', 'required'),
 			array('nombre, componente', 'length', 'max'=>45),
 			array('unidad_medida', 'length', 'max'=>20),
+			array('iva', 'length', 'max'=>5),
 			array('precio_contado, precio_seguro', 'length', 'max'=>9),
      		array('nombre', 'unique', 
      			'className' => 'Medicamentos',
@@ -44,7 +46,7 @@ class Medicamentos extends CActiveRecord
         	),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_medicamento, nombre, componente, unidad_medida, precio_contado, precio_seguro', 'safe', 'on'=>'search'),
+			array('id_medicamento, nombre, componente, unidad_medida, precio_contado, precio_seguro, iva', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,6 +75,7 @@ class Medicamentos extends CActiveRecord
 			'unidad_medida' => 'Unidad de Medida',
 			'precio_contado' => 'Precio Contado',
 			'precio_seguro' => 'Precio Seguro',
+			'iva' => '% IVA',
 		);
 	}
 
@@ -100,6 +103,7 @@ class Medicamentos extends CActiveRecord
 		$criteria->compare('unidad_medida',$this->unidad_medida,true);
 		$criteria->compare('precio_contado',$this->precio_contado,true);
 		$criteria->compare('precio_seguro',$this->precio_seguro,true);
+		$criteria->compare('iva',$this->iva,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

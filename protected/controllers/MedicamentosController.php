@@ -62,6 +62,9 @@ class MedicamentosController extends Controller
 		if(isset($_POST['Medicamentos']))
 		{
 			$model->attributes=$_POST['Medicamentos'];
+			$model->precio_contado = str_replace(',', '.', $model->precio_contado);
+			$model->precio_seguro = str_replace(',', '.', $model->precio_seguro);
+			$model->iva = str_replace(',', '.', $model->iva);
 			if($model->save()){
 				$this->redirect(array('view','id'=>$model->id_medicamento));
 				Yii::app()->user->setFlash('success','Factura creada.');
@@ -88,6 +91,9 @@ class MedicamentosController extends Controller
 		if(isset($_POST['Medicamentos']))
 		{
 			$model->attributes=$_POST['Medicamentos'];
+			$model->precio_contado = str_replace(',', '.', $model->precio_contado);
+			$model->precio_seguro = str_replace(',', '.', $model->precio_seguro);
+			$model->iva = str_replace(',', '.', $model->iva);
 			if($model->save()){
 				Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
 				$this->redirect(array('view','id'=>$model->id_medicamento));

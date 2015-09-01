@@ -60,6 +60,10 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
             'name' => 'precio_seguro',
             'value' => 'str_replace(".",",",$data->precio_seguro)',
         ),
+        array(
+            'name' => 'iva',
+            'value' => 'str_replace(".",",",$data->iva)',
+        ),
 		array(
 			'class'=>'CButtonColumn',
 		),

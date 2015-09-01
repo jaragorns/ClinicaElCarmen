@@ -63,6 +63,14 @@
 		<?php echo $form->error($model,'precio_seguro'); ?>
 	</div>
 
+	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'iva'); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'iva',array('size'=>5,'maxlength'=>5)); ?>
+		<?php echo $form->error($model,'iva'); ?>
+	</div>
+
 	<div class="buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save'),  array("class"=>"btn btn-primary btn-large")); ?>
 	</div>

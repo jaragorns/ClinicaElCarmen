@@ -29,5 +29,9 @@
 	<?php echo CHtml::encode($data->precio_seguro); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('iva')); ?>:</b>
+	<?php echo CHtml::encode($data->iva); ?>
+	<br />
+
 
 </div>
