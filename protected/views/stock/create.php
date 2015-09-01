@@ -4,15 +4,15 @@
 
 $this->breadcrumbs=array(
 	'Stocks'=>array('index'),
-	'Create',
+	'Crear',
 );
 
 $this->menu=array(
-	array('label'=>'List Stock', 'url'=>array('index')),
-	array('label'=>'Manage Stock', 'url'=>array('admin')),
+	array('label'=>'Listar Stock', 'url'=>array('index')),
+	array('label'=>'Gestionar Stock', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Stock</h1>
+<h1>Crear Stock</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

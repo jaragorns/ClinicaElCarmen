@@ -23,12 +23,14 @@
     </div>
 	<?php } ?>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->labelEx($model,'nombre'); ?>
-		<?php echo $form->textField($model,'nombre',array('size'=>25,'maxlength'=>25)); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'nombre',array('placeholder'=>'HOSPITALIZACION I','size'=>25,'maxlength'=>25)); ?>
 		<?php echo $form->error($model,'nombre'); ?>		
 	</div>
-	<div class="row buttons">
+	<div class="buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save'),  array("class"=>"btn btn-primary btn-large")); ?>
 	</div>
 

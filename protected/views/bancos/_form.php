@@ -27,7 +27,7 @@
 		<?php echo $form->labelEx($model,'nombre'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'nombre',array('size'=>60,'maxlength'=>60)); ?>
+		<?php echo $form->textField($model,'nombre',array('placeholder'=>"Banco de Venezuela" ,'size'=>60,'maxlength'=>60)); ?>
 		<?php echo $form->error($model,'nombre'); ?>
 	</div>
 
@@ -35,7 +35,7 @@
 		<?php echo $form->labelEx($model,'saldo'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'saldo'); ?>
+		<?php echo $form->textField($model,'saldo',array('placeholder'=>"100000.00")); ?>
 		<?php echo $form->error($model,'saldo'); ?>
 	</div>
 <!--JsM

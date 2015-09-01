@@ -11,28 +11,64 @@
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id_stock'); ?>
-		<?php echo $form->textField($model,'id_stock'); ?>
-	</div>
-
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'cantidad'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'cantidad'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->label($model,'id_estacion'); ?>
-		<?php echo $form->textField($model,'id_estacion'); ?>
+	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'id_estacion'); ?>
+	</div>
+	<div class="media">
+		<?php 
+			echo $form->dropDownList(
+				$model,
+				'id_estacion',
+				CHtml::listData(
+					Estaciones::model()->findAll(),
+					'id_estacion',
+					'nombre'),
+				array(
+					'class' => 'my-drop-down',
+					'empty'=>'-- Seleccione Estación --',
+				)
+			);
+		?> 
+		<?php echo $form->error($model,'unidad_medida'); ?>
 	</div>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'id_medicamento'); ?>
-		<?php echo $form->textField($model,'id_medicamento'); ?>
+	</div>
+	<div class="media">
+		<?php
+			echo $form->hiddenField($model,'id_medicamento',array());
+			$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+				'name'=>'unidad_medida',
+			    'value'=>'',
+			    'model'=>$model,
+			    'source'=>$this->createUrl('Facturas/Autocomplete'),
+			    // additional javascript options for the autocomplete plugin
+			    'options'=>array(
+			    	'minLength'=>'1',
+			    	'showAnim'=>'fold',
+			    	'select'=>"js:function(event, ui) { 
+	       				$('#Stock_id_medicamento').val(ui.item.id_medicamento); 
+	       			}"
+			    ),
+			    'htmlOptions'=>array(
+		        	'style'=>'width:436px;',
+		        	'placeholder'=>'Nombre del medicamento...',
+		        	'title'=>'Indique el medicamento que desea buscar.'
+	    		),
+			));
+		?>
 	</div>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+	<div class="buttons">
+		<?php echo CHtml::submitButton(Yii::t('app','Search'),  array("class"=>"btn btn-primary btn-large")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -12,13 +12,6 @@
 )); ?>
 
 	<div class="rowcontact">
-		<?php echo $form->label($model,'id_comprobante'); ?>
-	</div>
-	<div class="media">
-		<?php echo $form->textField($model,'id_comprobante'); ?>
-	</div>
-
-	<div class="rowcontact">
 		<?php echo $form->label($model,'num_comprobante'); ?>
 	</div>
 	<div class="media">

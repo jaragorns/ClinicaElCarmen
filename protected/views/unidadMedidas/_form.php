@@ -27,7 +27,7 @@
 		<?php echo $form->labelEx($model,'descripcion'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'descripcion',array('size'=>60,'maxlength'=>80)); ?>
+		<?php echo $form->textField($model,'descripcion',array('placeholder'=>'Miligramo','size'=>60,'maxlength'=>80)); ?>
 		<?php echo $form->error($model,'descripcion'); ?>
 	</div>
 
@@ -35,7 +35,7 @@
 		<?php echo $form->labelEx($model,'abreviatura'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'abreviatura',array('size'=>25,'maxlength'=>25)); ?>
+		<?php echo $form->textField($model,'abreviatura',array('placeholder'=>'mg','size'=>25,'maxlength'=>25)); ?>
 		<?php echo $form->error($model,'abreviatura'); ?>
 	</div>
 

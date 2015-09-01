@@ -12,11 +12,6 @@
 )); ?>
 
 	<div class="row">
-		<?php echo $form->label($model,'id_inventario'); ?>
-		<?php echo $form->textField($model,'id_inventario'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'cantidad'); ?>
 		<?php echo $form->textField($model,'cantidad'); ?>
 	</div>

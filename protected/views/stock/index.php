@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Stock', 'url'=>array('create')),
-	array('label'=>'Manage Stock', 'url'=>array('admin')),
+	array('label'=>'Crear Stock', 'url'=>array('create')),
+	array('label'=>'Gestionar Stock', 'url'=>array('admin')),
 );
 ?>
 

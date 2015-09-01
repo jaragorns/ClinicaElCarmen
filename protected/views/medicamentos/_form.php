@@ -27,7 +27,7 @@
 		<?php echo $form->labelEx($model,'nombre'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'nombre',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->textField($model,'nombre',array('placeholder'=>'ATAMEL','size'=>45,'maxlength'=>45)); ?>
 		<?php echo $form->error($model,'nombre'); ?>
 	</div>
 
@@ -35,7 +35,7 @@
 		<?php echo $form->labelEx($model,'componente'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'componente',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->textField($model,'componente',array('placeholder'=>'ACETAMINOFEN','size'=>45,'maxlength'=>45)); ?>
 		<?php echo $form->error($model,'componente'); ?>
 	</div>
 
@@ -43,7 +43,20 @@
 		<?php echo $form->labelEx($model,'unidad_medida'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'unidad_medida',array('size'=>20,'maxlength'=>20)); ?>
+		<?php 
+			echo $form->dropDownList(
+				$model,
+				'unidad_medida',
+				CHtml::listData(
+					UnidadMedidas::model()->findAll(),
+					'id_unidad_medidas',
+					'abreviatura'),
+				array(
+					'class' => 'my-drop-down',
+					'empty'=>'-- Seleccione Unidad de Medida --',
+				)
+			);
+		?> 
 		<?php echo $form->error($model,'unidad_medida'); ?>
 	</div>
 
@@ -51,7 +64,7 @@
 		<?php echo $form->labelEx($model,'precio_contado'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'precio_contado',array('size'=>20,'maxlength'=>9)); ?>
+		<?php echo $form->textField($model,'precio_contado',array('placeholder'=>'135.50','size'=>20,'maxlength'=>9)); ?>
 		<?php echo $form->error($model,'precio_contado'); ?>
 	</div>
 
@@ -59,7 +72,7 @@
 		<?php echo $form->labelEx($model,'precio_seguro'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'precio_seguro',array('size'=>20,'maxlength'=>9)); ?>
+		<?php echo $form->textField($model,'precio_seguro',array('placeholder'=>'388.45','size'=>20,'maxlength'=>9)); ?>
 		<?php echo $form->error($model,'precio_seguro'); ?>
 	</div>
 

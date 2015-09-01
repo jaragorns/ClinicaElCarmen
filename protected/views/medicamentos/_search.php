@@ -10,12 +10,7 @@
 	'action'=>Yii::app()->createUrl($this->route),
 	'method'=>'get',
 )); ?>
-	<!--
-	<div class="rowcontact">
-		<?php //echo $form->label($model,'id_medicamento'); ?>
-		<?php //echo $form->textField($model,'id_medicamento'); ?>
-	</div>
-	-->
+
 	<div class="rowcontact">
 		<?php echo $form->label($model,'nombre'); ?>
 	</div>
@@ -28,13 +23,6 @@
 	</div>
 	<div class="media">
 		<?php echo $form->textField($model,'componente',array('size'=>45,'maxlength'=>45)); ?>
-	</div>
-
-	<div class="rowcontact">
-		<?php echo $form->label($model,'unidad_medida'); ?>
-	</div>
-	<div class="media">
-		<?php echo $form->textField($model,'unidad_medida',array('size'=>20,'maxlength'=>20)); ?>
 	</div>
 
 	<div class="rowcontact">

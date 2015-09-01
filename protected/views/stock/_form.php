@@ -36,7 +36,7 @@
 	</div>
 	<div class="media">
 		<?php 	
-			$model->id_estacion = Estaciones::model()->findByAttributes(array('id_estacion'=>"7"))->nombre;
+			$model->id_estacion = Estaciones::model()->findByAttributes(array('id_estacion'=>"6"))->nombre;
 			echo $form->textField($model, 'id_estacion' ,array('disabled'=>'true', 'size'=>30, 'maxlength'=>80)); 
 			echo $form->error($model,'id_estacion'); 
 		?>
@@ -48,7 +48,7 @@
 	</div>
 	<div class="media">
 		<?php 
-		$consulta = "SELECT * FROM facturas WHERE num_factura = $model->num_factura	AND id_proveedor = $model->id_proveedor";
+		//$consulta = "SELECT * FROM Inventario WHERE num_factura = $model->num_factura	AND id_proveedor = $model->id_proveedor";
    			
 			//Medicamentos::model()->findAllBySql($consulta);
 			echo $form->dropDownList(

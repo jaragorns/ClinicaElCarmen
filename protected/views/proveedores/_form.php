@@ -27,7 +27,7 @@
 		<?php echo $form->labelEx($model,'nombre'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'nombre',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->textField($model,'nombre',array('placeholder'=>"Clínica El Carmen C.A.",'size'=>45,'maxlength'=>45)); ?>
 		<?php echo $form->error($model,'nombre'); ?>
 	</div>
 
@@ -35,7 +35,7 @@
 		<?php echo $form->labelEx($model,'rif'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'rif',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->textField($model,'rif',array('placeholder'=>"J090017461",'size'=>10,'maxlength'=>10)); ?>
 		<?php echo $form->error($model,'rif'); ?>
 	</div>
 
@@ -43,7 +43,7 @@
 		<?php echo $form->labelEx($model,'telefono'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'telefono',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->textField($model,'telefono',array('placeholder'=>"02772917765",'size'=>45,'maxlength'=>45)); ?>
 		<?php echo $form->error($model,'telefono'); ?>
 	</div>
 
@@ -51,7 +51,7 @@
 		<?php echo $form->labelEx($model,'direccion'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'direccion',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->textField($model,'direccion',array('placeholder'=>"Carrera 6, #6-56, San Juan de Colón",'size'=>45,'maxlength'=>45)); ?>
 		<?php echo $form->error($model,'direccion'); ?>
 	</div>
 
@@ -59,7 +59,7 @@
 		<?php echo $form->labelEx($model,'email'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'email',array('size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->textField($model,'email',array('placeholder'=>"clinicarmen@gmail.com",'size'=>45,'maxlength'=>45)); ?>
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 
