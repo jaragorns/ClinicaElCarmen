@@ -1088,7 +1088,7 @@
 
 						if(!empty($items_25->id_medicamento)){
 							$medicamento = Medicamentos::model()->findByAttributes(array('id_medicamento'=>$items_25->id_medicamento))->nombre;
-							$iva = Medicamentos::model()->findByAttributes(array('id_medicamento'=>$items25->id_medicamento))->iva;
+							$iva = Medicamentos::model()->findByAttributes(array('id_medicamento'=>$items_25->id_medicamento))->iva;
 						}else{
 							$medicamento = "";
 							$iva = "";
@@ -1320,7 +1320,7 @@
 				<td></td>
 				<td></td>
 				<td align="right"><?php echo $form->labelEx($model,'monto'); ?></td>
-				<td><?php echo $form->textField($model,'monto', array('id'=>'items_30_total','size'=>30, 'readonly'=>'disable')); ?></td>				
+				<td><?php echo $form->textField($model,'monto', array('size'=>30, 'readonly'=>'disable')); ?></td>				
 			</tr>
 		</table>
 		<table>
@@ -1349,6 +1349,9 @@
 		var val1 = document.querySelector('#items_'+num+'_cantidad').value.replace(',','.');
 		var val2 = document.querySelector('#items_'+num+'_precio').value.replace(',','.');
 		var porcentajeIva = document.getElementById('Inventario_'+(num-1)+'_iva').value.replace(',','.'); 
+		var suma = 0;
+		var totalFactura = 0; 
+		var i; 
 
 		if (isNaN(val1) || isNaN(val2)) {
 			alert("Debe Ingresar un valor numérico");
@@ -1362,13 +1365,23 @@
 				}else{
 					var total = (val1 * val2);
 				}
-				
+			
 				$("#items_"+num+"_total").val(total);	
+
+				for(i=1; i<=30; i++){
+					suma = document.querySelector('#items_'+i+'_total').value;	
+					if(suma!=""){
+						totalFactura = totalFactura + parseFloat(suma); 
+					}						
+				}
+
+				totalFactura = totalFactura.toFixed(2);
+				$("#Facturas_monto").val(totalFactura);		
+
 			}else{
 				$("#items_"+num+"_total").val('');	
 			}
-		}		
+		}
 	}
 
-	
 </script>
