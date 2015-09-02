@@ -15,8 +15,9 @@
     <link href="<?php echo Yii::app()->theme->baseUrl;?>/style.css" rel="stylesheet" media="screen">
 
      <!-- Scripts -->
-    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery-2.1.4.js"></script>
+    <!--<script src="<?php #echo Yii::app()->theme->baseUrl;?>/js/jquery-2.1.4.js"></script>
     <!--<script src="<?php #echo Yii::app()->theme->baseUrl;?>/js/jquery.js"></script>   -->
+    <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery2.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.cookie.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/bootstrap.min.js"></script>
     <script src="<?php echo Yii::app()->theme->baseUrl;?>/js/jquery.mixitup.min.js"></script>
