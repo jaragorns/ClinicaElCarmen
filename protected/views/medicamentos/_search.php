@@ -15,7 +15,28 @@
 		<?php echo $form->label($model,'nombre'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'nombre',array('size'=>45,'maxlength'=>45)); ?>
+		<?php
+			echo $form->hiddenField($model,'id_medicamento',array());
+			$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+				'name'=>'medicamento',
+			    'value'=>'',
+			    'model'=>$model,
+			    'source'=>$this->createUrl('Facturas/Autocomplete'),
+			    // additional javascript options for the autocomplete plugin
+			    'options'=>array(
+			    	'minLength'=>'1',
+			    	'showAnim'=>'fold',
+			    	'select'=>"js:function(event, ui) { 
+	       				$('#Stock_id_medicamento').val(ui.item.id_medicamento); 
+	       			}"
+			    ),
+			    'htmlOptions'=>array(
+		        	'style'=>'width:436px;',
+		        	'placeholder'=>'Nombre del medicamento...',
+		        	'title'=>'Indique el medicamento que desea buscar.'
+	    		),
+			));
+		?>
 	</div>
 
 	<div class="rowcontact">

@@ -63,14 +63,14 @@ class Facturas extends CActiveRecord
 	{
 		return array(
 			'id_factura' => 'Id Factura',
-			'control_factura' => 'Control Fact.',
-			'num_factura' => 'Num Factura',
-			'fecha_factura' => 'Fecha Fact.',
-			'fecha_entrada' => 'Fecha Entra.',
-			'fecha_vencimiento' => 'Fecha Venc.',
+			'control_factura' => 'Control Fact:',
+			'num_factura' => 'Num Factura:',
+			'fecha_factura' => 'Fecha Fact:',
+			'fecha_entrada' => 'Fecha Entra:',
+			'fecha_vencimiento' => 'Fecha Venc:',
 			'monto' => 'Total Factura:',
-			'retencion' => 'Retención',
-			'id_proveedor' => 'Proveedor',
+			'retencion' => 'Retención:',
+			'id_proveedor' => 'Proveedor:',
 		);
 	}
 

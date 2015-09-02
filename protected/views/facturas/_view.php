@@ -9,8 +9,8 @@
 	<?php echo CHtml::encode($data->num_factura); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_factura')); ?>:</b>
+	<?php echo CHtml::encode($data->fecha_factura); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('monto')); ?>:</b>

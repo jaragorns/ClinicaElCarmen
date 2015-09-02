@@ -40,7 +40,10 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 )); ?>
 </div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php
+	$search  = array('1', '2', '3');
+	$replace = array('75%', '100%', 'Sin Retencion'); 
+	$this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'facturas-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
@@ -53,15 +56,18 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
         ),
 		array(
             'name' => 'fecha_factura',
-            'value' => 'date_format(date_create($data->fecha_factura), "d-m-Y")'
+            'value' => 'date_format(date_create($data->fecha_factura), "d-m-Y")',
+            'htmlOptions' => array('style'=>'text-align: right;'),
         ),
         array(
             'name' => 'fecha_entrada',
-            'value' => 'date_format(date_create($data->fecha_entrada), "d-m-Y")'
+            'value' => 'date_format(date_create($data->fecha_entrada), "d-m-Y")',
+            'htmlOptions' => array('style'=>'text-align: right;'),
         ),
 		array(
             'name' => 'fecha_vencimiento',
-            'value' => 'date_format(date_create($data->fecha_vencimiento), "d-m-Y")'
+            'value' => 'date_format(date_create($data->fecha_vencimiento), "d-m-Y")',
+            'htmlOptions' => array('style'=>'text-align: right;'),
         ),
 		array(
             'name' => 'monto',
@@ -71,7 +77,8 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 		
         array(
             'name' => 'retencion',
-            'htmlOptions' => array('style'=>'width:70px;'),
+            'value' => 'strtr($data->retencion, array("1" => "75%","2" => "100%","0" => "S/R"))',
+            'htmlOptions' => array('style'=>'width:70px; text-align: right;'),
         ),
 		array(
 			'class'=>'CButtonColumn',
