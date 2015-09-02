@@ -82,7 +82,7 @@
 			    	<?php echo $form->labelEx($model,'num_factura'); ?>
 			    </td>
 			   	<td>
-					<?php echo $form->textField($model,'num_factura',array('size'=>20,'maxlength'=>20)); ?>
+					<?php echo $form->textField($model,'num_factura',array('size'=>20,'maxlength'=>20, 'onblur'=>'numControl()')); ?>
 					<?php echo $form->error($model,'num_factura'); ?>
 				</td> 
 			    <td>
@@ -1358,12 +1358,13 @@
 		}else{
 			if(val1!="" && val2!=""){
 				if(porcentajeIva>0){
-					var iva = (val1 * val2) * (porcentajeIva/100);
-					var total = (val1 * val2) + iva;
-					total = (Math.round(total * 10) / 10).toFixed(2);
+					var acum = val1 * val2; 
+					var iva =  acum * (porcentajeIva/100);
+					var total = acum + iva;
+					total = (Math.round(total * 100) / 100).toFixed(2);
 
 				}else{
-					var total = (val1 * val2);
+					var total = (val1 * val2).toFixed(2);
 				}
 			
 				$("#items_"+num+"_total").val(total);	
@@ -1381,6 +1382,15 @@
 			}else{
 				$("#items_"+num+"_total").val('');	
 			}
+		}
+	}
+
+	function numControl(){
+		var numControl = document.querySelector('#Facturas_control_factura').value;	
+		var numFactura = document.querySelector('#Facturas_num_factura').value;	
+
+		if(numControl=='' && numFactura!=''){
+			$("#Facturas_control_factura").val(numFactura);	
 		}
 	}
 

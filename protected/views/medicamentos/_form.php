@@ -80,7 +80,7 @@
 		<?php echo $form->labelEx($model,'iva'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'iva',array('size'=>5,'maxlength'=>5)); ?>
+		<?php echo $form->textField($model,'iva',array('placeholder'=>'12.00','size'=>5,'maxlength'=>5)); ?>
 		<?php echo $form->error($model,'iva'); ?>
 	</div>
 
