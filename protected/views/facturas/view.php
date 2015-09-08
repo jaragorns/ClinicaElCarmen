@@ -50,20 +50,13 @@ $this->menu = array(
 
 	<table>
 		<tr>
-			<th><?php echo $form->labelEx($items_1,'[0]id_medicamento'); ?></th>
-			<th><?php echo Chtml::label('IVA *', 'IVA', array()); ?></th>
-			<th><?php echo $form->labelEx($items_1,'[0]cantidad'); ?></th>
-			<th><?php echo $form->labelEx($items_1,'[0]precio_compra'); ?></th>
-			<th><?php echo $form->labelEx($items_1,'[0]total'); ?></th>
-		</tr>
-		<tr>
 			<td>
 				<?php 
-					echo $form->hiddenField($items_1,'[0]id_medicamento',array());
+					//echo $form->hiddenField($items_1,'[0]id_medicamento',array());
 
-					if(!empty($items_1->id_medicamento)){
-						$medicamento = Medicamentos::model()->findByAttributes(array('id_medicamento'=>$items_1->id_medicamento))->nombre;
-						$iva = Medicamentos::model()->findByAttributes(array('id_medicamento'=>$items_1->id_medicamento))->iva;
+					if(!empty($model->id_medicamento)){
+						$medicamento = Medicamentos::model()->findByAttributes(array('id_medicamento'=>$model->id_medicamento))->nombre;
+						$iva = Medicamentos::model()->findByAttributes(array('id_medicamento'=>$model->id_medicamento))->iva;
 					}else{
 						$medicamento = "";
 						$iva = "";
@@ -72,7 +65,7 @@ $this->menu = array(
 					$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
 	    				'name'=>'nombre_1',
 	    				'value'=>$medicamento,
-	    				'model'=>$items_1,
+	    				'model'=>$model,
 	    				'source'=>$this->createUrl('Facturas/Autocomplete'),
 	    				// additional javascript options for the autocomplete plugin
 	    				'options'=>array(
@@ -91,9 +84,5 @@ $this->menu = array(
 					));
 				?>
 			</td>
-			<td><?php echo Chtml::textField('[0]iva', $iva, array('id'=>'Inventario_0_iva','size'=>5, 'title'=>'Si el IVA no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-			<td><?php echo $form->textField($items_1,'[0]cantidad', array('id'=>'items_1_cantidad','size'=>20, 'onblur'=>'checkval(1)')); ?></td>
-			<td><?php echo $form->textField($items_1,'[0]precio_compra', array('id'=>'items_1_precio','size'=>20, 'onblur'=>'checkval(1)')); ?></td>	
-			<td><?php echo $form->textField($items_1,'[0]total', array('id'=>'items_1_total','size'=>30, 'readonly'=>'disable')); ?></td>
 		</tr>
 	</table>

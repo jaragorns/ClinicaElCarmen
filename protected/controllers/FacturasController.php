@@ -222,7 +222,7 @@ class FacturasController extends Controller
 
 			if($model->validate())
 			{
-				$consulta = "SELECT * FROM facturas WHERE num_factura = $model->num_factura	AND id_proveedor = $model->id_proveedor";
+				$consulta = "SELECT * FROM facturas WHERE num_factura = '".$model->num_factura."' AND id_proveedor = $model->id_proveedor";
 		
 				if(Facturas::model()->findAllBySql($consulta)){
 					// Si consigue el mismo num_factura de un mismo id_proveedor
@@ -230,132 +230,154 @@ class FacturasController extends Controller
 					
 				}else{					
 					if($items_1->validate()){
-
 						$items_1->save(); 
 						$cont++; 
-
-<<<<<<< HEAD
-						$this->funcion($items_1); 
-=======
-						Stock($items_1);
->>>>>>> 9052a05aea2572082fadbc1a77858aee42516605
-						
+						$this->Stock($items_1);
 					}
 					if($items_2->validate()){
 						$items_2->save(); 
 						$cont++; 
+						$this->Stock($items_2);
 					}
 					if($items_3->validate()){
 						$items_3->save(); 
 						$cont++; 
+						$this->Stock($items_3);
 					}
 					if($items_4->validate()){
 						$items_4->save(); 
 						$cont++; 
+						$this->Stock($items_4);
 					}
 					if($items_5->validate()){
 						$items_5->save(); 
 						$cont++; 
+						$this->Stock($items_5);
 					}
 					if($items_6->validate()){
 						$items_6->save(); 
 						$cont++; 
+						$this->Stock($items_6);
 					}
 					if($items_7->validate()){
 						$items_7->save(); 
 						$cont++; 
+						$this->Stock($items_7);
 					}
 					if($items_8->validate()){
 						$items_8->save(); 
 						$cont++; 
+						$this->Stock($items_8);
 					}
 					if($items_9->validate()){
 						$items_9->save(); 
 						$cont++; 
+						$this->Stock($items_9);
 					}
 					if($items_10->validate()){
 						$items_10->save(); 
 						$cont++; 
+						$this->Stock($items_10);
 					}
 					if($items_11->validate()){
 						$items_11->save(); 
 						$cont++; 
+						$this->Stock($items_11);
 					}
 					if($items_12->validate()){
 						$items_12->save(); 
 						$cont++; 
+						$this->Stock($items_12);
 					}
 					if($items_13->validate()){
 						$items_13->save(); 
 						$cont++; 
+						$this->Stock($items_13);
 					}
 					if($items_14->validate()){
 						$items_14->save(); 
 						$cont++; 
+						$this->Stock($items_14);
 					}
 					if($items_15->validate()){
 						$items_15->save(); 
 						$cont++; 
+						$this->Stock($items_15);
 					}
 					if($items_16->validate()){
 						$items_16->save(); 
 						$cont++; 
+						$this->Stock($items_16);
 					}
 					if($items_17->validate()){
 						$items_17->save(); 
 						$cont++; 
+						$this->Stock($items_17);
 					}
 					if($items_18->validate()){
 						$items_18->save(); 
 						$cont++; 
+						$this->Stock($items_18);
 					}
 					if($items_19->validate()){
 						$items_19->save(); 
 						$cont++; 
+						$this->Stock($items_19);
 					}
 					if($items_20->validate()){
 						$items_20->save(); 
 						$cont++; 
+						$this->Stock($items_20);
 					}
 					if($items_21->validate()){
 						$items_21->save(); 
 						$cont++; 
+						$this->Stock($items_21);
 					}
 					if($items_22->validate()){
 						$items_22->save(); 
 						$cont++; 
+						$this->Stock($items_22);
 					}
 					if($items_23->validate()){
 						$items_23->save(); 
 						$cont++; 
+						$this->Stock($items_23);
 					}
 					if($items_24->validate()){
 						$items_24->save(); 
 						$cont++; 
+						$this->Stock($items_24);
 					}
 					if($items_25->validate()){
 						$items_25->save(); 
 						$cont++; 
+						$this->Stock($items_25);
 					}
 					if($items_26->validate()){
 						$items_26->save(); 
 						$cont++; 
+						$this->Stock($items_26);
 					}
 					if($items_27->validate()){
 						$items_27->save(); 
 						$cont++; 
+						$this->Stock($items_27);
 					}
 					if($items_28->validate()){
 						$items_28->save(); 
 						$cont++; 
+						$this->Stock($items_28);
 					}
 					if($items_29->validate()){
 						$items_29->save(); 
 						$cont++; 
+						$this->Stock($items_29);
 					}
 					if($items_30->validate()){
 						$items_30->save(); 
 						$cont++; 
+						$this->Stock($items_30);
 					}
 					if($cont>0){
 						$model->save();
@@ -408,29 +430,6 @@ class FacturasController extends Controller
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-
-	public function funcion($model){
-		$existe = Stock::model()->findAll(array('condition'=>'id_medicamento=:id_medicamento',
-								'params'=>array(':id_medicamento'=>$model->id_medicamento),));
-
-						if($existe)
-						{ // Como el medicamento EXISTE debo ACTUALIZAR la CANTIDAD en STOCK
-							$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$model->id_medicamento;
-							$cant_stock = Stock::model()->findAllBySql($sql);
-							$cantidad_nueva = $cant_stock['0']['cantidad'] + $model->cantidad;
-							$sql = "UPDATE `stock` SET `cantidad`=".$cantidad_nueva." WHERE `id_medicamento` =".$model->id_medicamento;
-							$execute = Yii::app()->db->createCommand($sql)->execute();
-							
-						}else{
-							// Como el medicamente NO existe lo agrego en STOCK
-							$model_stock = new Stock;
-							$model_stock->id_medicamento = $model->id_medicamento;
-							$model_stock->id_estacion = $model->id_estacion;
-							$model_stock->cantidad = $model->cantidad;
-							$model_stock->save();
-							
-						}
-	}
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
@@ -553,11 +552,11 @@ class FacturasController extends Controller
 		echo CJSON::encode($arr);
 	}
 
-	public function Stock($model) 
+	public function Stock($model)
 	{
 
 		$existe = Stock::model()->findAll(array('condition'=>'id_medicamento=:id_medicamento',
-				'params'=>array(':id_medicamento'=>$model->id_medicamento),));
+			'params'=>array(':id_medicamento'=>$model->id_medicamento),));
 
 		if($existe)
 		{ // Como el medicamento EXISTE debo ACTUALIZAR la CANTIDAD en STOCK
@@ -566,7 +565,7 @@ class FacturasController extends Controller
 			$cantidad_nueva = $cant_stock['0']['cantidad'] + $model->cantidad;
 			$sql = "UPDATE `stock` SET `cantidad`=".$cantidad_nueva." WHERE `id_medicamento` =".$model->id_medicamento;
 			$execute = Yii::app()->db->createCommand($sql)->execute();
-
+							
 		}else{
 			// Como el medicamente NO existe lo agrego en STOCK
 			$model_stock = new Stock;
@@ -574,9 +573,8 @@ class FacturasController extends Controller
 			$model_stock->id_estacion = $model->id_estacion;
 			$model_stock->cantidad = $model->cantidad;
 			$model_stock->save();
-					
+							
 		}
-
 	}
 
 }
