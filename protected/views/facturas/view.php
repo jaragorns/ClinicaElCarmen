@@ -1,6 +1,9 @@
 <?php
 /* @var $this FacturasController */
 /* @var $model Facturas */
+$baseUrl = Yii::app()->baseUrl; 
+$cs = Yii::app()->getClientScript();
+$cs->registerCssFile($baseUrl.'/css/libre.css');
 
 $this->breadcrumbs=array(
 	'Factura'=>array('index'),
@@ -19,81 +22,87 @@ $this->menu = array(
 
 <h1>Factura #<?php echo $model->num_factura; ?></h1>
 
-	<table>
+	<table class="ancho">
 		<tr>
 			<td></td>
 			<td></td>
-	    	<td> <b><?php echo $model->getAttributeLabel('control_factura'); ?> </b></td>
-	    	<td> <?php echo $model->control_factura; ?> </td>
-	    	<td> <b><?php echo $model->getAttributeLabel('fecha_entrada'); ?> </b></td>
-			<td> <?php echo $model->fecha_entrada; ?> </td>
+	    	<td class="control"> <b><?php echo $model->getAttributeLabel('control_factura'); ?> </b></td>
+	    	<td class="numF"> <?php echo $model->control_factura; ?> </td>
+	    	<td class="control"> <b><?php echo $model->getAttributeLabel('fecha_entrada'); ?> </b></td>
+			<td class="numF"> <?php echo date_format(date_create($model->fecha_entrada),'d-m-Y'); ?> </td>
 	  	</tr>
 	  	<tr>
-		  	<td> <b><?php echo $model->getAttributeLabel('id_proveedor'); ?> </b></td>	
-			<td> <?php echo $model->idProveedor->nombre; ?> </td>
-		    <td> <b><?php echo $model->getAttributeLabel('num_factura'); ?> </b></td>
-		   	<td> <?php echo $model->num_factura; ?> </td>
-		    <td> <b><?php echo $model->getAttributeLabel('fecha_factura'); ?> </b></td>	
-			<td> <?php echo $model->fecha_factura; ?> </td>
+		  	<td class="proveedor"> <b><?php echo $model->getAttributeLabel('id_proveedor'); ?> </b></td>	
+			<td class="nomP"> <?php echo $model->idProveedor->nombre; ?> </td>
+		    <td class="control"> <b><?php echo $model->getAttributeLabel('num_factura'); ?> </b></td>
+		   	<td class="numF"> <?php echo $model->num_factura; ?> </td>
+		    <td class="control"> <b><?php echo $model->getAttributeLabel('fecha_factura'); ?> </b></td>	
+			<td class="numF"> <?php echo date_format(date_create($model->fecha_factura),'d-m-Y'); ?> </td>
 	  	</tr>
 	  	<tr>
 	  		<td></td>
 	  		<td></td>
 	  		<td></td>
 	  		<td></td>
-	  		<td> <b><?php echo $model->getAttributeLabel('fecha_vencimiento'); ?> </b></td>	
-			<td> <?php echo $model->fecha_vencimiento; ?> </td>
+	  		<td class="control"> <b><?php echo $model->getAttributeLabel('fecha_vencimiento'); ?> </b></td>	
+			<td class="numF"> <?php echo date_format(date_create($model->fecha_vencimiento),'d-m-Y'); ?> </td>
 	  	</tr>
 	</table>
 
  <h3>Detalle</h3>
 
-	<table>
+ 	<?php
+ 		$data = Inventario::model()->findAllBySql("SELECT * FROM inventario WHERE id_factura='".$model->num_factura."'"); 
+ 	?>
+
+	<table class="ancho">
 		<tr>
-			<th><?php echo $form->labelEx($items_1,'[0]id_medicamento'); ?></th>
-			<th><?php echo Chtml::label('IVA *', 'IVA', array()); ?></th>
-			<th><?php echo $form->labelEx($items_1,'[0]cantidad'); ?></th>
-			<th><?php echo $form->labelEx($items_1,'[0]precio_compra'); ?></th>
-			<th><?php echo $form->labelEx($items_1,'[0]total'); ?></th>
+			<th class="align"><b>Medicamento</b></th>
+			<th class="align"><b>IVA</b></th>
+			<th class="align"><b>Cantidad</b></th>
+			<th class="align"><b>Precio de Compra</b></th>
+			<th class="align"><b>Total</b></th>
 		</tr>
+		<?php 
+
+		for ($i=0; $i < count($data); $i++) { 
+			if(fmod($i,2)==0){	?>
+		
 		<tr>
-			<td>
+			<td class="medicamento"><?php echo Medicamentos::model()->findByAttributes(array('id_medicamento'=>$data[$i]["id_medicamento"]))->nombre; ?></td>
+			<td class="iva"><?php echo Medicamentos::model()->findByAttributes(array('id_medicamento'=>$data[$i]["id_medicamento"]))->iva; ?></td>
+			<td class="cantidad"><?php echo $data[$i]["cantidad"]; ?></td>
+			<td class="precio_compra"><?php echo $data[$i]["precio_compra"]; ?></td>
+			<td class="total"><?php echo $data[$i]["total"]; ?></td>
+		</tr>	
+		<?php	
+		}else{
+		?>		
+		<tr>
+			<td class="medicamentoC"><?php echo Medicamentos::model()->findByAttributes(array('id_medicamento'=>$data[$i]["id_medicamento"]))->nombre; ?></td>
+			<td class="ivaC"><?php echo Medicamentos::model()->findByAttributes(array('id_medicamento'=>$data[$i]["id_medicamento"]))->iva; ?></td>
+			<td class="cantidadC"><?php echo $data[$i]["cantidad"]; ?></td>
+			<td class="precio_compraC"><?php echo $data[$i]["precio_compra"]; ?></td>
+			<td class="totalC"><?php echo $data[$i]["total"]; ?></td>
+		</tr>	
+		<?php	
+			}
+		}
+		?>				
+	</table>
+	<br>
+	<table class="ancho">
+		<tr>
+			<td class="retencion"><b>Retención: </b>
 				<?php 
-					echo $form->hiddenField($items_1,'[0]id_medicamento',array());
-
-					if(!empty($items_1->id_medicamento)){
-						$medicamento = Medicamentos::model()->findByAttributes(array('id_medicamento'=>$items_1->id_medicamento))->nombre;
-						$iva = Medicamentos::model()->findByAttributes(array('id_medicamento'=>$items_1->id_medicamento))->iva;
-					}else{
-						$medicamento = "";
-						$iva = "";
-					}
-
-					$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-	    				'name'=>'nombre_1',
-	    				'value'=>$medicamento,
-	    				'model'=>$items_1,
-	    				'source'=>$this->createUrl('Facturas/Autocomplete'),
-	    				// additional javascript options for the autocomplete plugin
-	    				'options'=>array(
-	    					'minLength'=>'1',
-	            			'showAnim'=>'fold',
-	            			'select'=>"js:function(event, ui) { 
-   								$('#Inventario_0_id_medicamento').val(ui.item.id_medicamento); 
-   								$('#Inventario_0_iva').val(ui.item.iva);
-   							}"
-	    				),
-	    				'htmlOptions'=>array(
-    						'style'=>'width:436px;',
-    						'placeholder'=>'Nombre del medicamento...',
-    						'title'=>'Indique el medicamento que desea agregar a la factura.'
-						),
-					));
+				if($model->retencion==1)
+					echo "75 %";
+				elseif($model->retencion==2)
+					echo "100 %";
+				else
+					echo "Sin Retención";
 				?>
 			</td>
-			<td><?php echo Chtml::textField('[0]iva', $iva, array('id'=>'Inventario_0_iva','size'=>5, 'title'=>'Si el IVA no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-			<td><?php echo $form->textField($items_1,'[0]cantidad', array('id'=>'items_1_cantidad','size'=>20, 'onblur'=>'checkval(1)')); ?></td>
-			<td><?php echo $form->textField($items_1,'[0]precio_compra', array('id'=>'items_1_precio','size'=>20, 'onblur'=>'checkval(1)')); ?></td>	
-			<td><?php echo $form->textField($items_1,'[0]total', array('id'=>'items_1_total','size'=>30, 'readonly'=>'disable')); ?></td>
+			<td class="totalF"><b>Total Factura: </b> <?php echo $model->monto; ?></td>
 		</tr>
-	</table>
+	</table>			

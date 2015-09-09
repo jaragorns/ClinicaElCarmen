@@ -1,0 +1,88 @@
+.table, th, td{
+	border: 1px solid white;
+}
+th{
+	background-color: #006600;
+	color: #fff;
+}
+.ancho{
+	width: 100%;
+}
+
+.align{
+	text-align: center;
+}
+
+.medicamento{
+	width: 45%;
+	background-color: #DAFFDA;
+}
+.iva{
+	width: 10%; 
+	background-color: #DAFFDA;
+	text-align: center;
+}
+.cantidad{
+	width: 15%;
+	text-align: center;
+	background-color: #DAFFDA;
+}
+.precio_compra{
+	width: 15%;
+	text-align: center;
+	background-color: #DAFFDA;
+}
+.total{
+	width: 15%;
+	text-align: center;
+	background-color: #DAFFDA;
+}
+.medicamentoC{
+	width: 45%;
+	background-color: #F8F8F8;
+}
+.ivaC{
+	width: 10%; 
+	background-color: #F8F8F8;
+	text-align: center;
+}
+.cantidadC{
+	width: 15%;
+	text-align: center;
+	background-color: #F8F8F8;
+}
+.precio_compraC{
+	width: 15%;
+	text-align: center;
+	background-color: #F8F8F8;
+}
+.totalC{
+	width: 15%;
+	text-align: center;
+	background-color: #F8F8F8;
+}
+.totalF{
+	width: 50%;
+	text-align: right;
+	padding-right: 60px;
+	background-color: #DAFFDA;
+}
+.retencion{
+	background-color: #DAFFDA;
+}
+.proveedor{
+	width: 7%;
+	background-color: #F8F8F8;
+}
+.nomP{
+	width: 25%;
+	background-color: #DAFFDA;
+}
+.control{
+	width: 7%;
+	background-color: #F8F8F8;
+}
+.numF{
+	width: 10%;
+	background-color: #DAFFDA;
+}

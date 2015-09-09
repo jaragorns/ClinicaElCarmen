@@ -41,7 +41,7 @@ class Inventario extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('cantidad, precio_compra, id_factura, id_usuario, id_medicamento, id_estacion, total', 'required'),
-			array('cantidad, id_factura, id_usuario, id_medicamento, id_estacion', 'numerical', 'integerOnly'=>true),
+			array('cantidad, id_usuario, id_medicamento, id_estacion', 'numerical', 'integerOnly'=>true),
 			array('precio_compra', 'length', 'max'=>8),
 			array('total', 'length', 'max'=>10),
 			// The following rule is used by search().

@@ -77,7 +77,7 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 		
         array(
             'name' => 'retencion',
-            'value' => 'strtr($data->retencion, array("1" => "75%","2" => "100%","0" => "S/R"))',
+            'value' => 'strtr($data->retencion, array("1" => "75%","2" => "100%","3" => "S/R"))',
             'htmlOptions' => array('style'=>'width:70px; text-align: right;'),
         ),
 		array(

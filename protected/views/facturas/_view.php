@@ -10,7 +10,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_factura')); ?>:</b>
-	<?php echo CHtml::encode($data->fecha_factura); ?>
+	<?php echo CHtml::encode(date_format(date_create($data->fecha_factura),'d-m-Y')); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('monto')); ?>:</b>
