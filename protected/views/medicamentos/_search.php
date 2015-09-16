@@ -27,7 +27,7 @@
 			    	'minLength'=>'1',
 			    	'showAnim'=>'fold',
 			    	'select'=>"js:function(event, ui) { 
-	       				$('#Stock_id_medicamento').val(ui.item.id_medicamento); 
+	       				$('#Medicamentos_id_medicamento').val(ui.item.id_medicamento); 
 	       			}"
 			    ),
 			    'htmlOptions'=>array(

@@ -354,6 +354,9 @@
                                     <li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172">
                                         <a title="Gestionar Stock" href="<?php echo Yii::app()->baseUrl;?>/stock/admin">Gestionar Stock</a>
                                     </li>
+                                    <li id="menu-item-173" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-173">
+                                        <a title="Asignar Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/stock/asignar">Asignar Medicamentos</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
