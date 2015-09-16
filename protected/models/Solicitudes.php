@@ -37,9 +37,10 @@ class Solicitudes extends CActiveRecord
 			array('estacion_id_estacion, usuarios, stock_id_stock, guardias_id_guardia', 'required'),
 			array('estacion_id_estacion, cantidad, stock_id_stock, guardias_id_guardia', 'numerical', 'integerOnly'=>true),
 			array('usuarios', 'length', 'max'=>45),
+			array('cantidad', 'length', 'max'=>5),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_solicitud, estacion_id_estacion, cantidad, usuarios, stock_id_stock, guardias_id_guardia', 'safe', 'on'=>'search'),
+			array('id_solicitud, estacion_id_estacion, cantidad, usuarios, stock_id_stock, guardias_id_guardia, estado, fecha_solicitud', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,11 +65,13 @@ class Solicitudes extends CActiveRecord
 	{
 		return array(
 			'id_solicitud' => 'Id Solicitud',
-			'estacion_id_estacion' => 'Estacion Id Estacion',
+			'fecha_solicitud' => 'Fecha de Solicitud',
+			'estacion_id_estacion' => 'Servicio Origen',
 			'cantidad' => 'Cantidad',
-			'usuarios' => 'Usuarios',
-			'stock_id_stock' => 'Stock Id Stock',
-			'guardias_id_guardia' => 'Guardias Id Guardia',
+			'usuarios' => 'Realizada Por',
+			'stock_id_stock' => 'Medicamento',
+			'guardias_id_guardia' => 'Guardia',
+			'estado' => 'Estado',
 		);
 	}
 
@@ -96,6 +99,8 @@ class Solicitudes extends CActiveRecord
 		$criteria->compare('usuarios',$this->usuarios,true);
 		$criteria->compare('stock_id_stock',$this->stock_id_stock);
 		$criteria->compare('guardias_id_guardia',$this->guardias_id_guardia);
+		$criteria->compare('estado',$this->estado);
+		$criteria->compare('fecha_solicitud',$this->fecha_solicitud); 
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

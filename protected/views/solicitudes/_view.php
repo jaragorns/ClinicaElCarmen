@@ -10,7 +10,11 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('estacion_id_estacion')); ?>:</b>
-	<?php echo CHtml::encode($data->estacion_id_estacion); ?>
+	<?php echo CHtml::encode($data->estacionIdEstacion->nombre); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('stock_id_stock')); ?>:</b>
+	<?php echo CHtml::encode(Medicamentos::model()->findByAttributes(array('id_medicamento'=>$data->stockIdStock->id_medicamento))->nombre ); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('cantidad')); ?>:</b>
@@ -18,16 +22,12 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('usuarios')); ?>:</b>
-	<?php echo CHtml::encode($data->usuarios); ?>
+	<?php echo CHtml::encode(Usuarios::model()->findByAttributes(array('id'=>$data->usuarios))->NombreCompleto.' ('.
+	Estaciones::model()->findByAttributes(array('id_estacion'=>Guardias::model()->findByAttributes(array('id_guardia'=>$data->guardias_id_guardia))->id_estacion))->nombre
+	  .')	'
+	); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('stock_id_stock')); ?>:</b>
-	<?php echo CHtml::encode($data->stock_id_stock); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('guardias_id_guardia')); ?>:</b>
-	<?php echo CHtml::encode($data->guardias_id_guardia); ?>
-	<br />
-
+	
 
 </div>
