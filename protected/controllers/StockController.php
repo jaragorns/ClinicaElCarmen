@@ -483,10 +483,10 @@ class StockController extends Controller
 	public function actionAutocomplete($term) 
 	{
 		$criteria = new CDbCriteria;
-		
+		//$criteria->join = "RIGHT JOIN stock ON stock.id_medicamento = t.id_medicamento"; 
+		$criteria->condition = "cantidad>0";
 		$criteria->compare('LOWER(nombre)', strtolower($_GET['term']), true);
 		$criteria->order = 'nombre';
-		
 		$criteria->limit = 10; 
 		$data = Medicamentos::model()->findAll($criteria);
 

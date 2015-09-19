@@ -335,13 +335,13 @@
                                 </ul>
                             </li>
                             <li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
-                                <a title="Inventario" href="<?php echo Yii::app()->baseUrl;?>/inventario" data-toggle="dropdown" class="dropdown-toggle">Inventario <span class="caret"></span></a>
+                                <a title="Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes" data-toggle="dropdown" class="dropdown-toggle">Solicitudes <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li id="menu-item-161" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-161">
-                                        <a title="Agregar Inventario" href="<?php echo Yii::app()->baseUrl;?>/inventario/createSimple">Agregar Inventario</a>
+                                        <a title="Agregar Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/create">Agregar Solicitudes</a>
                                     </li>
                                     <li id="menu-item-162" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-162">
-                                        <a title="Gestionar Inventario" href="<?php echo Yii::app()->baseUrl;?>/inventario/admin">Gestionar Inventario</a>
+                                        <a title="Gestionar Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/admin">Gestionar Solicitudes</a>
                                     </li>
                                 </ul>
                             </li>

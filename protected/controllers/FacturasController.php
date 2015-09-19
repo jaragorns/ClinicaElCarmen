@@ -437,41 +437,42 @@ class FacturasController extends Controller
 		$model=$this->loadModel($id);
 		//busco todos los items para ese numero de factura
 		$data = Inventario::model()->findAll("id_factura='".$model->num_factura."'");	
+
 		//los guardo en un array, donde cada posicion(item) es un modelo 
 		for($i=0; $i<count($data); $i++){
-			$modelo[$i] = Inventario::model()->find("id_factura='".$data[$i]['id_factura']."'");
+			$cantidadesIniciales[$i] = $data[$i]->cantidad;
 		}
 		//si existe el modelo lo asigno a su variable modelo sino le digo que es uno nuevo
-		if(isset($modelo[0])) $items_1 = $modelo[0]; else $items_1 = new Inventario;
-		if(isset($modelo[1])) $items_2 = $modelo[1]; else $items_2 = new Inventario;
-		if(isset($modelo[2])) $items_3 = $modelo[2]; else $items_3 = new Inventario;
-		if(isset($modelo[3])) $items_4 = $modelo[3]; else $items_4 = new Inventario;
-		if(isset($modelo[4])) $items_5 = $modelo[4]; else $items_5 = new Inventario;
-		if(isset($modelo[5])) $items_6 = $modelo[5]; else $items_6 = new Inventario;
-		if(isset($modelo[6])) $items_7 = $modelo[6]; else $items_7 = new Inventario;
-		if(isset($modelo[7])) $items_8 = $modelo[7]; else $items_8 = new Inventario;
-		if(isset($modelo[8])) $items_9 = $modelo[8]; else $items_9 = new Inventario;
-		if(isset($modelo[9])) $items_10 = $modelo[9]; else $items_10 = new Inventario;
-		if(isset($modelo[10])) $items_11 = $modelo[10]; else $items_11 = new Inventario;
-		if(isset($modelo[11])) $items_12 = $modelo[11]; else $items_12 = new Inventario;
-		if(isset($modelo[12])) $items_13 = $modelo[12]; else $items_13 = new Inventario;
-		if(isset($modelo[13])) $items_14 = $modelo[13]; else $items_14 = new Inventario;
-		if(isset($modelo[14])) $items_15 = $modelo[14]; else $items_15 = new Inventario;
-		if(isset($modelo[15])) $items_16 = $modelo[15]; else $items_16 = new Inventario;
-		if(isset($modelo[16])) $items_17 = $modelo[16]; else $items_17 = new Inventario;
-		if(isset($modelo[17])) $items_18 = $modelo[17]; else $items_18 = new Inventario;
-		if(isset($modelo[18])) $items_19 = $modelo[18]; else $items_19 = new Inventario;
-		if(isset($modelo[19])) $items_20 = $modelo[19]; else $items_20 = new Inventario;
-		if(isset($modelo[20])) $items_21 = $modelo[20]; else $items_21 = new Inventario;
-		if(isset($modelo[21])) $items_22 = $modelo[21]; else $items_22 = new Inventario;
-		if(isset($modelo[22])) $items_23 = $modelo[22]; else $items_23 = new Inventario;
-		if(isset($modelo[23])) $items_24 = $modelo[23]; else $items_24 = new Inventario;
-		if(isset($modelo[24])) $items_25 = $modelo[24]; else $items_25 = new Inventario;
-		if(isset($modelo[25])) $items_26 = $modelo[25]; else $items_26 = new Inventario;
-		if(isset($modelo[26])) $items_27 = $modelo[26]; else $items_27 = new Inventario;
-		if(isset($modelo[27])) $items_28 = $modelo[27]; else $items_28 = new Inventario;
-		if(isset($modelo[28])) $items_29 = $modelo[28]; else $items_29 = new Inventario;
-		if(isset($modelo[29])) $items_30 = $modelo[29]; else $items_30 = new Inventario;
+		if(isset($data[0])) $items_1 = $data[0]; else $items_1 = new Inventario;
+		if(isset($data[1])) $items_2 = $data[1]; else $items_2 = new Inventario;
+		if(isset($data[2])) $items_3 = $data[2]; else $items_3 = new Inventario;
+		if(isset($data[3])) $items_4 = $data[3]; else $items_4 = new Inventario;
+		if(isset($data[4])) $items_5 = $data[4]; else $items_5 = new Inventario;
+		if(isset($data[5])) $items_6 = $data[5]; else $items_6 = new Inventario;
+		if(isset($data[6])) $items_7 = $data[6]; else $items_7 = new Inventario;
+		if(isset($data[7])) $items_8 = $data[7]; else $items_8 = new Inventario;
+		if(isset($data[8])) $items_9 = $data[8]; else $items_9 = new Inventario;
+		if(isset($data[9])) $items_10 = $data[9]; else $items_10 = new Inventario;
+		if(isset($data[10])) $items_11 = $data[10]; else $items_11 = new Inventario;
+		if(isset($data[11])) $items_12 = $data[11]; else $items_12 = new Inventario;
+		if(isset($data[12])) $items_13 = $data[12]; else $items_13 = new Inventario;
+		if(isset($data[13])) $items_14 = $data[13]; else $items_14 = new Inventario;
+		if(isset($data[14])) $items_15 = $data[14]; else $items_15 = new Inventario;
+		if(isset($data[15])) $items_16 = $data[15]; else $items_16 = new Inventario;
+		if(isset($data[16])) $items_17 = $data[16]; else $items_17 = new Inventario;
+		if(isset($data[17])) $items_18 = $data[17]; else $items_18 = new Inventario;
+		if(isset($data[18])) $items_19 = $data[18]; else $items_19 = new Inventario;
+		if(isset($data[19])) $items_20 = $data[19]; else $items_20 = new Inventario;
+		if(isset($data[20])) $items_21 = $data[20]; else $items_21 = new Inventario;
+		if(isset($data[21])) $items_22 = $data[21]; else $items_22 = new Inventario;
+		if(isset($data[22])) $items_23 = $data[22]; else $items_23 = new Inventario;
+		if(isset($data[23])) $items_24 = $data[23]; else $items_24 = new Inventario;
+		if(isset($data[24])) $items_25 = $data[24]; else $items_25 = new Inventario;
+		if(isset($data[25])) $items_26 = $data[25]; else $items_26 = new Inventario;
+		if(isset($data[26])) $items_27 = $data[26]; else $items_27 = new Inventario;
+		if(isset($data[27])) $items_28 = $data[27]; else $items_28 = new Inventario;
+		if(isset($data[28])) $items_29 = $data[28]; else $items_29 = new Inventario;
+		if(isset($data[29])) $items_30 = $data[29]; else $items_30 = new Inventario;
 
 
 		// Uncomment the following line if AJAX validation is needed
@@ -605,15 +606,15 @@ class FacturasController extends Controller
 			$items_29->id_factura = $model->num_factura;
 			$items_30->id_factura = $model->num_factura;
 		
-
 			$cont = 0; 
 
 			if($model->validate())
 			{
-					if($items_1->validate()){				
+					if($items_1->validate()){	
+						if($cantidadesIniciales[0] != $items_1->cantidad)
+							$this->StockUpdate($items_1, $cantidadesIniciales[0]);
 						$items_1->save(); 
-						$cont++; 
-						//$this->Stock($items_1);						
+						$cont++;								
 					}
 					if($items_2->validate()){
 						$items_2->save(); 
@@ -904,7 +905,8 @@ class FacturasController extends Controller
 		echo CJSON::encode($arr);
 	}
 
-	public function Stock($model){
+	public function Stock($model)
+	{
 		$existe = Stock::model()->findAll(array('condition'=>'id_medicamento=:id_medicamento',
 								'params'=>array(':id_medicamento'=>$model->id_medicamento),));
 
@@ -926,5 +928,34 @@ class FacturasController extends Controller
 			
 		}
 	}
+	
+	public function StockUpdate($model, $cantidadInicial)
+	{
+
+		$existe = Stock::model()->findAll(array('condition'=>'id_medicamento=:id_medicamento',
+								'params'=>array(':id_medicamento'=>$model->id_medicamento),));
+
+		if($existe)
+		{ // Como el medicamento EXISTE debo ACTUALIZAR la CANTIDAD en STOCK
+			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$model->id_medicamento;
+			$cant_stock = Stock::model()->findAllBySql($sql);
+			$cantidad_nueva = $cant_stock['0']['cantidad'] + $model->cantidad - $cantidadInicial;
+			
+			echo $cant_stock['0']['cantidad']."+". $model->cantidad ."-".$cantidadInicial;
+			exit();
+			$sql = "UPDATE `stock` SET `cantidad`=".$cantidad_nueva." WHERE `id_medicamento` =".$model->id_medicamento;
+			$execute = Yii::app()->db->createCommand($sql)->execute();
+			
+		}else{
+			// Como el medicamente NO existe lo agrego en STOCK
+			$model_stock = new Stock;
+			$model_stock->id_medicamento = $model->id_medicamento;
+			$model_stock->id_estacion = $model->id_estacion;
+			$model_stock->cantidad = $model->cantidad;
+			$model_stock->save();
+			
+		}
+	}
+	
 
 }
