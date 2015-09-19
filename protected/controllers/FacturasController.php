@@ -617,146 +617,204 @@ class FacturasController extends Controller
 						$cont++;								
 					}
 					if($items_2->validate()){
+						if($cantidadesIniciales[1] != $items_2->cantidad)
+							$this->StockUpdate($items_2, $cantidadesIniciales[1]);
 						$items_2->save(); 
 						$cont++; 
 						//$this->Stock($items_2);
 					}
 					if($items_3->validate()){
+						if($cantidadesIniciales[2] != $items_3->cantidad)
+							$this->StockUpdate($items_3, $cantidadesIniciales[2]);
 						$items_3->save(); 
 						$cont++; 
 						//$this->Stock($items_3);
 					}
 					if($items_4->validate()){
+						if($cantidadesIniciales[3] != $items_4->cantidad)
+							$this->StockUpdate($items_4, $cantidadesIniciales[3]);
 						$items_4->save(); 
 						$cont++; 
 						//$this->Stock($items_4);
 					}
 					if($items_5->validate()){
+						if($cantidadesIniciales[4] != $items_5->cantidad)
+							$this->StockUpdate($items_5, $cantidadesIniciales[4]);
 						$items_5->save(); 
 						$cont++; 
 						//$this->Stock($items_5);
 					}
 					if($items_6->validate()){
+						if($cantidadesIniciales[5] != $items_6->cantidad)
+							$this->StockUpdate($items_6, $cantidadesIniciales[5]);
 						$items_6->save(); 
 						$cont++; 
 						//$this->Stock($items_6);
 					}
 					if($items_7->validate()){
+						if($cantidadesIniciales[6] != $items_7->cantidad)
+							$this->StockUpdate($items_7, $cantidadesIniciales[6]);
 						$items_7->save(); 
 						$cont++; 
 						//$this->Stock($items_7);
 					}
 					if($items_8->validate()){
+						if($cantidadesIniciales[7] != $items_8->cantidad)
+							$this->StockUpdate($items_8, $cantidadesIniciales[7]);
 						$items_8->save(); 
 						$cont++; 
 						//$this->Stock($items_8);
 					}
 					if($items_9->validate()){
+						if($cantidadesIniciales[8] != $items_9->cantidad)
+							$this->StockUpdate($items_9, $cantidadesIniciales[8]);
 						$items_9->save(); 
 						$cont++; 
 						//$this->Stock($items_9);
 					}
 					if($items_10->validate()){
+						if($cantidadesIniciales[9] != $items_10->cantidad)
+							$this->StockUpdate($items_10, $cantidadesIniciales[9]);
 						$items_10->save(); 
 						$cont++; 
 						//$this->Stock($items_10);
 					}
 					if($items_11->validate()){
+						if($cantidadesIniciales[10] != $items_11->cantidad)
+							$this->StockUpdate($items_11, $cantidadesIniciales[10]);
 						$items_11->save(); 
 						$cont++; 
 						//$this->Stock($items_11);
 					}
 					if($items_12->validate()){
+						if($cantidadesIniciales[11] != $items_12->cantidad)
+							$this->StockUpdate($items_12, $cantidadesIniciales[11]);
 						$items_12->save(); 
 						$cont++; 
 						//$this->Stock($items_12);
 					}
 					if($items_13->validate()){
+						if($cantidadesIniciales[12] != $items_13->cantidad)
+							$this->StockUpdate($items_13, $cantidadesIniciales[12]);
 						$items_13->save(); 
 						$cont++; 
 						//$this->Stock($items_13);
 					}
 					if($items_14->validate()){
+						if($cantidadesIniciales[13] != $items_14->cantidad)
+							$this->StockUpdate($items_14, $cantidadesIniciales[13]);
 						$items_14->save(); 
 						$cont++; 
 						//$this->Stock($items_14);
 					}
 					if($items_15->validate()){
+						if($cantidadesIniciales[14] != $items_15->cantidad)
+							$this->StockUpdate($items_15, $cantidadesIniciales[14]);
 						$items_15->save(); 
 						$cont++; 
 						//$this->Stock($items_15);
 					}
 					if($items_16->validate()){
+						if($cantidadesIniciales[15] != $items_16->cantidad)
+							$this->StockUpdate($items_16, $cantidadesIniciales[15]);
 						$items_16->save(); 
 						$cont++; 
 						//$this->Stock($items_16);
 					}
 					if($items_17->validate()){
+						if($cantidadesIniciales[16] != $items_17->cantidad)
+							$this->StockUpdate($items_17, $cantidadesIniciales[16]);
 						$items_17->save(); 
 						$cont++; 
 						//$this->Stock($items_17);
 					}
 					if($items_18->validate()){
+						if($cantidadesIniciales[17] != $items_18->cantidad)
+							$this->StockUpdate($items_18, $cantidadesIniciales[17]);
 						$items_18->save(); 
 						$cont++; 
 						//$this->Stock($items_18);
 					}
 					if($items_19->validate()){
+						if($cantidadesIniciales[18] != $items_19->cantidad)
+							$this->StockUpdate($items_19, $cantidadesIniciales[18]);
 						$items_19->save(); 
 						$cont++; 
 						//$this->Stock($items_19);
 					}
 					if($items_20->validate()){
+						if($cantidadesIniciales[19] != $items_20->cantidad)
+							$this->StockUpdate($items_20, $cantidadesIniciales[19]);
 						$items_20->save(); 
 						$cont++; 
 						//$this->Stock($items_20);
 					}
 					if($items_21->validate()){
+						if($cantidadesIniciales[20] != $items_21->cantidad)
+							$this->StockUpdate($items_21, $cantidadesIniciales[20]);
 						$items_21->save(); 
 						$cont++; 
 						//$this->Stock($items_21);
 					}
 					if($items_22->validate()){
+						if($cantidadesIniciales[21] != $items_22->cantidad)
+							$this->StockUpdate($items_22, $cantidadesIniciales[21]);
 						$items_22->save(); 
 						$cont++; 
 						//$this->Stock($items_22);
 					}
 					if($items_23->validate()){
+						if($cantidadesIniciales[22] != $items_23->cantidad)
+							$this->StockUpdate($items_23, $cantidadesIniciales[22]);
 						$items_23->save(); 
 						$cont++; 
 						//$this->Stock($items_23);
 					}
 					if($items_24->validate()){
+						if($cantidadesIniciales[23] != $items_24->cantidad)
+							$this->StockUpdate($items_24, $cantidadesIniciales[23]);
 						$items_24->save(); 
 						$cont++; 
 						//$this->Stock($items_24);
 					}
 					if($items_25->validate()){
+						if($cantidadesIniciales[24] != $items_25->cantidad)
+							$this->StockUpdate($items_25, $cantidadesIniciales[24]);
 						$items_25->save(); 
 						$cont++; 
 						//$this->Stock($items_25);
 					}
 					if($items_26->validate()){
+						if($cantidadesIniciales[25] != $items_26->cantidad)
+							$this->StockUpdate($items_26, $cantidadesIniciales[25]);
 						$items_26->save(); 
 						$cont++; 
 						//$this->Stock($items_26);
 					}
 					if($items_27->validate()){
+						if($cantidadesIniciales[26] != $items_27->cantidad)
+							$this->StockUpdate($items_27, $cantidadesIniciales[26]);
 						$items_27->save(); 
 						$cont++; 
 						//$this->Stock($items_27);
 					}
 					if($items_28->validate()){
+						if($cantidadesIniciales[27] != $items_28->cantidad)
+							$this->StockUpdate($items_28, $cantidadesIniciales[27]);
 						$items_28->save(); 
 						$cont++; 
 						//$this->Stock($items_28);
 					}
 					if($items_29->validate()){
+						if($cantidadesIniciales[28] != $items_29->cantidad)
+							$this->StockUpdate($items_29, $cantidadesIniciales[28]);
 						$items_29->save(); 
 						$cont++; 
 						//$this->Stock($items_29);
 					}
 					if($items_30->validate()){
+						if($cantidadesIniciales[29] != $items_30->cantidad)
+							$this->StockUpdate($items_30, $cantidadesIniciales[29]);
 						$items_30->save(); 
 						$cont++; 
 						//$this->Stock($items_30);
@@ -939,10 +997,12 @@ class FacturasController extends Controller
 		{ // Como el medicamento EXISTE debo ACTUALIZAR la CANTIDAD en STOCK
 			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$model->id_medicamento;
 			$cant_stock = Stock::model()->findAllBySql($sql);
-			$cantidad_nueva = $cant_stock['0']['cantidad'] + $model->cantidad - $cantidadInicial;
+			$cantidad_nueva = $cant_stock['0']['cantidad'] - $cantidadInicial + $model->cantidad;
 			
 			echo $cant_stock['0']['cantidad']."+". $model->cantidad ."-".$cantidadInicial;
-			exit();
+			echo $cantidad_nueva;
+			//exit();
+
 			$sql = "UPDATE `stock` SET `cantidad`=".$cantidad_nueva." WHERE `id_medicamento` =".$model->id_medicamento;
 			$execute = Yii::app()->db->createCommand($sql)->execute();
 			
