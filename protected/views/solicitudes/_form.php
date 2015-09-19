@@ -41,7 +41,12 @@
 	<div class="media">
 		<?php 
 			echo $form->hiddenField($model,'stock_id_stock',array());
-			$medicamento=""; 
+			
+			if(!empty($model->stock_id_stock)){						
+				$medicamento = Medicamentos::model()->findByAttributes(array('id_medicamento'=>$model->stock_id_stock))->nombre;
+			}else{
+				$medicamento = "";
+			}
 
 			$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
 				'name'=>'nombre_1',

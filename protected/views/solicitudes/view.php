@@ -10,7 +10,6 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Lista de Solicitudes', 'url'=>array('index')),
 	array('label'=>'Crear Solicitud', 'url'=>array('create')),
-	array('label'=>'Modificar Solicitud', 'url'=>array('update', 'id'=>$model->id_solicitud)),
 	array('label'=>'Eliminar Solicitud', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_solicitud),'confirm'=>'Está seguro de eliminar la solicitud?')),
 	array('label'=>'Gestionar Solicitudes', 'url'=>array('admin')),
 );
@@ -22,9 +21,12 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		array(
+			'name'=>'fecha_solicitud',
+			'value'=> date_format(date_create($model->fecha_solicitud),'d-m-Y')
+		),
+		array(
 			'name' => 'estacion_id_estacion',
-			'value' => Estaciones::model()->findByAttributes(array('id_estacion'=>$model->estacion_id_estacion))->nombre
-						
+			'value' => Estaciones::model()->findByAttributes(array('id_estacion'=>$model->estacion_id_estacion))->nombre						
 		),
 		array(
 			'name' => 'stock_id_stock',
@@ -37,6 +39,10 @@ $this->menu=array(
 						Estaciones::model()->findByAttributes(array('id_estacion'=>
 							Guardias::model()->findByAttributes(array('id_guardia'=>$model->guardias_id_guardia))->id_estacion))->nombre
 	  .')' 
+		),
+		array(
+			'name'=>'estado',
+			'value' => strtr($model->estado, array("0" => "Pendiente","1" => "Asignado","2" => "Rechazado"))
 		),
 	),
 )); ?>

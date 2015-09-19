@@ -7,8 +7,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Solicitudes', 'url'=>array('create')),
-	array('label'=>'Manage Solicitudes', 'url'=>array('admin')),
+	array('label'=>'Crear Solicitud', 'url'=>array('create')),
+	array('label'=>'Gestionar Solicitudes', 'url'=>array('admin')),
 );
 ?>
 

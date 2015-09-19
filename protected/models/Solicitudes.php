@@ -90,7 +90,6 @@ class Solicitudes extends CActiveRecord
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
-
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_solicitud',$this->id_solicitud);
@@ -100,8 +99,8 @@ class Solicitudes extends CActiveRecord
 		$criteria->compare('stock_id_stock',$this->stock_id_stock);
 		$criteria->compare('guardias_id_guardia',$this->guardias_id_guardia);
 		$criteria->compare('estado',$this->estado);
-		$criteria->compare('fecha_solicitud',$this->fecha_solicitud); 
-
+		$criteria->compare('fecha_solicitud',$this->fecha_solicitud);
+		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

@@ -9,6 +9,10 @@
 	<?php echo CHtml::link(CHtml::encode($data->id_solicitud), array('view', 'id'=>$data->id_solicitud)); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_solicitud')); ?>:</b>
+	<?php echo CHtml::encode(date_format(date_create($data->fecha_solicitud),'d-m-Y')); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('estacion_id_estacion')); ?>:</b>
 	<?php echo CHtml::encode($data->estacionIdEstacion->nombre); ?>
 	<br />
@@ -28,6 +32,8 @@
 	); ?>
 	<br />
 
-	
+	<b><?php echo CHtml::encode($data->getAttributeLabel('estado')); ?>:</b>
+	<?php echo CHtml::encode(strtr($data->estado, array("0" => "Pendiente","1" => "Asignado","2" => "Rechazado"))); ?>
+	<br />
 
 </div>

@@ -54,11 +54,12 @@ class SolicitudesController extends Controller
 	 */
 	public function actionCreate()
 	{	
+
 		$deGuardia = $this->verificarGuardia(); 
 				
 		if(!empty($deGuardia)){
 
-			$model=new Solicitudes;
+			$model = new Solicitudes;
 			// Uncomment the following line if AJAX validation is needed
 			// $this->performAjaxValidation($model);
 
@@ -92,6 +93,7 @@ class SolicitudesController extends Controller
 			$this->render('create',array(
 				'model'=>$model,
 			));
+			
 		}else{
 			Yii::app()->user->setFlash('success','Debe estar de guardia para poder realizar solicitudes');
 			$this->redirect(array('index'));			
@@ -108,9 +110,6 @@ class SolicitudesController extends Controller
 	{
 		$model=$this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['Solicitudes']))
 		{
 			$model->attributes=$_POST['Solicitudes'];
@@ -120,7 +119,7 @@ class SolicitudesController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
-		));
+		)); 
 	}
 
 	/**
@@ -140,6 +139,14 @@ class SolicitudesController extends Controller
 	/**
 	 * Lists all models.
 	 */
+	
+	/*public function actionIndex($id_usuario)
+	{
+		$dataProvider=new CActiveDataProvider('Solicitudes',array('criteria'=>array('condition'=>'usuarios='.$id_usuario)));
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
+	}*/
 	public function actionIndex()
 	{
 		$dataProvider=new CActiveDataProvider('Solicitudes');
@@ -235,7 +242,7 @@ class SolicitudesController extends Controller
 				FROM guardias 
 				WHERE mes=7
 						AND ano=".date('Y')." 
-						AND id_usuario=245678654 
+						AND id_usuario=22234555 
 						AND ".$dia."!=1 "; 
 		$deGuardia = Guardias::model()->findAllBySql($sql);
 
