@@ -28,7 +28,7 @@ class SolicitudesController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete','autocomplete'),
+				'actions'=>array('index','view','create','update','admin','delete','autocomplete','autocomplete2'),
 				'roles'=>array('Superadmin'),
 			),
 			array('deny',  // deny all users
@@ -217,6 +217,41 @@ class SolicitudesController extends Controller
 	    			'stock_id_stock' => $item->id_medicamento,
 	    			'value' => $item->nombre,
 	   			);
+  			}
+	 	}else{
+	  		$arr = array();
+	  		$arr[] = array(
+	   			'stock_id_stock' => '',
+	   			'value' => 'El medicamento no existe, por favor verifíque.',
+	   			'label' => 'El medicamento no existe, por favor verifíque.',
+	  		);
+	 	}
+  
+		echo CJSON::encode($arr);
+	}
+
+	public function actionAutocomplete2($term) 
+	{
+		$criteria = new CDbCriteria;
+		$criteria->join = "RIGHT JOIN stock ON stock.id_medicamento = t.id_medicamento"; 
+		$criteria->condition = "cantidad>0";
+		$criteria->compare('LOWER(nombre)', strtolower($_GET['term']), true);
+		$criteria->order = 'nombre';
+		$criteria->limit = 10; 
+		
+		$data = Medicamentos::model()->findAll($criteria);
+
+		if (!empty($data))
+		{
+  			$arr = array();
+  			foreach ($data as $item) {
+
+	   			$idStock = Stock::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento))->id_stock;
+
+	   			$arr[] = array(
+	    			'stock_id_stock' => $idStock,
+	    			'value' => $item->nombre,
+	    		);
   			}
 	 	}else{
 	  		$arr = array();

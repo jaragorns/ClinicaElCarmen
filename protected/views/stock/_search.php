@@ -46,10 +46,10 @@
 		<?php
 			echo $form->hiddenField($model,'id_medicamento',array());
 			$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-				'name'=>'unidad_medida',
+				'name'=>'id_medicamento',
 			    'value'=>'',
 			    'model'=>$model,
-			    'source'=>$this->createUrl('Facturas/Autocomplete'),
+			    'source'=>$this->createUrl('Stock/Autocomplete'),
 			    // additional javascript options for the autocomplete plugin
 			    'options'=>array(
 			    	'minLength'=>'1',

@@ -41,18 +41,10 @@ $this->menu=array(
 	</div>
 	<div class="media">
 		<?php 
-			echo $form->dropDownList(
-				$model,
-				'id_estacion',
-				CHtml::listData(
-					Estaciones::model()->findAll(),
-					'id_estacion',
-					'nombre'),
-				array(
-					'class' => 'my-drop-down',
-					'empty'=>'-- Seleccione una Estación --',
-				)
-			);
+			 Yii::import('application.controllers.back.CservicesController');
+        	$obj =new CservicesController(); // preparing object
+        	echo $obj->verificarGuardia(); exit; // calling test class of ServiceController 
+			
 		?> 
 		<?php echo "<b>a</b> ".$form->labelEx($model,'id_estacion'); ?>
 		<?php 
@@ -103,7 +95,8 @@ $this->menu=array(
 		    					'minLength'=>'1',
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
-       								$('#Stock_0_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_0_id_medicamento').val(ui.item.id_medicamento);
+       								$('#Stock_0_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(

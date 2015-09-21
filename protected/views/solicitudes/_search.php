@@ -47,9 +47,33 @@
 		<?php echo $form->label($model,'stock_id_stock'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->dropDownList($model,'stock_id_stock',
-				CHtml::listData(
-					Medicamentos::model()->findAll(array('condition'=>'1=1')),'id_medicamento','nombre'),array('class' => 'my-drop-down','prompt'=>'Seleccione:',)); ?>		
+		<?php //echo $form->dropDownList($model,'stock_id_stock',
+			//	CHtml::listData(
+			//		Medicamentos::model()->findAll(array('condition'=>'1=1')),'id_medicamento','nombre'),array('class' => 'my-drop-down','prompt'=>'Seleccione:',)); 
+
+		echo $form->hiddenField($model,'stock_id_stock',array());
+
+			$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+				'name'=>'medicamento',
+			    'value'=>'',
+			    'model'=>$model,
+			    'source'=>$this->createUrl('Solicitudes/Autocomplete2'),
+			    // additional javascript options for the autocomplete plugin
+			    'options'=>array(
+			    	'minLength'=>'1',
+			    	'showAnim'=>'fold',
+			    	'select'=>"js:function(event, ui) { 
+	       				$('#Solicitudes_stock_id_stock').val(ui.item.stock_id_stock); 
+	       			}"
+			    ),
+			    'htmlOptions'=>array(
+		        	'style'=>'width:436px;',
+		        	'placeholder'=>'Nombre del medicamento...',
+		        	'title'=>'Indique el medicamento que desea buscar.'
+	    		),
+			));
+
+		?>		
 	</div>
 
 	<div class="rowcontact">

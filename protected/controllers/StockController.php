@@ -483,8 +483,8 @@ class StockController extends Controller
 	public function actionAutocomplete($term) 
 	{
 		$criteria = new CDbCriteria;
-		//$criteria->join = "RIGHT JOIN stock ON stock.id_medicamento = t.id_medicamento"; 
-		$criteria->condition = "cantidad>0";
+		$criteria->join = "RIGHT JOIN stock ON stock.id_medicamento = t.id_medicamento"; 
+		$criteria->condition = "cantidad>0 AND id_estacion = 6";
 		$criteria->compare('LOWER(nombre)', strtolower($_GET['term']), true);
 		$criteria->order = 'nombre';
 		$criteria->limit = 10; 
@@ -497,9 +497,12 @@ class StockController extends Controller
 		{
   			$arr = array();
   			foreach ($data as $item) {
+  				$idStock = Stock::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento))->id_stock;
+  				$existencia = Stock::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento))->cantidad;
   				$arr[] = array(
 		    		'id_medicamento' => $item->id_medicamento,
 		    		'value' => $item->nombre,
+		    		'existencia' => $existencia,
 	   			);
   			}
 
