@@ -338,7 +338,7 @@ class SolicitudesController extends Controller
 				FROM guardias 
 				WHERE mes=7
 						AND ano=".date('Y')." 
-						AND id_usuario=22234567 
+						AND id_usuario=33445556 
 						AND ".$dia."!=1 "; 
 		$deGuardia = Guardias::model()->findAllBySql($sql);
 
@@ -389,6 +389,7 @@ class SolicitudesController extends Controller
 				return false; 
 				//Yii::app()->user->setFlash('error','La cantidad solicitada de '.Medicamentos::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento))->nombre.' no está disponible en el Servicio');
 			}else{
+				$item->id_stock = $stock->id_stock;
 				return true; 
 			}
 		}else{	

@@ -36,32 +36,24 @@ class ItemSolicitudController extends Controller
 	public function actionAutocomplete($term) 
 	{
 		$criteria = new CDbCriteria;
-		$criteria->join = "RIGHT JOIN stock ON stock.id_medicamento = t.id_medicamento"; 
-		$criteria->condition = "cantidad>0";
 		$criteria->compare('LOWER(nombre)', strtolower($_GET['term']), true);
 		$criteria->order = 'nombre';
 		$criteria->limit = 10; 
-		
 		$data = Medicamentos::model()->findAll($criteria);
 
 		if (!empty($data))
 		{
   			$arr = array();
   			foreach ($data as $item) {
-
-	   			$idStock = Stock::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento))->id_stock;
-
 	   			$arr[] = array(
-	    			'id_stock' => $idStock,
-	    			'id_medicamento'=>$item->id_medicamento,
+	    			'id_medicamento' => $item->id_medicamento,
 	    			'value' => $item->nombre,
-	    		);
+	   			);
   			}
 	 	}else{
 	  		$arr = array();
 	  		$arr[] = array(
-	   			'id_stock' => '',
-	   			'id_medicamento' => '',
+	   			'id' => '',
 	   			'value' => 'El medicamento no existe, por favor verifíque.',
 	   			'label' => 'El medicamento no existe, por favor verifíque.',
 	  		);
@@ -69,4 +61,5 @@ class ItemSolicitudController extends Controller
   
 		echo CJSON::encode($arr);
 	}
+
 }

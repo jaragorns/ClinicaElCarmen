@@ -28,7 +28,10 @@
 	</div>
 	<div class="media">
 		<?php 
-			$sql2 = 'SELECT * FROM Estaciones WHERE id_estacion NOT IN ("1","7")  '; 
+			$servicio = $this->verificarGuardia(); 
+			$servicio = $servicio['id_estacion'];
+
+			$sql2 = 'SELECT * FROM Estaciones WHERE id_estacion NOT IN ("1","7","'.$servicio.'")  '; 
 			echo $form->dropDownList($model,'estacion_id_estacion',
 			CHtml::listData(
 				Estaciones::model()->findAllBySql($sql2),'id_estacion','nombre'),	array('class' => 'my-drop-down','prompt'=>'Seleccionar:',)); ?> 
@@ -65,7 +68,7 @@
 		<tr>
 			<td>
 				<?php 
-				echo $form->hiddenField($items_0,'[0]id_stock',array());
+				//echo $form->hiddenField($items_0,'[0]id_stock',array());
 				echo $form->hiddenField($items_0,'[0]id_medicamento',array());
 
 				if(!empty($items_0->id_medicamento)){
@@ -103,7 +106,7 @@
 		<tr>
 			<td>
 				<?php 
-				echo $form->hiddenField($items_1,'[1]id_stock',array());
+				//echo $form->hiddenField($items_1,'[1]id_stock',array());
 				echo $form->hiddenField($items_1,'[1]id_medicamento',array());
 
 				if(!empty($items_1->id_medicamento)){
@@ -140,7 +143,7 @@
 		<tr>
 			<td>
 				<?php 
-				echo $form->hiddenField($items_2,'[2]id_stock',array());
+				//echo $form->hiddenField($items_2,'[2]id_stock',array());
 				echo $form->hiddenField($items_2,'[2]id_medicamento',array());
 
 				if(!empty($items_2->id_medicamento)){
@@ -177,7 +180,7 @@
 		<tr>
 			<td>
 				<?php 
-				echo $form->hiddenField($items_3,'[3]id_stock',array());
+				//echo $form->hiddenField($items_3,'[3]id_stock',array());
 				echo $form->hiddenField($items_3,'[3]id_medicamento',array());
 
 				if(!empty($items_3->id_medicamento)){
@@ -214,7 +217,7 @@
 		<tr>
 			<td>
 				<?php 
-				echo $form->hiddenField($items_4,'[4]id_stock',array());
+				//echo $form->hiddenField($items_4,'[4]id_stock',array());
 				echo $form->hiddenField($items_4,'[4]id_medicamento',array());
 
 				if(!empty($items_4->id_medicamento)){
@@ -251,7 +254,7 @@
 		<tr>
 			<td>
 				<?php 
-				echo $form->hiddenField($items_5,'[5]id_stock',array());
+				//echo $form->hiddenField($items_5,'[5]id_stock',array());
 				echo $form->hiddenField($items_5,'[5]id_medicamento',array());
 
 				if(!empty($items_5->id_medicamento)){
@@ -288,7 +291,7 @@
 		<tr>
 			<td>
 				<?php 
-				echo $form->hiddenField($items_6,'[6]id_stock',array());
+				//echo $form->hiddenField($items_6,'[6]id_stock',array());
 				echo $form->hiddenField($items_6,'[6]id_medicamento',array());
 
 				if(!empty($items_6->id_medicamento)){
@@ -325,7 +328,7 @@
 		<tr>
 			<td>
 				<?php 
-				echo $form->hiddenField($items_7,'[7]id_stock',array());
+				//echo $form->hiddenField($items_7,'[7]id_stock',array());
 				echo $form->hiddenField($items_7,'[7]id_medicamento',array());
 
 				if(!empty($items_7->id_medicamento)){
@@ -362,7 +365,7 @@
 		<tr>
 			<td>
 				<?php 
-				echo $form->hiddenField($items_8,'[8]id_stock',array());
+				//echo $form->hiddenField($items_8,'[8]id_stock',array());
 				echo $form->hiddenField($items_8,'[8]id_medicamento',array());
 
 				if(!empty($items_8->id_medicamento)){
@@ -399,7 +402,7 @@
 		<tr>
 			<td>
 				<?php 
-				echo $form->hiddenField($items_9,'[9]id_stock',array());
+				//echo $form->hiddenField($items_9,'[9]id_stock',array());
 				echo $form->hiddenField($items_9,'[9]id_medicamento',array());
 
 				if(!empty($items_9->id_medicamento)){
