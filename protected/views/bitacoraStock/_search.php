@@ -1,6 +1,6 @@
 <?php
-/* @var $this StockController */
-/* @var $model Stock */
+/* @var $this BitacoraStockController */
+/* @var $model BitacoraStock */
 /* @var $form CActiveForm */
 ?>
 
@@ -12,31 +12,50 @@
 )); ?>
 
 	<div class="rowcontact">
-		<?php echo $form->label($model,'cantidad'); ?>
+		<?php echo $form->label($model,'id_usuario'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'cantidad'); ?>
+		<?php echo $form->textField($model,'id_usuario'); ?>
 	</div>
 
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'id_estacion'); ?>
+		<?php echo $form->label($model,'id_estacion_origen'); ?>
 	</div>
 	<div class="media">
 		<?php 
 			echo $form->dropDownList(
 				$model,
-				'id_estacion',
+				'id_estacion_destino',
 				CHtml::listData(
 					Estaciones::model()->findAll(array('condition'=>'id_estacion NOT IN (1,7)',)),
 					'id_estacion',
 					'nombre'),
 				array(
 					'class' => 'my-drop-down',
-					'empty'=>'-- Seleccione Estación --',
+					'empty'=>'-- Seleccione Servicio --',
 				)
 			);
-		?> 
-		<?php echo $form->error($model,'unidad_medida'); ?>
+		?>	
+	</div>
+
+	<div class="rowcontact">
+		<?php echo $form->label($model,'id_estacion_destino'); ?>
+	</div>
+	<div class="media">
+		<?php 
+			echo $form->dropDownList(
+				$model,
+				'id_estacion_destino',
+				CHtml::listData(
+					Estaciones::model()->findAll(array('condition'=>'id_estacion NOT IN (1,7)',)),
+					'id_estacion',
+					'nombre'),
+				array(
+					'class' => 'my-drop-down',
+					'empty'=>'-- Seleccione Servicio --',
+				)
+			);
+		?>	
 	</div>
 
 	<div class="rowcontact">
@@ -46,16 +65,16 @@
 		<?php
 			echo $form->hiddenField($model,'id_medicamento',array());
 			$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-				'name'=>'id_medicamento',
+				'name'=>'medicamento',
 			    'value'=>'',
 			    'model'=>$model,
-			    'source'=>$this->createUrl('Stock/Autocomplete'),
+			    'source'=>$this->createUrl('Facturas/Autocomplete'),
 			    // additional javascript options for the autocomplete plugin
 			    'options'=>array(
 			    	'minLength'=>'1',
 			    	'showAnim'=>'fold',
 			    	'select'=>"js:function(event, ui) { 
-	       				$('#Stock_id_medicamento').val(ui.item.id_medicamento); 
+	       				$('#BitacoraStock_id_medicamento').val(ui.item.id_medicamento); 
 	       			}"
 			    ),
 			    'htmlOptions'=>array(
@@ -65,6 +84,20 @@
 	    		),
 			));
 		?>
+	</div>
+
+	<div class="rowcontact">
+		<?php echo $form->label($model,'cantidad'); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'cantidad'); ?>
+	</div>
+
+	<div class="rowcontact">
+		<?php echo $form->label($model,'fecha'); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'fecha',array('placeholder'=>"2015-10-25 22:02",'size'=>30,'maxlength'=>17)); ?>
 	</div>
 
 	<div class="buttons">

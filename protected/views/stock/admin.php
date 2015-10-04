@@ -50,7 +50,10 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 			'name' => 'id_medicamento',
 			'value' => 'Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data->id_medicamento))->nombre'
 		),
-		'cantidad',
+		array(
+			'name' => 'cantidad',
+			'value' => '$data->cantidad." (".UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data->id_medicamento))->unidad_medida))->descripcion.")"'
+		),
 		array(
 			'name' => 'id_estacion',
 			'value' => 'Estaciones::model()->findByAttributes(array("id_estacion"=>$data->id_estacion))->nombre'
@@ -60,96 +63,3 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 		),
 	),
 )); ?>
-
-
-<div class="form">
-
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'stock-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
-)); ?>
-
-	<p class="note">Campos con <span class="required">*</span> son requeridos.</p>
-
-	<?php if($form->errorSummary($model)!=""){ ?>
-	<div class="alert alert-info">
-    	<strong><?php echo $form->errorSummary($model);?></strong> 
-    </div>
-	<?php } ?>
-
-	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'id_estacion'); ?>
-	</div>
-	<div class="media">
-		<?php 
-			echo $form->dropDownList(
-				$model,
-				'id_estacion',
-				CHtml::listData(
-					Estaciones::model()->findAll(),
-					'id_estacion',
-					'nombre'),
-				array(
-					'class' => 'my-drop-down',
-					'empty'=>'-- Seleccione una Estación --',
-				)
-			);
-		?> 
-		<?php echo "<b>a</b> ".$form->labelEx($model,'id_estacion'); ?>
-		<?php 
-			echo $form->dropDownList(
-				$model,
-				'id_estacion',
-				CHtml::listData(
-					Estaciones::model()->findAll(),
-					'id_estacion',
-					'nombre'),
-				array(
-					'class' => 'my-drop-down',
-					'empty'=>'-- Seleccione una Estación --',
-				)
-			);
-		?> 
-		<?php echo $form->error($model,'id_estacion'); ?>
-	</div>
-
-	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'id_medicamento'); ?>
-	</div>
-	<div class="media">
-		<?php 
-			echo $form->dropDownList(
-				$model,
-				'id_medicamento',
-				CHtml::listData(
-					Medicamentos::model()->findAll(),
-					'id_medicamento',
-					'nombre'),
-				array(
-					'class' => 'my-drop-down',
-					'empty'=>'-- Seleccione un Medicamento --',
-				)
-			);
-		?> 
-		<?php echo $form->error($model,'id_medicamento'); ?>
-	</div>
-
-	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'cantidad'); ?>
-	</div>
-	<div class="media">
-		<?php echo $form->textField($model,'cantidad'); ?>
-		<?php echo $form->error($model,'cantidad'); ?>
-	</div>
-
-	<div class="buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save'),  array("class"=>"btn btn-primary btn-large")); ?>
-	</div>
-
-<?php $this->endWidget(); ?>
-
-</div><!-- form -->

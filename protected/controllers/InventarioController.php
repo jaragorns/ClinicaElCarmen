@@ -28,7 +28,7 @@ class InventarioController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','createSimple','update','admin','delete'),
+				'actions'=>array('index','view','create','update','admin','delete'),
 				'roles'=>array('Superadmin'),
 			),
 			array('deny',  // deny all users
@@ -116,64 +116,6 @@ class InventarioController extends Controller
 		$this->render('create',array(
 			'model'=>$model,
 			'model_factura'=>$model_factura,
-		));
-	}
-
-	/**
-	 * Creates a new model, where user provide all data.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
-	 */
-	public function actionCreateSimple()
-	{
-
-		$model=new Inventario;
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Inventario']))
-		{
-			$model->attributes=$_POST['Inventario'];
-			$model->id_usuario = Yii::app()->user->id;
-
-			//Buscar el id_factura, ya que el usuario trabaja con el num_factura
-			$model_factura = new Facturas;
-			$model_factura = Facturas::model()->findByAttributes(array("num_factura"=>$model->id_factura));
-			$model->id_factura = $model_factura->id_factura;
-
-			$model->id_estacion = Estaciones::model()->findByAttributes(array('id_estacion'=>"7"))->id_estacion;
-
-			$existe = Inventario::model()->findAll(array('condition'=>'id_medicamento=:id_medicamento',
-					'params'=>array(':id_medicamento'=>$model->id_medicamento),));
-
-			if($existe)
-			{ // Como el medicamento EXISTE debo ACTUALIZAR la CANTIDAD en STOCK
-				$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$model->id_medicamento;
-				$cant_stock = Inventario::model()->findAllBySql($sql);
-				$cantidad_nueva = $cant_stock['0']['cantidad'] + $model->cantidad;
-				$sql = "UPDATE `stock` SET `cantidad`=".$cantidad_nueva." WHERE `id_medicamento` =".$model->id_medicamento;
-				$execute = Yii::app()->db->createCommand($sql)->execute();
-				
-			}else{
-				// Como el medicamente NO existe lo agrego en STOCK
-				$model_stock = new Stock;
-				$model_stock->id_medicamento = $model->id_medicamento;
-				$model_stock->id_estacion = $model->id_estacion;
-				$model_stock->cantidad = $model->cantidad;
-				$model_stock->save();
-				
-			}
-
-			if($model->save()){
-				Yii::app()->user->setFlash('success','Item agregado a la factura.');
-				$this->redirect(array('view','id'=>$model->id_inventario));
-
-			}
-				
-		}
-
-		$this->render('createSimple',array(
-			'model'=>$model,
 		));
 	}
 

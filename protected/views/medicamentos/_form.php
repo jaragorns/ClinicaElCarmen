@@ -15,6 +15,11 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
+	<div class="alert alert-info">
+    	<strong><?php echo "NOTA:";?></strong> <?php echo "La ".'<strong>'."UNIDAD DE MEDIDA".'</strong>'." se debe especificar de 
+    		acuerdo al consumo del medicamento. Y la ".'<strong>'."CANTIDAD".'</strong>'." de acuerdo a la ".'<strong>'."UNIDAD DE MEDIDA".'</strong>'; ?> 
+    </div>
+
 	<p class="note">Campos con <span class="required">*</span> son requeridos.</p>
 
 	<?php if($form->errorSummary($model)!=""){ ?>
@@ -50,7 +55,7 @@
 				CHtml::listData(
 					UnidadMedidas::model()->findAll(),
 					'id_unidad_medidas',
-					'abreviatura'),
+					'descripcion'),
 				array(
 					'class' => 'my-drop-down',
 					'empty'=>'-- Seleccione Unidad de Medida --',
@@ -61,10 +66,18 @@
 	</div>
 
 	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'cantidad'); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'cantidad',array('placeholder'=>'10','size'=>9,'maxlength'=>9)); ?>
+		<?php echo $form->error($model,'cantidad'); ?>
+	</div>
+
+	<div class="rowcontact">
 		<?php echo $form->labelEx($model,'precio_contado'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'precio_contado',array('placeholder'=>'135.50','size'=>20,'maxlength'=>9)); ?>
+		<?php echo $form->textField($model,'precio_contado',array('placeholder'=>'135,50','size'=>20,'maxlength'=>9)); ?>
 		<?php echo $form->error($model,'precio_contado'); ?>
 	</div>
 
@@ -72,7 +85,7 @@
 		<?php echo $form->labelEx($model,'precio_seguro'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'precio_seguro',array('placeholder'=>'388.45','size'=>20,'maxlength'=>9)); ?>
+		<?php echo $form->textField($model,'precio_seguro',array('placeholder'=>'388,45','size'=>20,'maxlength'=>9)); ?>
 		<?php echo $form->error($model,'precio_seguro'); ?>
 	</div>
 
@@ -80,7 +93,7 @@
 		<?php echo $form->labelEx($model,'iva'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'iva',array('placeholder'=>'12.00','size'=>5,'maxlength'=>5)); ?>
+		<?php echo $form->textField($model,'iva',array('placeholder'=>'12','size'=>5,'maxlength'=>5)); ?>
 		<?php echo $form->error($model,'iva'); ?>
 	</div>
 

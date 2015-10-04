@@ -28,8 +28,12 @@ class StockController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete','asignar','autocomplete'),
+				'actions'=>array('index','view','viewEstacion','create','update','admin','delete','asignar','autocomplete'),
 				'roles'=>array('Superadmin'),
+			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view','viewEstacion','create','update','admin','asignar','autocomplete'),
+				'roles'=>array('Farmacia'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -45,6 +49,23 @@ class StockController extends Controller
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+		));
+	}
+
+	/**
+	 * Displays a particular model.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionViewEstacion($id_estacion)
+	{
+		$model=new Stock('search');
+		//$model->unsetAttributes();  // clear any default values
+		$model->id_estacion = $id_estacion;
+		if(isset($_GET['Stock']))
+			$model->attributes=$_GET['Stock'];
+
+		$this->render('admin',array(
+			'model'=>$model,
 		));
 	}
 
@@ -114,9 +135,12 @@ class StockController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($items_1);
 		
+		//SolicitudesController::verificarGuardia();
+		//exit();
 
 		if(isset($_POST['Stock']))
 		{
+			$model->attributes = $_POST["Stock"];
 			$items_1->attributes = $_POST["Stock"][0];
 			$items_2->attributes = $_POST["Stock"][1];
 			$items_3->attributes = $_POST["Stock"][2];
@@ -147,208 +171,102 @@ class StockController extends Controller
 			$items_28->attributes = $_POST["Stock"][27];
 			$items_29->attributes = $_POST["Stock"][28];
 			$items_30->attributes = $_POST["Stock"][29];
-/*
-			$items_1->id_usuario = Yii::app()->user->id;
-			$items_2->id_usuario = Yii::app()->user->id;
-			$items_3->id_usuario = Yii::app()->user->id;
-			$items_4->id_usuario = Yii::app()->user->id;
-			$items_5->id_usuario = Yii::app()->user->id;
-			$items_6->id_usuario = Yii::app()->user->id;
-			$items_7->id_usuario = Yii::app()->user->id;
-			$items_8->id_usuario = Yii::app()->user->id;
-			$items_9->id_usuario = Yii::app()->user->id;
-			$items_10->id_usuario = Yii::app()->user->id;
-			$items_11->id_usuario = Yii::app()->user->id;
-			$items_12->id_usuario = Yii::app()->user->id;
-			$items_13->id_usuario = Yii::app()->user->id;
-			$items_14->id_usuario = Yii::app()->user->id;
-			$items_15->id_usuario = Yii::app()->user->id;
-			$items_16->id_usuario = Yii::app()->user->id;
-			$items_17->id_usuario = Yii::app()->user->id;
-			$items_18->id_usuario = Yii::app()->user->id;
-			$items_19->id_usuario = Yii::app()->user->id;
-			$items_20->id_usuario = Yii::app()->user->id;
-			$items_21->id_usuario = Yii::app()->user->id;
-			$items_22->id_usuario = Yii::app()->user->id;
-			$items_23->id_usuario = Yii::app()->user->id;
-			$items_24->id_usuario = Yii::app()->user->id;
-			$items_25->id_usuario = Yii::app()->user->id;
-			$items_26->id_usuario = Yii::app()->user->id;
-			$items_27->id_usuario = Yii::app()->user->id;
-			$items_28->id_usuario = Yii::app()->user->id;
-			$items_29->id_usuario = Yii::app()->user->id;
-			$items_30->id_usuario = Yii::app()->user->id;
-*/		
-			$cont = 0; 
 
-			if($model->validate())
-			{
-				//$consulta = "SELECT * FROM facturas WHERE num_factura = '".$model->num_factura."' AND id_proveedor = ".$model->id_proveedor;
-				//$data = Facturas::model()->findAllBySql($consulta);
+			$items_1->id_estacion = $model->id_estacion;
+			$items_2->id_estacion = $model->id_estacion;
+			$items_3->id_estacion = $model->id_estacion;
+			$items_4->id_estacion = $model->id_estacion;
+			$items_5->id_estacion = $model->id_estacion;
+			$items_6->id_estacion = $model->id_estacion;
+			$items_7->id_estacion = $model->id_estacion;
+			$items_8->id_estacion = $model->id_estacion;
+			$items_9->id_estacion = $model->id_estacion;
+			$items_10->id_estacion = $model->id_estacion;
+			$items_11->id_estacion = $model->id_estacion;
+			$items_12->id_estacion = $model->id_estacion;
+			$items_13->id_estacion = $model->id_estacion;
+			$items_14->id_estacion = $model->id_estacion;
+			$items_15->id_estacion = $model->id_estacion;
+			$items_16->id_estacion = $model->id_estacion;
+			$items_17->id_estacion = $model->id_estacion;
+			$items_18->id_estacion = $model->id_estacion;
+			$items_19->id_estacion = $model->id_estacion;
+			$items_20->id_estacion = $model->id_estacion;
+			$items_21->id_estacion = $model->id_estacion;
+			$items_22->id_estacion = $model->id_estacion;
+			$items_23->id_estacion = $model->id_estacion;
+			$items_24->id_estacion = $model->id_estacion;
+			$items_25->id_estacion = $model->id_estacion;
+			$items_26->id_estacion = $model->id_estacion;
+			$items_27->id_estacion = $model->id_estacion;
+			$items_28->id_estacion = $model->id_estacion;
+			$items_29->id_estacion = $model->id_estacion;
+			$items_30->id_estacion = $model->id_estacion;
 
-				//if(!empty($data) ){
-					// Si consigue el mismo num_factura de un mismo id_proveedor
-					//Yii::app()->user->setFlash('error','Ya existe ese NUMERO DE FACTURA para ese PROVEEDOR. Por favor revisar los datos suministrados.');
-					
-				//}else{	
-					if($items_1->validate()){				
-						$items_1->save(); 
-						$cont++; 
-						$this->Stock($items_1);						
-					}
-					if($items_2->validate()){
-						$items_2->save(); 
-						$cont++; 
-						$this->Stock($items_2);
-					}
-					if($items_3->validate()){
-						$items_3->save(); 
-						$cont++; 
-						$this->Stock($items_3);
-					}
-					if($items_4->validate()){
-						$items_4->save(); 
-						$cont++; 
-						$this->Stock($items_4);
-					}
-					if($items_5->validate()){
-						$items_5->save(); 
-						$cont++; 
-						$this->Stock($items_5);
-					}
-					if($items_6->validate()){
-						$items_6->save(); 
-						$cont++; 
-						$this->Stock($items_6);
-					}
-					if($items_7->validate()){
-						$items_7->save(); 
-						$cont++; 
-						$this->Stock($items_7);
-					}
-					if($items_8->validate()){
-						$items_8->save(); 
-						$cont++; 
-						$this->Stock($items_8);
-					}
-					if($items_9->validate()){
-						$items_9->save(); 
-						$cont++; 
-						$this->Stock($items_9);
-					}
-					if($items_10->validate()){
-						$items_10->save(); 
-						$cont++; 
-						$this->Stock($items_10);
-					}
-					if($items_11->validate()){
-						$items_11->save(); 
-						$cont++; 
-						$this->Stock($items_11);
-					}
-					if($items_12->validate()){
-						$items_12->save(); 
-						$cont++; 
-						$this->Stock($items_12);
-					}
-					if($items_13->validate()){
-						$items_13->save(); 
-						$cont++; 
-						$this->Stock($items_13);
-					}
-					if($items_14->validate()){
-						$items_14->save(); 
-						$cont++; 
-						$this->Stock($items_14);
-					}
-					if($items_15->validate()){
-						$items_15->save(); 
-						$cont++; 
-						$this->Stock($items_15);
-					}
-					if($items_16->validate()){
-						$items_16->save(); 
-						$cont++; 
-						$this->Stock($items_16);
-					}
-					if($items_17->validate()){
-						$items_17->save(); 
-						$cont++; 
-						$this->Stock($items_17);
-					}
-					if($items_18->validate()){
-						$items_18->save(); 
-						$cont++; 
-						$this->Stock($items_18);
-					}
-					if($items_19->validate()){
-						$items_19->save(); 
-						$cont++; 
-						$this->Stock($items_19);
-					}
-					if($items_20->validate()){
-						$items_20->save(); 
-						$cont++; 
-						$this->Stock($items_20);
-					}
-					if($items_21->validate()){
-						$items_21->save(); 
-						$cont++; 
-						$this->Stock($items_21);
-					}
-					if($items_22->validate()){
-						$items_22->save(); 
-						$cont++; 
-						$this->Stock($items_22);
-					}
-					if($items_23->validate()){
-						$items_23->save(); 
-						$cont++; 
-						$this->Stock($items_23);
-					}
-					if($items_24->validate()){
-						$items_24->save(); 
-						$cont++; 
-						$this->Stock($items_24);
-					}
-					if($items_25->validate()){
-						$items_25->save(); 
-						$cont++; 
-						$this->Stock($items_25);
-					}
-					if($items_26->validate()){
-						$items_26->save(); 
-						$cont++; 
-						$this->Stock($items_26);
-					}
-					if($items_27->validate()){
-						$items_27->save(); 
-						$cont++; 
-						$this->Stock($items_27);
-					}
-					if($items_28->validate()){
-						$items_28->save(); 
-						$cont++; 
-						$this->Stock($items_28);
-					}
-					if($items_29->validate()){
-						$items_29->save(); 
-						$cont++; 
-						$this->Stock($items_29);
-					}
-					if($items_30->validate()){
-						$items_30->save(); 
-						$cont++; 
-						$this->Stock($items_30);
-					}
-					if($cont>0){
-						$model->save();
-						$this->redirect(array('view','id'=>$model->id_estacion));
-						Yii::app()->user->setFlash('success','Medicamentos Asignados Correctamente.');	
-					}
-				//}
+			if($items_1->validate())
+				$this->Asignar($items_1);			
+			if($items_2->validate()) 
+				$this->Asignar($items_2);
+			if($items_3->validate()) 
+				$this->Asignar($items_3);
+			if($items_4->validate()) 
+				$this->Asignar($items_4);
+			if($items_5->validate()) 
+				$this->Asignar($items_5);
+			if($items_6->validate()) 
+				$this->Asignar($items_6);
+			if($items_7->validate()) 
+				$this->Asignar($items_7);
+			if($items_8->validate()) 
+				$this->Asignar($items_8);
+			if($items_9->validate()) 
+				$this->Asignar($items_9);
+			if($items_10->validate()) 
+				$this->Asignar($items_10);
+			if($items_11->validate()) 
+				$this->Asignar($items_11);
+			if($items_12->validate()) 
+				$this->Asignar($items_12);
+			if($items_13->validate()) 
+				$this->Asignar($items_13);
+			if($items_14->validate()) 
+				$this->Asignar($items_14);
+			if($items_15->validate()) 
+				$this->Asignar($items_15);
+			if($items_16->validate()) 
+				$this->Asignar($items_16);
+			if($items_17->validate()) 
+				$this->Asignar($items_17);
+			if($items_18->validate()) 
+				$this->Asignar($items_18);
+			if($items_19->validate()) 
+				$this->Asignar($items_19);
+			if($items_20->validate()) 
+				$this->Asignar($items_20);
+			if($items_21->validate()) 
+				$this->Asignar($items_21);
+			if($items_22->validate()) 
+				$this->Asignar($items_22);
+			if($items_23->validate()) 
+				$this->Asignar($items_23);
+			if($items_24->validate()) 
+				$this->Asignar($items_24);
+			if($items_25->validate()) 
+				$this->Asignar($items_25);
+			if($items_26->validate()) 
+				$this->Asignar($items_26);
+			if($items_27->validate()) 
+				$this->Asignar($items_27);
+			if($items_28->validate()) 
+				$this->Asignar($items_28);
+			if($items_29->validate()) 
+				$this->Asignar($items_29);
+			if($items_30->validate()) 
+				$this->Asignar($items_30);
 
-			}
+			//VIEW DEBO MOSTRAR LA ASIGNACION QUE ACABO DE HACER (ESTACION, MEDICAMENTO, CANTIDAD)
+			$this->redirect(array('viewEstacion','id_estacion'=>$model->id_estacion));
+			Yii::app()->user->setFlash('success','Medicamentos Asignados Correctamente.');	
 
 		}
 
@@ -468,6 +386,22 @@ class StockController extends Controller
 	}
 
 	/**
+	 * Returns the data model based on the primary key given in the GET variable.
+	 * If the data model is not found, an HTTP exception will be raised.
+	 * @param integer $id the ID_ESTACION of the model to be loaded
+	 * @return Stock the loaded model
+	 * @throws CHttpException
+	 */
+	public function loadModelByEstacion($id_estacion)
+	{
+
+		$model = Stock::model()->findByAttributes(array('id_estacion'=>$id_estacion));
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+
+	/**
 	 * Performs the AJAX validation.
 	 * @param Stock $model the model to be validated
 	 */
@@ -484,7 +418,19 @@ class StockController extends Controller
 	{
 		$criteria = new CDbCriteria;
 		$criteria->join = "RIGHT JOIN stock ON stock.id_medicamento = t.id_medicamento"; 
-		$criteria->condition = "cantidad>0 AND id_estacion = 6";
+
+		if(Yii::app()->user->role=="Farmacia"){
+			$criteria->condition = "stock.cantidad > 0 AND id_estacion = 6";
+			$estacion = 6;
+		}else{
+			if(!empty(SolicitudesController::verificarGuardia()->id_estacion)){
+				$criteria->condition = "stock.cantidad > 0 AND id_estacion = ".SolicitudesController::verificarGuardia()->id_estacion;
+				$estacion = SolicitudesController::verificarGuardia()->id_estacion;
+			}else{
+				Yii::app()->user->setFlash('error','Debe estar de guardia para realizar asiganaciones.');	
+			}
+		}
+		
 		$criteria->compare('LOWER(nombre)', strtolower($_GET['term']), true);
 		$criteria->order = 'nombre';
 		$criteria->limit = 10; 
@@ -497,8 +443,8 @@ class StockController extends Controller
 		{
   			$arr = array();
   			foreach ($data as $item) {
-  				$idStock = Stock::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento))->id_stock;
-  				$existencia = Stock::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento))->cantidad;
+  				$idStock = Stock::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento, 'id_estacion'=>$estacion))->id_stock;
+  				$existencia = Stock::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento, 'id_estacion'=>$estacion))->cantidad;
   				$arr[] = array(
 		    		'id_medicamento' => $item->id_medicamento,
 		    		'value' => $item->nombre,
@@ -511,8 +457,8 @@ class StockController extends Controller
 	  		$arr = array();
 	  		$arr[] = array(
 	   			'id' => '',
-	   			'value' => 'El medicamento no existe, por favor verifíque.',
-	   			'label' => 'El medicamento no existe, por favor verifíque.',
+	   			'value' => 'El medicamento no existe o no esta disponible, por favor verifíque.',
+	   			'label' => 'El medicamento no existe o no esta disponible, por favor verifíque.',
 	  		);
 
 	 	}
@@ -520,17 +466,60 @@ class StockController extends Controller
 		echo CJSON::encode($arr);
 	}
 
-	/*
-	$criteria = new CDbCriteria;
-$criteria->with = array('foreign_table1',
-                        'foreign_table2', 
-                        'foreign_table2.foreign_table3');
-$criteria->together = true; // ADDED THIS
-$criteria->select = array('id');
-$criteria->condition = "foreign_table1.col1=:col_val AND 
-                        foreign_table3.col3=:col_val2";
-$criteria->params = array(':col_val' => some_val, ':col_val2' => other_val);
-$criteria->order = 'foreign_table3.col5 DESC';
-$criteria->limit = 10;
-*/
+	public function Asignar($model)
+	{
+
+		if(Yii::app()->user->role=="Farmacia"){
+			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$model->id_medicamento." AND `id_estacion`= 6";
+		}else{
+			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$model->id_medicamento." AND `id_estacion`= ".SolicitudesController::verificarGuardia()->id_estacion;
+		}
+		$result = Stock::model()->findAllBySql($sql);
+
+		if($result)
+		{ // Se procede a buscar si existe cantidad del medicamento en la estacion a asignar.
+			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$model->id_medicamento." AND `id_estacion`= ".$model->id_estacion;
+			$cantidad_servicio = Stock::model()->findAllBySql($sql);
+
+			$cantidad_nueva = $result['0']['cantidad'] - $model->cantidad;
+
+			//CANTIDAD NUEVA PARA EL SERVICIO QUE ASIGNO
+			if(Yii::app()->user->role=="Farmacia"){
+				$sql = "UPDATE `stock` SET `cantidad`=".$cantidad_nueva." WHERE `id_medicamento` =".$model->id_medicamento." AND `id_estacion`= 6";
+				$execute = Yii::app()->db->createCommand($sql)->execute();
+				$estacion_origen = 6;
+			}else{
+				$sql = "UPDATE `stock` SET `cantidad`=".$cantidad_nueva." WHERE `id_medicamento` =".$model->id_medicamento." AND `id_estacion`= ".SolicitudesController::verificarGuardia()->id_estacion;
+				$execute = Yii::app()->db->createCommand($sql)->execute();
+				$estacion_origen = SolicitudesController::verificarGuardia()->id_estacion;
+			}
+
+			if($cantidad_servicio){
+				//CANTIDAD NUEVA PARA EL SERVICIO QUE RECIBIO (((UPDATE)))
+				$cant_asignar = $cantidad_servicio['0']['cantidad'] + $model->cantidad;
+				$sql = "UPDATE `stock` SET `cantidad`=".$cant_asignar." WHERE `id_medicamento` =".$model->id_medicamento." AND `id_estacion`= ".$model->id_estacion;
+				$execute = Yii::app()->db->createCommand($sql)->execute();
+				
+			}else{
+				$model_stock = new Stock;
+				$model_stock->id_medicamento = $model->id_medicamento;
+				$model_stock->id_estacion = $model->id_estacion;
+				$model_stock->cantidad = $model->cantidad;
+				$model_stock->save();
+			}
+		}
+
+		//BITACORA DE LAS ASIGNACIONES
+		$model_bitacora = new BitacoraStock;
+		$model_bitacora->id_usuario = Yii::app()->user->id;
+		$model_bitacora->id_estacion_origen = $estacion_origen;
+		$model_bitacora->id_estacion_destino = $model->id_estacion;
+		$model_bitacora->id_medicamento = $model->id_medicamento;
+		$model_bitacora->cantidad = $model->cantidad;
+		$model_bitacora->fecha = date('Y-m-d H:i:s');
+		echo $model_bitacora->fecha;
+		exit();
+		$model_bitacora->save();
+	}
+
 }

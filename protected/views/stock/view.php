@@ -16,7 +16,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Ver Stock #<?php echo $model->id_stock; ?></h1>
+<h1>Stock <?php echo $model->id_stock; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

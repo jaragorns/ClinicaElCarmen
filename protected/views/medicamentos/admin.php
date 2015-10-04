@@ -50,8 +50,9 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 		'componente',
 		array(
             'name' => 'unidad_medida',
-            'value' => 'UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>$data->unidad_medida))->abreviatura'
+            'value' => 'UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>$data->unidad_medida))->descripcion'
         ),
+        'cantidad',
         array(
             'name' => 'precio_contado',
             'value' => 'str_replace(".",",",$data->precio_contado)',
@@ -66,6 +67,7 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
         ),
 		array(
 			'class'=>'CButtonColumn',
+			'template'=>'{view}{update}',
 		),
 	),
 )); ?>

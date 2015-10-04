@@ -1,5 +1,4 @@
 <?php
-echo date('g');
 $this->breadcrumbs=array(
 	'Stocks'=>array('index'),
 	'Crear',
@@ -36,32 +35,54 @@ $this->menu=array(
     </div>
 	<?php } ?>
 
-	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'id_estacion'); ?>
-	</div>
+	<div class="rowcontact"></div>
 	<div class="media">
+		<b><?php echo "Estación Origen: ";?></b>
 		<?php 
-			 Yii::import('application.controllers.back.CservicesController');
-        	$obj =new CservicesController(); // preparing object
-        	echo $obj->verificarGuardia(); exit; // calling test class of ServiceController 
-			
-		?> 
-		<?php echo "<b>a</b> ".$form->labelEx($model,'id_estacion'); ?>
-		<?php 
-			echo $form->dropDownList(
-				$model,
-				'id_estacion',
-				CHtml::listData(
-					Estaciones::model()->findAll(),
+			if(Yii::app()->user->role=="Farmacia"){
+
+				echo '<i>'."FARMACIA ".'</i>'; 
+				echo "<b>a</b> ".$form->labelEx($model,'id_estacion')." "; 		 
+				echo $form->dropDownList(
+					$model,
 					'id_estacion',
-					'nombre'),
-				array(
-					'class' => 'my-drop-down',
-					'empty'=>'-- Seleccione una Estación --',
-				)
-			);
-		?> 
-		<?php echo $form->error($model,'id_estacion'); ?>
+					CHtml::listData(
+						Estaciones::model()->findAll(array('condition'=>'id_estacion NOT IN (:id_estacion,1,7)','params'=>array(':id_estacion'=>6),)),
+						'id_estacion',
+						'nombre'),
+					array(
+						'class' => 'my-drop-down',
+						'empty'=>'-- Seleccione una Estación --',
+					)
+				);
+				$model->id_estacion = 5;
+				$model->cantidad = 1;
+				$model->id_medicamento = 1;
+			}else{ 
+				if(!empty(SolicitudesController::verificarGuardia()->id_estacion)){
+					echo '<i>'.Estaciones::model()->findByAttributes(array('id_estacion'=>SolicitudesController::verificarGuardia()->id_estacion))->nombre.'</i>';
+					echo "<b> a</b> ".$form->labelEx($model,'id_estacion')." "; 		 
+					echo $form->dropDownList(
+						$model,
+						'id_estacion',
+						CHtml::listData(
+							Estaciones::model()->findAll(array('condition'=>'id_estacion NOT IN (:id_estacion,1,7)','params'=>array(':id_estacion'=>SolicitudesController::verificarGuardia()->id_estacion),)),
+							'id_estacion',
+							'nombre'),
+						array(
+							'class' => 'my-drop-down',
+							'empty'=>'-- Seleccione una Estación --',
+						)
+					);
+
+					$model->id_estacion = SolicitudesController::verificarGuardia()->id_estacion;
+					
+				}else{
+					Yii::app()->user->setFlash('error','Debe estar de guardia para realizar asiganaciones.');	
+				}
+			}
+			echo $form->error($model,'id_estacion'); 
+		?>
 	</div>
 
 		<h3>Detalle</h3>
@@ -108,7 +129,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[0]existencia', $existencia, array('id'=>'Stock_0_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_1,'[0]cantidad', array('id'=>'Stock_1_cantidad','size'=>20, 'onblur'=>'checkval(1)')); ?></td>
+				<td><?php echo $form->textField($items_1,'[0]cantidad', array('id'=>'Stock_1_cantidad','size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -134,6 +155,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_1_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_1_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -144,7 +166,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[1]existencia', $existencia, array('id'=>'Stock_1_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_2,'[1]cantidad', array('id'=>'items_2_cantidad', 'size'=>20, 'onblur'=>'checkval(2)')); ?></td>
+				<td><?php echo $form->textField($items_2,'[1]cantidad', array('id'=>'items_2_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -170,6 +192,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_2_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_2_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -180,7 +203,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[2]existencia', $existencia, array('id'=>'Stock_2_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_3,'[2]cantidad', array('id'=>'items_3_cantidad', 'size'=>20, 'onblur'=>'checkval(3)')); ?></td>
+				<td><?php echo $form->textField($items_3,'[2]cantidad', array('id'=>'items_3_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -206,6 +229,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_3_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_3_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -216,7 +240,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[3]existencia', $existencia, array('id'=>'Stock_3_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_4,'[3]cantidad', array('id'=>'items_4_cantidad', 'size'=>20, 'onblur'=>'checkval(4)')); ?></td>
+				<td><?php echo $form->textField($items_4,'[3]cantidad', array('id'=>'items_4_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -242,6 +266,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_4_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_4_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -252,7 +277,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[4]existencia', $existencia, array('id'=>'Stock_4_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_5,'[4]cantidad', array('id'=>'items_5_cantidad', 'size'=>20, 'onblur'=>'checkval(5)')); ?></td>
+				<td><?php echo $form->textField($items_5,'[4]cantidad', array('id'=>'items_5_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -278,6 +303,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_5_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_5_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -288,7 +314,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[5]existencia', $existencia, array('id'=>'Stock_5_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_6,'[5]cantidad', array('id'=>'items_6_cantidad', 'size'=>20, 'onblur'=>'checkval(6)')); ?></td>
+				<td><?php echo $form->textField($items_6,'[5]cantidad', array('id'=>'items_6_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -314,6 +340,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_6_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_6_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -324,7 +351,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[6]existencia', $existencia, array('id'=>'Stock_6_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_7,'[6]cantidad', array('id'=>'items_7_cantidad', 'size'=>20, 'onblur'=>'checkval(7)')); ?></td>
+				<td><?php echo $form->textField($items_7,'[6]cantidad', array('id'=>'items_7_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -350,6 +377,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_7_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_7_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -360,7 +388,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[7]existencia', $existencia, array('id'=>'Stock_7_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_8,'[7]cantidad', array('id'=>'items_8_cantidad', 'size'=>20, 'onblur'=>'checkval(8)')); ?></td>
+				<td><?php echo $form->textField($items_8,'[7]cantidad', array('id'=>'items_8_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -386,6 +414,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_8_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_8_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -396,7 +425,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[8]existencia', $existencia, array('id'=>'Stock_8_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_9,'[8]cantidad', array('id'=>'items_9_cantidad', 'size'=>20, 'onblur'=>'checkval(9)')); ?></td>
+				<td><?php echo $form->textField($items_9,'[8]cantidad', array('id'=>'items_9_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -422,6 +451,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_9_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_9_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -432,7 +462,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[9]existencia', $existencia, array('id'=>'Stock_9_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_10,'[9]cantidad', array('id'=>'items_10_cantidad', 'size'=>20, 'onblur'=>'checkval(10)')); ?></td>
+				<td><?php echo $form->textField($items_10,'[9]cantidad', array('id'=>'items_10_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -458,6 +488,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_10_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_10_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -468,7 +499,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[10]existencia', $existencia, array('id'=>'Stock_10_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_11,'[10]cantidad', array('id'=>'items_11_cantidad', 'size'=>20, 'onblur'=>'checkval(11)')); ?></td>
+				<td><?php echo $form->textField($items_11,'[10]cantidad', array('id'=>'items_11_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -494,6 +525,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_11_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_11_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -504,7 +536,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[11]existencia', $existencia, array('id'=>'Stock_11_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_12,'[11]cantidad', array('id'=>'items_12_cantidad', 'size'=>20, 'onblur'=>'checkval(12)')); ?></td>
+				<td><?php echo $form->textField($items_12,'[11]cantidad', array('id'=>'items_12_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -530,6 +562,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_12_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_12_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -540,7 +573,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[12]existencia', $existencia, array('id'=>'Stock_12_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_13,'[12]cantidad', array('id'=>'items_13_cantidad', 'size'=>20, 'onblur'=>'checkval(13)')); ?></td>
+				<td><?php echo $form->textField($items_13,'[12]cantidad', array('id'=>'items_13_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -566,6 +599,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_13_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_13_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -576,7 +610,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[13]existencia', $existencia, array('id'=>'Stock_13_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_14,'[13]cantidad', array('id'=>'items_14_cantidad', 'size'=>20, 'onblur'=>'checkval(14)')); ?></td>
+				<td><?php echo $form->textField($items_14,'[13]cantidad', array('id'=>'items_14_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -602,6 +636,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_14_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_14_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -612,7 +647,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[14]existencia', $existencia, array('id'=>'Stock_14_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_15,'[14]cantidad', array('id'=>'items_15_cantidad', 'size'=>20, 'onblur'=>'checkval(15)')); ?></td>
+				<td><?php echo $form->textField($items_15,'[14]cantidad', array('id'=>'items_15_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -638,6 +673,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_15_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_15_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -648,7 +684,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[15]existencia', $existencia, array('id'=>'Stock_15_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_16,'[15]cantidad', array('id'=>'items_16_cantidad', 'size'=>20, 'onblur'=>'checkval(16)')); ?></td>
+				<td><?php echo $form->textField($items_16,'[15]cantidad', array('id'=>'items_16_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -674,6 +710,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_16_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_16_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -684,7 +721,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[16]existencia', $existencia, array('id'=>'Stock_16_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_17,'[16]cantidad', array('id'=>'items_17_cantidad', 'size'=>20, 'onblur'=>'checkval(17)')); ?></td>
+				<td><?php echo $form->textField($items_17,'[16]cantidad', array('id'=>'items_17_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -710,6 +747,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_17_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_17_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -720,7 +758,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[17]existencia', $existencia, array('id'=>'Stock_17_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_18,'[17]cantidad', array('id'=>'items_18_cantidad', 'size'=>20, 'onblur'=>'checkval(18)')); ?></td>
+				<td><?php echo $form->textField($items_18,'[17]cantidad', array('id'=>'items_18_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -746,6 +784,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_18_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_18_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -756,7 +795,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[18]existencia', $existencia, array('id'=>'Stock_18_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_19,'[18]cantidad', array('id'=>'items_19_cantidad', 'size'=>20, 'onblur'=>'checkval(19)')); ?></td>
+				<td><?php echo $form->textField($items_19,'[18]cantidad', array('id'=>'items_19_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -782,6 +821,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_19_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_19_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -792,7 +832,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[19]existencia', $existencia, array('id'=>'Stock_19_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_20,'[19]cantidad', array('id'=>'items_20_cantidad', 'size'=>20, 'onblur'=>'checkval(20)')); ?></td>
+				<td><?php echo $form->textField($items_20,'[19]cantidad', array('id'=>'items_20_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -818,6 +858,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_20_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_20_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -828,7 +869,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[20]existencia', $existencia, array('id'=>'Stock_20_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_21,'[20]cantidad', array('id'=>'items_21_cantidad', 'size'=>20, 'onblur'=>'checkval(21)')); ?></td>
+				<td><?php echo $form->textField($items_21,'[20]cantidad', array('id'=>'items_21_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -854,6 +895,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_21_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_21_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -864,7 +906,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[21]existencia', $existencia, array('id'=>'Stock_21_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_22,'[21]cantidad', array('id'=>'items_22_cantidad', 'size'=>20, 'onblur'=>'checkval(22)')); ?></td>
+				<td><?php echo $form->textField($items_22,'[21]cantidad', array('id'=>'items_22_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -890,6 +932,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_22_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_22_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -900,7 +943,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[22]existencia', $existencia, array('id'=>'Stock_22_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_23,'[22]cantidad', array('id'=>'items_23_cantidad', 'size'=>20, 'onblur'=>'checkval(23)')); ?></td>
+				<td><?php echo $form->textField($items_23,'[22]cantidad', array('id'=>'items_23_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -926,6 +969,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_23_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_23_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -936,7 +980,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[23]existencia', $existencia, array('id'=>'Stock_23_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_24,'[23]cantidad', array('id'=>'items_24_cantidad', 'size'=>20, 'onblur'=>'checkval(24)')); ?></td>
+				<td><?php echo $form->textField($items_24,'[23]cantidad', array('id'=>'items_24_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -962,6 +1006,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_24_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_24_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -972,7 +1017,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[24]existencia', $existencia, array('id'=>'Stock_24_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_25,'[24]cantidad', array('id'=>'items_25_cantidad', 'size'=>20, 'onblur'=>'checkval(25)')); ?></td>
+				<td><?php echo $form->textField($items_25,'[24]cantidad', array('id'=>'items_25_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -998,6 +1043,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_25_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_25_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -1008,7 +1054,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[25]existencia', $existencia, array('id'=>'Stock_25_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_26,'[25]cantidad', array('id'=>'items_26_cantidad', 'size'=>20, 'onblur'=>'checkval(26)')); ?></td>
+				<td><?php echo $form->textField($items_26,'[25]cantidad', array('id'=>'items_26_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -1034,6 +1080,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_26_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_26_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -1044,7 +1091,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[26]existencia', $existencia, array('id'=>'Stock_26_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_27,'[26]cantidad', array('id'=>'items_27_cantidad', 'size'=>20, 'onblur'=>'checkval(27)')); ?></td>
+				<td><?php echo $form->textField($items_27,'[26]cantidad', array('id'=>'items_27_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -1070,6 +1117,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_27_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_27_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -1080,7 +1128,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[27]existencia', $existencia, array('id'=>'Stock_27_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_28,'[27]cantidad', array('id'=>'items_28_cantidad', 'size'=>20, 'onblur'=>'checkval(28)')); ?></td>
+				<td><?php echo $form->textField($items_28,'[27]cantidad', array('id'=>'items_28_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -1106,6 +1154,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_28_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_28_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -1116,7 +1165,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[28]existencia', $existencia, array('id'=>'Stock_28_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_29,'[28]cantidad', array('id'=>'items_29_cantidad', 'size'=>20, 'onblur'=>'checkval(29)')); ?></td>
+				<td><?php echo $form->textField($items_29,'[28]cantidad', array('id'=>'items_29_cantidad', 'size'=>20)); ?></td>
 			</tr>
 			<tr>
 				<td>
@@ -1142,6 +1191,7 @@ $this->menu=array(
 		            			'showAnim'=>'fold',
 		            			'select'=>"js:function(event, ui) { 
        								$('#Stock_29_id_medicamento').val(ui.item.id_medicamento); 
+       								$('#Stock_29_existencia').val(ui.item.existencia); 
        							}"
 		    				),
 		    				'htmlOptions'=>array(
@@ -1152,7 +1202,7 @@ $this->menu=array(
 					?>
 				</td>
 				<td><?php echo Chtml::textField('[29]existencia', $existencia, array('id'=>'Stock_29_existencia','size'=>10, 'title'=>'Si el existencia no es el correcto, DEBE CORREGIRLO EN EL MEDICAMENTO','readonly'=>'disable')); ?></td>
-				<td><?php echo $form->textField($items_30,'[29]cantidad', array('id'=>'items_30_cantidad', 'size'=>20, 'onblur'=>'checkval(30)')); ?></td>
+				<td><?php echo $form->textField($items_30,'[29]cantidad', array('id'=>'items_30_cantidad', 'size'=>20)); ?></td>
 			</tr>
 		</table>
 
@@ -1168,24 +1218,3 @@ $this->menu=array(
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
-
-<script type="text/javascript">
-
-	function checkval(num) {
-		var val1 = document.querySelector('#Stock_'+num+'_existencia');
-		var val2 = document.querySelector('#Stock_id_estacion');
-
-		$('#Stock_'+num+'_cantidad').val(val1);	
-
-	}
-
-	function numControl(){
-		var numControl = document.querySelector('#Facturas_control_factura').value;	
-		var numFactura = document.querySelector('#Facturas_num_factura').value;	
-
-		if(numControl=='' && numFactura!=''){
-			$("#Facturas_control_factura").val(numFactura);	
-		}
-	}
-
-</script>

@@ -10,8 +10,7 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Listar Medicamentos', 'url'=>array('index')),
 	array('label'=>'Crear Medicamento', 'url'=>array('create')),
-	array('label'=>'Atualizar Medicamentos', 'url'=>array('update', 'id'=>$model->id_medicamento)),
-	array('label'=>'Eliminar Medicamentos', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_medicamento),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Actualizar Medicamento', 'url'=>array('update', 'id'=>$model->id_medicamento)),
 	array('label'=>'Gestionar Medicamentos', 'url'=>array('admin')),
 );
 ?>
@@ -24,7 +23,11 @@ $this->menu=array(
 		//'id_medicamento',
 		'nombre',
 		'componente',
-		'unidad_medida',
+		array(
+            'name' => 'unidad_medida',
+            'value' => CHtml::encode(UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>$model->unidad_medida))->descripcion)
+        ),
+        'cantidad',
 		'precio_contado',
 		'precio_seguro',
 		'iva',

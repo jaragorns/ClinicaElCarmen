@@ -1,18 +1,18 @@
 <?php
-/* @var $this MedicamentosController */
+/* @var $this BitacoraStockController */
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Medicamentos',
+	'Bitacora Stocks',
 );
 
 $this->menu=array(
-	array('label'=>'Crear Medicamento', 'url'=>array('create')),
-	array('label'=>'Gestionar Medicamentos', 'url'=>array('admin')),
+	array('label'=>'Create BitacoraStock', 'url'=>array('create')),
+	array('label'=>'Manage BitacoraStock', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Medicamentos</h1>
+<h1>Bitacora Stocks</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

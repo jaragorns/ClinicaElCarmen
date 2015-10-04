@@ -21,6 +21,10 @@
 	<?php echo CHtml::encode($data->unidad_medida); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('cantidad')); ?>:</b>
+	<?php echo CHtml::encode($data->cantidad); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('precio_contado')); ?>:</b>
 	<?php echo CHtml::encode($data->precio_contado); ?>
 	<br />

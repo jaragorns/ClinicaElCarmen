@@ -1,15 +1,15 @@
 <?php
-/* @var $this InventarioController */
-/* @var $model Inventario */
+/* @var $this BitacoraStockController */
+/* @var $model BitacoraStock */
 
 $this->breadcrumbs=array(
-	'Inventario en Farmacia'=>array('index'),
-	'Gestionar',
+	'Bitacora Stocks'=>array('index'),
+	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Inventario en Farmacia', 'url'=>array('index')),
-	array('label'=>'Crear Item de una Factura', 'url'=>array('createsimple')),
+	array('label'=>'List BitacoraStock', 'url'=>array('index')),
+	array('label'=>'Create BitacoraStock', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -18,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$('#inventario-grid').yiiGridView('update', {
+	$('#bitacora-stock-grid').yiiGridView('update', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Gestionar Inventario de Farmacia</h1>
+<h1>Bitacora Stocks</h1>
 
 <p>
 También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -41,18 +41,22 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'inventario-grid',
+	'id'=>'bitacora-stock-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		//'id_inventario',
 		array(
-			'name' => 'id_factura',
-			'value' => 'Facturas::model()->findByAttributes(array("id_factura"=>$data->id_factura))->num_factura'
+			'name' => 'id_usuario',
+			'value' => 'Usuarios::model()->findByAttributes(array("id"=>$data->id_usuario))->nombres." ".
+			Usuarios::model()->findByAttributes(array("id"=>$data->id_usuario))->apellidos'
 		),
 		array(
-			'name' => 'id_estacion',
-			'value' => 'Estaciones::model()->findByAttributes(array("id_estacion"=>$data->id_estacion))->nombre'
+			'name' => 'id_estacion_origen',
+			'value' => 'Estaciones::model()->findByAttributes(array("id_estacion"=>$data->id_estacion_origen))->nombre'
+		),
+		array(
+			'name' => 'id_estacion_destino',
+			'value' => 'Estaciones::model()->findByAttributes(array("id_estacion"=>$data->id_estacion_destino))->nombre'
 		),
 		array(
 			'name' => 'id_medicamento',
@@ -60,14 +64,12 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 		),
 		'cantidad',
 		array(
-            'name' => 'precio_compra',
-            'value' => 'str_replace(".",",",$data->precio_compra)',
+            'name' => 'fecha',
+            'value' => 'date_format(date_create($data->fecha), "d-m-Y g:ia")',
+            'htmlOptions' => array('style'=>'text-align: right;'),
         ),
-		//'id_usuario',
 		array(
-        	'class'=>'CButtonColumn',
-        	'template'=>'{view}',
-		)
-))); 
-
-?>
+			'class'=>'CButtonColumn',
+		),
+	),
+)); ?>
