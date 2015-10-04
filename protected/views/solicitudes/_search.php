@@ -15,23 +15,18 @@
 		<?php echo $form->label($model,'fecha_solicitud'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'fecha_solicitud',array('placeholder'=>'YYYY-mm-dd')); ?>
+		<?php echo $form->textField($model,'fecha_solicitud',array('placeholder'=>'YYYY-MM-DD')); ?>
 	</div>
 
 	<div class="rowcontact">
 		<?php echo $form->label($model,'estacion_id_estacion'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->dropDownList($model,'estacion_id_estacion',
-				CHtml::listData(
-					Estaciones::model()->findAll(array('condition'=>'id_estacion NOT IN (1,7)')),'id_estacion','nombre'),	array('class' => 'my-drop-down','prompt'=>'Servicio:',)); ?>	
-	</div>
-
-	<div class="rowcontact">
-		<?php echo $form->label($model,'cantidad'); ?>
-	</div>
-	<div class="media">
-		<?php echo $form->textField($model,'cantidad'); ?>
+		<?php 
+			$sql2 = 'SELECT * FROM Estaciones WHERE id_estacion NOT IN ("1","7")'; 
+			echo $form->dropDownList($model,'estacion_id_estacion',
+			CHtml::listData(
+				Estaciones::model()->findAllBySql($sql2),'id_estacion','nombre'),	array('class' => 'my-drop-down','prompt'=>'Seleccionar:',)); ?> 
 	</div>
 
 	<div class="rowcontact">
@@ -40,54 +35,14 @@
 	<div class="media">
 		<?php echo $form->dropDownList($model,'usuarios',
 				CHtml::listData(
-					Usuarios::model()->findAll(array('condition'=>'itemname = "Enfermeria"', 'order'=>'nombres')),'id','NombreCompleto'),array('class' => 'my-drop-down','prompt'=>'Seleccione:',)); ?>	
+					Usuarios::model()->findAll(array('condition'=>'itemname=:itemname','params'=>array(':itemname'=>'Enfermeria'))),
+					'id','NombreCompleto'),	array('class' => 'my-drop-down','prompt'=>'Enfermera:',)); ?>
 	</div>
 
-	<div class="rowcontact">
-		<?php echo $form->label($model,'stock_id_stock'); ?>
-	</div>
-	<div class="media">
-		<?php //echo $form->dropDownList($model,'stock_id_stock',
-			//	CHtml::listData(
-			//		Medicamentos::model()->findAll(array('condition'=>'1=1')),'id_medicamento','nombre'),array('class' => 'my-drop-down','prompt'=>'Seleccione:',)); 
-
-		echo $form->hiddenField($model,'stock_id_stock',array());
-
-			$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-				'name'=>'medicamento',
-			    'value'=>'',
-			    'model'=>$model,
-			    'source'=>$this->createUrl('Solicitudes/Autocomplete2'),
-			    // additional javascript options for the autocomplete plugin
-			    'options'=>array(
-			    	'minLength'=>'1',
-			    	'showAnim'=>'fold',
-			    	'select'=>"js:function(event, ui) { 
-	       				$('#Solicitudes_stock_id_stock').val(ui.item.stock_id_stock); 
-	       			}"
-			    ),
-			    'htmlOptions'=>array(
-		        	'style'=>'width:436px;',
-		        	'placeholder'=>'Nombre del medicamento...',
-		        	'title'=>'Indique el medicamento que desea buscar.'
-	    		),
-			));
-
-		?>		
-	</div>
-
-	<div class="rowcontact">
-		<?php echo $form->label($model,'estado'); ?>
-	</div>
-	<div class="media">
-		<?php $estado = array('0'=>'Pendiente','1'=>'Asignado', '2'=>'Rechazado');
-				echo $form->dropDownList($model, 'estado', $estado, array('class' => 'my-drop-down','empty'=>'Seleccione:',)); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+	<div class="buttons">
+		<?php echo CHtml::submitButton(Yii::t('app','Search'),  array("class"=>"btn btn-primary btn-large")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
 
-</div><!-- search-form --> 
+</div><!-- search-form -->

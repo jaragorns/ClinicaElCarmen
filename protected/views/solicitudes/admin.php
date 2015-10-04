@@ -45,35 +45,24 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		//'id_solicitud',
 		array(
             'name' => 'fecha_solicitud',
-            'value' => 'date_format(date_create($data->fecha_solicitud), "d-m-Y")'
+            'value' => 'date_format(date_create($data->fecha_solicitud), "d-m-Y")',
+           
         ),
- 
         array(
         	'name' => 'estacion_id_estacion',
         	'value' => 'Estaciones::model()->findByAttributes(array("id_estacion"=>$data->estacion_id_estacion))->nombre'
-        ),
-		'cantidad',
-		 array(
-        	'name' => 'usuarios',
-        	'value' => 'Usuarios::model()->findByAttributes(array("id"=>$data->usuarios))->NombreCompleto."(".
-        		Estaciones::model()->findByAttributes(array("id_estacion"=>
-        			Guardias::model()->findByAttributes(array("id_guardia"=>$data->guardias_id_guardia))->id_estacion))->nombre.")"'
-        ),
+        ),		
 		array(
-			'name' => 'stock_id_stock',
-			'value' => 'Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data->stockIdStock->id_medicamento))->nombre'
-		),
-		//'guardias_id_guardia',
-		array(
-			'name'=>'estado',
-			'value' => 'strtr($data->estado, array("0" => "Pendiente","1" => "Asignado","3" => "Rechazado"))'
+			'name' => 'usuarios',
+			'value' => 'Usuarios::model()->findByAttributes(array("id"=>$data->usuarios))->NombreCompleto." - (".
+						Estaciones::model()->findByAttributes(array("id_estacion"=>
+							Guardias::model()->findByAttributes(array("id_guardia"=>$data->guardias_id_guardia))->id_estacion))->nombre
+	  .")" '
 		),
 		array(
 			'class'=>'CButtonColumn',
 		),
 	),
-));
-?>
+)); ?>

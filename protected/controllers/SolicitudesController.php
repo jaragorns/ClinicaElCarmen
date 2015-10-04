@@ -28,7 +28,7 @@ class SolicitudesController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete','autocomplete','autocomplete2'),
+				'actions'=>array('index','view','create','update','admin','delete','autocomplete'),
 				'roles'=>array('Superadmin'),
 			),
 			array('deny',  // deny all users
@@ -53,52 +53,185 @@ class SolicitudesController extends Controller
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate()
-	{	
-
+	{
 		$deGuardia = $this->verificarGuardia(); 
-				
+		$model=new Solicitudes;
+
 		if(!empty($deGuardia)){
-
-			$model = new Solicitudes;
-			// Uncomment the following line if AJAX validation is needed
-			// $this->performAjaxValidation($model);
-
-			if(isset($_POST['Solicitudes']))
-			{
-				$model->attributes=$_POST['Solicitudes'];
-				
-				if($model->validate()){
-
-					//busco que el medicamento seleccionado este disponible en el servicio
-					$sql = "SELECT * FROM stock WHERE id_estacion=".$model->estacion_id_estacion." AND id_medicamento=".$model->stock_id_stock; 
-					$stock = Stock::model()->findBySql($sql); 
-
-					if(!empty($stock) && $stock->cantidad>0){
-						//Si le digo la cantidad que solicito reviso si existe esa cantidad en la estacion 
-						if(!empty($model->cantidad) && ($model->cantidad > $stock->cantidad))
-							Yii::app()->user->setFlash('error','La cantidad solicitada no está disponible en el Servicio');
-						else{
-							$model->stock_id_stock = $stock->id_stock; 
-							$model->fecha_solicitud = date("Y-m-d"); 
-							$model->estado = 0; 
-							$model->save();
-							$this->redirect(array('view','id'=>$model->id_solicitud)); 
-						}
-					}else{
-						Yii::app()->user->setFlash('error','El medicamento no está disponible en el Servicio');
-					}
-				}
-			}
-
-			$this->render('create',array(
-				'model'=>$model,
-			));
 			
+			$items_0 = new ItemSolicitud;
+			$items_1 = new ItemSolicitud;
+			$items_2 = new ItemSolicitud;
+			$items_3 = new ItemSolicitud;
+			$items_4 = new ItemSolicitud;
+			$items_5 = new ItemSolicitud;
+			$items_6 = new ItemSolicitud;
+			$items_7 = new ItemSolicitud;
+			$items_8 = new ItemSolicitud;
+			$items_9 = new ItemSolicitud;
+
+			if(isset($_POST['Solicitudes'])){
+
+				$model->attributes=$_POST['Solicitudes'];
+				$items_0->attributes=$_POST['ItemSolicitud'][0];
+				$items_1->attributes=$_POST['ItemSolicitud'][1];
+				$items_2->attributes=$_POST['ItemSolicitud'][2];
+				$items_3->attributes=$_POST['ItemSolicitud'][3];
+				$items_4->attributes=$_POST['ItemSolicitud'][4];
+				$items_5->attributes=$_POST['ItemSolicitud'][5];
+				$items_6->attributes=$_POST['ItemSolicitud'][6];
+				$items_7->attributes=$_POST['ItemSolicitud'][7];
+				$items_8->attributes=$_POST['ItemSolicitud'][8];
+				$items_9->attributes=$_POST['ItemSolicitud'][9];
+
+				$model->fecha_solicitud = date("Y-m-d"); 
+
+				if($model->validate()){
+					//calcular el id de la nueva solicitud
+					$id = Yii::app()->db->createCommand('SELECT MAX(id_solicitud) as id FROM solicitudes')->queryRow();
+					$id = $id['id']+1;	
+					
+					$items_0->id_solicitud = $id;
+					$items_1->id_solicitud = $id;
+					$items_2->id_solicitud = $id;
+					$items_3->id_solicitud = $id;
+					$items_4->id_solicitud = $id;
+					$items_5->id_solicitud = $id;
+					$items_6->id_solicitud = $id;
+					$items_7->id_solicitud = $id;
+					$items_8->id_solicitud = $id;
+					$items_9->id_solicitud = $id;
+
+					$items_0->estado = 0; 
+					$items_1->estado = 0; 
+					$items_2->estado = 0; 
+					$items_3->estado = 0; 
+					$items_4->estado = 0; 
+					$items_5->estado = 0; 
+					$items_6->estado = 0; 
+					$items_7->estado = 0; 
+					$items_8->estado = 0; 
+					$items_9->estado = 0; 
+
+					$cont = 0; 
+					$contMalos = 0; 
+					$band = array(0,0,0,0,0,0,0,0,0,0);
+
+					if($items_0->validate()){
+						if($this->validarMedicamento($model->estacion_id_estacion,$items_0)){
+							$cont++;
+							$band[0]=1;
+						}else
+							$contMalos++;
+					}
+					if($items_1->validate()){
+						if($this->validarMedicamento($model->estacion_id_estacion,$items_1)){
+							$band[1]=1;
+							$cont++;
+						}else
+							$contMalos++;					
+					}
+					if($items_2->validate()){
+						if($this->validarMedicamento($model->estacion_id_estacion,$items_2)){
+							$band[2]=1;
+							$cont++;
+						}else
+							$contMalos++;					
+					}
+					if($items_3->validate()){
+						if($this->validarMedicamento($model->estacion_id_estacion,$items_3)){
+							$band[3]=1;
+							$cont++;
+						}else
+							$contMalos++;					
+					}
+					if($items_4->validate()){
+						if($this->validarMedicamento($model->estacion_id_estacion,$items_4)){
+							$band[4]=1;
+							$cont++;
+						}else
+							$contMalos++;					
+					}
+					if($items_5->validate()){
+						if($this->validarMedicamento($model->estacion_id_estacion,$items_5)){
+							$band[5]=1;
+							$cont++;
+						}else
+							$contMalos++;					
+					}
+					if($items_6->validate()){
+						if($this->validarMedicamento($model->estacion_id_estacion,$items_6)){
+							$band[6]=1;
+							$cont++;
+						}else
+							$contMalos++;					
+					}
+					if($items_7->validate()){
+						if($this->validarMedicamento($model->estacion_id_estacion,$items_7)){
+							$band[6]=1;
+							$cont++;
+						}else
+							$contMalos++;					
+					}
+					if($items_8->validate()){
+						if($this->validarMedicamento($model->estacion_id_estacion,$items_8)){
+							$band[8]=1;
+							$cont++;
+						}else
+							$contMalos++;					
+					}
+					if($items_9->validate()){
+						if($this->validarMedicamento($model->estacion_id_estacion,$items_9)){
+							$band[9]=1;
+							$cont++;
+						}else
+							$contMalos++;					
+					}
+
+					
+					if($contMalos==0 && $cont>0){
+						$model->save();
+						if($band[0]==1)	$items_0->save(); 
+						if($band[1]==1)	$items_1->save(); 
+						if($band[2]==1)	$items_2->save(); 
+						if($band[3]==1)	$items_3->save(); 
+						if($band[4]==1)	$items_4->save(); 
+						if($band[5]==1)	$items_5->save(); 
+						if($band[6]==1)	$items_6->save(); 
+						if($band[7]==1)	$items_7->save(); 
+						if($band[8]==1)	$items_8->save(); 
+						if($band[9]==1)	$items_9->save(); 
+						Yii::app()->user->setFlash('success','Solicitud Creada');
+						$this->redirect(array('view','id'=>$model->id_solicitud));
+					}							
+					else if ($cont==0)
+						Yii::app()->user->setFlash('error','Debe indicar al menos un medicamento');
+					else
+						echo "Acomodar la solicitud o continuar sin ese medicamento"; 
+				}
+								
+			}
 		}else{
-			Yii::app()->user->setFlash('success','Debe estar de guardia para poder realizar solicitudes');
+			Yii::app()->user->setFlash('notice','Debe estar de guardia para poder realizar solicitudes');
 			$this->redirect(array('index'));			
 		}
 
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		$this->render('create',array(
+			'model'=>$model,
+			'items_0'=>$items_0,
+			'items_1'=>$items_1,
+			'items_2'=>$items_2,
+			'items_3'=>$items_3,
+			'items_4'=>$items_4,
+			'items_5'=>$items_5,
+			'items_6'=>$items_6,
+			'items_7'=>$items_7,
+			'items_8'=>$items_8,
+			'items_9'=>$items_9,
+		));
 	}
 
 	/**
@@ -110,6 +243,9 @@ class SolicitudesController extends Controller
 	{
 		$model=$this->loadModel($id);
 
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
 		if(isset($_POST['Solicitudes']))
 		{
 			$model->attributes=$_POST['Solicitudes'];
@@ -119,7 +255,7 @@ class SolicitudesController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
-		)); 
+		));
 	}
 
 	/**
@@ -139,14 +275,6 @@ class SolicitudesController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	
-	/*public function actionIndex($id_usuario)
-	{
-		$dataProvider=new CActiveDataProvider('Solicitudes',array('criteria'=>array('condition'=>'usuarios='.$id_usuario)));
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}*/
 	public function actionIndex()
 	{
 		$dataProvider=new CActiveDataProvider('Solicitudes');
@@ -198,73 +326,6 @@ class SolicitudesController extends Controller
 		}
 	}
 
-	public function actionAutocomplete($term) 
-	{
-		$criteria = new CDbCriteria;
-		$criteria->join = "RIGHT JOIN stock ON stock.id_medicamento = t.id_medicamento"; 
-		$criteria->condition = "cantidad>0";
-		$criteria->compare('LOWER(nombre)', strtolower($_GET['term']), true);
-		$criteria->order = 'nombre';
-		$criteria->limit = 10; 
-		
-		$data = Medicamentos::model()->findAll($criteria);
-
-		if (!empty($data))
-		{
-  			$arr = array();
-  			foreach ($data as $item) {
-	   			$arr[] = array(
-	    			'stock_id_stock' => $item->id_medicamento,
-	    			'value' => $item->nombre,
-	   			);
-  			}
-	 	}else{
-	  		$arr = array();
-	  		$arr[] = array(
-	   			'stock_id_stock' => '',
-	   			'value' => 'El medicamento no existe, por favor verifíque.',
-	   			'label' => 'El medicamento no existe, por favor verifíque.',
-	  		);
-	 	}
-  
-		echo CJSON::encode($arr);
-	}
-
-	public function actionAutocomplete2($term) 
-	{
-		$criteria = new CDbCriteria;
-		$criteria->join = "RIGHT JOIN stock ON stock.id_medicamento = t.id_medicamento"; 
-		$criteria->condition = "cantidad>0";
-		$criteria->compare('LOWER(nombre)', strtolower($_GET['term']), true);
-		$criteria->order = 'nombre';
-		$criteria->limit = 10; 
-		
-		$data = Medicamentos::model()->findAll($criteria);
-
-		if (!empty($data))
-		{
-  			$arr = array();
-  			foreach ($data as $item) {
-
-	   			$idStock = Stock::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento))->id_stock;
-
-	   			$arr[] = array(
-	    			'stock_id_stock' => $idStock,
-	    			'value' => $item->nombre,
-	    		);
-  			}
-	 	}else{
-	  		$arr = array();
-	  		$arr[] = array(
-	   			'stock_id_stock' => '',
-	   			'value' => 'El medicamento no existe, por favor verifíque.',
-	   			'label' => 'El medicamento no existe, por favor verifíque.',
-	  		);
-	 	}
-  
-		echo CJSON::encode($arr);
-	}
-
 	public function verificarGuardia(){
 	
 		//asignacion zona horaria	
@@ -277,7 +338,7 @@ class SolicitudesController extends Controller
 				FROM guardias 
 				WHERE mes=7
 						AND ano=".date('Y')." 
-						AND id_usuario=22234555 
+						AND id_usuario=22234567 
 						AND ".$dia."!=1 "; 
 		$deGuardia = Guardias::model()->findAllBySql($sql);
 
@@ -305,7 +366,7 @@ class SolicitudesController extends Controller
 				$band = true; 
 			}				
 			else{
-				echo "no esta de guardia"; 
+			//	echo "no esta de guardia"; 
 				$deGuardia = ""; 
 			}
 				
@@ -316,6 +377,31 @@ class SolicitudesController extends Controller
 			return $deGuardia;
 	}
 
+	public function validarMedicamento($id_estacion, $item){
+		//busco que el medicamento seleccionado este disponible en el servicio
+		$stock = Stock::model()->findByAttributes(array('id_estacion'=>$id_estacion,  
+															'id_medicamento'=>$item->id_medicamento));
+		
+		//si la busqueda existe y la cantidad del medicamento es mayor que 0 
+		if(!empty($stock) && $stock->cantidad>0){
+			if(!empty($item->cantidad) && ($item->cantidad > $stock->cantidad)){
+				echo "NO HAY SUFICIENTE <br>"; 
+				return false; 
+				//Yii::app()->user->setFlash('error','La cantidad solicitada de '.Medicamentos::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento))->nombre.' no está disponible en el Servicio');
+			}else{
+				return true; 
+			}
+		}else{	
+			//Yii::app()->user->setFlash('error','El medicamento '.Medicamentos::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento))->nombre.' no está disponible en el Servicio');
+			echo "NO HAY <br>"; 
+			$item->id_stock="";
+			$item->cantidad="";
+			$item->id_medicamento="";
+			return false; 
+		}
+
+		
+	}
 }
 
 function dentro_de_horario($hms_inicio, $hms_fin, $hms_referencia=NULL){ // v2011-06-21
