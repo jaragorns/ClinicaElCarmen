@@ -420,23 +420,15 @@
                                 <a title="Stock" href="<?php echo Yii::app()->baseUrl;?>/stock" data-toggle="dropdown" class="dropdown-toggle">Stock <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li id="menu-item-171" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-171">
-                                        <a title="Agregar Stock" href="<?php echo Yii::app()->baseUrl;?>/stock/create">Agregar Stock</a>
-                                    </li>
-                                    <li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172">
                                         <a title="Gestionar Stock" href="<?php echo Yii::app()->baseUrl;?>/stock/admin">Gestionar Stock</a>
                                     </li>
-                                    <li id="menu-item-173" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-173">
+                                    <li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172">
                                         <a title="Asignar Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/stock/asignar">Asignar Medicamentos</a>
                                     </li>
                                 </ul>
                             </li>
-                            <li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
-                                <a title="Bitacora Stock" href="<?php echo Yii::app()->baseUrl;?>/bitaorastock" data-toggle="dropdown" class="dropdown-toggle">Bitacora Stock <span class="caret"></span></a>
-                                <ul role="menu" class=" dropdown-menu">
-                                    <li id="menu-item-181" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172">
-                                        <a title="Gestionar Bitacora Stock" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock/admin">Gestionar Bitacora Stock</a>
-                                    </li>
-                                </ul>
+                            <li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-18">
+                                <a title="Bitacora Stock" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock/admin">Bitacora Stock</a>
                             </li>
                         </ul>
                     <?php 

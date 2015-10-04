@@ -436,9 +436,6 @@ class StockController extends Controller
 		$criteria->limit = 10; 
 		$data = Medicamentos::model()->findAll($criteria);
 
-		//$consulta = "SELECT * FROM stock WHERE id_medicamento = '".$model->num_factura."' AND id_proveedor = ".$model->id_proveedor;
-		//$data = Facturas::model()->findAllBySql($consulta);
-
 		if (!empty($data))
 		{
   			$arr = array();
@@ -517,8 +514,6 @@ class StockController extends Controller
 		$model_bitacora->id_medicamento = $model->id_medicamento;
 		$model_bitacora->cantidad = $model->cantidad;
 		$model_bitacora->fecha = date('Y-m-d H:i:s');
-		echo $model_bitacora->fecha;
-		exit();
 		$model_bitacora->save();
 	}
 

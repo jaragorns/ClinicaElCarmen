@@ -3,13 +3,8 @@
 /* @var $model BitacoraStock */
 
 $this->breadcrumbs=array(
-	'Bitacora Stocks'=>array('index'),
-	'Manage',
-);
-
-$this->menu=array(
-	array('label'=>'List BitacoraStock', 'url'=>array('index')),
-	array('label'=>'Create BitacoraStock', 'url'=>array('create')),
+	'Bitacora Stocks'=>array('admin'),
+	'Gestion',
 );
 
 Yii::app()->clientScript->registerScript('search', "
