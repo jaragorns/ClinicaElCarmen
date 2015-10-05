@@ -64,8 +64,14 @@ h1 {
   font-size: 2em;
 }
 mark {
-  color: #000;
-  background: #ff0;
+  ackground: radial-gradient( 6px -9px, circle);
+  background-color: #FF8129;
+  border: 1px solid white;
+  border-radius: 12px; /* one half of ( (border * 2) + height + padding ) */
+  color: white;
+  font: bold 14px/13px Helvetica, Verdana, Tahoma;
+  padding: 0px 3px 0 6px;
+  text-align: center;
 }
 small {
   font-size: 80%;

@@ -405,8 +405,21 @@
                                     </li>
                                 </ul>
                             </li>
+                            <?php
+                                if(Yii::app()->user->role=="Farmacia"){
+                                    $result = Solicitudes::model()->findAll(array('condition'=>'estacion_id_estacion=:id_estacion',
+                                        'params'=>array(':id_estacion'=>6),));
+
+                                }else{
+                                    if(!empty(SolicitudesController::verificarGuardia()->id_estacion)){
+                                        $result = Solicitudes::model()->findAll(array('condition'=>'estacion_id_estacion=:id_estacion',
+                                            'params'=>array(':id_estacion'=>SolicitudesController::verificarGuardia()->id_estacion),));
+                                    }
+                                }
+
+                            ?>
                             <li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
-                                <a title="Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes" data-toggle="dropdown" class="dropdown-toggle">Solicitudes <span class="caret"></span></a>
+                                <a title="Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes" data-toggle="dropdown" class="dropdown-toggle"><?php if(!empty($result))echo '<mark>'.count($result).'</mark>';?> Solicitudes <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li id="menu-item-161" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-161">
                                         <a title="Agregar Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/create">Agregar Solicitudes</a>

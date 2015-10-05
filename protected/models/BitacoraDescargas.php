@@ -1,25 +1,28 @@
 <?php
 
 /**
- * This is the model class for table "bitacora_stock".
+ * This is the model class for table "bitacora_descargas".
  *
- * The followings are the available columns in table 'bitacora_stock':
- * @property integer $id_bitacora_stock
- * @property integer $id_usuario
- * @property integer $id_estacion_origen
- * @property integer $id_estacion_destino
- * @property integer $id_medicamento
+ * The followings are the available columns in table 'bitacora_descargas':
+ * @property integer $id_bitacora
+ * @property string $fecha_hora
  * @property integer $cantidad
- * @property string $fecha
+ * @property integer $estado
+ * @property integer $id_stock
+ * @property integer $id_guardia
+ *
+ * The followings are the available model relations:
+ * @property Guardias $idGuardia
+ * @property Tickets[] $tickets
  */
-class BitacoraStock extends CActiveRecord
+class BitacoraDescargas extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'bitacora_stock';
+		return 'bitacora_descargas';
 	}
 
 	/**
@@ -30,11 +33,11 @@ class BitacoraStock extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_usuario, id_estacion_origen, id_estacion_destino, id_medicamento, cantidad, fecha', 'required'),
-			array('id_usuario, id_estacion_origen, id_estacion_destino, id_medicamento, cantidad', 'numerical', 'integerOnly'=>true),
+			array('fecha_hora, cantidad, estado, id_stock, id_guardia', 'required'),
+			array('cantidad, estado, id_stock, id_guardia', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_bitacora_stock, id_usuario, id_estacion_origen, id_estacion_destino, id_medicamento, cantidad, fecha', 'safe', 'on'=>'search'),
+			array('id_bitacora, fecha_hora, cantidad, estado, id_stock, id_guardia', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -46,6 +49,8 @@ class BitacoraStock extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'idGuardia' => array(self::BELONGS_TO, 'Guardias', 'id_guardia'),
+			'tickets' => array(self::HAS_MANY, 'Tickets', 'bitacora_descargas_id_bitacora'),
 		);
 	}
 
@@ -55,13 +60,12 @@ class BitacoraStock extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_bitacora_stock' => 'Id Bitacora Stock',
-			'id_usuario' => 'Usuario',
-			'id_estacion_origen' => 'Servicio Origen',
-			'id_estacion_destino' => 'Servicio Destino',
-			'id_medicamento' => 'Medicamento',
+			'id_bitacora' => 'Id Bitacora',
+			'fecha_hora' => 'Fecha Hora',
 			'cantidad' => 'Cantidad',
-			'fecha' => 'Fecha',
+			'estado' => 'Estado',
+			'id_stock' => 'Id Stock',
+			'id_guardia' => 'Id Guardia',
 		);
 	}
 
@@ -83,19 +87,15 @@ class BitacoraStock extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id_bitacora_stock',$this->id_bitacora_stock);
-		$criteria->compare('id_usuario',$this->id_usuario);
-		$criteria->compare('id_estacion_origen',$this->id_estacion_origen);
-		$criteria->compare('id_estacion_destino',$this->id_estacion_destino);
-		$criteria->compare('id_medicamento',$this->id_medicamento);
+		$criteria->compare('id_bitacora',$this->id_bitacora);
+		$criteria->compare('fecha_hora',$this->fecha_hora,true);
 		$criteria->compare('cantidad',$this->cantidad);
-		$criteria->compare('fecha',$this->fecha,true);
+		$criteria->compare('estado',$this->estado);
+		$criteria->compare('id_stock',$this->id_stock);
+		$criteria->compare('id_guardia',$this->id_guardia);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
-			'sort'=>array(
-			    'defaultOrder'=>'fecha DESC',
-			),
 		));
 	}
 
@@ -103,7 +103,7 @@ class BitacoraStock extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return BitacoraStock the static model class
+	 * @return BitacoraDescargas the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

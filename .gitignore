@@ -219,3 +219,7 @@ pip-log.txt
 protected/runtime/application.log
 protected/models/Estaciones.php
 protected/views/estaciones/view.php
+protected/models/BitacoraStock.php
+protected/controllers/SolicitudesController.php
+protected/controllers/SolicitudesController.php
+protected/controllers/SolicitudesController.php
