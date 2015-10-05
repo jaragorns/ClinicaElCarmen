@@ -160,7 +160,7 @@ class Guardias extends CActiveRecord
 		}	
 		
 		$sort = new CSort();
-		$sort->defaultOrder = 'mes ASC, ano ASC, id_estacion ASC';
+		$sort->defaultOrder = 'mes DESC, ano DESC, id_estacion ASC';
 
 		$criteria->compare('id_guardia',$this->id_guardia);
 		$criteria->compare('id_usuario',$this->id_usuario);
@@ -200,7 +200,8 @@ class Guardias extends CActiveRecord
 		$criteria->compare('ano',$this->ano);
 		
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria, 'sort'=>$sort
+			'criteria'=>$criteria, 
+			'sort'=>$sort
 		)); 
 	}
 

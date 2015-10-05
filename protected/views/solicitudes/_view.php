@@ -24,4 +24,8 @@
 	); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('estado')); ?>:</b>
+	<?php echo strtr($data->estado, array("0" => "Pendiente","1" => "En Proceso","2" => "Procesada")); ?>
+	<br />
+
 </div>

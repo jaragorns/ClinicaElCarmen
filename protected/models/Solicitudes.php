@@ -33,12 +33,12 @@ class Solicitudes extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('fecha_solicitud, estacion_id_estacion, usuarios, guardias_id_guardia', 'required'),
-			array('estacion_id_estacion, guardias_id_guardia', 'numerical', 'integerOnly'=>true),
+			array('fecha_solicitud, estacion_id_estacion, usuarios, guardias_id_guardia, estado', 'required'),
+			array('estacion_id_estacion, guardias_id_guardia, estado', 'numerical', 'integerOnly'=>true),
 			array('usuarios', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_solicitud, fecha_solicitud, estacion_id_estacion, usuarios, guardias_id_guardia', 'safe', 'on'=>'search'),
+			array('id_solicitud, fecha_solicitud, estacion_id_estacion, usuarios, guardias_id_guardia, estado', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,6 +67,7 @@ class Solicitudes extends CActiveRecord
 			'estacion_id_estacion' => 'Estación Origen',
 			'usuarios' => 'Realizado Por',
 			'guardias_id_guardia' => 'Guardia',
+			'estado' => 'Estado'
 		);
 	}
 
@@ -93,9 +94,13 @@ class Solicitudes extends CActiveRecord
 		$criteria->compare('estacion_id_estacion',$this->estacion_id_estacion);
 		$criteria->compare('usuarios',$this->usuarios,true);
 		$criteria->compare('guardias_id_guardia',$this->guardias_id_guardia);
+		$criteria->compare('estado',$this->estado);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array(
+				'defaultOrder' => 'fecha_solicitud DESC',
+			),
 		));
 	}
 

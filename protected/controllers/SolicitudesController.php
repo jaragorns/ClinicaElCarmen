@@ -85,6 +85,7 @@ class SolicitudesController extends Controller
 				$items_9->attributes=$_POST['ItemSolicitud'][9];
 
 				$model->fecha_solicitud = date("Y-m-d"); 
+				$model->estado = 0; //Pendiente				
 
 				if($model->validate()){
 					//calcular el id de la nueva solicitud
@@ -290,6 +291,7 @@ class SolicitudesController extends Controller
 	{
 		$model=new Solicitudes('search');
 		$model->unsetAttributes();  // clear any default values
+		
 		if(isset($_GET['Solicitudes']))
 			$model->attributes=$_GET['Solicitudes'];
 

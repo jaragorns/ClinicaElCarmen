@@ -41,7 +41,7 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'solicitudes-grid',
+	'id'=>'solicitudes-grid',	
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
@@ -61,6 +61,10 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 							Guardias::model()->findByAttributes(array("id_guardia"=>$data->guardias_id_guardia))->id_estacion))->nombre
 	  .")" '
 		),
+		 array(
+            'name' => 'estado',
+            'value' => 'strtr($data->estado, array("0" => "Pendiente","1" => "En Proceso","2" => "Procesada"))',
+        ),
 		array(
 			'class'=>'CButtonColumn',
 		),
