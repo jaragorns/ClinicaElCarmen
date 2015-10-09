@@ -3,13 +3,13 @@
 /* @var $model Solicitudes */
 
 $this->breadcrumbs=array(
-	'Solicitudes'=>array('index'),
+	'Solicitudes',
 	'Crear Solicitud',
 );
 
 $this->menu=array(
-	array('label'=>'Lista de Solicitudes', 'url'=>array('index')),
-	array('label'=>'Gestionar Solicitudes', 'url'=>array('admin')),
+	array('label'=>'Mis Solicitudes', 'url'=>array('admin')),
+	array('label'=>'Solicitudes Pendientes', 'url'=>array('adminPendiente')),
 );
 ?>
 

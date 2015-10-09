@@ -64,7 +64,7 @@ class ItemSolicitud extends CActiveRecord
 			'id_stock' => 'Medicamento',
 			'id_solicitud' => 'Id Solicitud',
 			'estado' => 'Estado',
-			'id_medicamento' => 'Id Medicamento',
+			'id_medicamento' => 'Medicamento',
 			'cantidad' => 'Cantidad',
 		);
 	}

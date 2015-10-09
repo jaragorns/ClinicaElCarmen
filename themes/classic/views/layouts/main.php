@@ -412,8 +412,9 @@
 
                                 }else{
                                     if(!empty(SolicitudesController::verificarGuardia()->id_estacion)){
-                                        $result = Solicitudes::model()->findAll(array('condition'=>'estacion_id_estacion=:id_estacion',
-                                            'params'=>array(':id_estacion'=>SolicitudesController::verificarGuardia()->id_estacion),));
+                                        $result = Solicitudes::model()->findAll(array('condition'=>'estacion_id_estacion=:id_estacion AND estado!=2',
+                                            'params'=>array(':id_estacion'=>SolicitudesController::verificarGuardia()->id_estacion
+                                              ),));
                                     }
                                 }
 
@@ -425,7 +426,10 @@
                                         <a title="Agregar Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/create">Agregar Solicitudes</a>
                                     </li>
                                     <li id="menu-item-162" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-162">
-                                        <a title="Gestionar Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/admin">Gestionar Solicitudes</a>
+                                        <a title="Mis Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/admin">Mis Solicitudes</a>
+                                    </li>
+                                    <li id="menu-item-163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163">
+                                        <a title="Solicitudes Pendientes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/adminPendiente">Solicitudes Pendientes</a>
                                     </li>
                                 </ul>
                             </li>

@@ -64,7 +64,7 @@ class Solicitudes extends CActiveRecord
 		return array(
 			'id_solicitud' => 'Id Solicitud',
 			'fecha_solicitud' => 'Fecha de Solicitud',
-			'estacion_id_estacion' => 'Estación Origen',
+			'estacion_id_estacion' => 'Solicitado A',
 			'usuarios' => 'Realizado Por',
 			'guardias_id_guardia' => 'Guardia',
 			'estado' => 'Estado'
@@ -99,11 +99,59 @@ class Solicitudes extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'sort'=>array(
-				'defaultOrder' => 'fecha_solicitud DESC',
+				'defaultOrder' => 'fecha_solicitud DESC, estado ASC',
 			),
 		));
 	}
 
+	public function searchPendiente()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$estacion = SolicitudesController::verificarGuardia(); 
+
+		if(!empty($estacion)){
+			$estacion = $estacion['id_estacion'];
+		
+			$criteria->addCondition("estacion_id_estacion='$estacion'");
+
+			$criteria->compare('id_solicitud',$this->id_solicitud);
+			$criteria->compare('fecha_solicitud',$this->fecha_solicitud,true);
+			$criteria->compare('estacion_id_estacion',$estacion);
+			$criteria->compare('usuarios',$this->usuarios,true);
+			$criteria->compare('guardias_id_guardia',$this->guardias_id_guardia);
+			$criteria->compare('estado',$this->estado);
+
+			return new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
+				'sort'=>array(
+					'defaultOrder' => 'fecha_solicitud DESC, estado ASC',
+				),
+			));	
+		}else{
+			Yii::app()->user->setFlash('notice','Debe estar de guardia para Gestionar Solicitudes');
+
+			$criteria->addCondition("1=0");
+
+			return new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
+			));	
+		}
+		
+	}
+
+	public function searchItems($id)
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+		$criteria = new CDbCriteria;
+		$criteria->addCondition("id_solicitud='$id'");
+			
+		return new CActiveDataProvider('ItemSolicitud', array(
+			'criteria'=>$criteria,
+		));
+	}
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

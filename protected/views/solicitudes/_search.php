@@ -39,6 +39,10 @@
 					'id','NombreCompleto'),	array('class' => 'my-drop-down','prompt'=>'Enfermera:',)); ?>
 	</div>
 
+	<div class="rowcontact">
+		<?php echo $form->label($model,'estado'); ?>
+	</div>
+
 	<div class="buttons">
 		<?php echo CHtml::submitButton(Yii::t('app','Search'),  array("class"=>"btn btn-primary btn-large")); ?>
 	</div>

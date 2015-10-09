@@ -28,7 +28,7 @@ class SolicitudesController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete','autocomplete'),
+				'actions'=>array('index','view','create','update','admin','delete','autocomplete','adminPendiente','viewPendiente','AjaxEditColumn'),
 				'roles'=>array('Superadmin'),
 			),
 			array('deny',  // deny all users
@@ -44,6 +44,13 @@ class SolicitudesController extends Controller
 	public function actionView($id)
 	{
 		$this->render('view',array(
+			'model'=>$this->loadModel($id),
+		));
+	}
+
+	public function actionViewPendiente($id)
+	{
+		$this->render('viewPendiente',array(
 			'model'=>$this->loadModel($id),
 		));
 	}
@@ -214,7 +221,7 @@ class SolicitudesController extends Controller
 			}
 		}else{
 			Yii::app()->user->setFlash('notice','Debe estar de guardia para poder realizar solicitudes');
-			$this->redirect(array('index'));			
+			$this->redirect(array('admin'));			
 		}
 
 		// Uncomment the following line if AJAX validation is needed
@@ -300,6 +307,19 @@ class SolicitudesController extends Controller
 		));
 	}
 
+	public function actionAdminPendiente()
+	{
+		$model=new Solicitudes('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		if(isset($_GET['Solicitudes']))
+			$model->attributes=$_GET['Solicitudes'];
+
+		$this->render('adminPendiente',array(
+			'model'=>$model,
+		));
+	}
+
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
@@ -340,11 +360,11 @@ class SolicitudesController extends Controller
 				FROM guardias 
 				WHERE mes=7
 						AND ano=".date('Y')." 
-						AND id_usuario=33445556 
+						AND id_usuario=99987655
 						AND ".$dia."!=1 "; 
+
 		$deGuardia = Guardias::model()->findAllBySql($sql);
 
-		
 		$pos = 0; 
 		$band=false; 
 		//buscar de acuerdo a la hora donde esta
@@ -367,16 +387,12 @@ class SolicitudesController extends Controller
 				$pos = $i;
 				$band = true; 
 			}				
-			else{
-			//	echo "no esta de guardia"; 
-				$deGuardia = ""; 
-			}
-				
-		}	
+		}
+
 		if($band)
 			return $deGuardia[$pos];
 		else
-			return $deGuardia;
+			return $deGuardia="";
 	}
 
 	public function validarMedicamento($id_estacion, $item){
@@ -402,9 +418,48 @@ class SolicitudesController extends Controller
 			$item->id_medicamento="";
 			return false; 
 		}
-
 		
 	}
+
+	public function actionAjaxEditColumn(){
+		$id_item_solicitud   = $_POST["keyvalue"];  
+        $name       = $_POST["name"]; 		//ESTADO
+        $old_value  = $_POST["old_value"];  //"0" => "Pendiente","1" => "Aprobado","2" => "Rechazado"
+        $new_value  = $_POST["new_value"];  //"0" => "Pendiente","1" => "Aprobado","2" => "Rechazado"
+ 
+        //Do some stuff here, and return the value to be displayed..
+        $model = ItemSolicitud::model()->findByPk($id_item_solicitud);
+
+        //if($name == "estado" && Yii::app()->user->checkAccess('RequestAdmExpensesMedina')){
+        if($name == "estado" && SolicitudesController::verificarGuardia()->id_estacion){
+        	$model->saveAttributes(array('estado'=>$new_value));
+
+        	//BUSCAR TODAS LOS ITEM_SOLCITUD DE UNA SOLCITUD Y VER SUS ESTADOS CON EL FIN DE (UPDATE ESTADO DE LA SOLICITUD)
+        	$items_solicitud = ItemSolicitud::model()->findAll(array('condition'=>'id_solicitud='.$model->id_solicitud));
+	  	
+		  	$cont_1 = 0;
+		  	$cont_2 = 0;
+
+		  	foreach ($items_solicitud as $key => $value) {
+		  		if($value->estado=="0"){
+		  			$cont_1++;	
+		  		}else{
+		  			$cont_2++;
+		  		}
+		  	}
+
+		  	if($cont_1 > 0){
+		  		$solicitud = Solicitudes::model()->findByPk($model->id_solicitud);
+		  		$solicitud->saveAttributes(array('estado'=>1));
+		  	}
+		  	if($cont_2 == count($items_solicitud)){
+		  		$solicitud = Solicitudes::model()->findByPk($model->id_solicitud);
+		  		$solicitud->saveAttributes(array('estado'=>2));
+		  	}
+		  	
+        }        
+		echo $new_value;	
+    }
 }
 
 function dentro_de_horario($hms_inicio, $hms_fin, $hms_referencia=NULL){ // v2011-06-21

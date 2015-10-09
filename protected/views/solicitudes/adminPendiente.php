@@ -4,12 +4,11 @@
 
 $this->breadcrumbs=array(
 	'Solicitudes',
-	'Mis Solicitudes',
+	'Solicitudes Pendientes',
 );
 
 $this->menu=array(
 	array('label'=>'Crear Solicitud', 'url'=>array('create')),
-	array('label'=>'Solicitudes Pendientes', 'url'=>array('adminPendiente')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,7 +25,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Mis Solicitudes</h1>
+<h1>Solicitudes Pendientes</h1>
 
 <p>
 También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -42,7 +41,7 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'solicitudes-grid',	
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$model->searchPendiente(),
 	'filter'=>$model,
 	'columns'=>array(
 		array(
@@ -67,6 +66,12 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
         ),
 		array(
 			'class'=>'CButtonColumn',
+			'template'=>'{view}',
+			'buttons'=>array(
+				'view'=>array(
+					'url'=>'Yii::app()->createUrl("Solicitudes/viewPendiente",array("id"=>$data->id_solicitud))',
+				),
+			)
 		),
 	),
 )); ?>
