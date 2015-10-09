@@ -35,6 +35,8 @@
         
     <!-- icon -->
     <link href="<?php echo Yii::app()->theme->baseUrl;?>/img/favicon.jpg" rel="shortcut icon" type="image/x-icon" />
+
+    <!-- mapa -->
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
     <script>
     /*
@@ -446,6 +448,9 @@
                             </li>
                             <li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-18">
                                 <a title="Bitacora Stock" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock/admin">Bitacora Stock</a>
+                            </li>
+                            <li id="menu-item-19" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19">
+                                <a title="Descargas" href="<?php echo Yii::app()->baseUrl;?>/bitacoradescargas/admin">Descargas</a>
                             </li>
                         </ul>
                     <?php 

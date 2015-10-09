@@ -172,102 +172,331 @@ class StockController extends Controller
 			$items_29->attributes = $_POST["Stock"][28];
 			$items_30->attributes = $_POST["Stock"][29];
 
-			$items_1->id_estacion = $model->id_estacion;
-			$items_2->id_estacion = $model->id_estacion;
-			$items_3->id_estacion = $model->id_estacion;
-			$items_4->id_estacion = $model->id_estacion;
-			$items_5->id_estacion = $model->id_estacion;
-			$items_6->id_estacion = $model->id_estacion;
-			$items_7->id_estacion = $model->id_estacion;
-			$items_8->id_estacion = $model->id_estacion;
-			$items_9->id_estacion = $model->id_estacion;
-			$items_10->id_estacion = $model->id_estacion;
-			$items_11->id_estacion = $model->id_estacion;
-			$items_12->id_estacion = $model->id_estacion;
-			$items_13->id_estacion = $model->id_estacion;
-			$items_14->id_estacion = $model->id_estacion;
-			$items_15->id_estacion = $model->id_estacion;
-			$items_16->id_estacion = $model->id_estacion;
-			$items_17->id_estacion = $model->id_estacion;
-			$items_18->id_estacion = $model->id_estacion;
-			$items_19->id_estacion = $model->id_estacion;
-			$items_20->id_estacion = $model->id_estacion;
-			$items_21->id_estacion = $model->id_estacion;
-			$items_22->id_estacion = $model->id_estacion;
-			$items_23->id_estacion = $model->id_estacion;
-			$items_24->id_estacion = $model->id_estacion;
-			$items_25->id_estacion = $model->id_estacion;
-			$items_26->id_estacion = $model->id_estacion;
-			$items_27->id_estacion = $model->id_estacion;
-			$items_28->id_estacion = $model->id_estacion;
-			$items_29->id_estacion = $model->id_estacion;
-			$items_30->id_estacion = $model->id_estacion;
+			if(!empty($model->id_estacion))
+			{
+				$items_1->id_estacion = $model->id_estacion;
+				$items_2->id_estacion = $model->id_estacion;
+				$items_3->id_estacion = $model->id_estacion;
+				$items_4->id_estacion = $model->id_estacion;
+				$items_5->id_estacion = $model->id_estacion;
+				$items_6->id_estacion = $model->id_estacion;
+				$items_7->id_estacion = $model->id_estacion;
+				$items_8->id_estacion = $model->id_estacion;
+				$items_9->id_estacion = $model->id_estacion;
+				$items_10->id_estacion = $model->id_estacion;
+				$items_11->id_estacion = $model->id_estacion;
+				$items_12->id_estacion = $model->id_estacion;
+				$items_13->id_estacion = $model->id_estacion;
+				$items_14->id_estacion = $model->id_estacion;
+				$items_15->id_estacion = $model->id_estacion;
+				$items_16->id_estacion = $model->id_estacion;
+				$items_17->id_estacion = $model->id_estacion;
+				$items_18->id_estacion = $model->id_estacion;
+				$items_19->id_estacion = $model->id_estacion;
+				$items_20->id_estacion = $model->id_estacion;
+				$items_21->id_estacion = $model->id_estacion;
+				$items_22->id_estacion = $model->id_estacion;
+				$items_23->id_estacion = $model->id_estacion;
+				$items_24->id_estacion = $model->id_estacion;
+				$items_25->id_estacion = $model->id_estacion;
+				$items_26->id_estacion = $model->id_estacion;
+				$items_27->id_estacion = $model->id_estacion;
+				$items_28->id_estacion = $model->id_estacion;
+				$items_29->id_estacion = $model->id_estacion;
+				$items_30->id_estacion = $model->id_estacion;
 
-			if($items_1->validate())
-				$this->Asignar($items_1);			
-			if($items_2->validate()) 
-				$this->Asignar($items_2);
-			if($items_3->validate()) 
-				$this->Asignar($items_3);
-			if($items_4->validate()) 
-				$this->Asignar($items_4);
-			if($items_5->validate()) 
-				$this->Asignar($items_5);
-			if($items_6->validate()) 
-				$this->Asignar($items_6);
-			if($items_7->validate()) 
-				$this->Asignar($items_7);
-			if($items_8->validate()) 
-				$this->Asignar($items_8);
-			if($items_9->validate()) 
-				$this->Asignar($items_9);
-			if($items_10->validate()) 
-				$this->Asignar($items_10);
-			if($items_11->validate()) 
-				$this->Asignar($items_11);
-			if($items_12->validate()) 
-				$this->Asignar($items_12);
-			if($items_13->validate()) 
-				$this->Asignar($items_13);
-			if($items_14->validate()) 
-				$this->Asignar($items_14);
-			if($items_15->validate()) 
-				$this->Asignar($items_15);
-			if($items_16->validate()) 
-				$this->Asignar($items_16);
-			if($items_17->validate()) 
-				$this->Asignar($items_17);
-			if($items_18->validate()) 
-				$this->Asignar($items_18);
-			if($items_19->validate()) 
-				$this->Asignar($items_19);
-			if($items_20->validate()) 
-				$this->Asignar($items_20);
-			if($items_21->validate()) 
-				$this->Asignar($items_21);
-			if($items_22->validate()) 
-				$this->Asignar($items_22);
-			if($items_23->validate()) 
-				$this->Asignar($items_23);
-			if($items_24->validate()) 
-				$this->Asignar($items_24);
-			if($items_25->validate()) 
-				$this->Asignar($items_25);
-			if($items_26->validate()) 
-				$this->Asignar($items_26);
-			if($items_27->validate()) 
-				$this->Asignar($items_27);
-			if($items_28->validate()) 
-				$this->Asignar($items_28);
-			if($items_29->validate()) 
-				$this->Asignar($items_29);
-			if($items_30->validate()) 
-				$this->Asignar($items_30);
+				$cont = 0; 
+				$contMalos = 0;
+				$id = array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+				$validos = array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 
-			//VIEW DEBO MOSTRAR LA ASIGNACION QUE ACABO DE HACER (ESTACION, MEDICAMENTO, CANTIDAD)
-			$this->redirect(array('viewEstacion','id_estacion'=>$model->id_estacion));
-			Yii::app()->user->setFlash('success','Medicamentos Asignados Correctamente.');	
+				if($items_1->validate()){
+					$id[1] = $items_1->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[1] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_2->validate()){
+					$id[2] = $items_2->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[2] = 1;
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_3->validate()){
+					$id[3] = $items_3->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[3] = 1;		
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_4->validate()){
+					$id[4] = $items_4->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[4] = 1;		
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_5->validate()){
+					$id[5] = $items_5->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[5] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_6->validate()){
+					$id[6] = $items_6->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[6] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_7->validate()){
+					$id[7] = $items_7->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[7] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_8->validate()){
+					$id[8] = $items_8->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[8] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_9->validate()){
+					$id[9] = $items_9->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[9] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_10->validate()){
+					$id[10] = $items_10->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[10] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_11->validate()){
+					$id[11] = $items_11->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[11] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_12->validate()){
+					$id[12] = $items_12->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[12] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_13->validate()){
+					$id[13] = $items_13->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[13] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_14->validate()){
+					$id[14] = $items_14->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[14] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_15->validate()){
+					$id[15] = $items_15->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[15] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_16->validate()){
+					$id[16] = $items_16->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[16] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_17->validate()){
+					$id[17] = $items_17->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[17] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_18->validate()){
+					$id[18] = $items_18->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[18] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_19->validate()){
+					$id[19] = $items_19->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[19] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_20->validate()){
+					$id[20] = $items_20->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[20] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_21->validate()){
+					$id[21] = $items_21->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[21] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_22->validate()){
+					$id[22] = $items_22->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[22] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_23->validate()){
+					$id[23] = $items_23->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[23] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_24->validate()){
+					$id[24] = $items_24->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[24] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_25->validate()){
+					$id[25] = $items_25->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[25] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_26->validate()){
+					$id[26] = $items_26->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[26] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_27->validate()){
+					$id[27] = $items_27->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[27] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_28->validate()){
+					$id[28] = $items_28->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[28] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_29->validate()){
+					$id[29] = $items_29->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[29] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
+				if($items_30->validate()){
+					$id[30] = $items_30->id_medicamento;
+					if($this->noRepetidos($id)){
+						$validos[30] = 1;	
+						$cont++;
+					}else
+						$contMalos++;
+				}
 
+				if($cont>0 && $contMalos==0){
+
+					if($validos[1]==1) $this->Asignar($items_1);
+					if($validos[2]==1) $this->Asignar($items_2);
+					if($validos[3]==1) $this->Asignar($items_3);
+					if($validos[4]==1) $this->Asignar($items_4);
+					if($validos[5]==1) $this->Asignar($items_5);
+					if($validos[6]==1) $this->Asignar($items_6);
+					if($validos[7]==1) $this->Asignar($items_7);
+					if($validos[8]==1) $this->Asignar($items_8);
+					if($validos[9]==1) $this->Asignar($items_9);
+					if($validos[10]==1) $this->Asignar($items_10);
+					if($validos[11]==1) $this->Asignar($items_11);
+					if($validos[12]==1) $this->Asignar($items_12);
+					if($validos[13]==1) $this->Asignar($items_13);
+					if($validos[14]==1) $this->Asignar($items_14);
+					if($validos[15]==1) $this->Asignar($items_15);
+					if($validos[16]==1) $this->Asignar($items_16);
+					if($validos[17]==1) $this->Asignar($items_17);
+					if($validos[18]==1) $this->Asignar($items_18);
+					if($validos[19]==1) $this->Asignar($items_19);
+					if($validos[20]==1) $this->Asignar($items_20);
+					if($validos[21]==1) $this->Asignar($items_21);
+					if($validos[22]==1) $this->Asignar($items_22);
+					if($validos[23]==1) $this->Asignar($items_23);
+					if($validos[24]==1) $this->Asignar($items_24);
+					if($validos[25]==1) $this->Asignar($items_25);
+					if($validos[26]==1) $this->Asignar($items_26);
+					if($validos[27]==1) $this->Asignar($items_27);
+					if($validos[28]==1) $this->Asignar($items_28);
+					if($validos[29]==1) $this->Asignar($items_29);
+					if($validos[30]==1) $this->Asignar($items_30);
+
+			 		$model->save();
+					Yii::app()->user->setFlash('success','Medicamentos Asignados Correctamente.');		
+					$this->redirect(array('viewEstacion','id_estacion'=>$model->id_estacion));
+
+			 	}else{
+			 		Yii::app()->user->setFlash('notice','Debe asignar al menos un medicamento.');		
+			 	}
+				
+			}else{
+				$model->cantidad = 0;
+				$model->id_medicamento = 0;
+				$model->validate();
+			}
 		}
 
 		$this->render('asignar',array(
@@ -430,6 +659,7 @@ class StockController extends Controller
 				Yii::app()->user->setFlash('error','Debe estar de guardia para realizar asiganaciones.');	
 			}
 		}
+
 		
 		$criteria->compare('LOWER(nombre)', strtolower($_GET['term']), true);
 		$criteria->order = 'nombre';
@@ -442,9 +672,11 @@ class StockController extends Controller
   			foreach ($data as $item) {
   				$idStock = Stock::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento, 'id_estacion'=>$estacion))->id_stock;
   				$existencia = Stock::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento, 'id_estacion'=>$estacion))->cantidad;
+  				$UnidadMedida = UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>Medicamentos::model()->findByAttributes(array("id_medicamento"=>$item->id_medicamento))->unidad_medida))->descripcion;
+  				
   				$arr[] = array(
 		    		'id_medicamento' => $item->id_medicamento,
-		    		'value' => $item->nombre,
+		    		'value' => $item->nombre." (".$UnidadMedida.")",
 		    		'existencia' => $existencia,
 	   			);
   			}
@@ -472,9 +704,16 @@ class StockController extends Controller
 			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$model->id_medicamento." AND `id_estacion`= ".SolicitudesController::verificarGuardia()->id_estacion;
 		}
 		$result = Stock::model()->findAllBySql($sql);
+		$band = FALSE;
 
-		if($result)
-		{ // Se procede a buscar si existe cantidad del medicamento en la estacion a asignar.
+		//SI LA CANTIDAD A ASIGNAR ES MAYOR A LA EXISTENCIA
+		if($model->cantidad > $result['0']['cantidad']){
+
+			Yii::app()->user->setFlash('error','No hay existencia suficiente para efectuar la operación. '.$model->id_medicamento);	
+			$band = TRUE;
+
+		}else{ 
+			//SE PROCEDE A BUSCAR SI EXISTE CANTIDAD DEL MEDICAMENTO EN LA ESTACION A ASIGNAR.
 			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$model->id_medicamento." AND `id_estacion`= ".$model->id_estacion;
 			$cantidad_servicio = Stock::model()->findAllBySql($sql);
 
@@ -507,14 +746,39 @@ class StockController extends Controller
 		}
 
 		//BITACORA DE LAS ASIGNACIONES
-		$model_bitacora = new BitacoraStock;
-		$model_bitacora->id_usuario = Yii::app()->user->id;
-		$model_bitacora->id_estacion_origen = $estacion_origen;
-		$model_bitacora->id_estacion_destino = $model->id_estacion;
-		$model_bitacora->id_medicamento = $model->id_medicamento;
-		$model_bitacora->cantidad = $model->cantidad;
-		$model_bitacora->fecha = date('Y-m-d H:i:s');
-		$model_bitacora->save();
+		if(!$band){
+			$model_bitacora = new BitacoraStock;
+			$model_bitacora->id_usuario = Yii::app()->user->id;
+			$model_bitacora->id_estacion_origen = $estacion_origen;
+			$model_bitacora->id_estacion_destino = $model->id_estacion;
+			$model_bitacora->id_medicamento = $model->id_medicamento;
+			$model_bitacora->cantidad = $model->cantidad;
+			$model_bitacora->fecha = date('Y-m-d H:i:s');
+			$model_bitacora->save();
+		}
+	}
+
+	public function noRepetidos($id){
+		$contaRepe = 0;
+		$band = false;
+		 	for($i=0; $i<count($id); $i++){
+		 		for($j=0; $j<count($id); $j++){
+		 			if($id[$i]==$id[$j] && !empty($id[$i]) ){
+		 				$contaRepe++;
+		 			}			
+		 		}
+		 		if($contaRepe>2){
+		 			$contaRepe=0;
+		 			$band=true;
+		 		}	
+		 	}
+
+		 	if($band){
+		 		Yii::app()->user->setFlash('error','No debe repetir medicamentos. BORRAR LA ASIGNACION REPETIDA');
+		 		return false;
+		 	}else{
+		 		return true;
+		 	}		
 	}
 
 }

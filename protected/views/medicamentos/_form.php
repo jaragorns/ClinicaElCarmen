@@ -17,7 +17,7 @@
 
 	<div class="alert alert-info">
     	<strong><?php echo "NOTA:";?></strong> <?php echo "La ".'<strong>'."UNIDAD DE MEDIDA".'</strong>'." se debe especificar de 
-    		acuerdo al consumo del medicamento. Y la ".'<strong>'."CANTIDAD".'</strong>'." de acuerdo a la ".'<strong>'."UNIDAD DE MEDIDA".'</strong>'; ?> 
+    		acuerdo al ".'<strong>'."CONSUMO ".'</strong>'."del medicamento. Y la ".'<strong>'."CANTIDAD".'</strong>'." de acuerdo a la ".'<strong>'."UNIDAD DE MEDIDA".'</strong>'; ?> 
     </div>
 
 	<p class="note">Campos con <span class="required">*</span> son requeridos.</p>

@@ -223,3 +223,8 @@ protected/models/BitacoraStock.php
 protected/controllers/SolicitudesController.php
 protected/controllers/SolicitudesController.php
 protected/controllers/SolicitudesController.php
+protected/controllers/SolicitudesController.php
+protected/controllers/SolicitudesController.php
+protected/runtime/application.log
+protected/views/bitacoraDescargas/admin.php
+protected/views/bitacoraDescargas/admin.php
