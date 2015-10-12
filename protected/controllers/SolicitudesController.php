@@ -28,7 +28,7 @@ class SolicitudesController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete','autocomplete','adminPendiente','viewPendiente','AjaxEditColumn'),
+				'actions'=>array('index','view','create','update','admin','delete','autocomplete','adminPendiente','viewPendiente','AjaxEditColumn', 'ajaxeditcolumnAsig'),
 				'roles'=>array('Superadmin'),
 			),
 			array('deny',  // deny all users
@@ -354,13 +354,18 @@ class SolicitudesController extends Controller
 		date_default_timezone_set("America/Caracas");
 		//consulto si la persona logueada esta de guardia hoy para poder hacer solicitudes
 		$dia = "dia_".date("j");
+		$hora = date("G:i"); //hora en minutos y segundos
+
+		if(strtotime($hora) > strtotime("00:00")){
+			$dia = "dia_".(date("j")-1);
+		}
 		//cambiar el dia y el id
 		//$sql = "SELECT id_guardia, id_usuario, id_estacion FROM guardias WHERE mes=".date('n')." AND ano=".date('Y')." AND id_usuario=".Yii::app()->user->id." AND ".$dia."!=1 "; 
 		$sql = "SELECT id_guardia, id_usuario, id_estacion, ".$dia." 
 				FROM guardias 
 				WHERE mes=7
 						AND ano=".date('Y')." 
-						AND id_usuario=99987655
+						AND id_usuario=22234567
 						AND ".$dia."!=1 "; 
 
 		$deGuardia = Guardias::model()->findAllBySql($sql);
@@ -376,9 +381,9 @@ class SolicitudesController extends Controller
 			$turno = 2; 
 		elseif(dentro_de_horario("13:00","19:00",$hora)==1)
 			$turno = 3;
-		elseif(dentro_de_horario("19:00","07:00",$hora)==1)
+		elseif(dentro_de_horario("19:00","07:00",$hora)==1){
 			$turno = 4;
-		elseif(dentro_de_horario("07:00","15:00",$hora)==1)
+		}elseif(dentro_de_horario("07:00","15:00",$hora)==1)
 			$turno = 5;
 
 		for($i=0; $i<count($deGuardia); $i++){
@@ -386,7 +391,7 @@ class SolicitudesController extends Controller
 				//echo "ESTA de guardia EN ".$deGuardia[$i]->id_estacion;
 				$pos = $i;
 				$band = true; 
-			}				
+			}		
 		}
 
 		if($band)
@@ -427,11 +432,25 @@ class SolicitudesController extends Controller
         $old_value  = $_POST["old_value"];  //"0" => "Pendiente","1" => "Aprobado","2" => "Rechazado"
         $new_value  = $_POST["new_value"];  //"0" => "Pendiente","1" => "Aprobado","2" => "Rechazado"
  
-        //Do some stuff here, and return the value to be displayed..
-        $model = ItemSolicitud::model()->findByPk($id_item_solicitud);
 
-        //if($name == "estado" && Yii::app()->user->checkAccess('RequestAdmExpensesMedina')){
+	    //Do some stuff here, and return the value to be displayed..
+        $model = ItemSolicitud::model()->findByPk($id_item_solicitud);
+        
+        //LO PUEDE CAMBIAR DE ESTADO (APROBADO) SOLO SI YA ASIGNADO UNA CANTIDAD EN EL CAMPO CANTIDAD
+        // ES DECIR QUE ESTE EN LA BITACORA STOCK 
         if($name == "estado" && SolicitudesController::verificarGuardia()->id_estacion){
+
+        	if($new_value == 1){ //SI APRUEBA LA SOLICITUD
+        		$exist_bitacora = BitacoraStock::model()->findByAttributes(array('id_item_solicitud'=>$id_item_solicitud)); 
+        		//si existe un registro en la bitacora para ese itemo
+        		if(!empty($exist_bitacora)){
+
+
+        		}else{
+        			$new_value = 0;
+        		}
+        		//Hacer el cambio en Stock
+        	}
         	$model->saveAttributes(array('estado'=>$new_value));
 
         	//BUSCAR TODAS LOS ITEM_SOLCITUD DE UNA SOLCITUD Y VER SUS ESTADOS CON EL FIN DE (UPDATE ESTADO DE LA SOLICITUD)
@@ -460,9 +479,101 @@ class SolicitudesController extends Controller
         }        
 		echo $new_value;	
     }
+    
+    public function actionAjaxEditColumnAsig(){
+
+		$id_item_solicitud   = $_POST["keyvalue"];  
+        $name       = $_POST["name"]; 		
+        $old_value  = $_POST["old_value"];  
+        $new_value  = $_POST["new_value"];  
+
+      	$model = ItemSolicitud::model()->findByPk($id_item_solicitud);
+      	//modelo de tipo solicitud dnd tengo los datos necesarios para asignar excepto la estacion
+        $modelSolicitud = Solicitudes::model()->findByAttributes(array('id_solicitud'=>$model->id_solicitud)); 
+        //obtengo la estacion de quien me hizo la solicitud y a donde voy a asignar por medio de la guardia.
+        $estacion = Guardias::model()->findByPk($modelSolicitud->guardias_id_guardia)->id_estacion;
+
+      	//Creando registro en bitacora
+       	$band = $this->registro_bitacora($model->id_medicamento, $new_value, $estacion, SolicitudesController::verificarGuardia()->id_estacion, $model->id_item_solicitud); 
+
+       	if($band){
+			echo $new_value;
+		}else{
+			$old_value = BitacoraStock::model()->findByAttributes(array('id_item_solicitud'=>$model->id_item_solicitud))->cantidad; 
+			echo $old_value;
+		}	
+    }
+
+    public function Asignar($id_medicamento, $cantidad_asignar, $estacion_destino, $estacion_origen)
+	{
+		
+		if(Yii::app()->user->role=="Farmacia"){
+			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$id_medicamento." AND `id_estacion`= 6";
+		}else{
+			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$id_medicamento." AND `id_estacion`= ".$estacion_origen;
+		}
+		$result = Stock::model()->findAllBySql($sql);
+
+		//SI LA CANTIDAD A ASIGNAR ES MAYOR A LA EXISTENCIA
+		if($cantidad_asignar > $result['0']['cantidad']){
+
+		}else{ 
+			//SE PROCEDE A BUSCAR SI EXISTE CANTIDAD DEL MEDICAMENTO EN LA ESTACION A ASIGNAR.
+			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$id_medicamento." AND `id_estacion`= ".$estacion_destino;
+			$cantidad_servicio = Stock::model()->findAllBySql($sql);
+
+			$cantidad_nueva = $result['0']['cantidad'] - $cantidad_asignar;
+
+			//CANTIDAD NUEVA PARA EL SERVICIO QUE ASIGNO
+			if(Yii::app()->user->role=="Farmacia"){
+				$sql = "UPDATE `stock` SET `cantidad`=".$cantidad_nueva." WHERE `id_medicamento` =".$id_medicamento." AND `id_estacion`= 6";
+				$execute = Yii::app()->db->createCommand($sql)->execute();
+			}else{
+				$sql = "UPDATE `stock` SET `cantidad`=".$cantidad_nueva." WHERE `id_medicamento` =".$id_medicamento." AND `id_estacion`= ".$estacion_origen;
+				$execute = Yii::app()->db->createCommand($sql)->execute();
+			}
+
+			if($cantidad_servicio){
+				//CANTIDAD NUEVA PARA EL SERVICIO QUE RECIBIO (((UPDATE)))
+				$cant_asignar = $cantidad_servicio['0']['cantidad'] + $cantidad_asignar;
+				$sql = "UPDATE `stock` SET `cantidad`=".$cant_asignar." WHERE `id_medicamento` =".$id_medicamento." AND `id_estacion`= ".$estacion_destino;
+				$execute = Yii::app()->db->createCommand($sql)->execute();
+				
+			}else{
+				$model_stock = new Stock;
+				$model_stock->id_medicamento = $id_medicamento;
+				$model_stock->id_estacion = $estacion_destino;
+				$model_stock->cantidad = $cantidad_asignar;
+				$model_stock->save();
+			}
+		}
+
+	}
+
+	public function registro_bitacora($id_medicamento, $cantidad_asignar, $estacion_destino, $estacion_origen, $item){
+		$model_bitacora = new BitacoraStock;
+		$model_bitacora->id_usuario = Yii::app()->user->id;
+		$model_bitacora->id_estacion_origen = $estacion_origen;
+		$model_bitacora->id_estacion_destino = $estacion_destino;
+		$model_bitacora->id_medicamento = $id_medicamento;
+		$model_bitacora->cantidad = $cantidad_asignar;
+		$model_bitacora->fecha = date('Y-m-d H:i:s');
+		$model_bitacora->id_item_solicitud = $item;
+		$model_bitacora->estado = 1; 
+
+		$exist = BitacoraStock::model()->findByAttributes(array('id_item_solicitud'=>$item));
+
+		if(empty($exist)){
+			$model_bitacora->save();
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
 }
 
-function dentro_de_horario($hms_inicio, $hms_fin, $hms_referencia=NULL){ // v2011-06-21
+function dentro_de_horario($hms_inicio, $hms_fin, $hms_referencia){ // v2011-06-21
 	    if( is_null($hms_referencia) ){
 	        $hms_referencia = date('G:i:s');
 	    }
