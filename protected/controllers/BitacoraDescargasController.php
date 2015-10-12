@@ -28,7 +28,7 @@ class BitacoraDescargasController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete'),
+				'actions'=>array('index','view','create','update','admin','delete','descontar','submit'),
 				'roles'=>array('Superadmin'),
 			),
 			array('deny',  // deny all users
@@ -162,4 +162,37 @@ class BitacoraDescargasController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function actionDescontar(){
+
+		$keyvalue   = $_POST["keyvalue"];   // ie: 'userid123'
+        //$name       = $_POST["name"];   // ie: 'firstname'
+        $old_value  = $_POST["old_value"];  // ie: 'patricia'
+        $new_value  = $_POST["new_value"];  // ie: '  paTTy '
+ 
+        // do some stuff here, and return the value to be displayed..
+        $model_stock = Stock::model()->findByPk($keyvalue);
+
+        $bitacora_descarga = new BitacoraDescargas;
+
+        if($new_value <= $model_stock->cantidad && $new_value > 0){
+        	$bitacora_descarga->fecha_hora = date('Y-m-d H:i:s');
+        	$bitacora_descarga->cantidad = $new_value;
+        	$bitacora_descarga->estado = 0;
+        	$bitacora_descarga->id_stock = $model_stock->id_stock;
+        	$bitacora_descarga->id_guardia = SolicitudesController::verificarGuardia()->id_guardia;
+        	$bitacora_descarga->save();
+        	echo $new_value;
+        }else{
+        	echo $old_value;
+        }
+		
+	}
+
+	public function actionSubmit(){
+		echo "entro";
+
+		exit();
+	}
+
 }

@@ -42,15 +42,33 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'bitacora-descargas-grid',
-	'dataProvider'=>$model->search(),
+	'dataProvider'=>$model->searchDescarga(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id_bitacora',
 		'fecha_hora',
-		'cantidad',
+		/*
+		array(
+			'name' => 'cantidad',
+			'value' => '$data->cantidad." (".UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data->id_medicamento))->unidad_medida))->descripcion.")"'
+		),
+		*/
 		'estado',
 		'id_stock',
 		'id_guardia',
+		/*
+		array(
+        	'header'=>'Cantidad',
+        	'value'=>'CHTML::numberField("cant" ,"0" ,array(\'min\'=>0,\'max\'=>$data->cantidad))',
+        	'type'=>'raw',
+        	'htmlOptions'=>array('width'=>'60px'),
+      	),
+      	array(
+        	'header'=>'',
+        	'value'=>'CHTML::button("Descontar" ,array("submit" => array("bitacoraDescargas/descontar/stock=".$data->id_stock)))',
+        	'type'=>'raw',
+        	'htmlOptions'=>array('width'=>'20px'),
+      	),
+      	*/
 		array(
 			'class'=>'CButtonColumn',
 		),
