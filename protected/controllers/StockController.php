@@ -767,6 +767,7 @@ class StockController extends Controller
 			$model_bitacora->id_estacion_destino = $model->id_estacion;
 			$model_bitacora->id_medicamento = $model->id_medicamento;
 			$model_bitacora->cantidad = $model->cantidad;
+			date_default_timezone_set("America/Caracas");
 			$model_bitacora->fecha = date('Y-m-d H:i:s');
 			$model_bitacora->save();
 		}

@@ -57,7 +57,10 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 			'name' => 'id_medicamento',
 			'value' => 'Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data->id_medicamento))->nombre'
 		),
-		'cantidad',
+		array(
+			'name' => 'cantidad',
+			'value' => '$data->cantidad." (".UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data->id_medicamento))->unidad_medida))->descripcion.")"',
+		),
 		array(
             'name' => 'fecha',
             'value' => 'date_format(date_create($data->fecha), "d-m-Y g:ia")',

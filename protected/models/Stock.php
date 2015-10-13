@@ -102,6 +102,8 @@ class Stock extends CActiveRecord
 		// @todo Please modify the following code to remove attributes that should not be searched
 		$criteria=new CDbCriteria;
 
+		$criteria->compare('id_medicamento',$this->id_medicamento);
+
 		$estacion = SolicitudesController::verificarGuardia(); 
 
 		if(!empty($estacion)){
@@ -115,7 +117,7 @@ class Stock extends CActiveRecord
 			));	
 
 		}else{
-			Yii::app()->user->setFlash('notice','Debe estar de guardia para Gestionar Solicitudes');
+			Yii::app()->user->setFlash('notice','Debe estar de Guardia para realizar descargas en su servicio.');
 
 			$criteria->addCondition("1=0");
 

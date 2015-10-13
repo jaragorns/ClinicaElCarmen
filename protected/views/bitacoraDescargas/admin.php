@@ -3,13 +3,7 @@
 /* @var $model BitacoraDescargas */
 
 $this->breadcrumbs=array(
-	'Bitacora Descargases'=>array('index'),
-	'Manage',
-);
-
-$this->menu=array(
-	array('label'=>'List BitacoraDescargas', 'url'=>array('index')),
-	array('label'=>'Create BitacoraDescargas', 'url'=>array('create')),
+	'Gestión Bitacora Descargas',
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,14 +20,14 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Bitacora Descargases</h1>
+<h1>Gesti&oacute;n de Bitacora Descargas</h1>
 
 <p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+Tambi&eacute;n puede escribir un operador de comparaci&oacute;n  (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
+&oacute; <b>=</b>) en el comienzo de cada uno de los valores de b&uacute;squeda para especificar c&oacute;mo se debe hacer la comparaci&oacute;n.
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link(Yii::t('app','Advanced Search'),'#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -42,33 +36,30 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'bitacora-descargas-grid',
-	'dataProvider'=>$model->searchDescarga(),
+	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'fecha_hora',
-		/*
+		 array(
+            'name'  => 'fecha_hora',
+            'value' => 'date_format(date_create($data->fecha_hora), "d-m-Y g:ia")',
+        ),
+		'cantidad',
+		 array(
+            'name' => 'estado',
+            'value' => 'strtr($data->estado, array("0" => "INACTIVO","1" => "DESCARGADO"))',
+        ),
 		array(
-			'name' => 'cantidad',
-			'value' => '$data->cantidad." (".UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data->id_medicamento))->unidad_medida))->descripcion.")"'
+			'header' => 'Medicamento',
+			'value' => 'Medicamentos::model()->findByAttributes(array("id_medicamento"=>Stock::model()->findByAttributes(array("id_stock"=>$data->id_stock))->id_medicamento))->nombre'
 		),
-		*/
-		'estado',
-		'id_stock',
-		'id_guardia',
-		/*
 		array(
-        	'header'=>'Cantidad',
-        	'value'=>'CHTML::numberField("cant" ,"0" ,array(\'min\'=>0,\'max\'=>$data->cantidad))',
-        	'type'=>'raw',
-        	'htmlOptions'=>array('width'=>'60px'),
-      	),
-      	array(
-        	'header'=>'',
-        	'value'=>'CHTML::button("Descontar" ,array("submit" => array("bitacoraDescargas/descontar/stock=".$data->id_stock)))',
-        	'type'=>'raw',
-        	'htmlOptions'=>array('width'=>'20px'),
-      	),
-      	*/
+			'header' => 'Servicio',
+			'value' => 'Estaciones::model()->findByAttributes(array("id_estacion"=>Guardias::model()->findByAttributes(array("id_guardia"=>$data->id_guardia))->id_estacion))->nombre',
+		),
+		array(
+			'header' => 'Usuario',
+			'value' => 'Usuarios::model()->findByAttributes(array("id"=>Guardias::model()->findByAttributes(array("id_guardia"=>$data->id_guardia))->id_usuario))->NombreCompleto',
+		),
 		array(
 			'class'=>'CButtonColumn',
 		),

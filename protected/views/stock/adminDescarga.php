@@ -35,31 +35,21 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 
 <?php echo CHtml::link(Yii::t('app','Advanced Search'),'#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
+<?php $this->renderPartial('_searchDescarga',array(
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'stock',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
-)); ?>
-
 <?php 
 	Yii::import('application.extensions.eeditable.*');
 	$this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'stock',
+	'id'=>'stock-grid',
 	'dataProvider'=>$model->searchDescarga(),
 	'filter'=>$model,
 	'columns'=>array(
-		//'id_stock',
 		array(
 			'name' => 'id_medicamento',
-			'value' => 'Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data->id_medicamento))->nombre'
+			'value' => 'Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data->id_medicamento))->nombre." (".UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data->id_medicamento))->unidad_medida))->descripcion.")"'
 		),
 		array(
 			'header' => 'Existencia',
@@ -71,7 +61,6 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 		),
 		array(
 			'header'=>'Cantidad',
-			//'value'=>'CHTML::numberField("cant" ,"0" ,array(\'min\'=>0,\'max\'=>$data->cantidad))',
 			'value'=>'0',
 			'class'=>'EEditableColumn','editable_type'=>'editbox',
 			'action'=>array('bitacoraDescargas/descontar'),
@@ -86,7 +75,7 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
       	*/
       	array(
         	'header'=>'',
-        	'value'=>'CHTML::button("Descontar" ,array("submit" => array("bitacoraDescargas/submit/stock=".$data->id_stock."/cantidad/")))',
+        	'value'=>'CHTML::button("Descontar" ,array("submit"=>array("bitacoraDescargas/submit/stock/".$data->id_stock), "class"=>"btn btn-primary btn-large"))',
         	'type'=>'raw',
         	'htmlOptions'=>array('width'=>'20px'),
       	),
@@ -97,10 +86,5 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 		*/
 	),
 ));
-
-	//echo CHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save'),  array("class"=>"btn btn-primary btn-large", "submit" => array("bitacoraDescargas/descontar"))); 
-
-
-$this->endWidget(); 
  ?>
 

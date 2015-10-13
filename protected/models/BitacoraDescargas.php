@@ -88,7 +88,7 @@ class BitacoraDescargas extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		//$criteria->join='LEFT JOIN Stock ON Stock.id_estacion='.SolicitudesController::verificarGuardia()->id_estacion;
-        //$criteria->condition='Client.businessId='. Yii::app()->userInfo->business;
+        //$criteria->condition='estado=1';
 
 		$criteria->compare('id_bitacora',$this->id_bitacora);
 		$criteria->compare('fecha_hora',$this->fecha_hora,true);
@@ -99,44 +99,10 @@ class BitacoraDescargas extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array(
+				'defaultOrder' => 'estado DESC, fecha_hora DESC',
+			),
 		));
-	}
-
-	public function searchDescarga()
-	{
-
-		$consulta = "SELECT * FROM stock WHERE id_estacion = ".SolicitudesController::verificarGuardia()->id_estacion;
-		$data = Stock::model()->findAllBySql($consulta);
-
-		echo "<pre>";
-		print_r($data);
-		echo "</pre>";
-		exit();
-		// @todo Please modify the following code to remove attributes that should not be searched
-		$criteria=new CDbCriteria;
-
-		$estacion = SolicitudesController::verificarGuardia(); 
-
-		if(!empty($estacion)){
-
-			$estacion = $estacion['id_estacion'];
-		
-			$criteria->addCondition("id_estacion='$estacion'");
-
-			return new CActiveDataProvider($this, array(
-				'criteria'=>$data,
-			));	
-
-		}else{
-			Yii::app()->user->setFlash('notice','Debe estar de guardia para Gestionar Solicitudes');
-
-			$criteria->addCondition("1=0");
-
-			return new CActiveDataProvider($this, array(
-				'criteria'=>$criteria,
-			));	
-		}
-
 	}
 
 	/**
