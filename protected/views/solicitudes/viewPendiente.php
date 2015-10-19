@@ -43,7 +43,7 @@ $this->menu=array(
 
 <?php 
 	$estacionSolicita = Guardias::model()->findByAttributes(array('id_guardia'=>$model->guardias_id_guardia))->id_estacion;
-
+  
   if($model->estado!=2){
       Yii::import('application.extensions.eeditable.*');
       $this->widget('zii.widgets.grid.CGridView', array(
@@ -53,22 +53,24 @@ $this->menu=array(
         array(
                 'name' => 'id_medicamento',
                 'value' => 'Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data->id_medicamento))->nombre',     
-           //     'htmlOptions' => array('style'=>'text-align: left;'),      
             ),
             array(
               'name' => 'Cantidad Solicitada',
               'value' => '$data->cantidad',
-            //  'htmlOptions' => array('style'=>'width:100px; text-align: center;'),
             ),
             array(
-              'name' => 'Cantidad Existente',
+              'name' => 'Cantidad en Servicio',
               'value' => 'cantidadExistente('.$estacionSolicita.',$data->id_medicamento)',
-            //  'htmlOptions' => array('style'=>'width:100px; text-align: center;'),
             ),
             array(
               'name' => 'Mi Stock',
               'value' => 'miStock('.$model->estacion_id_estacion.',$data->id_medicamento)',
-            //  'htmlOptions' => array('style'=>'width:100px; text-align: center;'),
+            ),
+            array(
+              'name' => 'Asignacion',
+              'value' => '0',
+              'class'=>'EEditableColumn', 'editable_type'=>'editbox',
+              'action'=>array('Solicitudes/ajaxeditcolumnAsig'),
             ),
              array(
                 'name'=>'estado',
@@ -95,7 +97,7 @@ $this->menu=array(
             //  'htmlOptions' => array('style'=>'width:100px; text-align: center;'),
             ),
             array(
-              'name' => 'Cantidad Existente',
+              'name' => 'Cantidad en Servicio',
               'value' => 'cantidadExistente('.$estacionSolicita.',$data->id_medicamento)',
             //  'htmlOptions' => array('style'=>'width:100px; text-align: center;'),
             ),
@@ -103,6 +105,10 @@ $this->menu=array(
               'name' => 'Mi Stock',
               'value' => 'miStock('.$model->estacion_id_estacion.',$data->id_medicamento)',
             //  'htmlOptions' => array('style'=>'width:100px; text-align: center;'),
+            ),
+            array(
+              'name' => 'Asignado',
+              'value' => 'bitacora_stock($data->id_item_solicitud,$data->id_medicamento)',
             ),
              array(
                 'name'=>'estado',
@@ -113,6 +119,14 @@ $this->menu=array(
      <h3 align="center">Solicitud Procesada</h3>
 
      <?php 
+
+    //    $model = ItemSolicitud::model()->findByPk($id_item_solicitud);
+        //modelo de tipo solicitud dnd tengo los datos necesarios para asignar excepto la estacion
+        $modelSolicitud = Solicitudes::model()->findByAttributes(array('id_solicitud'=>$model->id_solicitud)); 
+        //obtengo la estacion de quien me hizo la solicitud y a donde voy a asignar por medio de la guardia.
+        $estacion = Guardias::model()->findByPk($modelSolicitud->guardias_id_guardia)->id_estacion;
+
+        print_r($estacion);
   }
 
 function cantidadExistente($estacion, $id_medicamento) {
@@ -135,6 +149,18 @@ function miStock($estacion, $id_medicamento){
     } else {
     	return $value->cantidad;
     }	
+
+}
+
+function bitacora_stock($item, $id_medicamento){
+  $sql = "SELECT cantidad FROM bitacora_stock WHERE id_item_solicitud=".$item." AND id_medicamento=".$id_medicamento;
+  $value = Stock::model()->findBySql($sql);
+
+    if (!isset($value->cantidad)) {
+      return 0;
+    } else {
+      return $value->cantidad;
+    } 
 
 }
 

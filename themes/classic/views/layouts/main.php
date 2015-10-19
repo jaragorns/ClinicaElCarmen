@@ -452,6 +452,23 @@
                             <li id="menu-item-19" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19">
                                 <a title="Descargas" href="<?php echo Yii::app()->baseUrl;?>/bitacoradescargas/admin">Descargas</a>
                             </li>
+                            <li id="menu-item-20" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-20 dropdown">
+                                <a title="Reportes" href="<?php echo Yii::app()->baseUrl;?>/reportes" data-toggle="dropdown" class="dropdown-toggle">Reportes<span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-201" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-201">
+                                        <a title="Vacaciones" href="<?php echo Yii::app()->baseUrl;?>/reportes/vacaciones">Vacaciones</a>
+                                    </li>
+                                    <li id="menu-item-202" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-202">
+                                        <a title="Proveedores" href="<?php echo Yii::app()->baseUrl;?>/reportes/proveedores">Proveedores</a>
+                                    </li>
+                                    <li id="menu-item-203" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-203">
+                                        <a title="Facturas" href="<?php echo Yii::app()->baseUrl;?>/reportes/facturas">Facturas</a>
+                                    </li>
+                                    <li id="menu-item-204" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-204">
+                                        <a title="Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/reportes/medicamentos">Medicamentos</a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     <?php 
                     }if(Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){ ?>
