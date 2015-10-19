@@ -450,7 +450,7 @@
                                 <a title="Bitacora Stock" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock/admin">Bitacora Stock</a>
                             </li>
                             <li id="menu-item-19" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19">
-                                <a title="Descargas" href="<?php echo Yii::app()->baseUrl;?>/bitacoradescargas/admin">Descargas</a>
+                                <a title="Descargas" href="<?php echo Yii::app()->baseUrl;?>/stock/adminDescarga">Descargas</a>
                             </li>
                             <li id="menu-item-20" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-20 dropdown">
                                 <a title="Reportes" href="<?php echo Yii::app()->baseUrl;?>/reportes" data-toggle="dropdown" class="dropdown-toggle">Reportes<span class="caret"></span></a>

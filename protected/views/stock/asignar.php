@@ -74,7 +74,7 @@ $this->menu=array(
 					$model->id_estacion = SolicitudesController::verificarGuardia()->id_estacion;
 					
 				}else{
-					Yii::app()->user->setFlash('error','Debe estar de guardia para realizar asiganaciones.');	
+					Yii::app()->user->setFlash('notice','Debe estar de guardia para realizar asiganaciones.');	
 				}
 			}
 			echo $form->error($model,'id_estacion'); 

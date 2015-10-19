@@ -28,7 +28,7 @@ class StockController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','viewEstacion','create','update','admin','delete','asignar','autocomplete'),
+				'actions'=>array('index','view','viewEstacion','create','update','admin','delete','asignar','adminDescarga','autocomplete'),
 				'roles'=>array('Superadmin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
@@ -489,6 +489,7 @@ class StockController extends Controller
 					$this->redirect(array('viewEstacion','id_estacion'=>$model->id_estacion));
 
 			 	}else{
+			 		if($cont == 0)
 			 		Yii::app()->user->setFlash('notice','Debe asignar al menos un medicamento.');		
 			 	}
 				
@@ -595,6 +596,19 @@ class StockController extends Controller
 			$model->attributes=$_GET['Stock'];
 
 		$this->render('admin',array(
+			'model'=>$model,
+		));
+	}
+
+	public function actionAdminDescarga()
+	{
+		
+		$model=new Stock('searchDescarga');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Stock']))
+			$model->attributes=$_GET['Stock'];
+
+		$this->render('adminDescarga',array(
 			'model'=>$model,
 		));
 	}
@@ -753,6 +767,7 @@ class StockController extends Controller
 			$model_bitacora->id_estacion_destino = $model->id_estacion;
 			$model_bitacora->id_medicamento = $model->id_medicamento;
 			$model_bitacora->cantidad = $model->cantidad;
+			date_default_timezone_set("America/Caracas");
 			$model_bitacora->fecha = date('Y-m-d H:i:s');
 			$model_bitacora->save();
 		}
@@ -774,7 +789,7 @@ class StockController extends Controller
 		 	}
 
 		 	if($band){
-		 		Yii::app()->user->setFlash('error','No debe repetir medicamentos. BORRAR LA ASIGNACION REPETIDA');
+		 		Yii::app()->user->setFlash('error','No debe repetir medicamentos. BORRAR EL MEDICAMENTO Y SU ASIGNACION');
 		 		return false;
 		 	}else{
 		 		return true;

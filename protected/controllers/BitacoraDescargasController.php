@@ -28,7 +28,7 @@ class BitacoraDescargasController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete'),
+				'actions'=>array('index','view','create','update','admin','delete','descontar','submit'),
 				'roles'=>array('Superadmin'),
 			),
 			array('deny',  // deny all users
@@ -162,4 +162,62 @@ class BitacoraDescargasController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function actionDescontar(){
+
+		$keyvalue   = $_POST["keyvalue"];   // ie: 'userid123'
+        //$name       = $_POST["name"];   // ie: 'firstname'
+        $old_value  = $_POST["old_value"];  // ie: 'patricia'
+        $new_value  = $_POST["new_value"];  // ie: '  paTTy '
+ 
+        // do some stuff here, and return the value to be displayed..
+        $model_stock = Stock::model()->findByPk($keyvalue);
+
+        $bitacora_descarga = new BitacoraDescargas;
+
+        if($new_value <= $model_stock->cantidad && $new_value > 0){
+        	date_default_timezone_set("America/Caracas");
+        	$bitacora_descarga->fecha_hora = date('Y-m-d H:i:s');
+        	$bitacora_descarga->cantidad = $new_value;
+        	$bitacora_descarga->estado = 0;
+        	$bitacora_descarga->id_stock = $model_stock->id_stock;
+        	$bitacora_descarga->id_guardia = SolicitudesController::verificarGuardia()->id_guardia;
+        	$bitacora_descarga->save();
+        	echo $new_value;
+        }else{
+        	echo $old_value;
+        }
+		
+	}
+	/*BUSCO EL ULTIMO REGISTRO EN BITACORA_DESCARGAS
+	* $_GET['stock'] es el id_stock donde se hizo la descarga, obtenido mediante $_GET.
+	* Se realiza la busqueda tomando en cuenta el id_guardia de la persona logeada y el ultimo registro escrito en BITACORA_DESCARGAS ''DESC => fecha_hora''
+	* Esto se hace debido a que el usuario pudo haber modificado varias veces el campo eeditable de la cantidad a descargar y debo tomar el ultimo insertado
+	*/ 
+	public function actionSubmit(){
+
+		$bitacora_descarga = new BitacoraDescargas;
+
+		$bitacora = BitacoraDescargas::model()->findAllByAttributes(array('id_stock'=>$_GET['stock'],'id_guardia'=>SolicitudesController::verificarGuardia()->id_guardia,'estado'=>0), array('order'=>'fecha_hora DESC'));
+
+		if(!empty($bitacora)){
+			
+			$bitacora_descarga = $bitacora[0];
+			$stock = Stock::model()->findByPk($_GET['stock']);
+			$sql = "UPDATE `stock` SET `cantidad`=".($stock->cantidad - $bitacora_descarga->cantidad)." WHERE `id_stock`=".$_GET['stock'];
+			$execute = Yii::app()->db->createCommand($sql)->execute();
+			$bitacora_descarga->estado = 1;
+			$bitacora_descarga->save();
+			Yii::app()->user->setFlash('success','Descarga de medicamentos realizada.');
+			$this->redirect(array('stock/adminDescarga'));
+
+		}else{
+
+			Yii::app()->user->setFlash('notice','Debe haber insertado un monto del medicamento a descargar.');
+			$this->redirect(array('stock/adminDescarga'));
+
+		}
+
+	}
+
 }

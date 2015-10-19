@@ -87,6 +87,9 @@ class BitacoraDescargas extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		//$criteria->join='LEFT JOIN Stock ON Stock.id_estacion='.SolicitudesController::verificarGuardia()->id_estacion;
+        //$criteria->condition='estado=1';
+
 		$criteria->compare('id_bitacora',$this->id_bitacora);
 		$criteria->compare('fecha_hora',$this->fecha_hora,true);
 		$criteria->compare('cantidad',$this->cantidad);
@@ -96,6 +99,9 @@ class BitacoraDescargas extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array(
+				'defaultOrder' => 'estado DESC, fecha_hora DESC',
+			),
 		));
 	}
 

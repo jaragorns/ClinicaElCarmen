@@ -356,7 +356,7 @@ class SolicitudesController extends Controller
 		$dia = "dia_".date("j");
 		$hora = date("G:i"); //hora en minutos y segundos
 
-		if(strtotime($hora) > strtotime("00:00")){
+		if(strtotime($hora) > strtotime("00:00") && strtotime($hora) < strtotime("07:00")){
 			$dia = "dia_".(date("j")-1);
 		}
 		//cambiar el dia y el id
@@ -366,6 +366,7 @@ class SolicitudesController extends Controller
 				WHERE mes=7
 						AND ano=".date('Y')." 
 						AND id_usuario=345678222
+						AND id_usuario=999765
 						AND ".$dia."!=1 "; 
 
 		$deGuardia = Guardias::model()->findAllBySql($sql);
