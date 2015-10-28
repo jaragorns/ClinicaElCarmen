@@ -444,9 +444,11 @@ class SolicitudesController extends Controller
         		$exist_bitacora = BitacoraStock::model()->findByAttributes(array('id_item_solicitud'=>$id_item_solicitud)); 
         		//si existe un registro en la bitacora para ese itemo
         		if(!empty($exist_bitacora)){
-
-
-        		}else{
+        			$this->asignar($exist_bitacora->id_medicamento, 
+        							$exist_bitacora->cantidad, 
+        							$exist_bitacora->id_estacion_destino,
+        							$exist_bitacora->id_estacion_origen);
+	       		}else{
         			$new_value = 0;
         		}
         		//Hacer el cambio en Stock
@@ -493,15 +495,30 @@ class SolicitudesController extends Controller
         //obtengo la estacion de quien me hizo la solicitud y a donde voy a asignar por medio de la guardia.
         $estacion = Guardias::model()->findByPk($modelSolicitud->guardias_id_guardia)->id_estacion;
 
-      	//Creando registro en bitacora
-       	$band = $this->registro_bitacora($model->id_medicamento, $new_value, $estacion, SolicitudesController::verificarGuardia()->id_estacion, $model->id_item_solicitud); 
+        $estacion_origen = SolicitudesController::verificarGuardia()->id_estacion; 
 
-       	if($band){
-			echo $new_value;
-		}else{
-			$old_value = BitacoraStock::model()->findByAttributes(array('id_item_solicitud'=>$model->id_item_solicitud))->cantidad; 
-			echo $old_value;
-		}	
+        //busco mi stock
+        $cantidad_stock = Stock::model()->findByAttributes(array('id_estacion'=>$estacion_origen, 'id_medicamento'=>$model->id_medicamento));
+      	$cantidad_stock = $cantidad_stock->cantidad;
+
+      	//comparo que tenga cantidad suficiente en stock para asignar 
+      	if($new_value <= $cantidad_stock){
+      		//Creando registro en bitacora
+    	   	$band = $this->registro_bitacora($model->id_medicamento, $new_value, $estacion, $estacion_origen, $model->id_item_solicitud); 	
+
+    	   	if($band){
+				echo $new_value;
+			}else{
+				$old_value = BitacoraStock::model()->findByAttributes(array('id_item_solicitud'=>$model->id_item_solicitud))->cantidad; 
+				echo $old_value;
+			}
+	   	}else{
+	   		echo "0";
+	   	}
+
+      	
+
+       	
     }
 
     public function Asignar($id_medicamento, $cantidad_asignar, $estacion_destino, $estacion_origen)
@@ -515,9 +532,7 @@ class SolicitudesController extends Controller
 		$result = Stock::model()->findAllBySql($sql);
 
 		//SI LA CANTIDAD A ASIGNAR ES MAYOR A LA EXISTENCIA
-		if($cantidad_asignar > $result['0']['cantidad']){
-
-		}else{ 
+		if($cantidad_asignar <= $result['0']['cantidad']){
 			//SE PROCEDE A BUSCAR SI EXISTE CANTIDAD DEL MEDICAMENTO EN LA ESTACION A ASIGNAR.
 			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$id_medicamento." AND `id_estacion`= ".$estacion_destino;
 			$cantidad_servicio = Stock::model()->findAllBySql($sql);
@@ -559,8 +574,7 @@ class SolicitudesController extends Controller
 		$model_bitacora->cantidad = $cantidad_asignar;
 		$model_bitacora->fecha = date('Y-m-d H:i:s');
 		$model_bitacora->id_item_solicitud = $item;
-		$model_bitacora->estado = 1; 
-
+		
 		$exist = BitacoraStock::model()->findByAttributes(array('id_item_solicitud'=>$item));
 
 		if(empty($exist)){
