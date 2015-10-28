@@ -70,6 +70,19 @@ class BitacoraDescargas extends CActiveRecord
 	}
 
 	/**
+	 * @return array to obtain full information 
+	 */
+	public function getStockInformation()
+    {
+        return 'Se descargo '.$this->cantidad
+        .' '.UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>Medicamentos::model()->findByAttributes(array("id_medicamento"=>Stock::model()->findByAttributes(array("id_stock"=>$this->id_stock))->id_medicamento))->unidad_medida))->descripcion
+        .' de '.Medicamentos::model()->findByAttributes(array("id_medicamento"=>Stock::model()->findByAttributes(array("id_stock"=>$this->id_stock))->id_medicamento))->nombre
+        .'. En el servicio '.Estaciones::model()->findByAttributes(array("id_estacion"=>Guardias::model()->findByAttributes(array("id_guardia"=>$this->id_guardia))->id_estacion))->nombre
+        .'. Fecha: '.date_format(date_create($this->fecha_hora), "d-m-Y g:ia")
+        .'. Por '.Usuarios::model()->findByAttributes(array("id"=>Guardias::model()->findByAttributes(array("id_guardia"=>$this->id_guardia))->id_usuario))->NombreCompleto;
+    }
+
+	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
 	 * Typical usecase:

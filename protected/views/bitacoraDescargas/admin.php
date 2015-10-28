@@ -39,12 +39,12 @@ Tambi&eacute;n puede escribir un operador de comparaci&oacute;n  (<b>&lt;</b>, <
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		 array(
+		array(
             'name'  => 'fecha_hora',
             'value' => 'date_format(date_create($data->fecha_hora), "d-m-Y g:ia")',
         ),
 		'cantidad',
-		 array(
+		array(
             'name' => 'estado',
             'value' => 'strtr($data->estado, array("0" => "INACTIVO","1" => "DESCARGADO"))',
         ),

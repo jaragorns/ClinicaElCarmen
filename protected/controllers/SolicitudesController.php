@@ -365,7 +365,7 @@ class SolicitudesController extends Controller
 				FROM guardias 
 				WHERE mes=7
 						AND ano=".date('Y')." 
-						AND id_usuario=999765
+						AND id_usuario=4567764
 						AND ".$dia."!=1 "; 
 
 		$deGuardia = Guardias::model()->findAllBySql($sql);

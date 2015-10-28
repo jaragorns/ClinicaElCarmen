@@ -4,6 +4,46 @@ $this->breadcrumbs=array(
 	'Galería',
 );
 ?>
+<!--
+	<div id="carousel-example-captions" class="carousel carousel-images slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-captions" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-captions" data-slide-to="1"></li>
+        <li data-target="#carousel-example-captions" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item active">
+        <img src="<?php //echo Yii::app()->theme->baseUrl;?>/img/fotos/Frente.jpg" alt="Clinica El Carmen C.A.">
+        <div class="carousel-caption animated fadeInUpBig">
+            <h3>Clínica El Carmen C.A.</h3>
+            <p>San Juan de Colón - Edo. Táchira</p>
+        </div>
+        </div>
+        <div class="item">
+        <img src="<?php //echo Yii::app()->theme->baseUrl;?>/img/fotos/Sala_espera.jpg" alt="Sala de Espera - Emergencia.">
+        <div class="carousel-caption animated fadeInUpBig">
+            <h3>Clínica El Carmen C.A.</h3>
+            <p>Sala de Espera - Emergencia.</p>
+        </div>
+        </div>
+        <div class="item">
+        <img src="<?php //echo Yii::app()->theme->baseUrl;?>/img/fotos/Pasillo9.jpg" alt="Patio Central - Vista Superior.">
+        <div class="carousel-caption animated fadeInUpBig">
+            <h3>Clínica El Carmen C.A.</h3>
+            <p>Patio Central - Vista Superior.</p>
+        </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#carousel-example-captions" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-captions" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+-->
+
+
 	<div class="row">
 		<h1 class="center-title">Galería</h1>
 			<ul id="jquery-demo">

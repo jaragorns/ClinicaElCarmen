@@ -431,7 +431,7 @@
                                         <a title="Mis Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/admin">Mis Solicitudes</a>
                                     </li>
                                     <li id="menu-item-163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163">
-                                        <a title="Solicitudes Pendientes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/adminPendiente">Solicitudes Pendientes</a>
+                                        <a title="Solicitudes Pendientes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/adminPendiente"><span class="badge"><?php if(!empty($result))echo count($result);?></span>Solicitudes Pendientes</a>
                                     </li>
                                 </ul>
                             </li>
@@ -446,11 +446,46 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li id="menu-item-18" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-18">
-                                <a title="Bitacora Stock" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock/admin">Bitacora Stock</a>
+                            <li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Bitacora Stock" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock" data-toggle="dropdown" class="dropdown-toggle">Bitacoras <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-181" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-181">
+                                        <a title="Bitacora Stock" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock/admin">Bitacora Stock</a>
+                                    </li>
+                                    <li id="menu-item-182" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-182">
+                                        <a title="Bitacora Descargas" href="<?php echo Yii::app()->baseUrl;?>/bitacoradescargas/admin">Bitacora Descargas</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li id="menu-item-19" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19">
                                 <a title="Descargas" href="<?php echo Yii::app()->baseUrl;?>/stock/adminDescarga">Descargas</a>
+                            </li>
+                            <li id="menu-item-20" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Reportes" href="<?php echo Yii::app()->baseUrl;?>/stock" data-toggle="dropdown" class="dropdown-toggle">Reportes <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-201" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-201">
+                                        <a title="Reporte 1" href="<?php echo Yii::app()->baseUrl;?>/stock/admin">Reporte 1</a>
+                                    </li>
+                                    <li id="menu-item-202" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-202">
+                                        <a title="Reporte 2" href="<?php echo Yii::app()->baseUrl;?>/stock/asignar">Reporte 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul id="menu-mainmenu" class="nav navbar-nav">
+                            <li id="menu-item-21" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Tickets" href="<?php echo Yii::app()->baseUrl;?>/tickets" data-toggle="dropdown" class="dropdown-toggle">Tickets <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-211" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-211">
+                                        <a title="Crear Ticket" href="<?php echo Yii::app()->baseUrl;?>/tickets/create">Crear Ticket</a>
+                                    </li>
+                                    <li id="menu-item-212" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-212">
+                                        <a title="Tickets Pendientes" href="<?php echo Yii::app()->baseUrl;?>/tickets/admin">Tickets Pendientes</a>
+                                    </li>
+                                     <li id="menu-item-213" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-213">
+                                        <a title="Historial de Tickets" href="<?php echo Yii::app()->baseUrl;?>/tickets/adminHistorial">Historial de Tickets</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     <?php 
