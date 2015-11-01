@@ -15,7 +15,8 @@ $this->breadcrumbs=array(
 * El <b>Reporte por Proveedor</b> le mostrará todas las facturas asociadas a un proveedor específico.<br>
 * Si selecciona <b>Todos los Proveedores</b> se le mostrará un reporte de todas las facturas a la fecha de todos los proveedores. <br>
 *  El <b>Rango de Fechas</b> le permite seleccionar las facturas existentes para un período de tiempo dado, bien sea de 
-	todos los proveedores o para uno en específico. 
+	todos los proveedores o para uno en específico. <br>
+* Si desea imprimir una factura específica debe buscar dicha factura y seleccionar la opción Ver, luego Imprimir. 
 </p>
 
 <?php //$this->renderPartial('_facturas'); ?>

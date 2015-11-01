@@ -29,7 +29,7 @@ class ReportesController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('vacaciones','Autocomplete','vacio','proveedores','facturas', 
-								'AutocompletePro', 'medicamentos'),
+								'AutocompletePro', 'medicamentos', 'solicitudes'),
 				'roles'=>array('Superadmin'),
 			),
 			array('deny',  // deny all users
@@ -424,6 +424,250 @@ class ReportesController extends Controller
 		}
 	}
 
+	public function actionSolicitudes(){
+		$sql = "";
+		$sql0 = "";
+		$sql1 = ""; 
+		$sql2 = ""; 
+		$sql3 = ""; 
+		//si solo selecciono reporte general
+		if(isset($_GET["all"]) && $_GET["all"]==1){
+			$sql0 = "SELECT * FROM solicitudes"; 
+
+			//si colocó rango de fechas
+			if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+				$sql0 = "SELECT * FROM solicitudes WHERE fecha_solicitud BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+			}
+
+			$bandPendiente = false; 
+			$bandProceso = false; 
+			$bandProcesadas = false; 
+
+			//si selecciona algun estado filtra por ese estado y verifica si hay rango de fechas
+			if( $_GET["allPen"]==1 ){
+				$sql1= " SELECT * FROM solicitudes WHERE estado = 0"; 
+
+				if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+					$sql1 = "SELECT * FROM solicitudes WHERE estado = 0 AND fecha_solicitud BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+				}
+				$bandPendiente = true; 
+			}				
+			if( $_GET["allenPro"]==1 ){
+				$sql2= " SELECT * FROM solicitudes WHERE estado = 1"; 
+
+				if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+					$sql2 = "SELECT * FROM solicitudes WHERE estado = 1 AND fecha_solicitud BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+				}
+				$bandProceso = true; 
+			}
+			if( $_GET["allPro"]==1 ){
+				$sql3= " SELECT * FROM solicitudes WHERE estado = 2"; 
+
+				if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+					$sql3 = "SELECT * FROM solicitudes WHERE estado = 2 AND fecha_solicitud BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+				}
+				$bandProcesadas = true; 
+			}
+
+			if($bandPendiente)
+				$sql = $sql1;
+			if($bandProceso)
+				$sql = $sql2;
+			if($bandProcesadas)
+				$sql = $sql3;
+			if($bandPendiente && $bandProceso)
+				$sql = $sql1 ." UNION ".$sql2;
+			if($bandPendiente && $bandProcesadas)
+				$sql = $sql1 ." UNION ".$sql3;
+			if($bandProceso && $bandProcesadas)
+				$sql = $sql2 ." UNION ".$sql3;
+			if($bandPendiente && $bandProceso && $bandProcesadas) 
+				$sql = $sql1 ." UNION ".$sql2. " UNION ".$sql3;
+			if($bandPendiente==false && $bandProceso==false && $bandProcesadas==false) 
+				$sql = $sql0;
+			
+			$this->crearPdfSolicitudes($sql); 
+		}
+		if(isset($_GET["reaPor"]) && !empty($_GET["reaPor"])){
+			$sql0 = "SELECT a.* FROM solicitudes as a JOIN guardias as b 
+					ON a.guardias_id_guardia = b.id_guardia 
+					 WHERE b.id_estacion = ".$_GET["reaPor"]; 
+
+			//si colocó rango de fechas
+			if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+				$sql0 = "SELECT a.* FROM solicitudes as a JOIN guardias as b 
+					ON a.guardias_id_guardia = b.id_guardia 
+					 WHERE b.id_estacion = ".$_GET["reaPor"]." AND a.fecha_solicitud BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+			}
+
+			$bandPendiente = false; 
+			$bandProceso = false; 
+			$bandProcesadas = false; 
+
+			//si selecciona algun estado filtra por ese estado y verifica si hay rango de fechas
+			if( $_GET["rpPen"]==1 ){
+				$sql1= " SELECT a.* FROM solicitudes as a JOIN guardias as b 
+					ON a.guardias_id_guardia = b.id_guardia 
+					 WHERE a.estado = 0 AND b.id_estacion = ".$_GET["reaPor"]; 
+
+				if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+					$sql1 = "SELECT a.* FROM solicitudes as a JOIN guardias as b 
+					ON a.guardias_id_guardia = b.id_guardia 
+					 WHERE a.estado = 0 AND b.id_estacion = ".$_GET["reaPor"]." AND fecha_solicitud BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+				}
+				$bandPendiente = true; 
+			}				
+			if( $_GET["rpenPro"]==1 ){
+				$sql2= " SELECT a.* FROM solicitudes as a JOIN guardias as b 
+					ON a.guardias_id_guardia = b.id_guardia 
+					 WHERE a.estado = 1 AND b.id_estacion = ".$_GET["reaPor"];
+
+				if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+					$sql2 = "SELECT a.* FROM solicitudes as a JOIN guardias as b 
+					ON a.guardias_id_guardia = b.id_guardia 
+					 WHERE a.estado = 1 AND b.id_estacion = ".$_GET["reaPor"]." AND fecha_solicitud BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+				}
+				$bandProceso = true; 
+			}
+			if( $_GET["rpPro"]==1 ){
+				$sql3= " SELECT a.* FROM solicitudes as a JOIN guardias as b 
+					ON a.guardias_id_guardia = b.id_guardia 
+					 WHERE a.estado = 2 AND b.id_estacion = ".$_GET["reaPor"];
+				if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+					$sql3 =  "SELECT a.* FROM solicitudes as a JOIN guardias as b 
+					ON a.guardias_id_guardia = b.id_guardia 
+					 WHERE a.estado = 2 AND b.id_estacion = ".$_GET["reaPor"]." AND fecha_solicitud BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+				}
+				$bandProcesadas = true; 
+			}
+
+			if($bandPendiente)
+				$sql = $sql1;
+			if($bandProceso)
+				$sql = $sql2;
+			if($bandProcesadas)
+				$sql = $sql3;
+			if($bandPendiente && $bandProceso)
+				$sql = $sql1 ." UNION ".$sql2;
+			if($bandPendiente && $bandProcesadas)
+				$sql = $sql1 ." UNION ".$sql3;
+			if($bandProceso && $bandProcesadas)
+				$sql = $sql2 ." UNION ".$sql3;
+			if($bandPendiente && $bandProceso && $bandProcesadas) 
+				$sql = $sql1 ." UNION ".$sql2. " UNION ".$sql3;
+			if($bandPendiente==false && $bandProceso==false && $bandProcesadas==false) 
+				$sql = $sql0;
+			
+			$this->crearPdfSolicitudes($sql); 
+		}
+
+		if(isset($_GET["reaA"]) && !empty($_GET["reaA"])){
+			$sql0 = "SELECT * FROM solicitudes WHERE estacion_id_estacion = ".$_GET["reaA"]; 
+
+			//si colocó rango de fechas
+			if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+				$sql0 = "SELECT * FROM solicitudes WHERE estacion_id_estacion = ".$_GET["reaA"]." AND fecha_solicitud BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+			}
+
+			$bandPendiente = false; 
+			$bandProceso = false; 
+			$bandProcesadas = false; 
+
+			//si selecciona algun estado filtra por ese estado y verifica si hay rango de fechas
+			if( $_GET["raPen"]==1 ){
+				$sql1= " SELECT * FROM solicitudes WHERE estado = 0 AND estacion_id_estacion = ".$_GET["reaA"]; 
+
+				if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+					$sql1 = "SELECT * FROM solicitudes WHERE estado = 0 AND estacion_id_estacion = ".$_GET["reaA"]." AND fecha_solicitud BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+				}
+				$bandPendiente = true; 
+			}				
+			if( $_GET["raenPro"]==1 ){
+				$sql2= " SELECT * FROM solicitudes WHERE estado = 1 AND estacion_id_estacion = ".$_GET["reaA"];
+
+				if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+					$sql2 = "SELECT * FROM solicitudes WHERE estado = 1 AND estacion_id_estacion = ".$_GET["reaA"]." AND fecha_solicitud BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+				}
+				$bandProceso = true; 
+			}
+			if( $_GET["raPro"]==1 ){
+				$sql3= " SELECT * FROM solicitudes WHERE estado = 2 AND estacion_id_estacion = ".$_GET["reaA"];
+
+				if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+					$sql3 = "SELECT * FROM solicitudes WHERE estado = 2 AND estacion_id_estacion = ".$_GET["reaA"]." AND fecha_solicitud BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+				}
+				$bandProcesadas = true; 
+			}
+
+			if($bandPendiente)
+				$sql = $sql1;
+			if($bandProceso)
+				$sql = $sql2;
+			if($bandProcesadas)
+				$sql = $sql3;
+			if($bandPendiente && $bandProceso)
+				$sql = $sql1 ." UNION ".$sql2;
+			if($bandPendiente && $bandProcesadas)
+				$sql = $sql1 ." UNION ".$sql3;
+			if($bandProceso && $bandProcesadas)
+				$sql = $sql2 ." UNION ".$sql3;
+			if($bandPendiente && $bandProceso && $bandProcesadas) 
+				$sql = $sql1 ." UNION ".$sql2. " UNION ".$sql3;
+			if($bandPendiente==false && $bandProceso==false && $bandProcesadas==false) 
+				$sql = $sql0;
+			
+			$this->crearPdfSolicitudes($sql); 
+		}
+
+
+		$this->render('solicitudes'); 
+	}
+
+	public function crearPdfSolicitudes($sql){
+		$data = Solicitudes::model()->findAllBySql($sql); 
+		$tam = count($data);
+
+		if(!empty($data)){
+			$html = '
+				<table width="100%">
+					<tr>
+						<td class="logo"><img src="'.Yii::app()->theme->baseUrl.'/img/pre.png" height="120" width="160"></td>
+						<td class="titulo"><b>Reporte de Solicitudes <br> </b></td>
+					</tr>
+				</table>
+				<br><br>
+				<table width="100%" border="1" align="center" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
+					<tr>
+						<th class="header">Fecha de Solicitud</th>
+						<th class="header">Solicitado A</th>
+						<th class="header">Realizado Por</th>
+						<th class="header">Estado</th>
+					</tr>';
+					for($i=0; $i<$tam; $i++){
+						$html.='
+					<tr>
+						<td class="nombre">'.date_format(date_create($data[$i]["fecha_solicitud"]), "d-m-Y").'</td>
+						<td class="unidad">'.Estaciones::model()->findByAttributes(array("id_estacion"=>$data[$i]["estacion_id_estacion"]))->nombre.'</td>
+						<td class="componente"></td>
+						<td class="cantidad">'.strtr($data[$i]["estado"],array("0"=>"Pendiente", "1"=>"En Proceso", "2"=>"Procesada")).'</td>
+					</tr>';
+					}
+				$html.='
+				</table>
+			'; 
+
+			$mPDF1 = Yii::app()->ePdf->mpdf('','A4-L',9,'',15,15,15,15,'','');
+			$stylesheet = file_get_contents(Yii::getPathOfAlias('webroot.css') . '/reportes.css');
+			$nombre = "Reporte_Solicitudes.pdf";
+	        $mPDF1->WriteHTML($stylesheet, 1);
+			$mPDF1->WriteHTML($html);
+			$mPDF1->Output($nombre,'I'); 
+
+		}else{
+			Yii::app()->user->setFlash('notice','No hay registro de Solicitudes');
+			$this->redirect("solicitudes"); 	
+		}
+	}
 	public function actionAutocomplete($term) 
 	{
 		$criteria = new CDbCriteria;

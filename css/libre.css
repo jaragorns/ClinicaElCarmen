@@ -67,7 +67,14 @@ th{
 	padding-right: 60px;
 	background-color: #DAFFDA;
 }
+.totalF2{
+	width: 50%;
+	text-align: right;
+	padding-right: 30px;
+	background-color: #DAFFDA;
+}
 .retencion{
+	width: 50%;
 	background-color: #DAFFDA;
 }
 .proveedor{
