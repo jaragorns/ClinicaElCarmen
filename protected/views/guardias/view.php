@@ -3,7 +3,7 @@
 /* @var $model Guardias */
 
 $this->breadcrumbs=array(
-	'Guardiases'=>array('index'),
+	'Guardias'=>array('index'),
 	$model->id_guardia,
 );
 

@@ -28,7 +28,7 @@ class FacturasController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete','autocomplete'),
+				'actions'=>array('index','view','create','update','admin','delete','autocomplete','imprimir'),
 				'roles'=>array('Superadmin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
@@ -851,6 +851,98 @@ class FacturasController extends Controller
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
+
+	public function actionImprimir($id){
+		$factura = Facturas::model()->findByAttributes(array('id_factura'=>$id));
+		$data = Inventario::model()->findAllByAttributes(array('id_factura'=>$factura->num_factura));
+
+		$html='
+			<table class="ancho">
+			<tr>
+				<td></td>
+				<td></td>
+		    	<td class="control"><b>Control Fact:</b></td>
+		    	<td class="numF">'.$factura->control_factura.'</td>
+		    	<td class="control"><b>Fecha de Entra:</b></td>
+				<td class="numF">'.date_format(date_create($factura->fecha_entrada),"d-m-Y").'</td>
+		  	</tr>
+		  	<tr>
+			  	<td class="proveedor"><b>Proveedor:</b></td>	
+				<td class="nomP">'.$factura->idProveedor->nombre.'</td>
+			    <td class="control"><b>Num Factura:</b></td>
+			   	<td class="numF">'.$factura->num_factura.'</td>
+			    <td class="control"> <b>Fecha Fact:</b></td>	
+				<td class="numF">'.date_format(date_create($factura->fecha_factura),"d-m-Y").'</td>
+		  	</tr>
+		  	<tr>
+		  		<td></td>
+		  		<td></td>
+		  		<td></td>
+		  		<td></td>
+		  		<td class="control"> <b>Fecha Venc:</b></td>	
+				<td class="numF">'.date_format(date_create($factura->fecha_vencimiento),"d-m-Y").'</td>
+		  	</tr>
+		</table>
+		<br><br>
+		<table class="ancho">
+		<tr>
+			<th class="align"><b>Medicamento</b></th>
+			<th class="align"><b>IVA</b></th>
+			<th class="align"><b>Cantidad</b></th>
+			<th class="align"><b>Precio de Compra</b></th>
+			<th class="align"><b>Total</b></th>
+		</tr>';
+		for ($i=0; $i < count($data); $i++) { 
+			if(fmod($i,2)==0){
+		$html.='		
+		<tr>
+			<td class="medicamento">'.Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data[$i]["id_medicamento"]))->nombre.' </td>
+			<td class="iva">'.Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data[$i]["id_medicamento"]))->iva.' </td>
+			<td class="cantidad">'.$data[$i]["cantidad"].' </td>
+			<td class="precio_compra">'.$data[$i]["precio_compra"].' </td>
+			<td class="total">'.$data[$i]["total"].' </td>
+		</tr>';	
+		}else{
+		$html.='				
+		<tr>
+			<td class="medicamentoC">'.Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data[$i]["id_medicamento"]))->nombre.' </td>
+			<td class="ivaC">'.Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data[$i]["id_medicamento"]))->iva.' </td>
+			<td class="cantidadC">'.$data[$i]["cantidad"].' </td>
+			<td class="precio_compraC">'.$data[$i]["precio_compra"].' </td>
+			<td class="totalC">'.$data[$i]["total"].' </td>
+		</tr>';	
+			}
+		}
+		$html.='
+	</table>
+	<br>
+	<table class="ancho">
+		<tr>
+			<td class="retencion"><b>Retención: </b>';
+				if($factura->retencion==1)
+					$html.='75 %';
+				elseif($factura->retencion==2)
+					$html.='100 %';
+				else
+					$html.='Sin Retención';
+			$html.='
+			</td>
+			<td class="totalF2"><b>Total Factura: </b>'.$factura->monto.' </td>
+			<td>
+
+			</td>
+		</tr>
+	</table>		
+		';
+
+		$mPDF1 = Yii::app()->ePdf->mpdf('','A4',9,'',15,15,15,15,'','');
+		$stylesheet = file_get_contents(Yii::getPathOfAlias('webroot.css') . '/libre.css');
+		$nombre = "factura_".$factura->num_factura.".pdf";
+        $mPDF1->WriteHTML($stylesheet, 1);
+		$mPDF1->WriteHTML($html);
+		$mPDF1->Output($nombre,'I'); 
+	}
+
 
 	/**
 	 * Lists all models.

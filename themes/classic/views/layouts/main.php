@@ -485,6 +485,9 @@
                                      <li id="menu-item-213" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-213">
                                         <a title="Historial de Tickets" href="<?php echo Yii::app()->baseUrl;?>/tickets/adminHistorial">Historial de Tickets</a>
                                     </li>
+                                    <li id="menu-item-205" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-205">
+                                        <a title="Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/reportes/solicitudes">Solicitudes</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>

@@ -15,7 +15,7 @@ $this->menu = array(
 	array('label'=>'Crear Factura', 'url'=>array('create')),
 	array('label'=>'Actualizar Factura', 'url'=>array('update', 'id'=>$model->id_factura)),
 	array('label'=>'Gestionar Facturas', 'url'=>array('admin')),
-	
+	array('label'=>'Imprimir Factura', 'url'=>array('imprimir', 'id'=>$model->id_factura)),	
 );
 
 ?>
