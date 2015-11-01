@@ -463,11 +463,17 @@
                             <li id="menu-item-20" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
                                 <a title="Reportes" href="<?php echo Yii::app()->baseUrl;?>/stock" data-toggle="dropdown" class="dropdown-toggle">Reportes <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
-                                    <li id="menu-item-201" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-201">
-                                        <a title="Reporte 1" href="<?php echo Yii::app()->baseUrl;?>/stock/admin">Reporte 1</a>
+                                    <li id="menu-item-205" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-205">
+                                        <a title="Reporte de Facturas" href="<?php echo Yii::app()->baseUrl;?>/reportes/facturas">Facturas</a>
                                     </li>
-                                    <li id="menu-item-202" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-202">
-                                        <a title="Reporte 2" href="<?php echo Yii::app()->baseUrl;?>/stock/asignar">Reporte 2</a>
+                                    <li id="menu-item-205" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-205">
+                                        <a title="Reporte de Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/reportes/medicamentos">Medicamentos</a>
+                                    </li>
+                                    <li id="menu-item-205" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-205">
+                                        <a title="Reporte de Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/reportes/solicitudes">Solicitudes</a>
+                                    </li>
+                                    <li id="menu-item-205" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-205">
+                                        <a title="Reporte de Vacaciones" href="<?php echo Yii::app()->baseUrl;?>/reportes/vacaciones">Vacaciones</a>
                                     </li>
                                 </ul>
                             </li>
@@ -482,11 +488,8 @@
                                     <li id="menu-item-212" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-212">
                                         <a title="Tickets Pendientes" href="<?php echo Yii::app()->baseUrl;?>/tickets/admin">Tickets Pendientes</a>
                                     </li>
-                                     <li id="menu-item-213" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-213">
+                                    <li id="menu-item-213" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-213">
                                         <a title="Historial de Tickets" href="<?php echo Yii::app()->baseUrl;?>/tickets/adminHistorial">Historial de Tickets</a>
-                                    </li>
-                                    <li id="menu-item-205" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-205">
-                                        <a title="Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/reportes/solicitudes">Solicitudes</a>
                                     </li>
                                 </ul>
                             </li>

@@ -43,21 +43,19 @@
 		<?php echo $form->label($model,'cantidad'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->numberField($model,'cantidad',array('min'=>0, 'max'=>999999)); ?>
+		<?php  echo $form->numberField($model,'cantidad',array('min'=>0, 'max'=>999999)); ?>
 	</div>
 
 	<div class="rowcontact">
 		<?php echo $form->label($model,'estado'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'estado'); ?>
-	</div>
-
-	<div class="rowcontact">
-		<?php echo $form->label($model,'bitacora_descargas_id_bitacora'); ?>
-	</div>
-	<div class="media">
-		<?php echo $form->textField($model,'bitacora_descargas_id_bitacora'); ?>
+		<?php echo "En Construcción"
+			//echo CHtml::dropDownList('estado', 'estado', 
+            //  array('1' => 'Aprobado', '2' => 'Rechazado'),
+            //  array('empty' => '-- Seleccione un Estado --'));
+		?> 
+		<?php echo $form->error($model,'estado'); ?>
 	</div>
 
 	<div class="buttons">
