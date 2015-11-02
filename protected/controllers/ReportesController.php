@@ -646,10 +646,10 @@ class ReportesController extends Controller
 					for($i=0; $i<$tam; $i++){
 						$html.='
 					<tr>
-						<td class="nombre">'.date_format(date_create($data[$i]["fecha_solicitud"]), "d-m-Y").'</td>
-						<td class="unidad">'.Estaciones::model()->findByAttributes(array("id_estacion"=>$data[$i]["estacion_id_estacion"]))->nombre.'</td>
-						<td class="componente"></td>
-						<td class="cantidad">'.strtr($data[$i]["estado"],array("0"=>"Pendiente", "1"=>"En Proceso", "2"=>"Procesada")).'</td>
+						<td class="fecha">'.date_format(date_create($data[$i]["fecha_solicitud"]), "d-m-Y").'</td>
+						<td class="fecha">'.Estaciones::model()->findByAttributes(array("id_estacion"=>$data[$i]["estacion_id_estacion"]))->nombre.'</td>
+						<td class="reaP">'.Usuarios::model()->findByAttributes(array("id"=>Guardias::model()->findByAttributes(array("id_guardia"=>$data[$i]["guardias_id_guardia"]))->id_usuario))->NombreCompleto.' ( '.Estaciones::model()->findByAttributes(array("id_estacion"=>Guardias::model()->findByAttributes(array("id_guardia"=>$data[$i]["guardias_id_guardia"]))->id_estacion))->nombre.' ) </td>
+						<td class="fecha">'.strtr($data[$i]["estado"],array("0"=>"Pendiente", "1"=>"En Proceso", "2"=>"Procesada")).'</td>
 					</tr>';
 					}
 				$html.='

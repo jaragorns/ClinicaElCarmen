@@ -478,6 +478,9 @@
                                     <li id="menu-item-205" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-205">
                                         <a title="Reporte de Inventario" href="<?php echo Yii::app()->baseUrl;?>/reportes/inventario">Inventario</a>
                                     </li>
+                                    <li id="menu-item-206" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-206">
+                                        <a title="Reporte de Asignaciones" href="<?php echo Yii::app()->baseUrl;?>/reportes/asignaciones">Asignaciones</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>

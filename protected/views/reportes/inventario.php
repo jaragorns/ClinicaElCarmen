@@ -10,8 +10,11 @@ $this->breadcrumbs=array(
 <h1>Reporte de Inventario</h1>
 
 <p align="justify">
-
-
+	* El <b>Reporte General </b> le mostrar&aacute; la cantidad de medicamentos existentes en cada uno de los servicios. <br>
+	* Si selecciona un <b>Servicio</b> se mostrar&aacute; el inventario existente en dicho servicio. <br>
+	* Si selecciona un <b>Medicamento</b> se mostrar&aacute; la cantidad existente de ese medicamento en cada uno de los servicios. <br>
+	* Si selecciona el <b>Servicio</b> y a su vez un <b>Medicamento</b> se mostrar&aacute; la cantidad disponible de ese medicamento en ese servicio. <br><br>
+	<b>NOTA:</b> Si la cantidad de alg&uacute;n medicamento es 0 no se mostrar&aacute; ese medicamento en el reporte, es decir, de no aparecer un medicamento en el reporte significa que no hay existencia del mismo.  
 </p>
 
 <div class="form">
