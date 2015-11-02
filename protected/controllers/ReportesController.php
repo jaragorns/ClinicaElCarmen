@@ -29,7 +29,7 @@ class ReportesController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('vacaciones','Autocomplete','vacio','proveedores','facturas', 
-								'AutocompletePro', 'medicamentos', 'solicitudes'),
+								'AutocompletePro', 'medicamentos', 'solicitudes','inventario','AutocompleteMed'),
 				'roles'=>array('Superadmin'),
 			),
 			array('deny',  // deny all users
@@ -668,6 +668,77 @@ class ReportesController extends Controller
 			$this->redirect("solicitudes"); 	
 		}
 	}
+
+	public function actionInventario(){
+
+		if(isset($_GET["all"]) && $_GET["all"]==1){
+			$sql = "SELECT a.cantidad, a.id_medicamento, a.id_estacion, b.nombre FROM stock as a, medicamentos as b WHERE a.id_medicamento = b.id_medicamento AND a.cantidad>0 ORDER BY a.id_estacion, b.nombre ASC"; 
+			$this->crearPdfInventario($sql); 
+		}
+
+		if(isset($_GET["servicio"]) && !empty($_GET["servicio"])) {
+			$sql = "SELECT a.cantidad, a.id_medicamento, a.id_estacion, b.nombre FROM stock as a, medicamentos as b WHERE a.id_medicamento = b.id_medicamento AND a.id_estacion = ".$_GET["servicio"]." AND a.cantidad>0 ORDER BY a.id_estacion, b.nombre ASC"; 
+			if(!empty($_GET["id_medicamento"])){
+				$sql = "SELECT a.cantidad, a.id_medicamento, a.id_estacion, b.nombre FROM stock as a, medicamentos as b WHERE a.id_medicamento = b.id_medicamento AND a.id_medicamento = ".$_GET["id_medicamento"]." AND a.id_estacion = ".$_GET["servicio"]." AND a.cantidad>0 ORDER BY a.id_estacion, b.nombre ASC"; 
+			}
+			$this->crearPdfInventario($sql); 
+		}
+		if(isset($_GET["id_medicamento"]) && !empty($_GET["id_medicamento"])) {
+			$sql = "SELECT a.cantidad, a.id_medicamento, a.id_estacion, b.nombre FROM stock as a, medicamentos as b WHERE a.id_medicamento = b.id_medicamento AND a.id_medicamento = ".$_GET["id_medicamento"]." AND a.cantidad>0 ORDER BY a.id_estacion, b.nombre ASC"; 
+			$this->crearPdfInventario($sql); 
+		}
+
+		$this->render('inventario'); 
+	}
+
+	public function crearPdfInventario($sql){
+		$connection = Yii::app()->db;
+		$command = $connection->createCommand($sql);
+		$dataReader = $command->query();
+		$data = $dataReader->readAll();
+		
+		$tam = count($data);
+
+		if(!empty($data)){
+			$html = '
+				<table width="100%">
+					<tr>
+						<td class="logo"><img src="'.Yii::app()->theme->baseUrl.'/img/pre.png" height="120" width="160"></td>
+						<td class="titulo"><b>Reporte de Inventario <br> </b></td>
+					</tr>
+				</table>
+				<br><br>
+				<table width="100%" border="1" align="center" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
+					<tr>
+						<th class="header">Medicamento</th>
+						<th class="header">Cantidad</th>
+						<th class="header">Servicio</th>
+					</tr>';
+					for($i=0; $i<$tam; $i++){
+						$html.='
+					<tr>
+						<td class="nombre">'.$data[$i]["nombre"].'</td>
+						<td class="unidad">'.$data[$i]["cantidad"].'</td>
+						<td class="componente">'.Estaciones::model()->findByAttributes(array("id_estacion"=>$data[$i]["id_estacion"]))->nombre.'</td>
+					</tr>';
+					}
+				$html.='
+				</table>
+			'; 
+
+			$mPDF1 = Yii::app()->ePdf->mpdf('','A4',9,'',15,15,15,15,'','');
+			$stylesheet = file_get_contents(Yii::getPathOfAlias('webroot.css') . '/reportes.css');
+			$nombre = "Reporte_Inventario.pdf";
+	        $mPDF1->WriteHTML($stylesheet, 1);
+			$mPDF1->WriteHTML($html);
+			$mPDF1->Output($nombre,'I'); 
+
+		}else{
+			Yii::app()->user->setFlash('notice','No hay registro de Inventario');
+			$this->redirect("inventario"); 	
+		}
+
+	}
 	public function actionAutocomplete($term) 
 	{
 		$criteria = new CDbCriteria;
@@ -691,6 +762,35 @@ class ReportesController extends Controller
 	   			'id' => '',
 	   			'value' => 'El usuario no existe, por favor verifíque.',
 	   			'label' => 'El usuario no existe, por favor verifíque.',
+	  		);
+	 	}
+  
+		echo CJSON::encode($arr);
+	}
+
+	public function actionAutocompleteMed($term) 
+	{
+		$criteria = new CDbCriteria;
+		$criteria->compare('LOWER(nombre)', strtolower($_GET['term']), true);
+		$criteria->order = 'nombre';
+		$criteria->limit = 10; 
+		$data = Medicamentos::model()->findAll($criteria);
+
+		if (!empty($data))
+		{
+  			$arr = array();
+  			foreach ($data as $item) {
+	   			$arr[] = array(
+	    			'id_medicamento' => $item->id_medicamento,
+	    			'value' => $item->nombre,
+	   			);
+  			}
+	 	}else{
+	  		$arr = array();
+	  		$arr[] = array(
+	   			'id' => '',
+	   			'value' => 'El medicamento no existe, por favor verifíque.',
+	   			'label' => 'El medicamento no existe, por favor verifíque.',
 	  		);
 	 	}
   
