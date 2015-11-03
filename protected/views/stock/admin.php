@@ -3,14 +3,14 @@
 /* @var $model Stock */
 
 $this->breadcrumbs=array(
-	'Stocks'=>array('index'),
-	'Gestionar',
+	'Gestionar Inventario ',
 );
-
-$this->menu=array(
-	array('label'=>'Listar Stock', 'url'=>array('index')),
+if(!empty(SolicitudesController::verificarGuardia()->id_guardia)){
+	$this->menu=array(
 	array('label'=>'Asignar Medicamentos', 'url'=>array('asignar')),
 );
+}
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -26,12 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Gestionar Stock</h1>
-
-<p>
-También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-ó <b>=</b>)  en el comienzo de cada uno de los valores de búsqueda para especificar cómo se debe hacer la comparación.
-</p>
+<h1>Gestionar Inventario</h1>
 
 <?php echo CHtml::link(Yii::t('app','Advanced Search'),'#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
@@ -57,9 +52,6 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 		array(
 			'name' => 'id_estacion',
 			'value' => 'Estaciones::model()->findByAttributes(array("id_estacion"=>$data->id_estacion))->nombre'
-		),
-		array(
-			'class'=>'CButtonColumn',
 		),
 	),
 )); ?>

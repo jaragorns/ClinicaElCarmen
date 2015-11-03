@@ -48,11 +48,11 @@
 		<tr>
 			<td><?php echo $form->labelEx($model,'id_usuario'); ?></td>
 			<td><?php echo $form->labelEx($model,'id_estacion'); ?></td>
-			<?php 
+			<?php /*
 				for ($i=1; $i <=31 ; $i++) { ?>
 					<td><?php echo $form->labelEx($model,'dia_'.$i); ?>
 			</td>	
-			<?php } ?>	
+			<?php } */ ?>	
 		</tr>
 		<tr>
 			<td>
@@ -69,13 +69,48 @@
 				CHtml::listData(
 					Estaciones::model()->findAllBySql($sql2),'id_estacion','nombre'),	array('class' => 'my-drop-down','prompt'=>'Servicio:',)); ?> 
 			</td>
+		</tr>
+	</table>
+	<br><br>
+
+	<table>
+		<tr>
+			<?php 
+				for ($i=1; $i <=15 ; $i++) { ?>
+					<td><?php echo $form->labelEx($model,'dia_'.$i); ?>
+			</td>	
+			<?php }  ?>	
+		</tr>
+		<tr>
 			<?php 
 				$sql3 ="SELECT * FROM Turnos WHERE abreviatura!='V'";
-			for ($i=1; $i <=31 ; $i++) { ?>
+			for ($i=1; $i <=15 ; $i++) { 
+				?>
 					<td><?php echo $form->dropDownList($model,'dia_'.$i,
 				CHtml::listData(
 					Turnos::model()->findAllBySql($sql3),'id_turno','abreviatura'),	array('class' => 'my-drop-down')); ?> 
+					</td>	
+
+			<?php } ?>	
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<?php 
+				for ($i=16; $i <=31 ; $i++) { ?>
+					<td><?php echo $form->labelEx($model,'dia_'.$i); ?>
 			</td>	
+			<?php }  ?>	
+		</tr>
+		<tr>
+			<?php 
+				$sql3 ="SELECT * FROM Turnos WHERE abreviatura!='V'";
+			for ($i=16; $i <=31 ; $i++) { 
+				?>
+					<td><?php echo $form->dropDownList($model,'dia_'.$i,
+				CHtml::listData(
+					Turnos::model()->findAllBySql($sql3),'id_turno','abreviatura'),	array('class' => 'my-drop-down')); ?> 
+					</td>	
+
 			<?php } ?>	
 		</tr>
 	</table>

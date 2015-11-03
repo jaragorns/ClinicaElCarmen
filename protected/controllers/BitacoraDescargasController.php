@@ -31,6 +31,14 @@ class BitacoraDescargasController extends Controller
 				'actions'=>array('index','view','create','update','admin','delete','descontar','submit'),
 				'roles'=>array('Superadmin'),
 			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('admin'),
+				'roles'=>array('Jefe_Farmacia','Farmaceuta','Jefe_Enfermeria','Accionista','Administrador_Admin'),
+			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('admin','descontar','submit'),
+				'roles'=>array('Enfermera'),
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),

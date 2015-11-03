@@ -100,10 +100,8 @@ class Tickets extends CActiveRecord
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
-		
-
 		$criteria=new CDbCriteria;
-
+		
 		$criteria->addCondition("estado=1 OR estado=2");
 
 		$criteria->compare('id_ticket',$this->id_ticket);

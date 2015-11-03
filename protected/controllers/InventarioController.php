@@ -73,6 +73,7 @@ class InventarioController extends Controller
 
 		if(isset($_POST['Inventario']))
 		{
+			/*
 			$model->attributes=$_POST['Inventario'];
 			$model->id_usuario = Yii::app()->user->id;
 
@@ -110,6 +111,7 @@ class InventarioController extends Controller
 				$this->redirect(array('view','id'=>$model->id_inventario));
 				
 			}
+			*/
 	
 		}
 

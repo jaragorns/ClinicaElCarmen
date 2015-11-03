@@ -194,22 +194,142 @@
                 
                     <!-- Menu segun tareas, roles o usuario -->
                     <?php 
-                    if(Yii::app()->user->role=="Farmacia"){ ?>
+                    if(Yii::app()->user->role=="Enfermera"){ ?>
                         <ul id="menu-mainmenu" class="nav navbar-nav">
+                            <li id="menu-item-19" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-19">
+                                <a title="Descargas" href="<?php echo Yii::app()->baseUrl;?>/stock/adminDescarga">Descargas</a>
+                            </li>
                             <li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
-                                <a title="Stock" href="<?php echo Yii::app()->baseUrl;?>/stock" data-toggle="dropdown" class="dropdown-toggle">Stock <span class="caret"></span></a>
+                                <a title="Inventario" href="<?php echo Yii::app()->baseUrl;?>/stock" data-toggle="dropdown" class="dropdown-toggle">Inventario <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
-                                    <li id="menu-item-171" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-171">
-                                        <a title="Agregar Stock" href="<?php echo Yii::app()->baseUrl;?>/stock/create">Agregar Stock</a>
-                                    </li>
                                     <li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172">
-                                        <a title="Gestionar Stock" href="<?php echo Yii::app()->baseUrl;?>/stock/admin">Gestionar Stock</a>
+                                        <a title="Gestionar Inventario" href="<?php echo Yii::app()->baseUrl;?>/stock/adminEstacion">Gestionar Inventario</a>
                                     </li>
                                     <li id="menu-item-173" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-173">
                                         <a title="Asignar Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/stock/asignar">Asignar Medicamentos</a>
                                     </li>
                                 </ul>
                             </li>
+                            <?php
+                                if(Yii::app()->user->role=="Farmaceuta"){
+                                    $result = Solicitudes::model()->findAll(array('condition'=>'estacion_id_estacion=:id_estacion',
+                                        'params'=>array(':id_estacion'=>6),));
+
+                                }else{
+                                    if(!empty(SolicitudesController::verificarGuardia()->id_estacion)){
+                                        $result = Solicitudes::model()->findAll(array('condition'=>'estacion_id_estacion=:id_estacion AND estado!=2',
+                                            'params'=>array(':id_estacion'=>SolicitudesController::verificarGuardia()->id_estacion
+                                              ),));
+                                    }
+                                }
+
+                            ?>
+                            <li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes" data-toggle="dropdown" class="dropdown-toggle"><?php if(!empty($result))echo '<mark>'.count($result).'</mark>';?> Solicitudes <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-161" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-161">
+                                        <a title="Agregar Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/create">Agregar Solicitudes</a>
+                                    </li>
+                                    <li id="menu-item-162" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-162">
+                                        <a title="Mis Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/admin">Mis Solicitudes</a>
+                                    </li>
+                                    <li id="menu-item-163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163">
+                                        <a title="Solicitudes Pendientes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/adminPendiente"><span class="badge"><?php if(!empty($result))echo count($result);?></span>Solicitudes Pendientes</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="menu-item-21" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Tickets" href="<?php echo Yii::app()->baseUrl;?>/tickets" data-toggle="dropdown" class="dropdown-toggle">Tickets <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-211" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-211">
+                                        <a title="Crear Ticket" href="<?php echo Yii::app()->baseUrl;?>/tickets/create">Crear Ticket</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    <?php
+                    }if(Yii::app()->user->role=="Jefe_Enfermeria"){ ?>
+                        <ul id="menu-mainmenu" class="nav navbar-nav">
+                            <li id="menu-item-14" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-14 dropdown">
+                                <a title="Guardias" href="<?php echo Yii::app()->baseUrl;?>/guardias" data-toggle="dropdown" class="dropdown-toggle">Guardias <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-141" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-141">
+                                        <a title="Agregar Guardia" href="<?php echo Yii::app()->baseUrl;?>/guardias/create">Agregar Guardia</a>
+                                    </li>
+                                    <li id="menu-item-142" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-142">
+                                        <a title="Gestionar Guardias" href="<?php echo Yii::app()->baseUrl;?>/guardias/admin">Gestionar Guardias</a>
+                                    </li>
+                                    <li id="menu-item-143" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-143">
+                                        <a title="Imprimir Guardias" href="<?php echo Yii::app()->baseUrl;?>/guardias/imprimir">Imprimir Guardias</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Inventario" href="<?php echo Yii::app()->baseUrl;?>/stock" data-toggle="dropdown" class="dropdown-toggle">Inventario <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172">
+                                        <a title="Gestionar Inventario" href="<?php echo Yii::app()->baseUrl;?>/stock/admin">Gestionar Inventario</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    <?php
+                    }if(Yii::app()->user->role=="Accionista"){ ?>
+                        <ul id="menu-mainmenu" class="nav navbar-nav">
+                            <li id="menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-6 dropdown">
+                                <a title="Bancos" href="<?php echo Yii::app()->baseUrl;?>/bancos" data-toggle="dropdown" class="dropdown-toggle">Bancos <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-63" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-61">
+                                        <a title="Listar Bancos" href="<?php echo Yii::app()->baseUrl;?>/bancos/index">Listar Bancos</a>
+                                    </li>
+                                 </ul>
+                            </li>
+                            <li id="menu-item-7" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-7 dropdown">
+                                <a title="Comprobantes" href="<?php echo Yii::app()->baseUrl;?>/comprobantes" data-toggle="dropdown" class="dropdown-toggle">Comprobantes <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-72" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-72">
+                                        <a title="Gestionar Comprobantes" href="<?php echo Yii::app()->baseUrl;?>/comprobantes/admin">Gestionar Comprobantes</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="menu-item-10" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-10 dropdown">
+                                <a title="Proveedores" href="<?php echo Yii::app()->baseUrl;?>/proveedores" data-toggle="dropdown" class="dropdown-toggle">Proveedores <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-102" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-102">
+                                        <a title="Gestionar Proveedores" href="<?php echo Yii::app()->baseUrl;?>/proveedores/admin">Gestionar Proveedores</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/medicamentos" data-toggle="dropdown" class="dropdown-toggle">Medicamentos <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-132" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-132">
+                                        <a title="Gestionar Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/medicamentos/admin">Gestionar Medicamentos</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="menu-item-20" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Reportes" href="<?php echo Yii::app()->baseUrl;?>/reportes" data-toggle="dropdown" class="dropdown-toggle">Reportes <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-201" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-201">
+                                        <a title="Reporte de Facturas" href="<?php echo Yii::app()->baseUrl;?>/reportes/facturas">Facturas</a>
+                                    </li>
+                                    <li id="menu-item-202" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-202">
+                                        <a title="Reporte de Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/reportes/medicamentos">Medicamentos</a>
+                                    </li>
+                                    <li id="menu-item-203" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-203">
+                                        <a title="Reporte de Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/reportes/solicitudes">Solicitudes</a>
+                                    </li>
+                                    <li id="menu-item-204" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-204">
+                                        <a title="Reporte de Vacaciones" href="<?php echo Yii::app()->baseUrl;?>/reportes/vacaciones">Vacaciones</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    <?php
+                    }if(Yii::app()->user->role=="Farmaceuta"){ ?>
+                        <ul id="menu-mainmenu" class="nav navbar-nav">
+                            
                             <li id="menu-item-10" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-10 dropdown">
                                 <a title="Proveedores" href="<?php echo Yii::app()->baseUrl;?>/proveedores" data-toggle="dropdown" class="dropdown-toggle">Proveedores <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
@@ -254,21 +374,48 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Inventario" href="<?php echo Yii::app()->baseUrl;?>/stock" data-toggle="dropdown" class="dropdown-toggle">Inventario <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172">
+                                        <a title="Gestionar Inventario" href="<?php echo Yii::app()->baseUrl;?>/stock/admin">Gestionar Inventario</a>
+                                    </li>
+                                    <li id="menu-item-173" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-173">
+                                        <a title="Asignar Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/stock/asignar">Asignar Medicamentos</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <?php
+                                if(Yii::app()->user->role=="Farmaceuta"){
+                                    $result = Solicitudes::model()->findAll(array('condition'=>'estacion_id_estacion=:id_estacion',
+                                        'params'=>array(':id_estacion'=>6),));
+
+                                }else{
+                                    if(!empty(SolicitudesController::verificarGuardia()->id_estacion)){
+                                        $result = Solicitudes::model()->findAll(array('condition'=>'estacion_id_estacion=:id_estacion AND estado!=2',
+                                            'params'=>array(':id_estacion'=>SolicitudesController::verificarGuardia()->id_estacion
+                                              ),));
+                                    }
+                                }
+
+                            ?>
                             <li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
-                                <a title="Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes" data-toggle="dropdown" class="dropdown-toggle">Solicitudes <span class="caret"></span></a>
+                                <a title="Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes" data-toggle="dropdown" class="dropdown-toggle"><?php if(!empty($result))echo '<mark>'.count($result).'</mark>';?> Solicitudes <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li id="menu-item-161" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-161">
                                         <a title="Agregar Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/create">Agregar Solicitudes</a>
                                     </li>
                                     <li id="menu-item-162" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-162">
-                                        <a title="Gestionar Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/admin">Gestionar Solicitudes</a>
+                                        <a title="Mis Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/admin">Mis Solicitudes</a>
+                                    </li>
+                                    <li id="menu-item-163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163">
+                                        <a title="Solicitudes Pendientes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/adminPendiente"><span class="badge"><?php if(!empty($result))echo count($result);?></span>Solicitudes Pendientes</a>
                                     </li>
                                 </ul>
                             </li>
                         </ul>
                     <?php 
-                    }
-                    if(Yii::app()->user->role=="Superadmin"){ ?>
+                    }if(Yii::app()->user->role=="Superadmin"){ ?>
                         <ul id="menu-mainmenu" class="nav navbar-nav">
                             <li id="menu-item-1" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1 dropdown">
                                 <a title="Usuarios" href="<?php echo Yii::app()->baseUrl;?>" data-toggle="dropdown" class="dropdown-toggle">Usuarios <span class="caret"></span></a>
@@ -408,7 +555,7 @@
                                 </ul>
                             </li>
                             <?php
-                                if(Yii::app()->user->role=="Farmacia"){
+                                if(Yii::app()->user->role=="Farmaceuta"){
                                     $result = Solicitudes::model()->findAll(array('condition'=>'estacion_id_estacion=:id_estacion',
                                         'params'=>array(':id_estacion'=>6),));
 
@@ -436,10 +583,10 @@
                                 </ul>
                             </li>
                             <li id="menu-item-17" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
-                                <a title="Stock" href="<?php echo Yii::app()->baseUrl;?>/stock" data-toggle="dropdown" class="dropdown-toggle">Stock <span class="caret"></span></a>
+                                <a title="Inventario" href="<?php echo Yii::app()->baseUrl;?>/stock" data-toggle="dropdown" class="dropdown-toggle">Inventario <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li id="menu-item-171" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-171">
-                                        <a title="Gestionar Stock" href="<?php echo Yii::app()->baseUrl;?>/stock/admin">Gestionar Stock</a>
+                                        <a title="Gestionar Inventario" href="<?php echo Yii::app()->baseUrl;?>/stock/admin">Gestionar Inventario</a>
                                     </li>
                                     <li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172">
                                         <a title="Asignar Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/stock/asignar">Asignar Medicamentos</a>
@@ -447,13 +594,13 @@
                                 </ul>
                             </li>
                             <li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
-                                <a title="Bitacora Stock" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock" data-toggle="dropdown" class="dropdown-toggle">Bitacoras <span class="caret"></span></a>
+                                <a title="Bitacora de Inventario" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock" data-toggle="dropdown" class="dropdown-toggle">Bitacoras <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li id="menu-item-181" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-181">
-                                        <a title="Bitacora Stock" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock/admin">Bitacora Stock</a>
+                                        <a title="Bitacora de Inventario" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock/admin">Bitacora de Inventario</a>
                                     </li>
                                     <li id="menu-item-182" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-182">
-                                        <a title="Bitacora Descargas" href="<?php echo Yii::app()->baseUrl;?>/bitacoradescargas/admin">Bitacora Descargas</a>
+                                        <a title="Bitacora Descargas" href="<?php echo Yii::app()->baseUrl;?>/bitacoradescargas/admin">Bitacora de Descargas</a>
                                     </li>
                                 </ul>
                             </li>
@@ -461,18 +608,18 @@
                                 <a title="Descargas" href="<?php echo Yii::app()->baseUrl;?>/stock/adminDescarga">Descargas</a>
                             </li>
                             <li id="menu-item-20" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
-                                <a title="Reportes" href="<?php echo Yii::app()->baseUrl;?>/stock" data-toggle="dropdown" class="dropdown-toggle">Reportes <span class="caret"></span></a>
+                                <a title="Reportes" href="<?php echo Yii::app()->baseUrl;?>/reportes" data-toggle="dropdown" class="dropdown-toggle">Reportes <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
-                                    <li id="menu-item-205" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-205">
+                                    <li id="menu-item-201" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-201">
                                         <a title="Reporte de Facturas" href="<?php echo Yii::app()->baseUrl;?>/reportes/facturas">Facturas</a>
                                     </li>
-                                    <li id="menu-item-205" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-205">
+                                    <li id="menu-item-202" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-202">
                                         <a title="Reporte de Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/reportes/medicamentos">Medicamentos</a>
                                     </li>
-                                    <li id="menu-item-205" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-205">
+                                    <li id="menu-item-203" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-203">
                                         <a title="Reporte de Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/reportes/solicitudes">Solicitudes</a>
                                     </li>
-                                    <li id="menu-item-205" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-205">
+                                    <li id="menu-item-204" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-204">
                                         <a title="Reporte de Vacaciones" href="<?php echo Yii::app()->baseUrl;?>/reportes/vacaciones">Vacaciones</a>
                                     </li>
                                 </ul>

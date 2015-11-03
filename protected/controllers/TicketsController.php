@@ -31,6 +31,10 @@ class TicketsController extends Controller
 				'actions'=>array('index','view','create','update','admin','adminHistorial','delete','aprobar','rechazar'),
 				'roles'=>array('Superadmin'),
 			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('view','create'),
+				'roles'=>array('Enfermera'),
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),

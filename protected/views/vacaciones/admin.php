@@ -36,7 +36,7 @@ Tambi&eacute;n puede escribir un operador de comparaci&oacute;n  (<b>&lt;</b>, <
 <?php echo CHtml::link(Yii::t('app','Advanced Search'),'#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
-	'model'=>$model, 'rol_user'=>$rol_user
+	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
 

@@ -8,10 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Stock', 'url'=>array('index')),
 	array('label'=>'Crear Stock', 'url'=>array('create')),
 	array('label'=>'Actualizar Stock', 'url'=>array('update', 'id'=>$model->id_stock)),
-	array('label'=>'Eliminar Stock', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_stock),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Gestionar Stock', 'url'=>array('admin')),
 );
 ?>

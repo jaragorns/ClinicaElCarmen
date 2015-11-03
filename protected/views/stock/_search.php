@@ -15,7 +15,7 @@
 		<?php echo $form->label($model,'cantidad'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'cantidad'); ?>
+		<?php  echo $form->numberField($model,'cantidad',array('min'=>0, 'max'=>999999)); ?>
 	</div>
 
 	<div class="rowcontact">

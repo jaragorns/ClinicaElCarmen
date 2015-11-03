@@ -28,12 +28,20 @@ class StockController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','viewEstacion','create','update','admin','delete','asignar','adminDescarga','autocomplete'),
+				'actions'=>array('index','view','viewEstacion','create','update','admin','adminEstacion','delete','asignar','adminDescarga','autocomplete'),
 				'roles'=>array('Superadmin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','viewEstacion','create','update','admin','asignar','autocomplete'),
-				'roles'=>array('Farmacia'),
+				'roles'=>array('Farmaceuta'),
+			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('adminEstacion','adminDescarga','asignar','autocomplete'),
+				'roles'=>array('Enfermera'),
+			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('admin','adminDescarga','autocomplete'),
+				'roles'=>array('Jefe_Enfermeria'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -600,6 +608,18 @@ class StockController extends Controller
 		));
 	}
 
+	public function actionAdminEstacion()
+	{
+		$model=new Stock('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Stock']))
+			$model->attributes=$_GET['Stock'];
+
+		$this->render('adminEstacion',array(
+			'model'=>$model,
+		));
+	}
+
 	public function actionAdminDescarga()
 	{
 		
@@ -662,7 +682,7 @@ class StockController extends Controller
 		$criteria = new CDbCriteria;
 		$criteria->join = "RIGHT JOIN stock ON stock.id_medicamento = t.id_medicamento"; 
 
-		if(Yii::app()->user->role=="Farmacia"){
+		if(Yii::app()->user->role=="Farmaceuta"){
 			$criteria->condition = "stock.cantidad > 0 AND id_estacion = 6";
 			$estacion = 6;
 		}else{
@@ -712,7 +732,7 @@ class StockController extends Controller
 	public function Asignar($model)
 	{
 
-		if(Yii::app()->user->role=="Farmacia"){
+		if(Yii::app()->user->role=="Farmaceuta"){
 			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$model->id_medicamento." AND `id_estacion`= 6";
 		}else{
 			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$model->id_medicamento." AND `id_estacion`= ".SolicitudesController::verificarGuardia()->id_estacion;
@@ -734,7 +754,7 @@ class StockController extends Controller
 			$cantidad_nueva = $result['0']['cantidad'] - $model->cantidad;
 
 			//CANTIDAD NUEVA PARA EL SERVICIO QUE ASIGNO
-			if(Yii::app()->user->role=="Farmacia"){
+			if(Yii::app()->user->role=="Farmaceuta"){
 				$sql = "UPDATE `stock` SET `cantidad`=".$cantidad_nueva." WHERE `id_medicamento` =".$model->id_medicamento." AND `id_estacion`= 6";
 				$execute = Yii::app()->db->createCommand($sql)->execute();
 				$estacion_origen = 6;

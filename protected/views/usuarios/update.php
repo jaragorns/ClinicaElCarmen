@@ -3,7 +3,7 @@
 /* @var $model Usuarios */
 
 $this->breadcrumbs=array(
-	'Usuarios'=>array('index'),
+	'Usuarios',
 	$model->username=>array('view','id'=>$model->id),
 	'Actualizar',
 );
@@ -13,8 +13,7 @@ $this->menu=array(
 		'visible'=>Yii::app()->user->role=="Superadmin", Yii::app()->user->role=="Administrador", 
 					Yii::app()->user->role=="Vicepresidente", Yii::app()->user->role=="Presidente"),
 	array('label'=>'Crear Usuario', 'url'=>array('create'),
-		'visible'=>Yii::app()->user->role=="Superadmin", Yii::app()->user->role=="Administrador", 
-					Yii::app()->user->role=="Vicepresidente", Yii::app()->user->role=="Presidente"),
+		'visible'=>Yii::app()->user->checkAccess('CrearUsuario')),
 	array('label'=>'Ver Usuario', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Gestionar Usuarios', 'url'=>array('admin'),
 		'visible'=>Yii::app()->user->role=="Superadmin", Yii::app()->user->role=="Administrador", 

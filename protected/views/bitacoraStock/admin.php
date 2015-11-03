@@ -55,7 +55,7 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 		),
 		array(
 			'name' => 'id_medicamento',
-			'value' => 'Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data->id_medicamento))->nombre'
+			'value' => 'Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data->id_medicamento))->nombre." (".UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data->id_medicamento))->unidad_medida))->descripcion.")"'
 		),
 		array(
 			'name' => 'cantidad',
@@ -66,8 +66,5 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
             'value' => 'date_format(date_create($data->fecha), "d-m-Y g:ia")',
             'htmlOptions' => array('style'=>'text-align: right;'),
         ),
-		array(
-			'class'=>'CButtonColumn',
-		),
 	),
 )); ?>

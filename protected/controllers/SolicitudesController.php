@@ -31,6 +31,10 @@ class SolicitudesController extends Controller
 				'actions'=>array('index','view','create','update','admin','delete','autocomplete','adminPendiente','viewPendiente','AjaxEditColumn', 'ajaxeditcolumnAsig'),
 				'roles'=>array('Superadmin'),
 			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('create','admin','autocomplete','adminPendiente','viewPendiente','AjaxEditColumn', 'ajaxeditcolumnAsig'),
+				'roles'=>array('Enfermera','Farmaceuta'),
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -360,13 +364,13 @@ class SolicitudesController extends Controller
 			$dia = "dia_".(date("j")-1);
 		}
 		//cambiar el dia y el id
-		//$sql = "SELECT id_guardia, id_usuario, id_estacion FROM guardias WHERE mes=".date('n')." AND ano=".date('Y')." AND id_usuario=".Yii::app()->user->id." AND ".$dia."!=1 "; 
-		$sql = "SELECT id_guardia, id_usuario, id_estacion, ".$dia." 
+		$sql = "SELECT id_guardia, id_usuario, id_estacion FROM guardias WHERE mes=".date('n')." AND ano=".date('Y')." AND id_usuario=".Yii::app()->user->id." AND ".$dia."!=1 "; 
+		/*$sql = "SELECT id_guardia, id_usuario, id_estacion, ".$dia." 
 				FROM guardias 
 				WHERE mes=7
 						AND ano=".date('Y')." 
-						AND id_usuario=7778764
-						AND ".$dia."!=1 "; 
+						AND id_usuario=9999000
+						AND ".$dia."!=1 "; */
 
 		$deGuardia = Guardias::model()->findAllBySql($sql);
 
@@ -524,7 +528,7 @@ class SolicitudesController extends Controller
     public function Asignar($id_medicamento, $cantidad_asignar, $estacion_destino, $estacion_origen)
 	{
 		
-		if(Yii::app()->user->role=="Farmacia"){
+		if(Yii::app()->user->role=="Farmaceuta"){
 			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$id_medicamento." AND `id_estacion`= 6";
 		}else{
 			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$id_medicamento." AND `id_estacion`= ".$estacion_origen;
@@ -540,7 +544,7 @@ class SolicitudesController extends Controller
 			$cantidad_nueva = $result['0']['cantidad'] - $cantidad_asignar;
 
 			//CANTIDAD NUEVA PARA EL SERVICIO QUE ASIGNO
-			if(Yii::app()->user->role=="Farmacia"){
+			if(Yii::app()->user->role=="Farmaceuta"){
 				$sql = "UPDATE `stock` SET `cantidad`=".$cantidad_nueva." WHERE `id_medicamento` =".$id_medicamento." AND `id_estacion`= 6";
 				$execute = Yii::app()->db->createCommand($sql)->execute();
 			}else{

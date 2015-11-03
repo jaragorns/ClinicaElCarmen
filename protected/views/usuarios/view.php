@@ -3,7 +3,7 @@
 /* @var $model Usuarios */
 
 $this->breadcrumbs=array(
-	'Usuarios'=>array('index'),
+	'Usuario',
 	$model->username,
 );
 
@@ -12,10 +12,9 @@ $this->menu=array(
 		'visible'=>Yii::app()->user->role=="Superadmin", Yii::app()->user->role=="Administrador", 
 					Yii::app()->user->role=="Vicepresidente", Yii::app()->user->role=="Presidente"),
 	array('label'=>'Crear Usuarios', 'url'=>array('create'),
-		'visible'=>Yii::app()->user->role=="Superadmin", Yii::app()->user->role=="Administrador", 
-					Yii::app()->user->role=="Vicepresidente", Yii::app()->user->role=="Presidente"),
-	array('label'=>'Actualizar Usuario', 'url'=>array('update', 'id'=>$model->id)),
-	//array('label'=>'Eliminar Usuario', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+		'visible'=>Yii::app()->user->checkAccess('CrearUsuario')),
+	array('label'=>'Actualizar Usuario', 'url'=>array('update', 'id'=>$model->id),
+		'visible'=>Yii::app()->user->checkAccess('ModificarUsuario')),
 	array('label'=>'Gestionar Usuarios', 'url'=>array('admin'),
 		'visible'=>Yii::app()->user->role=="Superadmin", Yii::app()->user->role=="Administrador", 
 					Yii::app()->user->role=="Vicepresidente", Yii::app()->user->role=="Presidente"),

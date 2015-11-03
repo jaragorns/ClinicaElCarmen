@@ -13,7 +13,6 @@ $this->menu=array(
         'visible'=>Yii::app()->user->role=="Presidente",
 		'visible'=>Yii::app()->user->role=="Superadmin"),
 	array('label'=>'Actualizar Banco', 'url'=>array('update', 'id'=>$model->id_bancos)),
-	//array('label'=>'Eliminar Bancos', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_bancos),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Gestionar Bancos', 'url'=>array('admin')),
 );
 ?>

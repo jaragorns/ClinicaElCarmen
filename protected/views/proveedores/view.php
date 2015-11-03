@@ -3,15 +3,13 @@
 /* @var $model Proveedores */
 
 $this->breadcrumbs=array(
-	'Proveedores'=>array('index'),
+	'Proveedores',
 	$model->nombre,
 );
 
 $this->menu=array(
-	array('label'=>'Listar Proveedores', 'url'=>array('index')),
 	array('label'=>'Crear Proveedor', 'url'=>array('create')),
 	array('label'=>'Actualizar Proveedor', 'url'=>array('update', 'id'=>$model->id_proveedor)),
-	array('label'=>'Eliminar Proveedor', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id_proveedor),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Gestionar Proveedores', 'url'=>array('admin')),
 );
 ?>

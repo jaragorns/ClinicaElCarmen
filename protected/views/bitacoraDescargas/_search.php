@@ -11,38 +11,43 @@
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'id_bitacora'); ?>
-		<?php echo $form->textField($model,'id_bitacora'); ?>
-	</div>
-
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'fecha_hora'); ?>
-		<?php echo $form->textField($model,'fecha_hora'); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'fecha_hora',array('placeholder'=>"2015-10-25 22:02",'size'=>30,'maxlength'=>17)); ?>
 	</div>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'cantidad'); ?>
-		<?php echo $form->textField($model,'cantidad'); ?>
+	</div>
+	<div class="media">
+		<?php  echo $form->numberField($model,'cantidad',array('min'=>0, 'max'=>999999)); ?>
 	</div>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'estado'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'estado'); ?>
 	</div>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'id_stock'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'id_stock'); ?>
 	</div>
 
-	<div class="row">
+	<div class="rowcontact">
 		<?php echo $form->label($model,'id_guardia'); ?>
+	</div>
+	<div class="media">
 		<?php echo $form->textField($model,'id_guardia'); ?>
 	</div>
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+	<div class="buttons">
+		<?php echo CHtml::submitButton(Yii::t('app','Search'),  array("class"=>"btn btn-primary btn-large")); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -63,19 +63,28 @@
 					<?php echo $form->labelEx($model,'id_proveedor'); ?>
 				</td>	
 				<td>
-					<?php echo $form->dropDownList(
-								$model,
-								'id_proveedor',
-								CHtml::listData(
-									Proveedores::model()->findAll(),
-									'id_proveedor',
-									'nombre'),
-								array(
-									'class' => 'my-drop-down',
-									'empty'=>'-- Seleccione un Proveedor --',
-								)
-							);
-						?> 
+					<?php
+						echo Chtml::hiddenField('id_proveedor', '', array());
+
+						$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+			    				'name'=>'name',
+			    				'value'=>'',
+			    				'source'=>$this->createUrl('Reportes/AutocompletePro'),
+			    				// additional javascript options for the autocomplete plugin
+			    				'options'=>array(
+			    					'minLength'=>'1',
+			            			'showAnim'=>'fold',
+			            			'select'=>"js:function(event, ui) { 
+											$('#id_proveedor').val(ui.item.id_pro);
+										}"
+			    				),
+			    				'htmlOptions'=>array(
+									'style'=>'width:400px;',
+									'placeholder'=>'Nombre del Proveedor...',
+									'title'=>'Indique el nombre del Proveedor que desea consultar.'
+								),
+						));
+					?> 
 					<?php echo $form->error($model,'id_proveedor'); ?>
 				</td>
 			    <td>

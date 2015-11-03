@@ -418,7 +418,7 @@ body{
 }a.thumbnail:hover,a.thumbnail:focus,a.thumbnail.active{
 	border-color:#00708c
 }.badge{
-	border-radius:2px;background-color:#00708c;margin-left:3px;margin-right:5px
+	border-radius:2px;background-color:#FF8129;margin-left:3px;margin-right:5px;border:1px solid #FFF;
 }.label{
 	border-radius:0
 }.label-default{

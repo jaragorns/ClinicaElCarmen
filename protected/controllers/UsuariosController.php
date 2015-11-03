@@ -28,16 +28,16 @@ class UsuariosController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete'),
-				'roles'=>array('Superadmin','Presidente','Vicepresidente'),
+				'actions'=>array('view','create','update','admin','delete'),
+				'roles'=>array('Superadmin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','admin'),
-				'roles'=>array('Administrador'),
+				'actions'=>array('view','create','admin','update'),
+				'roles'=>array('Jefe_Enfermeria','Presidente','Vicepresidente'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('view','update'),
-				'roles'=>array('Enfermeria'),
+				'roles'=>array('Enfermera'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -134,23 +134,27 @@ class UsuariosController extends Controller
 		        }
 				$model->attributes=$_POST['Usuarios'];
 
+
+				print_r($model->attributes);
+
 				// Validate all three model
 				$rol_user->userid = Yii::app()->user->id;
-		        $valid=$rol_user->validate(); 
-		        $valid=$model->validate() && $valid;
-		 
-		        if($valid){       
-		            //$rol_user->save();
-		            $model->save();
-		        }
 
-				$model->password = crypt($model->password.'salt');
-				if(Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){
-					Yii::app()->authManager->revoke(Authassignment::model()->findByAttributes(array("userid"=>$model->id))->itemname,$model->id);
-					Yii::app()->authManager->assign($rol_user->itemname,$model->id);
-				}
-				Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
-				$this->redirect(array('view','id'=>$model->id));
+		        if($model->validate() AND $rol_user->validate()){       
+
+		            $model->save();
+		            $model->password = crypt($model->password.'salt');
+
+					if(Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){
+						Yii::app()->authManager->revoke(Authassignment::model()->findByAttributes(array("userid"=>$model->id))->itemname,$model->id);
+						Yii::app()->authManager->assign($rol_user->itemname,$model->id);
+					}
+
+					Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
+					$this->redirect(array('view','id'=>$model->id));
+
+		        }
+				
 			}
 			$this->render('update',array(
 				'model'=>$model,

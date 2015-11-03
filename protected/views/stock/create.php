@@ -3,12 +3,10 @@
 /* @var $model Stock */
 
 $this->breadcrumbs=array(
-	'Stocks'=>array('index'),
-	'Crear',
+	'Crear Stock',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Stock', 'url'=>array('index')),
 	array('label'=>'Gestionar Stock', 'url'=>array('admin')),
 );
 ?>

@@ -6,12 +6,11 @@ $cs = Yii::app()->getClientScript();
 $cs->registerCssFile($baseUrl.'/css/libre.css');
 
 $this->breadcrumbs=array(
-	'Factura'=>array('index'),
+	'Factura',
 	'#'.$model->num_factura,
 );
 
 $this->menu = array(
-	array('label'=>'Listar Facturas', 'url'=>array('index')),
 	array('label'=>'Crear Factura', 'url'=>array('create')),
 	array('label'=>'Actualizar Factura', 'url'=>array('update', 'id'=>$model->id_factura)),
 	array('label'=>'Gestionar Facturas', 'url'=>array('admin')),

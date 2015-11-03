@@ -31,6 +31,10 @@ class BitacoraStockController extends Controller
 				'actions'=>array('index','view','create','update','admin','delete'),
 				'roles'=>array('Superadmin'),
 			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('admin'),
+				'roles'=>array('Jefe_Farmacia','Farmaceuta','Jefe_Enfermeria','Accionista','Administrador_Admin'),
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),

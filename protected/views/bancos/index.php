@@ -5,12 +5,13 @@
 $this->breadcrumbs=array(
 	'Bancos',
 );
-
+if(!(Yii::app()->user->role=="Accionista")){
 $this->menu=array(
 	array('label'=>'Crear Banco', 'url'=>array('create')),
 	array('label'=>'Gestionar Bancos', 'url'=>array('admin')),
 	array('label'=>'Gestionar Comprobantes', 'url'=>array('/comprobantes/admin')),
 );
+}
 ?>
 
 <h1>Bancos</h1>

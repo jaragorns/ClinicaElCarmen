@@ -25,7 +25,7 @@
 		<?php 
 			echo $form->dropDownList(
 				$model,
-				'id_estacion_destino',
+				'id_estacion_origen',
 				CHtml::listData(
 					Estaciones::model()->findAll(array('condition'=>'id_estacion NOT IN (1,7)',)),
 					'id_estacion',
@@ -90,7 +90,7 @@
 		<?php echo $form->label($model,'cantidad'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'cantidad'); ?>
+		<?php  echo $form->numberField($model,'cantidad',array('min'=>0, 'max'=>999999)); ?>
 	</div>
 
 	<div class="rowcontact">

@@ -84,9 +84,6 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
             'editable_options'=>array('EN ESPERA'=>'-ELEGIR-','APROBADO'=>'APROBADO','RECHAZADO'=>'RECHAZADO'),
             'action'=>array('Comprobantes/ajaxeditcolumnPrada'),
         ),
-        array(
-			'class'=>'CButtonColumn',
-		),
         /*EDITBOX
         array(
             'name'=>'estado_med',

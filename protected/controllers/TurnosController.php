@@ -31,6 +31,10 @@ class TurnosController extends Controller
 				'actions'=>array('index','view','create','update','admin','delete'),
 				'roles'=>array('Superadmin'),
 			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('view','create','update','admin'),
+				'roles'=>array('Jefe_Farmacia'),
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),

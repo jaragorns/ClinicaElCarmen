@@ -94,8 +94,36 @@ class Stock extends CActiveRecord
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+			'sort'=>array(
+				'defaultOrder' => 'id_estacion ASC',
+			),
 		));
 	}
+
+	public function searchEstacion()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		if(!empty(SolicitudesController::verificarGuardia()->id_estacion)){
+			$criteria->addCondition("id_estacion=".SolicitudesController::verificarGuardia()->id_estacion);
+		}else{
+			Yii::app()->user->setFlash('error','Debe estar de guardia.');
+		}
+		$criteria->compare('id_stock',$this->id_stock);
+		$criteria->compare('cantidad',$this->cantidad);
+		$criteria->compare('id_estacion',$this->id_estacion);
+		$criteria->compare('id_medicamento',$this->id_medicamento);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+			'sort'=>array(
+				'defaultOrder' => 'id_estacion ASC',
+			),
+		));
+	}
+
 
 	public function searchDescarga()
 	{

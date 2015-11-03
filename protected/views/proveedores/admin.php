@@ -3,12 +3,11 @@
 /* @var $model Proveedores */
 
 $this->breadcrumbs=array(
-	'Proveedores'=>array('index'),
+	'Proveedores',
 	'Gestionar',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Proveedores', 'url'=>array('index')),
 	array('label'=>'Crear Proveedores', 'url'=>array('create')),
 );
 
@@ -27,11 +26,6 @@ $('.search-form form').submit(function(){
 ?>
 
 <h1>Gestionar Proveedores</h1>
-
-<p>
-También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-ó <b>=</b>)  en el comienzo de cada uno de los valores de búsqueda para especificar cómo se debe hacer la comparación.
-</p>
 
 <?php echo CHtml::link(Yii::t('app','Advanced Search'),'#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
@@ -55,7 +49,8 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 		'direccion',
 		'email',
 		array(
-			'class'=>'CButtonColumn',
-		),
+            'class'=>'CButtonColumn',
+            'template'=>'{view}{update}',
+        ),
 	),
 )); ?>

@@ -32,8 +32,12 @@ class FacturasController extends Controller
 				'roles'=>array('Superadmin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','autocomplete'),
-				'roles'=>array('Farmacia'),
+				'actions'=>array('index','view','create','update','admin','autocomplete','imprimir'),
+				'roles'=>array('Jefe_Farmacia','Farmaceuta'),
+			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('autocomplete'),
+				'roles'=>array('Accionista'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

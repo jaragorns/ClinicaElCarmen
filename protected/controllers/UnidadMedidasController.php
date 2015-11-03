@@ -32,8 +32,8 @@ class UnidadMedidasController extends Controller
 				'roles'=>array('Superadmin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin'),
-				'roles'=>array('Farmacia'),
+				'actions'=>array('view','create','update','admin'),
+				'roles'=>array('Jefe_Farmacia','Farmaceuta'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

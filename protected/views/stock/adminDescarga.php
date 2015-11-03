@@ -3,12 +3,10 @@
 /* @var $model Stock */
 
 $this->breadcrumbs=array(
-	'Stocks'=>array('index'),
-	'Gestionar',
+	'Descarga de Medicamentos',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Stock', 'url'=>array('index')),
 	array('label'=>'Asignar Medicamentos', 'url'=>array('asignar')),
 );
 
@@ -28,10 +26,10 @@ $('.search-form form').submit(function(){
 
 <h1>Descarga de Medicamentos</h1>
 
-<p>
-También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-ó <b>=</b>)  en el comienzo de cada uno de los valores de búsqueda para especificar cómo se debe hacer la comparación.
-</p>
+<div class="alert alert-info">
+	<p><strong>Ingrese el valor númerico en el recuadro de CANTIDAD, pulse la tecla ENTER y luego presiona el boton DESCONTAR 
+	de la misma fila de la cantidad ingresada.</strong></p>
+</div>
 
 <?php echo CHtml::link(Yii::t('app','Advanced Search'),'#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
@@ -39,6 +37,7 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
+
 
 <?php 
 	Yii::import('application.extensions.eeditable.*');

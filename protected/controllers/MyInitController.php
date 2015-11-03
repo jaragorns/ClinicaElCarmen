@@ -21,14 +21,8 @@ class MyInitController extends Controller
 			$auth->createOperation('EliminarComprobante','Eliminar comprobante (En caso necesario)');
 
 			$auth->createOperation('CrearComprobante','Crear comprobantes (Con los Datos del comprobante original)');
-			$auth->createOperation('CrearComprobante','Crear comprobantes (Con los Datos del comprobante original)');
-			$auth->createOperation('CrearComprobante','Crear comprobantes (Con los Datos del comprobante original)');
 			 
 			/////////////////////////////TAREAS////////////////////////////////////////
-			$task=$auth->createTask('RequestAdmExpenses','Aprobacion o Rechazo de Gatos Administrativos',"NULL");
-			$task->addChild('RequestAdmExpensesMedina');
-			$task->addChild('RequestAdmExpensesPrada');
-
 			$task=$auth->createTask('GestionUsuarios','Acceso al mantenimiento a los usuarios',"NULL");
 			$task->addChild('CrearUsuario');
 			$task->addChild('ModificarUsuario');			
@@ -36,70 +30,64 @@ class MyInitController extends Controller
 
 			$task=$auth->createTask('GestionComprobantes','Acceso al mantenimiento a los comprobantes',"NULL");
 			$task->addChild('CrearComprobante');
-			$task->addChild('ModificarComprobante');			
-			$task->addChild('EliminarComprobante');				
-			 
+			$task->addChild('ModificarComprobante');				
 
 			/////////////////////////////ROLES////////////////////////////////////////
 			$role=$auth->createRole('Presidente');
-			$role->addChild('RequestAdmExpensesMedina');
-			$role->addChild('GestionUsuarios');
+			$role->addChild('RequestAdmExpensesPrada');
 
 			$role=$auth->createRole('Vicepresidente');
-			$role->addChild('RequestAdmExpensesPrada');
-			$role->addChild('GestionUsuarios');
-
-			$role=$auth->createRole('GerenteEjecutivo');
-			//$role->addChild('CrearUsuario');
+			$role->addChild('RequestAdmExpensesMedina');
 
 			$role=$auth->createRole('Accionista');
-			//$role->addChild('CrearUsuario');
-			//$role->addChild('ModificarUsuario');
 
-			$role=$auth->createRole('Administrador_Admin'); //Jefe Administracion
-			$role->addChild('GestionComprobantes');
+			$role=$auth->createRole('Administrador_Admin'); 
 
 			$role=$auth->createRole('Asistente_Admin');
-			$role->addChild('CrearComprobante');
 
-			$role=$auth->createRole('Administrador_Farmacia');		//CONTADOR, SECRETARIAS, ASISTENTES...
-			//$role->addChild('NADA');
-			
-			$role=$auth->createRole('Medico');
-			//$role->addChild('reader');
-			//$role->addChild('updatePost');
+			$role=$auth->createRole('Administrativo');
 
-			$role=$auth->createRole('Estacion');
-			//$role->addChild('reader');
-			//$role->addChild('updatePost');
+			$role=$auth->createRole('Jefe_Farmacia');
 
 			$role=$auth->createRole('Farmaceuta');
-			//$role->addChild('reader');
-			//$role->addChild('updatePost');
+
+			$role=$auth->createRole('Jefe_Enfermeria');
+
+			$role=$auth->createRole('Enfermera');
+
+			$role=$auth->createRole('Medico');
 			 
 			$role=$auth->createRole('Superadmin');
-			$role->addChild('Administrador_Admin');
-			$role->addChild('Administrador_Farmacia');
 			$role->addChild('Presidente');
 			$role->addChild('Vicepresidente');
 			$role->addChild('Accionista');
-			$role->addChild('Medico');
+			$role->addChild('Administrador_Admin');
+			$role->addChild('Asistente_Admin');
+			$role->addChild('Administrativo');
+			$role->addChild('Jefe_Farmacia');
 			$role->addChild('Farmaceuta');
-			$role->addChild('Estacion');
+			$role->addChild('Jefe_Enfermeria');
+			$role->addChild('Enfermera');
+			$role->addChild('Medico');
 			 
 			$auth->assign('Superadmin','18716856');
-			$auth->assign('Presidente','16');
-			$auth->assign('Vicepresidente','9221736');
-			$auth->assign('GerenteEjecutivo','18');
+			$auth->assign('Superadmin','19777859');
+			$auth->assign('Presidente','16');//Zulay
+			$auth->assign('Vicepresidente','9221736');//Lorena
+			$auth->assign('Accionista','18');//Carlos.H, Carmen A, Lorena, Zulay, Juan Carlos, Yamil, Mayla, Yasmin, Mariangel 
+			$auth->assign('Jefe_Farmacia','');//Mayla
+			$auth->assign('Farmaceuta','');//Deisy
+			$auth->assign('Jefe_Enfermeria','');//Nancy
+			$auth->assign('Enfermeria','18');//Nancy, Maria, etc...
 
- 			echo "Listo!";
+ 			echo "RBAC LOAD!!";
 		}
 
 		public function actionCheckAccess()
 		{
 			echo Yii::app()->user->role;
 			echo " - ";
-			if(Yii::app()->user->checkAccess('RequestAdmExpensesMedina'))
+			if(Yii::app()->user->checkAccess('ModificarUsuario'))
 			{
 				echo "Autorizado";
 			}else{
@@ -108,3 +96,14 @@ class MyInitController extends Controller
 
 		}
 }
+
+
+/*
+/////////////////////////////OPERACIONES////////////////////////////////////////
+
+
+
+
+
+
+*/

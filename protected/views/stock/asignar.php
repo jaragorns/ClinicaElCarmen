@@ -1,12 +1,10 @@
 <?php
 $this->breadcrumbs=array(
-	'Stocks'=>array('index'),
-	'Crear',
+	'Asginar Medicamentos',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Stock', 'url'=>array('index')),
-	array('label'=>'Gestionar Stock', 'url'=>array('admin')),
+	array('label'=>'Gestionar Inventario', 'url'=>array('admin')),
 );
 
 ?>
@@ -36,7 +34,7 @@ $this->menu=array(
 	<div class="media">
 		<b><?php echo "Estación Origen: ";?></b>
 		<?php 
-			if(Yii::app()->user->role=="Farmacia"){
+			if(Yii::app()->user->role=="Farmaceuta"){
 
 				echo '<i>'."FARMACIA ".'</i>'; 
 				echo "<b>a</b> ".$form->labelEx($model,'id_estacion')." "; 		 

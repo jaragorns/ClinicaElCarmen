@@ -9,7 +9,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Stock', 'url'=>array('index')),
 	array('label'=>'Crear Stock', 'url'=>array('create')),
 	array('label'=>'Ver Stock', 'url'=>array('view', 'id'=>$model->id_stock)),
 	array('label'=>'Gestionar Stock', 'url'=>array('admin')),

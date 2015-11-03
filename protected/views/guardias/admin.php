@@ -179,7 +179,8 @@ También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, 
             'value' => 'Turnos::model()->findByAttributes(array("id_turno"=>$data->dia_31))->abreviatura'
         ),
 		array(
-			'class'=>'CButtonColumn',
-		),
+            'class'=>'CButtonColumn',
+            'template'=>'{view}{update}',
+        ),
 	),
 )); ?>

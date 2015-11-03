@@ -3,13 +3,10 @@
 /* @var $model Facturas */
 
 $this->breadcrumbs=array(
-	'Facturas'=>array('index'),
-	$model->id_factura=>array('view','id'=>$model->id_factura),
-	'Actualizar',
+	'Actualizar Factura',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Facturas', 'url'=>array('index')),
 	array('label'=>'Crear Factura', 'url'=>array('create')),
 	array('label'=>'Ver Facturas', 'url'=>array('view', 'id'=>$model->id_factura)),
 	array('label'=>'Gestionar Facturas', 'url'=>array('admin')),

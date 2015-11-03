@@ -42,9 +42,38 @@
 	<table>
 		<tr>
 			<?php 
-				for ($i=1; $i<=31 ; $i++) { ?>
+				for ($i=1; $i<=15 ; $i++) { ?>
 					<td>	
 					<?php echo $form->label($model,'dia_'.$i); ?>
+					</td>	
+				<?php }
+			?>			
+		</tr>
+		<tr>
+			<?php 
+				for ($i=1; $i<=15 ; $i++) { ?>
+					<td>	
+					<?php echo $form->dropDownList($model,'dia_'.$i,
+					CHtml::listData(
+						Turnos::model()->findAll(),'id_turno','abreviatura'),array('class' => 'my-drop-down','prompt'=>'-',)); ?>
+					</td>	
+				<?php }
+			?>			
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<?php 
+				for ($i=16; $i<=31 ; $i++) { ?>
+					<td>	
+					<?php echo $form->label($model,'dia_'.$i); ?>
+					</td>	
+				<?php }
+			?>			
+		</tr>
+		<tr>
+			<?php 
+				for ($i=16; $i<=31 ; $i++) { ?>
+					<td>	
 					<?php echo $form->dropDownList($model,'dia_'.$i,
 					CHtml::listData(
 						Turnos::model()->findAll(),'id_turno','abreviatura'),array('class' => 'my-drop-down','prompt'=>'-',)); ?>

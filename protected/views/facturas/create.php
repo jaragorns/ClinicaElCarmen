@@ -3,17 +3,15 @@
 /* @var $model Facturas */
 
 $this->breadcrumbs=array(
-	'Facturas'=>array('index'),
-	'Crear',
+	'Crear Factura',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Facturas', 'url'=>array('index')),
 	array('label'=>'Gestionar Facturas', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Crear Facturas</h1>
+<h1>Crear Factura</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model, 
 										'items_1'=>$items_1, 

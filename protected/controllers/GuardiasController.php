@@ -31,6 +31,10 @@ class GuardiasController extends Controller
 				'actions'=>array('index','view','create','update','admin','delete','imprimir'),
 				'roles'=>array('Superadmin'),
 			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('view','create','update','admin','imprimir'),
+				'roles'=>array('Jefe_Enfermeria'),
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),

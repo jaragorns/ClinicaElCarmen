@@ -35,6 +35,10 @@ class BancosController extends Controller
 				'actions'=>array('index','view','admin'),
 				'roles'=>array('Presidente'),
 			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index'),
+				'roles'=>array('Accionista'),
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
