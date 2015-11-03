@@ -364,7 +364,7 @@ class SolicitudesController extends Controller
 			$dia = "dia_".(date("j")-1);
 		}
 		//cambiar el dia y el id
-		$sql = "SELECT id_guardia, id_usuario, id_estacion FROM guardias WHERE mes=".date('n')." AND ano=".date('Y')." AND id_usuario=".Yii::app()->user->id." AND ".$dia."!=1 "; 
+		$sql = "SELECT id_guardia, id_usuario, id_estacion, ".$dia." FROM guardias WHERE mes=".date('n')." AND ano=".date('Y')." AND id_usuario=".Yii::app()->user->id." AND ".$dia."!=1 "; 
 		/*$sql = "SELECT id_guardia, id_usuario, id_estacion, ".$dia." 
 				FROM guardias 
 				WHERE mes=7
