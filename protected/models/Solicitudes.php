@@ -96,6 +96,8 @@ class Solicitudes extends CActiveRecord
 		$criteria->compare('guardias_id_guardia',$this->guardias_id_guardia);
 		$criteria->compare('estado',$this->estado);
 
+		$criteria->addCondition("usuarios='Yii::app()->user->id'");
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'sort'=>array(
@@ -112,8 +114,11 @@ class Solicitudes extends CActiveRecord
 
 		$estacion = SolicitudesController::verificarGuardia(); 
 
-		if(!empty($estacion)){
-			$estacion = $estacion['id_estacion'];
+		if(!empty($estacion) || Yii::app()->user->role=="Farmaceuta"){
+			if(Yii::app()->user->role=="Farmaceuta")
+				$estacion = 6;
+			else
+				$estacion = $estacion['id_estacion'];
 		
 			$criteria->addCondition("estacion_id_estacion='$estacion'");
 

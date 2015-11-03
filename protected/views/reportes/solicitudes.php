@@ -31,7 +31,7 @@ El <b>Rango de Fechas</b> permite filtrar las solicitudes de cada uno de los rep
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'reporteFacturas-form',
+	'id'=>'reporteSolicitudes-form',
 	'method'=>'get',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.

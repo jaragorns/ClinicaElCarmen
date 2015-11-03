@@ -64,7 +64,7 @@ class Stock extends CActiveRecord
 		return array(
 			'id_stock' => 'Id Stock',
 			'cantidad' => 'Cantidad',
-			'id_estacion' => 'Estación',
+			'id_estacion' => 'Servicio',
 			'id_medicamento' => 'Medicamento',
 		);
 	}

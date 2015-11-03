@@ -49,7 +49,7 @@
 				'name'=>'id_medicamento',
 			    'value'=>'',
 			    'model'=>$model,
-			    'source'=>$this->createUrl('Stock/Autocomplete'),
+			    'source'=>$this->createUrl('Facturas/Autocomplete'),
 			    // additional javascript options for the autocomplete plugin
 			    'options'=>array(
 			    	'minLength'=>'1',

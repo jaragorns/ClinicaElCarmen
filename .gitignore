@@ -239,3 +239,9 @@ protected/views/tickets/create.php
 *.php
 *.php
 protected/runtime/application.log
+protected/views/reportes/asignaciones.php
+protected/views/reportes/descargas.php
+protected/views/reportes/asignaciones.php
+protected/views/reportes/asignaciones.php
+protected/views/reportes/asignaciones.php
+protected/views/reportes/inventario.php

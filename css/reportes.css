@@ -43,3 +43,27 @@
 	padding: 7px;
 	width: 5%;
 }
+.fecha{
+	text-align: center;
+	width: 20%; 
+	padding: 7px;
+}
+.reaP{
+	text-align: center;	
+	padding: 7px;
+}
+.cantidadAS{
+	text-align: center;
+	padding: 7px;
+	width: 10%;
+}
+.servicio{
+	text-align: center;
+	padding: 7px;
+	width: 13%;
+}
+.medicamento{
+	text-align: center;
+	padding: 7px;
+	width: 24%;
+}
