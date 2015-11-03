@@ -96,6 +96,8 @@ class Solicitudes extends CActiveRecord
 		$criteria->compare('guardias_id_guardia',$this->guardias_id_guardia);
 		$criteria->compare('estado',$this->estado);
 
+		$criteria->addCondition("usuarios='Yii::app()->user->id'");
+
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 			'sort'=>array(
