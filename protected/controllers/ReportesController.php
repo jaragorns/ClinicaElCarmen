@@ -29,7 +29,8 @@ class ReportesController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('vacaciones','Autocomplete','vacio','proveedores','facturas', 
-								'AutocompletePro', 'medicamentos', 'solicitudes','inventario','AutocompleteMed'),
+								'AutocompletePro', 'medicamentos', 'solicitudes','inventario','AutocompleteMed',
+								'asignaciones', 'descargas'),
 				'roles'=>array('Superadmin'),
 			),
 			array('deny',  // deny all users
@@ -336,7 +337,7 @@ class ReportesController extends Controller
 		}
 		if(isset($_GET["can"]) && $_GET["can"]==1){
 			$campos.=", cantidad";
-			$bandCan = false; 
+			$bandCan = true; 
 		}
 		if(isset($_GET["pc"]) && $_GET["pc"]==1){
 			$campos.=", precio_contado";
@@ -739,6 +740,184 @@ class ReportesController extends Controller
 		}
 
 	}
+
+	public function actionAsignaciones(){
+
+		if(isset($_GET["all"]) && $_GET["all"]==1){
+			$sql = "SELECT * FROM bitacora_stock";
+			if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+				$sql = "SELECT *  FROM bitacora_stock WHERE CAST(fecha as DATE) BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+			}
+			$this->crearPdfAsignaciones($sql);
+		}
+		if(isset($_GET["id_usuario"]) && !empty($_GET["id_usuario"])){
+			$sql = "SELECT * FROM bitacora_stock WHERE id_usuario = ".$_GET["id_usuario"];
+			if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+					$sql = "SELECT * FROM bitacora_stock WHERE id_usuario = ".$_GET["id_usuario"]." AND CAST(fecha as DATE) BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+				}
+			$this->crearPdfAsignaciones($sql);
+		}
+		if(isset($_GET["reaPor"]) && !empty($_GET["reaPor"])){
+			$sql = "SELECT * FROM bitacora_stock WHERE id_estacion_origen = ".$_GET["reaPor"];
+			if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+					$sql = "SELECT * FROM bitacora_stock WHERE id_estacion_origen = ".$_GET["reaPor"]." AND CAST(fecha as DATE) BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+				}
+			$this->crearPdfAsignaciones($sql);
+		}
+		if(isset($_GET["reaA"]) && !empty($_GET["reaA"])){
+			$sql = "SELECT * FROM bitacora_stock WHERE id_estacion_destino = ".$_GET["reaA"];
+			if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+					$sql = "SELECT * FROM bitacora_stock WHERE id_estacion_destino = ".$_GET["reaA"]." AND CAST(fecha as DATE) BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+				}
+			$this->crearPdfAsignaciones($sql);
+		}
+		if(isset($_GET["id_medicamento"]) && !empty($_GET["id_medicamento"])){
+			$sql = "SELECT * FROM bitacora_stock WHERE id_medicamento = ".$_GET["id_medicamento"];
+			if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+					$sql = "SELECT * FROM bitacora_stock WHERE id_medicamento = ".$_GET["id_medicamento"]." AND CAST(fecha as DATE) BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' "; 
+				}
+			$this->crearPdfAsignaciones($sql);
+		}
+		$this->render('asignaciones'); 
+	}
+
+	public function crearPdfAsignaciones($sql){
+		$data = BitacoraStock::model()->findAllBySql($sql); 
+		$tam = count($data);
+
+		if(!empty($data)){
+			$html = '
+				<table width="100%">
+					<tr>
+						<td class="logo"><img src="'.Yii::app()->theme->baseUrl.'/img/pre.png" height="120" width="160"></td>
+						<td class="titulo"><b>Reporte de Asignaciones <br> </b></td>
+					</tr>
+				</table>
+				<br><br>
+				<table width="100%" border="1" align="center" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
+					<tr>
+						<th class="header">Usuario</th>
+						<th class="header">Servicio Origen</th>
+						<th class="header">Servicio Destino</th>
+						<th class="header">Medicamento</th>
+						<th class="header">Cantidad</th>
+						<th class="header">Fecha</th>
+					</tr>';
+					for($i=0; $i<$tam; $i++){
+						$html.='
+					<tr>
+						<td class="fecha">'.Usuarios::model()->findByAttributes(array("id"=>$data[$i]["id_usuario"]))->NombreCompleto.'</td>
+						<td class="servicio">'.Estaciones::model()->findByAttributes(array("id_estacion"=>$data[$i]["id_estacion_origen"]))->nombre.'</td>
+						<td class="servicio">'.Estaciones::model()->findByAttributes(array("id_estacion"=>$data[$i]["id_estacion_destino"]))->nombre.'</td>
+						<td class="medicamento">'.Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data[$i]["id_medicamento"]))->nombre.'</td>
+						<td class="cantidadAS">'.$data[$i]["cantidad"].' ('.UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>Medicamentos::model()->findByAttributes(array("id_medicamento"=>$data[$i]["id_medicamento"]))->unidad_medida))->descripcion.')</td>
+						<td class="fecha">'.date_format(date_create($data[$i]["fecha"]), "d-m-Y g:ia") .'</td>
+					</tr>';
+					}
+				$html.='
+				</table>
+			'; 
+
+			$mPDF1 = Yii::app()->ePdf->mpdf('','A4-L',9,'',15,15,15,15,'','');
+			$stylesheet = file_get_contents(Yii::getPathOfAlias('webroot.css') . '/reportes.css');
+			$nombre = "Reporte_Asignaciones.pdf";
+	        $mPDF1->WriteHTML($stylesheet, 1);
+			$mPDF1->WriteHTML($html);
+			$mPDF1->Output($nombre,'I'); 
+
+		}else{
+			Yii::app()->user->setFlash('notice','No hay registro de Asignaciones');
+			$this->redirect("asignaciones"); 	
+		}
+	}
+
+	public function actionDescargas(){
+
+		if(isset($_GET["all"]) && $_GET["all"]==1){
+			$sql = "SELECT * FROM bitacora_descargas";
+			if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+				$sql = "SELECT * FROM bitacora_descargas WHERE CAST(fecha_hora as DATE) BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' ";
+			}
+			$this->crearPdfDescargas($sql); 
+		}
+
+		if(isset($_GET["servicio"]) && !empty($_GET["servicio"])){
+			$sql = "SELECT a.* FROM bitacora_descargas as a JOIN stock as b ON a.id_stock = b.id_stock WHERE b.id_estacion = ".$_GET["servicio"];
+			if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+				$sql = "SELECT a.* FROM bitacora_descargas as a JOIN stock as b ON a.id_stock = b.id_stock WHERE b.id_estacion=".$_GET["servicio"]." AND CAST(a.fecha_hora as DATE) BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' ";
+			}
+			$this->crearPdfDescargas($sql); 
+		}
+		if(isset($_GET["id_usuario"]) && !empty($_GET["id_usuario"])){
+			$sql = "SELECT a.* FROM bitacora_descargas as a JOIN guardias as b ON a.id_guardia = b.id_guardia WHERE b.id_usuario = ".$_GET["id_usuario"];
+			if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+				$sql = "SELECT a.* FROM bitacora_descargas as a JOIN guardias as b ON a.id_guardia = b.id_guardia WHERE b.id_usuario=".$_GET["id_usuario"]." AND CAST(a.fecha_hora as DATE) BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' ";
+			}
+			$this->crearPdfDescargas($sql); 
+		}
+		if(isset($_GET["id_medicamento"]) && !empty($_GET["id_medicamento"])){
+			$sql = "SELECT a.* FROM bitacora_descargas as a JOIN stock as b ON a.id_stock = b.id_stock WHERE b.id_medicamento = ".$_GET["id_medicamento"];
+			if(!empty($_GET["ffd"]) && !empty($_GET["ffh"])){
+				$sql = "SELECT a.* FROM bitacora_descargas as a JOIN stock as b ON a.id_stock = b.id_stock WHERE b.id_medicamento=".$_GET["id_medicamento"]." AND CAST(a.fecha_hora as DATE) BETWEEN '".date_format(date_create($_GET['ffd']), 'Y-m-d')."' AND '".date_format(date_create($_GET['ffh']), 'Y-m-d')."' ";
+			}
+			$this->crearPdfDescargas($sql); 
+		}
+
+		$this->render('descargas');
+	}
+
+	public function crearPdfDescargas($sql){
+		$connection = Yii::app()->db;
+		$command = $connection->createCommand($sql);
+		$dataReader = $command->query();
+		$data = $dataReader->readAll();
+
+		$tam = count($data);
+
+		if(!empty($data)){
+			$html = '
+				<table width="100%">
+					<tr>
+						<td class="logo"><img src="'.Yii::app()->theme->baseUrl.'/img/pre.png" height="120" width="160"></td>
+						<td class="titulo"><b>Reporte de Asignaciones <br> </b></td>
+					</tr>
+				</table>
+				<br><br>
+				<table width="100%" border="1" align="center" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
+					<tr>
+						<th class="header">Servicio</th>
+						<th class="header">Usuario</th>
+						<th class="header">Medicamento</th>
+						<th class="header">Cantidad</th>
+						<th class="header">Fecha</th>
+					</tr>';
+					for($i=0; $i<$tam; $i++){
+						$html.='
+					<tr>
+						<td class="fecha">'.Estaciones::model()->findByAttributes(array("id_estacion"=>Guardias::model()->findByAttributes(array("id_guardia"=>$data[$i]["id_guardia"]))->id_estacion))->nombre.'</td>
+						<td class="servicio">'.Usuarios::model()->findByAttributes(array("id"=>Guardias::model()->findByAttributes(array("id_guardia"=>$data[$i]["id_guardia"]))->id_usuario))->NombreCompleto.'</td>
+						<td class="medicamento">'.Medicamentos::model()->findByAttributes(array("id_medicamento"=>Stock::model()->findByAttributes(array("id_stock"=>$data[$i]["id_stock"]))->id_medicamento))->nombre.'</td>
+						<td class="cantidadAS">'.$data[$i]["cantidad"].' ('.UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>Medicamentos::model()->findByAttributes(array("id_medicamento"=>Stock::model()->findByAttributes(array("id_stock"=>$data[$i]["id_stock"]))->id_medicamento))->unidad_medida))->descripcion.')</td>
+						<td class="fecha">'.date_format(date_create($data[$i]["fecha_hora"]), "d-m-Y g:ia") .'</td>
+					</tr>';
+					}
+				$html.='
+				</table>
+			'; 
+
+			$mPDF1 = Yii::app()->ePdf->mpdf('','A4-L',9,'',15,15,15,15,'','');
+			$stylesheet = file_get_contents(Yii::getPathOfAlias('webroot.css') . '/reportes.css');
+			$nombre = "Reporte_Descargas.pdf";
+	        $mPDF1->WriteHTML($stylesheet, 1);
+			$mPDF1->WriteHTML($html);
+			$mPDF1->Output($nombre,'I'); 
+
+		}else{
+			Yii::app()->user->setFlash('notice','No hay registro de Descargas');
+			$this->redirect("descargas"); 	
+		}
+	}
+
 	public function actionAutocomplete($term) 
 	{
 		$criteria = new CDbCriteria;

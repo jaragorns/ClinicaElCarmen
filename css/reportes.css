@@ -52,3 +52,18 @@
 	text-align: center;	
 	padding: 7px;
 }
+.cantidadAS{
+	text-align: center;
+	padding: 7px;
+	width: 10%;
+}
+.servicio{
+	text-align: center;
+	padding: 7px;
+	width: 13%;
+}
+.medicamento{
+	text-align: center;
+	padding: 7px;
+	width: 24%;
+}

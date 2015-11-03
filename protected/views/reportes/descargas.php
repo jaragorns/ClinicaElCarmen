@@ -2,26 +2,25 @@
 
 $this->breadcrumbs=array(
 	'Reportes',
-	'Asignaciones',
+	'Descargas',
 );
 
 ?>
 <br>
-<h1>Reporte de Asignaciones</h1>
+<h1>Reporte de Descargas</h1>
 
 <p align="justify">
-	* El <b>Reporte General</b> le mostrar&aacute; todas las asignaciones que han sido realizadas a la fecha. <br>
-	* Si selecciona un <b>empleado</b> y/o enfermera el reporte le mostrar&aacute; las asignaciones que ha realizado dicho empleado a la fecha <br>
-	* Si le selecciona un servicio en la opci&oacute;n <b>Realizadas Por</b> el reporte mostrar&aacute; todas las solicitudes que tienen como origen dicho servicio, es decir, lo que el servicio ha solicitado. <br>
-	* Si le selecciona un servicio en la opci&oacute;n <b>Realizadas A</b> el reporte mostrar&aacute; todas las solicitudes que tienen como destino dicho servicio, es decir, lo que se le ha solicitado al servicio. <br>
-	* Si selecciona un <b>Medicamento</b> el reporte le mostrar&aacute; las asignaciones realizadas de ese medicamento. <br>
+	* El <b>Reporte General</b> le mostrar&aacute; todas las descargas que han sido realizadas a la fecha. <br>
+	* Si le selecciona un <b>servicio</b> el reporte mostrar&aacute; todas las descargas que fueron realizadas en dicho servicio. <br>
+	* Si selecciona un <b>empleado</b> y/o enfermera el reporte le mostrar&aacute; las descargas que ha realizado dicho empleado a la fecha <br>
+	* Si selecciona un <b>Medicamento</b> el reporte le mostrar&aacute; las descargas realizadas de ese medicamento. <br>
 	* El <b>Rango de Fechas</b> le permite filtrar desde una fecha inicial hasta una fecha final los reportes, dada cualquiera de las opciones anteriores. 
 </p>
 
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'reporteAsignaciones-form',
+	'id'=>'reporteDescargas-form',
 	'method'=>'get',
 	// Please note: When you enable ajax validation, make sure the corresponding
 	// controller action is handling ajax validation correctly.
@@ -35,6 +34,24 @@ $this->breadcrumbs=array(
 		<tr>
 			<td><?php echo Chtml::label('Reporte General',false); ?></td>
 			<td><?php echo Chtml::checkBox('all', false, array('checkValue'=>1, 'uncheckValue'=>0)); ?></td>
+		</tr>
+		<tr>
+			<td><?php echo Chtml::label('Servicio: ',false); ?></td>
+			<td><?php 
+				echo Chtml::dropDownList(
+					'servicio',
+					'servicio',
+					CHtml::listData(
+						Estaciones::model()->findAll(array('condition'=>'id_estacion NOT IN ("1","7")')),
+						'id_estacion',
+						'nombre'),
+					array(
+						'class' => 'my-drop-down',
+						'empty'=>'-- Seleccione un Servicio --',
+					)
+				);
+			?> 
+			</td>
 		</tr>
 		<tr>
 			<td><?php echo Chtml::label('Empleado',false); ?></td>
@@ -61,42 +78,6 @@ $this->breadcrumbs=array(
 					),
 			));
 		?></td>
-		</tr>
-		<tr>
-			<td><?php echo Chtml::label('Realizadas Por: ',false); ?></td>
-			<td><?php 
-				echo Chtml::dropDownList(
-					'reaPor',
-					'reaPor',
-					CHtml::listData(
-						Estaciones::model()->findAll(array('condition'=>'id_estacion NOT IN ("1","7")')),
-						'id_estacion',
-						'nombre'),
-					array(
-						'class' => 'my-drop-down',
-						'empty'=>'-- Seleccione un Servicio --',
-					)
-				);
-			?> 
-			</td>
-		</tr>
-		<tr>
-			<td><?php echo Chtml::label('Realizadas A: ',false); ?></td>
-			<td><?php 
-				echo Chtml::dropDownList(
-					'reaA',
-					'reaA',
-					CHtml::listData(
-						Estaciones::model()->findAll(array('condition'=>'id_estacion NOT IN ("1","7")')),
-						'id_estacion',
-						'nombre'),
-					array(
-						'class' => 'my-drop-down',
-						'empty'=>'-- Seleccione un Servicio --',
-					)
-				);
-			?> 
-			</td>
 		</tr>
 		<tr>
 			<td><?php echo Chtml::label('Medicamento', false); ?></td>
