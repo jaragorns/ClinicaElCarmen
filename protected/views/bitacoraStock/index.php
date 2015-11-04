@@ -3,7 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Bitacora Stocks',
+	'Bitacora de Inventario',
 );
 
 $this->menu=array(

@@ -15,34 +15,70 @@
 		<?php echo $form->label($model,'id_usuario'); ?>
 	</div>
 	<div class="media">
-		<?php 
-			echo $form->dropDownList(
-				$model,
-				'id_usuario',
-				CHtml::listData(
-					Usuarios::model()->findAll(),
-					'id',
-					'NombreCompleto'),
-				array(
-					'class' => 'my-drop-down',
-					'empty'=>'-- Seleccione un Empleado --',
-				)
-			);
-		?> 
+		<?php
+			echo $form->hiddenField($model,'id_usuario',array());
+			$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+				'name'=>'usuario',
+			    'value'=>'',
+			    'model'=>$model,
+			    'source'=>$this->createUrl('Reportes/Autocomplete'),
+			    // additional javascript options for the autocomplete plugin
+			    'options'=>array(
+			    	'minLength'=>'1',
+			    	'showAnim'=>'fold',
+			    	'select'=>"js:function(event, ui) { 
+	       				$('#Vacaciones_id_usuario').val(ui.item.id_usuario); 
+	       			}"
+			    ),
+			    'htmlOptions'=>array(
+		        	'style'=>'width:300px;',
+		        	'placeholder'=>'Nombre del empleado...',
+		        	'title'=>'Indique el empleado que desea buscar.'
+	    		),
+			));
+		?>
 	</div>
 
 	<div class="rowcontact">
 		<?php echo $form->label($model,'fecha_inicio'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'fecha_inicio',array('placeholder'=>"2015-10-25",'size'=>30,'maxlength'=>12)); ?>
+		<?php 
+			$this->widget('zii.widgets.jui.CJuiDatePicker', 
+				array(
+					'attribute'=>'fecha_inicio',
+	                'model'=>$model,
+	                'value' => $model->fecha_inicio,
+	                'language'=> Yii::app()->language,
+	                'language'=>'es',
+	                'options'=>array (
+	                    'showSecond'=>true,
+	                    'dateFormat'=>'yy-mm-dd',
+	                ),  
+	            )   
+	        );
+		?>
 	</div>
 
 	<div class="rowcontact">
 		<?php echo $form->label($model,'fecha_fin'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'fecha_fin',array('placeholder'=>"2015-10-25",'size'=>30,'maxlength'=>12)); ?>
+		<?php 
+			$this->widget('zii.widgets.jui.CJuiDatePicker', 
+				array(
+					'attribute'=>'fecha_fin',
+	                'model'=>$model,
+	                'value' => $model->fecha_fin,
+	                'language'=> Yii::app()->language,
+	                'language'=>'es',
+	                'options'=>array (
+	                    'showSecond'=>true,
+	                    'dateFormat'=>'yy-mm-dd',
+	                ),  
+	            )   
+	        );
+		?>
 	</div>
 
 	<div class="buttons">

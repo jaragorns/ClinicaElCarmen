@@ -50,12 +50,9 @@
 		<?php echo $form->label($model,'estado'); ?>
 	</div>
 	<div class="media">
-		<?php echo "En Construcción"
-			//echo CHtml::dropDownList('estado', 'estado', 
-            //  array('1' => 'Aprobado', '2' => 'Rechazado'),
-            //  array('empty' => '-- Seleccione un Estado --'));
-		?> 
-		<?php echo $form->error($model,'estado'); ?>
+		<?php echo CHtml::dropDownList('estado', $model, 
+              array('0' => 'Pendiente', '1' => 'Aprobado', '2' => 'Rechazado'),
+              array('empty' => 'Seleccionar:')); ?>
 	</div>
 
 	<div class="buttons">

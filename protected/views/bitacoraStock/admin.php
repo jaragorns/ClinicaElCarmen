@@ -3,7 +3,7 @@
 /* @var $model BitacoraStock */
 
 $this->breadcrumbs=array(
-	'Bitacora Stocks'=>array('admin'),
+	'Bitacora de Inventario'=>array('admin'),
 	'Gestion',
 );
 
@@ -21,12 +21,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Bitacora Stocks</h1>
-
-<p>
-También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-ó <b>=</b>)  en el comienzo de cada uno de los valores de búsqueda para especificar cómo se debe hacer la comparación.
-</p>
+<h1>Bitacora de Inventario</h1>
 
 <?php echo CHtml::link(Yii::t('app','Advanced Search'),'#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">

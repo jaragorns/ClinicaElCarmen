@@ -15,7 +15,21 @@
 		<?php echo $form->label($model,'fecha_solicitud'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'fecha_solicitud',array('placeholder'=>'YYYY-MM-DD')); ?>
+		<?php 
+			$this->widget('zii.widgets.jui.CJuiDatePicker', 
+				array(
+					'attribute'=>'fecha_solicitud',
+	                'model'=>$model,
+	                'value' => $model->fecha_solicitud,
+	                'language'=> Yii::app()->language,
+	                'language'=>'es',
+	                'options'=>array (
+	                    'showSecond'=>true,
+	                    'dateFormat'=>'yy-mm-dd',
+	                ),  
+	            )   
+	        );
+		?>
 	</div>
 
 	<div class="rowcontact">
@@ -42,6 +56,12 @@
 	<div class="rowcontact">
 		<?php echo $form->label($model,'estado'); ?>
 	</div>
+	<div class="media">
+		<?php echo CHtml::dropDownList('estado', $model, 
+              array('0' => 'Pendiente', '1' => 'En Proceso', '2' => 'Procesada'),
+              array('empty' => 'Seleccionar:')); ?>
+	</div>
+
 
 	<div class="buttons">
 		<?php echo CHtml::submitButton(Yii::t('app','Search'),  array("class"=>"btn btn-primary btn-large")); ?>

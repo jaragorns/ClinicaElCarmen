@@ -15,7 +15,21 @@
 		<?php echo $form->label($model,'fecha_hora'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'fecha_hora',array('placeholder'=>"2015-10-25 22:02",'size'=>30,'maxlength'=>17)); ?>
+		<?php 
+			$this->widget('zii.widgets.jui.CJuiDatePicker', 
+				array(
+					'attribute'=>'fecha_hora',
+	                'model'=>$model,
+	                'value' => $model->fecha_hora,
+	                'language'=> Yii::app()->language,
+	                'language'=>'es',
+	                'options'=>array (
+	                    'showSecond'=>true,
+	                    'dateFormat'=>'yy-mm-dd',
+	                ),  
+	            )   
+	        );
+		?>
 	</div>
 
 	<div class="rowcontact">
@@ -23,27 +37,6 @@
 	</div>
 	<div class="media">
 		<?php  echo $form->numberField($model,'cantidad',array('min'=>0, 'max'=>999999)); ?>
-	</div>
-
-	<div class="rowcontact">
-		<?php echo $form->label($model,'estado'); ?>
-	</div>
-	<div class="media">
-		<?php echo $form->textField($model,'estado'); ?>
-	</div>
-
-	<div class="rowcontact">
-		<?php echo $form->label($model,'id_stock'); ?>
-	</div>
-	<div class="media">
-		<?php echo $form->textField($model,'id_stock'); ?>
-	</div>
-
-	<div class="rowcontact">
-		<?php echo $form->label($model,'id_guardia'); ?>
-	</div>
-	<div class="media">
-		<?php echo $form->textField($model,'id_guardia'); ?>
 	</div>
 
 	<div class="buttons">

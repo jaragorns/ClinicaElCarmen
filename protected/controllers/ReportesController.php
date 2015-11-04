@@ -28,20 +28,14 @@ class ReportesController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-<<<<<<< HEAD
-				'actions'=>array('vacaciones','Autocomplete','proveedores','facturas', 
-								'AutocompletePro', 'medicamentos', 'solicitudes'),
+				'actions'=>array('vacaciones','Autocomplete','vacio','proveedores','facturas', 
+								'AutocompletePro', 'medicamentos', 'solicitudes','inventario','AutocompleteMed',
+								'asignaciones', 'descargas'),
 				'roles'=>array('Superadmin','Jefe_Farmacia','Accionista','Administrador_Admin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('AutocompletePro'),
 				'roles'=>array('Farmaceuta'),
-=======
-				'actions'=>array('vacaciones','Autocomplete','vacio','proveedores','facturas', 
-								'AutocompletePro', 'medicamentos', 'solicitudes','inventario','AutocompleteMed',
-								'asignaciones', 'descargas'),
-				'roles'=>array('Superadmin'),
->>>>>>> origin/master
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

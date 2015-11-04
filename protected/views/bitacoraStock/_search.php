@@ -15,7 +15,28 @@
 		<?php echo $form->label($model,'id_usuario'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'id_usuario'); ?>
+		<?php
+			echo $form->hiddenField($model,'id_usuario',array());
+
+			$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+				'name'=>'usuario',
+				'value'=>'',
+				'source'=>$this->createUrl('Reportes/Autocomplete'),
+				// additional javascript options for the autocomplete plugin
+				'options'=>array(
+			    	'minLength'=>'1',
+			        'showAnim'=>'fold',
+			        'select'=>"js:function(event, ui) { 
+						$('#BitacoraStock_id_usuario').val(ui.item.id_usuario);
+					}"
+				),
+				'htmlOptions'=>array(
+					'style'=>'width:300px;',
+					'placeholder'=>'Nombre del Empleado...',
+					'title'=>'Indique el nombre del Empleado que desea consultar.'
+				),
+			));
+		?>
 	</div>
 
 	<div class="rowcontact">
@@ -78,7 +99,7 @@
 	       			}"
 			    ),
 			    'htmlOptions'=>array(
-		        	'style'=>'width:436px;',
+		        	'style'=>'width:300px;',
 		        	'placeholder'=>'Nombre del medicamento...',
 		        	'title'=>'Indique el medicamento que desea buscar.'
 	    		),
@@ -97,7 +118,21 @@
 		<?php echo $form->label($model,'fecha'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'fecha',array('placeholder'=>"2015-10-25 22:02",'size'=>30,'maxlength'=>17)); ?>
+		<?php 
+			$this->widget('zii.widgets.jui.CJuiDatePicker', 
+				array(
+					'attribute'=>'fecha',
+	                'model'=>$model,
+	                'value' => $model->fecha,
+	                'language'=> Yii::app()->language,
+	                'language'=>'es',
+	                'options'=>array (
+	                    'showSecond'=>true,
+	                    'dateFormat'=>'yy-mm-dd',
+	                ),  
+	            )   
+	        );
+		?>
 	</div>
 
 	<div class="buttons">
