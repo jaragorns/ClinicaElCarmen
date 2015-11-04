@@ -28,7 +28,11 @@ class ReportesController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
+<<<<<<< HEAD
 				'actions'=>array('vacaciones','Autocomplete','vacio','proveedores','facturas', 
+=======
+				'actions'=>array('vacaciones','Autocomplete','proveedores','facturas', 
+>>>>>>> origin/master
 								'AutocompletePro', 'medicamentos', 'solicitudes','inventario','AutocompleteMed',
 								'asignaciones', 'descargas'),
 				'roles'=>array('Superadmin','Jefe_Farmacia','Accionista','Administrador_Admin'),

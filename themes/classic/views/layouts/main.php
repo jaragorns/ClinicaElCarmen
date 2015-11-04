@@ -323,6 +323,18 @@
                                     <li id="menu-item-204" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-204">
                                         <a title="Reporte de Vacaciones" href="<?php echo Yii::app()->baseUrl;?>/reportes/vacaciones">Vacaciones</a>
                                     </li>
+                                    <li id="menu-item-205" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-205">
+                                        <a title="Reporte de Inventario" href="<?php echo Yii::app()->baseUrl;?>/reportes/inventario">Inventario</a>
+                                    </li>
+                                    <li id="menu-item-206" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-206">
+                                        <a title="Reporte de Asignaciones" href="<?php echo Yii::app()->baseUrl;?>/reportes/asignaciones">Asignaciones</a>
+                                    </li>
+                                    <li id="menu-item-207" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-207">
+                                        <a title="Reporte de Descargas" href="<?php echo Yii::app()->baseUrl;?>/reportes/descargas">Descargas</a>
+                                    </li>
+                                     <li id="menu-item-208" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-208">
+                                        <a title="Reporte de Proveedores" href="<?php echo Yii::app()->baseUrl;?>/reportes/proveedores">Proveedores</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
