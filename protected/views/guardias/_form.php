@@ -57,7 +57,7 @@
 		<tr>
 			<td>
 				<?php
-				$sql = 'SELECT * FROM Usuarios WHERE itemname="Enfermeria" OR itemname="Coord. Enfermeria" order by nombres,apellidos';
+				$sql = 'SELECT * FROM Usuarios WHERE itemname="Enfermera" OR itemname="Coord. Enfermeria" order by nombres,apellidos';
 				echo $form->dropDownList($model,'id_usuario',
 				CHtml::listData(
 					Usuarios::model()->findAllBySql($sql),'id','NombreCompleto'),	array('class' => 'my-drop-down','prompt'=>'Enfermera:',)); ?> 

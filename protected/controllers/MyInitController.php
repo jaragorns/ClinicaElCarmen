@@ -78,7 +78,7 @@ class MyInitController extends Controller
 			$auth->assign('Jefe_Farmacia','');//Mayla
 			$auth->assign('Farmaceuta','');//Deisy
 			$auth->assign('Jefe_Enfermeria','');//Nancy
-			$auth->assign('Enfermeria','18');//Nancy, Maria, etc...
+			$auth->assign('Enfermera','18');//Nancy, Maria, etc...
 
  			echo "RBAC LOAD!!";
 		}

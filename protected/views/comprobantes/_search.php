@@ -36,22 +36,22 @@
 		<?php echo $form->label($model,'fecha'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'fecha'); ?>
+		<?php 
+			$this->widget('zii.widgets.jui.CJuiDatePicker', 
+				array(
+					'attribute'=>'fecha',
+	                'model'=>$model,
+	                'value' => $model->fecha,
+	                'language'=> Yii::app()->language,
+	                'language'=>'es',
+	                'options'=>array (
+	                    'showSecond'=>true,
+	                    'dateFormat'=>'yy-mm-dd',
+	                ),  
+	            )   
+	        );
+		?>
 	</div>
-<!--
-	<div class="rowcontact">
-		<?php //echo $form->label($model,'detalle'); ?>
-	</div>
-	<div class="media">
-		<?php //echo $form->textField($model,'detalle',array('size'=>60,'maxlength'=>80)); ?>
-	</div>
-	<div class="rowcontact">
-		<?php //echo $form->label($model,'usuarios_username'); ?>
-	</div>
-	<div class="media">
-		<?php //echo $form->textField($model,'usuarios_username'); ?>
-	</div>
--->
 	<div class="rowcontact">
 		<?php echo $form->label($model,'bancos_id_bancos'); ?>
 	</div>

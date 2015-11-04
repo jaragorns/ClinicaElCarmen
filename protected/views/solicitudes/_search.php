@@ -49,7 +49,7 @@
 	<div class="media">
 		<?php echo $form->dropDownList($model,'usuarios',
 				CHtml::listData(
-					Usuarios::model()->findAll(array('condition'=>'itemname=:itemname','params'=>array(':itemname'=>'Enfermeria'))),
+					Usuarios::model()->findAll(array('condition'=>'itemname=:itemname','params'=>array(':itemname'=>'Enfermera'))),
 					'id','NombreCompleto'),	array('class' => 'my-drop-down','prompt'=>'Enfermera:',)); ?>
 	</div>
 

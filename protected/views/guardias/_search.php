@@ -27,7 +27,7 @@
 				<?php echo $form->label($model,'id_usuario'); ?>
 				<?php echo $form->dropDownList($model,'id_usuario',
 				CHtml::listData(
-					Usuarios::model()->findAll(array('condition'=>'itemname=:itemname','params'=>array(':itemname'=>'Enfermeria'))),
+					Usuarios::model()->findAll(array('condition'=>'itemname=:itemname','params'=>array(':itemname'=>'Enfermera'))),
 					'id','NombreCompleto'),	array('class' => 'my-drop-down','prompt'=>'Enfermera:',)); ?>
 			</td>
 			<td>

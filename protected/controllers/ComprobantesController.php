@@ -45,7 +45,7 @@ class ComprobantesController extends Controller
 			),
 			array('allow', 
 				'actions'=>array('admin'),
-				'roles'=>array('Accionista'),
+				'roles'=>array('Accionista','Jefe_Farmacia'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),

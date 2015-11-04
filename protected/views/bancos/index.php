@@ -5,13 +5,15 @@
 $this->breadcrumbs=array(
 	'Bancos',
 );
-if(!(Yii::app()->user->role=="Accionista")){
 $this->menu=array(
-	array('label'=>'Crear Banco', 'url'=>array('create')),
-	array('label'=>'Gestionar Bancos', 'url'=>array('admin')),
-	array('label'=>'Gestionar Comprobantes', 'url'=>array('/comprobantes/admin')),
+	array('label'=>'Crear Banco', 'url'=>array('create'),
+		'visible'=>Yii::app()->user->role=="Superadmin", Yii::app()->user->role=="Presidente", Yii::app()->user->role=="Vicepresidente"),
+	array('label'=>'Gestionar Bancos', 'url'=>array('admin'),
+		'visible'=>Yii::app()->user->role=="Superadmin", Yii::app()->user->role=="Presidente", Yii::app()->user->role=="Vicepresidente"),
+	array('label'=>'Gestionar Comprobantes', 'url'=>array('/comprobantes/admin'),
+		'visible'=>Yii::app()->user->role=="Superadmin", Yii::app()->user->role=="Presidente", Yii::app()->user->role=="Vicepresidente"),
 );
-}
+
 ?>
 
 <h1>Bancos</h1>
