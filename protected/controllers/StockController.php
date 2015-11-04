@@ -33,7 +33,7 @@ class StockController extends Controller
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view','viewEstacion','create','update','admin','asignar','autocomplete'),
-				'roles'=>array('Farmaceuta'),
+				'roles'=>array('Farmaceuta','Jefe_Farmacia'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('adminEstacion','adminDescarga','asignar','autocomplete'),

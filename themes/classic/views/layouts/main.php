@@ -413,12 +413,6 @@
                             <li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
                                 <a title="Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes" data-toggle="dropdown" class="dropdown-toggle"><?php if(!empty($result))echo '<mark>'.count($result).'</mark>';?> Solicitudes <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
-                                    <li id="menu-item-161" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-161">
-                                        <a title="Agregar Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/create">Agregar Solicitudes</a>
-                                    </li>
-                                    <li id="menu-item-162" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-162">
-                                        <a title="Mis Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/admin">Mis Solicitudes</a>
-                                    </li>
                                     <li id="menu-item-163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163">
                                         <a title="Solicitudes Pendientes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/adminPendiente"><span class="badge"><?php if(!empty($result))echo count($result);?></span>Solicitudes Pendientes</a>
                                     </li>
@@ -480,34 +474,6 @@
                                     </li>
                                     <li id="menu-item-173" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-173">
                                         <a title="Asignar Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/stock/asignar">Asignar Medicamentos</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <?php
-                                if(Yii::app()->user->role=="Farmaceuta"){
-                                    $result = Solicitudes::model()->findAll(array('condition'=>'estacion_id_estacion=:id_estacion',
-                                        'params'=>array(':id_estacion'=>6),));
-
-                                }else{
-                                    if(!empty(SolicitudesController::verificarGuardia()->id_estacion)){
-                                        $result = Solicitudes::model()->findAll(array('condition'=>'estacion_id_estacion=:id_estacion AND estado!=2',
-                                            'params'=>array(':id_estacion'=>SolicitudesController::verificarGuardia()->id_estacion
-                                              ),));
-                                    }
-                                }
-
-                            ?>
-                            <li id="menu-item-16" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
-                                <a title="Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes" data-toggle="dropdown" class="dropdown-toggle"><?php if(!empty($result))echo '<mark>'.count($result).'</mark>';?> Solicitudes <span class="caret"></span></a>
-                                <ul role="menu" class=" dropdown-menu">
-                                    <li id="menu-item-161" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-161">
-                                        <a title="Agregar Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/create">Agregar Solicitudes</a>
-                                    </li>
-                                    <li id="menu-item-162" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-162">
-                                        <a title="Mis Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/admin">Mis Solicitudes</a>
-                                    </li>
-                                    <li id="menu-item-163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163">
-                                        <a title="Solicitudes Pendientes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/adminPendiente"><span class="badge"><?php if(!empty($result))echo count($result);?></span>Solicitudes Pendientes</a>
                                     </li>
                                 </ul>
                             </li>

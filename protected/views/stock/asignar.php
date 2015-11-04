@@ -34,7 +34,7 @@ $this->menu=array(
 	<div class="media">
 		<b><?php echo "Estación Origen: ";?></b>
 		<?php 
-			if(Yii::app()->user->role=="Farmaceuta"){
+			if(Yii::app()->user->role=="Jefe_Farmacia" OR Yii::app()->user->role=="Farmaceuta"){
 
 				echo '<i>'."FARMACIA ".'</i>'; 
 				echo "<b>a</b> ".$form->labelEx($model,'id_estacion')." "; 		 
