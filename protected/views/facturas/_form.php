@@ -64,7 +64,7 @@
 				</td>	
 				<td>
 					<?php
-						echo Chtml::hiddenField('id_proveedor', '', array());
+						echo $form->hiddenField($model,'id_proveedor', array());
 
 						$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
 			    				'name'=>'name',
@@ -75,8 +75,8 @@
 			    					'minLength'=>'1',
 			            			'showAnim'=>'fold',
 			            			'select'=>"js:function(event, ui) { 
-											$('#id_proveedor').val(ui.item.id_pro);
-										}"
+										$('#Facturas_id_proveedor').val(ui.item.id_pro);
+									}"
 			    				),
 			    				'htmlOptions'=>array(
 									'style'=>'width:400px;',

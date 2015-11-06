@@ -8,7 +8,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Unidad de Medidas', 'url'=>array('index')),
 	array('label'=>'Crear Unidad de Medidas', 'url'=>array('create')),
 );
 
@@ -42,8 +41,9 @@ $('.search-form form').submit(function(){
 		//'id_unidad_medidas',
 		'descripcion',
 		'abreviatura',
-		array(
-			'class'=>'CButtonColumn',
-		),
+		 array(
+            'class'=>'CButtonColumn',
+            'template'=>'{view}{update}',
+        ),
 	),
 )); ?>

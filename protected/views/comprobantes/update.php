@@ -3,9 +3,7 @@
 /* @var $model Comprobantes */
 
 $this->breadcrumbs=array(
-	'Comprobantes'=>array('index'),
-	$model->num_comprobante,
-	'Actualizar',
+	'Actualizar Comprobantes',
 );
 
 $this->menu=array(

@@ -28,11 +28,11 @@ class SolicitudesController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete','autocomplete','adminPendiente','viewPendiente','AjaxEditColumn', 'ajaxeditcolumnAsig'),
+				'actions'=>array('index','view','create','update','admin','delete','autocomplete','adminPendiente','adminHistorial','viewPendiente','AjaxEditColumn', 'ajaxeditcolumnAsig'),
 				'roles'=>array('Superadmin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('create','admin','autocomplete','adminPendiente','viewPendiente','AjaxEditColumn', 'ajaxeditcolumnAsig'),
+				'actions'=>array('view','create','admin','autocomplete','adminPendiente','adminHistorial','viewPendiente','AjaxEditColumn', 'ajaxeditcolumnAsig'),
 				'roles'=>array('Enfermera','Farmaceuta'),
 			),
 			array('deny',  // deny all users
@@ -324,6 +324,19 @@ class SolicitudesController extends Controller
 		));
 	}
 
+	public function actionAdminHistorial()
+	{
+		$model=new Solicitudes('search');
+		$model->unsetAttributes();  // clear any default values
+		
+		if(isset($_GET['Solicitudes']))
+			$model->attributes=$_GET['Solicitudes'];
+
+		$this->render('adminHistorial',array(
+			'model'=>$model,
+		));
+	}
+
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
@@ -412,16 +425,15 @@ class SolicitudesController extends Controller
 		//si la busqueda existe y la cantidad del medicamento es mayor que 0 
 		if(!empty($stock) && $stock->cantidad>0){
 			if(!empty($item->cantidad) && ($item->cantidad > $stock->cantidad)){
-				echo "NO HAY SUFICIENTE <br>"; 
 				return false; 
-				//Yii::app()->user->setFlash('error','La cantidad solicitada de '.Medicamentos::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento))->nombre.' no está disponible en el Servicio');
+				Yii::app()->user->setFlash('error','La cantidad solicitada de '.Medicamentos::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento))->nombre.' no está disponible en el Servicio');
 			}else{
 				$item->id_stock = $stock->id_stock;
 				return true; 
 			}
 		}else{	
-			//Yii::app()->user->setFlash('error','El medicamento '.Medicamentos::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento))->nombre.' no está disponible en el Servicio');
-			echo "NO HAY <br>"; 
+			Yii::app()->user->setFlash('error','El medicamento '.Medicamentos::model()->findByAttributes(array('id_medicamento'=>$item->id_medicamento))->nombre.' no está disponible en el Servicio');
+
 			$item->id_stock="";
 			$item->cantidad="";
 			$item->id_medicamento="";
@@ -440,9 +452,14 @@ class SolicitudesController extends Controller
 	    //Do some stuff here, and return the value to be displayed..
         $model = ItemSolicitud::model()->findByPk($id_item_solicitud);
         
+        if(Yii::app()->user->role='Farmaceuta'){
+        	$band = true;
+        }else{
+        	$band = SolicitudesController::verificarGuardia()->id_estacion;
+        }
         //LO PUEDE CAMBIAR DE ESTADO (APROBADO) SOLO SI YA ASIGNADO UNA CANTIDAD EN EL CAMPO CANTIDAD
         // ES DECIR QUE ESTE EN LA BITACORA STOCK 
-        if($name == "estado" && SolicitudesController::verificarGuardia()->id_estacion){
+        if($name == "estado" && $band){
 
         	if($new_value == 1){ //SI APRUEBA LA SOLICITUD
         		$exist_bitacora = BitacoraStock::model()->findByAttributes(array('id_item_solicitud'=>$id_item_solicitud)); 
@@ -457,6 +474,10 @@ class SolicitudesController extends Controller
         		}
         		//Hacer el cambio en Stock
         	}
+        	$modelSolicitud = Solicitudes::model()->findByAttributes(array('id_solicitud'=>$model->id_solicitud));
+        	$modelSolicitud->id_usuario_procesa = Yii::app()->user->id;
+        	$modelSolicitud->save();
+
         	$model->saveAttributes(array('estado'=>$new_value));
 
         	//BUSCAR TODAS LOS ITEM_SOLCITUD DE UNA SOLCITUD Y VER SUS ESTADOS CON EL FIN DE (UPDATE ESTADO DE LA SOLICITUD)
@@ -499,7 +520,11 @@ class SolicitudesController extends Controller
         //obtengo la estacion de quien me hizo la solicitud y a donde voy a asignar por medio de la guardia.
         $estacion = Guardias::model()->findByPk($modelSolicitud->guardias_id_guardia)->id_estacion;
 
-        $estacion_origen = SolicitudesController::verificarGuardia()->id_estacion; 
+        if(Yii::app()->user->role='Farmaceuta'){
+        	$estacion_origen = 6;
+        }else{
+        	$estacion_origen = SolicitudesController::verificarGuardia()->id_estacion; 
+        }
 
         //busco mi stock
         $cantidad_stock = Stock::model()->findByAttributes(array('id_estacion'=>$estacion_origen, 'id_medicamento'=>$model->id_medicamento));

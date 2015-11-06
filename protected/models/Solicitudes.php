@@ -38,7 +38,7 @@ class Solicitudes extends CActiveRecord
 			array('usuarios', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_solicitud, fecha_solicitud, estacion_id_estacion, usuarios, guardias_id_guardia, estado', 'safe', 'on'=>'search'),
+			array('id_solicitud, fecha_solicitud, estacion_id_estacion, usuarios, guardias_id_guardia, estado, id_usuario_procesa', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -96,7 +96,7 @@ class Solicitudes extends CActiveRecord
 		$criteria->compare('guardias_id_guardia',$this->guardias_id_guardia);
 		$criteria->compare('estado',$this->estado);
 
-		$criteria->addCondition("usuarios='Yii::app()->user->id'");
+		$criteria->addCondition("usuarios=".Yii::app()->user->id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -120,7 +120,7 @@ class Solicitudes extends CActiveRecord
 			else
 				$estacion = $estacion['id_estacion'];
 		
-			$criteria->addCondition("estacion_id_estacion='$estacion'");
+			$criteria->addCondition("estacion_id_estacion='$estacion' AND estado!=2");
 
 			$criteria->compare('id_solicitud',$this->id_solicitud);
 			$criteria->compare('fecha_solicitud',$this->fecha_solicitud,true);
@@ -145,6 +145,27 @@ class Solicitudes extends CActiveRecord
 			));	
 		}
 		
+	}
+
+	public function searchHistorial()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+			if(Yii::app()->user->role=="Farmaceuta"){
+				$criteria->addCondition("estado=2");
+			}				
+			else{
+				$criteria->addCondition("id_usuario_procesa='".Yii::app()->user->id."' AND estado=2");
+			}
+
+			return new CActiveDataProvider($this, array(
+				'criteria'=>$criteria,
+				'sort'=>array(
+					'defaultOrder' => 'fecha_solicitud DESC, estado ASC',
+				),
+			));	
 	}
 
 	public function searchItems($id)

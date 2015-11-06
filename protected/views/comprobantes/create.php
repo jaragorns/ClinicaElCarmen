@@ -3,8 +3,7 @@
 /* @var $model Comprobantes */
 
 $this->breadcrumbs=array(
-	'Comprobantes'=>array('index'),
-	'Crear',
+	'Crear Comprobante',
 );
 
 $this->menu=array(

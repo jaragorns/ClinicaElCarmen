@@ -3,8 +3,7 @@
 /* @var $model BitacoraStock */
 
 $this->breadcrumbs=array(
-	'Bitacora de Inventario'=>array('admin'),
-	'Gestion',
+	'Bitacora de Asignaciones',
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -21,7 +20,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Bitacora de Inventario</h1>
+<h1>Bitacora de Asignaciones</h1>
 
 <?php echo CHtml::link(Yii::t('app','Advanced Search'),'#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">

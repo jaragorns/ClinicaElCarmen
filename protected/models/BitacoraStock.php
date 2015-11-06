@@ -99,6 +99,30 @@ class BitacoraStock extends CActiveRecord
 		));
 	}
 
+	public function searchAsig()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		$criteria->addCondition("id_usuario=".Yii::app()->user->id);
+
+		$criteria->compare('id_bitacora_stock',$this->id_bitacora_stock);
+		$criteria->compare('id_usuario',$this->id_usuario);
+		$criteria->compare('id_estacion_origen',$this->id_estacion_origen);
+		$criteria->compare('id_estacion_destino',$this->id_estacion_destino);
+		$criteria->compare('id_medicamento',$this->id_medicamento);
+		$criteria->compare('cantidad',$this->cantidad);
+		$criteria->compare('fecha',$this->fecha,true);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+			'sort'=>array(
+			    'defaultOrder'=>'fecha DESC',
+			),
+		));	
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

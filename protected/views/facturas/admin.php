@@ -73,8 +73,9 @@ $('.search-form form').submit(function(){
             'value' => 'strtr($data->retencion, array("1" => "75%","2" => "100%","3" => "S/R"))',
             'htmlOptions' => array('style'=>'width:70px; text-align: right;'),
         ),
-		array(
-			'class'=>'CButtonColumn',
-		),
+		 array(
+            'class'=>'CButtonColumn',
+            'template'=>'{view}{update}',
+        ),
 	),
 )); ?>

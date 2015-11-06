@@ -41,8 +41,9 @@ $('.search-form form').submit(function(){
 	'columns'=>array(
 		'descripcion',
 		'abreviatura',
-		array(
-			'class'=>'CButtonColumn',
-		),
+		 array(
+            'class'=>'CButtonColumn',
+            'template'=>'{view}{update}',
+        ),
 	),
 )); ?>

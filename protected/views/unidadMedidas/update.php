@@ -9,7 +9,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Unidad de Medidas', 'url'=>array('index')),
 	array('label'=>'Crear Unidad de Medidas', 'url'=>array('create')),
 	array('label'=>'Ver Unidad de Medidas', 'url'=>array('view', 'id'=>$model->id_unidad_medidas)),
 	array('label'=>'Gestionar Unidad de Medidas', 'url'=>array('admin')),

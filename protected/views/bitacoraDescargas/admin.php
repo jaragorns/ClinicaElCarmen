@@ -3,7 +3,7 @@
 /* @var $model BitacoraDescargas */
 
 $this->breadcrumbs=array(
-	'Gestión Bitacora Descargas',
+	'Bitacora Descargas',
 );
 
 Yii::app()->clientScript->registerScript('search', "

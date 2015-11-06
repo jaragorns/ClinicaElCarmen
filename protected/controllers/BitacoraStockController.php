@@ -35,6 +35,10 @@ class BitacoraStockController extends Controller
 				'actions'=>array('admin'),
 				'roles'=>array('Jefe_Farmacia','Farmaceuta','Jefe_Enfermeria','Accionista','Administrador_Admin'),
 			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('adminAsig'),
+				'roles'=>array('Enfermera'),
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -139,6 +143,17 @@ class BitacoraStockController extends Controller
 		));
 	}
 
+	public function actionAdminAsig()
+	{
+		$model=new BitacoraStock('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['BitacoraStock']))
+			$model->attributes=$_GET['BitacoraStock'];
+
+		$this->render('adminAsig',array(
+			'model'=>$model,
+		));
+	}
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

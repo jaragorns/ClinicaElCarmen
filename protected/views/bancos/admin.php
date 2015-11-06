@@ -52,17 +52,9 @@ $('.search-form form').submit(function(){
             'value' => 'date_format(date_create($data->fecha_actualizacion), "d-m-Y")',
             'htmlOptions' => array('style'=>'text-align: right;'),
         ),
-		array(
-			'class'=>'CButtonColumn',
-		),
+		 array(
+            'class'=>'CButtonColumn',
+            'template'=>'{view}{update}',
+        ),
 	),
 )); ?>
-
-<!--
-	array(
-			'name' => 'fecha_actualizacion',
-			'type' => 'raw',
-			'htmlOptions' => array('class'=>'datetime_cell'),
-			'value' => 'Yii::app()->lc->toLocal($data->c_datetime, "fecha_actualizacion", "small")',
-		),
--->

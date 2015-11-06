@@ -32,7 +32,7 @@ class StockController extends Controller
 				'roles'=>array('Superadmin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','viewEstacion','create','update','admin','asignar','autocomplete'),
+				'actions'=>array('view','viewEstacion','create','update','admin','asignar','autocomplete'),
 				'roles'=>array('Farmaceuta','Jefe_Farmacia'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
@@ -493,8 +493,13 @@ class StockController extends Controller
 					if($validos[30]==1) $this->Asignar($items_30);
 
 			 		$model->save();
+			 		if(Yii::app()->user->role=='Farmaceuta' OR Yii::app()->user->role=='Jefe_Farmacia'){
+			 			Yii::app()->user->setFlash('success','Medicamentos Asignados Correctamente.');		
+						$this->redirect(array('stock/admin'));
+			 		}
+
 					Yii::app()->user->setFlash('success','Medicamentos Asignados Correctamente.');		
-					$this->redirect(array('viewEstacion','id_estacion'=>$model->id_estacion));
+					$this->redirect(array('adminEstacion'));
 
 			 	}else{
 			 		if($cont == 0)

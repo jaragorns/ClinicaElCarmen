@@ -33,11 +33,11 @@ class UsuariosController extends Controller
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('view','create','admin','update'),
-				'roles'=>array('Jefe_Enfermeria','Presidente','Vicepresidente'),
+				'roles'=>array('Jefe_Enfermeria','Presidente','Vicepresidente','Jefe_Farmacia'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('view','update'),
-				'roles'=>array('Enfermera'),
+				'roles'=>array('Enfermera','Farmaceuta'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -119,8 +119,41 @@ class UsuariosController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
-		if($id == Yii::app()->user->id || Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){
+		if($id == Yii::app()->user->id || Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente" || Yii::app()->user->role=="Jefe_Enfermeria"){
+			
+			if($id=='18716856' && Yii::app()->user->role!="Superadmin"){
+				Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
+				$this->render('view',array(
+					'model'=>$this->loadModel(Yii::app()->user->id),
+				));
+			}
+
 			$model=$this->loadModel($id);
+
+			if($model->itemname=='Presidente' && Yii::app()->user->role!="Presidente"){
+				Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
+				$this->render('view',array(
+					'model'=>$this->loadModel(Yii::app()->user->id),
+				));
+			}
+			if($model->itemname=='Vicepresidente' && Yii::app()->user->role!="Vicepresidente"){
+				Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
+				$this->render('view',array(
+					'model'=>$this->loadModel(Yii::app()->user->id),
+				));
+			}
+			if($model->itemname=='Jefe_Farmacia' && Yii::app()->user->role!="Jefe_Farmacia"){
+				Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
+				$this->render('view',array(
+					'model'=>$this->loadModel(Yii::app()->user->id),
+				));
+			}
+			if($model->itemname=='Jefe_Enfermeria' && Yii::app()->user->role!="Jefe_Enfermeria"){
+				Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
+				$this->render('view',array(
+					'model'=>$this->loadModel(Yii::app()->user->id),
+				));
+			}
 
 		    $rol_user=Authassignment::model()->find($model->id);
 
@@ -148,6 +181,8 @@ class UsuariosController extends Controller
 					if(Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){
 						Yii::app()->authManager->revoke(Authassignment::model()->findByAttributes(array("userid"=>$model->id))->itemname,$model->id);
 						Yii::app()->authManager->assign($rol_user->itemname,$model->id);
+						$model->itemname = $rol_user->itemname;
+						$model->save();
 					}
 
 					Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');

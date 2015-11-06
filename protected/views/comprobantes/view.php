@@ -3,8 +3,7 @@
 /* @var $model Comprobantes */
 
 $this->breadcrumbs=array(
-	'Comprobantes'=>array('index'),
-	$model->id_comprobante,
+	'Comprobantes',
 );
 
 $this->menu=array(
@@ -26,15 +25,17 @@ $this->menu=array(
 		//'id_comprobante',
 		'num_comprobante',
 		'num_cheque',
-		'monto',
+		array(
+			'name' => 'monto',
+			'value' => str_replace(".",",",$model->monto)
+		),
 		'fecha',
 		'detalle',
 		'estado_med',
 		'estado_pra',
 		array(
 			'name' => 'usuarios_username',
-			'value' => Usuarios::model()->findByAttributes(array('id'=>$model->usuarios_username))->nombres.' '.
-						Usuarios::model()->findByAttributes(array('id'=>$model->usuarios_username))->apellidos
+			'value' => Usuarios::model()->findByAttributes(array('id'=>$model->usuarios_username))->NombreCompleto
 		),
 		array(
 			'name' => 'bancos_id_bancos',

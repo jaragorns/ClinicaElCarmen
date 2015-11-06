@@ -187,6 +187,15 @@
                             <div class="dropdown-menu dropdown-profile animated fadeInUp">
                                 <h4><?php echo Yii::app()->user->getState('nombres').' '.Yii::app()->user->getState('apellidos');?></h4>
                                 <h6><?php echo Yii::app()->user->role." - ".Yii::app()->user->getState('cargo');?></h6>
+                                <?php 
+                                if(!empty(SolicitudesController::verificarGuardia()->id_estacion)){?>
+                                    <h6><?php echo Estaciones::model()->findByAttributes(array('id_estacion'=>SolicitudesController::verificarGuardia()->id_estacion))->nombre; ?></h6>
+                                <?php 
+                                }else{ 
+                                    if(Yii::app()->user->role=="Enfermera"){?>
+                                        <h6><?php echo "LIBRE";?></h6>
+                                <?php }
+                            }?>
                                 <a href="<?php echo Yii::app()->baseUrl.'/usuarios/view/'.Yii::app()->user->id;?>">Perfil</a> | <a href="<?php echo Yii::app()->baseUrl;?>/site/logout"?>Salir</a>
                             </div>
                         </li> <!-- dropdown -->
@@ -208,6 +217,9 @@
                                     <li id="menu-item-173" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-173">
                                         <a title="Asignar Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/stock/asignar">Asignar Medicamentos</a>
                                     </li>
+                                    <li id="menu-item-174" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-174">
+                                        <a title="Bitacora de Asignaciones" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock/adminAsig">Bitacora de Asignaciones</a>
+                                    </li>
                                 </ul>
                             </li>
                             <?php
@@ -217,9 +229,7 @@
 
                                 }else{
                                     if(!empty(SolicitudesController::verificarGuardia()->id_estacion)){
-                                        $result = Solicitudes::model()->findAll(array('condition'=>'estacion_id_estacion=:id_estacion AND estado!=2',
-                                            'params'=>array(':id_estacion'=>SolicitudesController::verificarGuardia()->id_estacion
-                                              ),));
+                                        $result = Solicitudes::model()->findAllByAttributes(array('estacion_id_estacion'=>SolicitudesController::verificarGuardia()->id_estacion,'estado'=>'NOT IN(2)'));
                                     }
                                 }
 
@@ -235,6 +245,9 @@
                                     </li>
                                     <li id="menu-item-163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163">
                                         <a title="Solicitudes Pendientes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/adminPendiente"><span class="badge"><?php if(!empty($result))echo count($result);?></span>Solicitudes Pendientes</a>
+                                    </li>
+                                    <li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164">
+                                        <a title="Historial Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/adminHistorial">Historial Solicitudes</a>
                                     </li>
                                 </ul>
                             </li>
@@ -269,6 +282,28 @@
                                 <ul role="menu" class=" dropdown-menu">
                                     <li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172">
                                         <a title="Gestionar Inventario" href="<?php echo Yii::app()->baseUrl;?>/stock/admin">Gestionar Inventario</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Bitacora de Asignaciones" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock" data-toggle="dropdown" class="dropdown-toggle">Bitacoras <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-181" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-181">
+                                        <a title="Bitacora de Asignaciones" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock/admin">Bitacora de Asignaciones</a>
+                                    </li>
+                                    <li id="menu-item-182" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-182">
+                                        <a title="Bitacora Descargas" href="<?php echo Yii::app()->baseUrl;?>/bitacoradescargas/admin">Bitacora de Descargas</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="menu-item-13" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
+                                <a title="Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/medicamentos" data-toggle="dropdown" class="dropdown-toggle">Medicamentos <span class="caret"></span></a>
+                                <ul role="menu" class=" dropdown-menu">
+                                    <li id="menu-item-131" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-131">
+                                        <a title="Agregar Medicamento" href="<?php echo Yii::app()->baseUrl;?>/medicamentos/create">Agregar Medicamento</a>
+                                    </li>
+                                    <li id="menu-item-132" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-132">
+                                        <a title="Gestionar Medicamentos" href="<?php echo Yii::app()->baseUrl;?>/medicamentos/admin">Gestionar Medicamentos</a>
                                     </li>
                                 </ul>
                             </li>
@@ -398,7 +433,7 @@
                             </li>
                             <?php
                                 if(Yii::app()->user->role=="Farmaceuta"){
-                                    $result = Solicitudes::model()->findAll(array('condition'=>'estacion_id_estacion=:id_estacion',
+                                    $result = Solicitudes::model()->findAll(array('condition'=>'estacion_id_estacion=:id_estacion AND estado!=2',
                                         'params'=>array(':id_estacion'=>6),));
 
                                 }else{
@@ -415,6 +450,9 @@
                                 <ul role="menu" class=" dropdown-menu">
                                     <li id="menu-item-163" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-163">
                                         <a title="Solicitudes Pendientes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/adminPendiente"><span class="badge"><?php if(!empty($result))echo count($result);?></span>Solicitudes Pendientes</a>
+                                    </li>
+                                    <li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164">
+                                        <a title="Historial Solicitudes" href="<?php echo Yii::app()->baseUrl;?>/solicitudes/adminHistorial">Historial Solicitudes</a>
                                     </li>
                                 </ul>
                             </li>
@@ -705,10 +743,10 @@
                                 </ul>
                             </li>
                             <li id="menu-item-18" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-11 dropdown">
-                                <a title="Bitacora de Inventario" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock" data-toggle="dropdown" class="dropdown-toggle">Bitacoras <span class="caret"></span></a>
+                                <a title="Bitacora de Asignaciones" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock" data-toggle="dropdown" class="dropdown-toggle">Bitacoras <span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li id="menu-item-181" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-181">
-                                        <a title="Bitacora de Inventario" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock/admin">Bitacora de Inventario</a>
+                                        <a title="Bitacora de Asignaciones" href="<?php echo Yii::app()->baseUrl;?>/bitacorastock/admin">Bitacora de Asignaciones</a>
                                     </li>
                                     <li id="menu-item-182" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-182">
                                         <a title="Bitacora Descargas" href="<?php echo Yii::app()->baseUrl;?>/bitacoradescargas/admin">Bitacora de Descargas</a>

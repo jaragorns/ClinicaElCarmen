@@ -3,7 +3,6 @@
 /* @var $model Solicitudes */
 
 $this->breadcrumbs=array(
-	'Solicitudes',
 	'Solicitudes Pendientes',
 );
 
@@ -24,8 +23,11 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-
-<h1>Solicitudes Pendientes</h1>
+<?php if(Yii::app()->user->role=='Farmaceuta') { ?>
+	 	<h1>Solicitudes Pendientes en: FARMACIA</h1>
+<?php }else {?>
+	<h1>Solicitudes Pendientes en: <?php echo Estaciones::model()->findByAttributes(array('id_estacion'=>SolicitudesController::verificarGuardia()->id_estacion))->nombre;  ?></h1>
+<?php } ?>
 
 <?php echo CHtml::link('Búsqueda Avanzada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">

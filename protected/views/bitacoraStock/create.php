@@ -3,7 +3,7 @@
 /* @var $model BitacoraStock */
 
 $this->breadcrumbs=array(
-	'Bitacora de Inventario'=>array('index'),
+	'Bitacora de Asignaciones'=>array('index'),
 	'Create',
 );
 

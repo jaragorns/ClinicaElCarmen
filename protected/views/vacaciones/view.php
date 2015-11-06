@@ -26,7 +26,13 @@ $this->menu=array(
 			'value' => Usuarios::model()->findByAttributes(array('id'=>$model->id_usuario))->nombres.' '.
 						Usuarios::model()->findByAttributes(array('id'=>$model->id_usuario))->apellidos
 		),
-		'fecha_inicio',
-		'fecha_fin',		
+		array(
+            'name' => 'fecha_inicio',
+            'value' => date_format(date_create($model->fecha_inicio), "d-m-Y")
+        ),
+		array(
+            'name' => 'fecha_fin',
+            'value' => date_format(date_create($model->fecha_fin), "d-m-Y")
+        ),	
 	),
 )); ?>

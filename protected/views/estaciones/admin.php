@@ -41,8 +41,9 @@ $('.search-form form').submit(function(){
 	'columns'=>array(
 		//'id_estacion',
 		'nombre',
-		array(
-			'class'=>'CButtonColumn',
-		),
+		 array(
+            'class'=>'CButtonColumn',
+            'template'=>'{view}{update}',
+        ),
 	),
 )); ?>

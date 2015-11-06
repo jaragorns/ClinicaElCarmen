@@ -64,25 +64,12 @@ $('.search-form form').submit(function(){
 			'class'=>'EEditableColumn','editable_type'=>'editbox',
 			'action'=>array('bitacoraDescargas/descontar'),
 		),
-		/*
-		array(
-        	'header'=>'qwe',
-        	'value'=>'CHTML::numberField("cant" ,"0" ,array(\'min\'=>0,\'max\'=>$data->cantidad))',
-        	'type'=>'raw',
-        	'htmlOptions'=>array('width'=>'60px'),
-      	),
-      	*/
       	array(
         	'header'=>'',
         	'value'=>'CHTML::button("Descontar" ,array("submit"=>array("bitacoraDescargas/submit/stock/".$data->id_stock), "class"=>"btn btn-primary btn-large"))',
         	'type'=>'raw',
         	'htmlOptions'=>array('width'=>'20px'),
       	),
-      	/* 
-		array(
-			'class'=>'CButtonColumn',
-		),
-		*/
 	),
 ));
  ?>

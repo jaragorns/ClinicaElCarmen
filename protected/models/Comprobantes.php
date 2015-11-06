@@ -39,11 +39,12 @@ class Comprobantes extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('num_comprobante, num_cheque, monto, fecha, detalle, usuarios_username, bancos_id_bancos', 'required'),
-			array('monto, bancos_id_bancos', 'numerical', 'integerOnly'=>true),
+			array('bancos_id_bancos', 'numerical', 'integerOnly'=>true),
 			array('num_comprobante', 'length', 'max'=>10),
 			array('num_cheque', 'length', 'max'=>20),
 			array('estado_med, estado_pra', 'length', 'max'=>30),
 			array('detalle', 'length', 'max'=>80),
+			array('monto', 'length', 'max'=>14),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id_comprobante, num_comprobante, num_cheque, monto, fecha, detalle, estado_med, estado_pra, usuarios_username, bancos_id_bancos', 'safe', 'on'=>'search'),

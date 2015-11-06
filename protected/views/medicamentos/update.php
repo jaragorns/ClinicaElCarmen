@@ -9,7 +9,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Medicamentos', 'url'=>array('index')),
 	array('label'=>'Crear Medicamento', 'url'=>array('create')),
 	array('label'=>'Ver Medicamento', 'url'=>array('view', 'id'=>$model->id_medicamento)),
 	array('label'=>'Gestionar Medicamentos', 'url'=>array('admin')),

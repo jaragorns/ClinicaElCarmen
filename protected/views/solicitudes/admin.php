@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Mis Solicitudes</h1>
+<h1>Solicitudes realizadas por: <?php echo Usuarios::model()->findByAttributes(array('id'=>Yii::app()->user->id))->NombreCompleto; ?></h1> 
 
 <?php echo CHtml::link('Búsqueda Avanzada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
@@ -60,8 +60,9 @@ $('.search-form form').submit(function(){
             'name' => 'estado',
             'value' => 'strtr($data->estado, array("0" => "Pendiente","1" => "En Proceso","2" => "Procesada"))',
         ),
-		array(
-			'class'=>'CButtonColumn',
-		),
+		 array(
+            'class'=>'CButtonColumn',
+            'template'=>'{view}',
+        ),
 	),
 )); ?>

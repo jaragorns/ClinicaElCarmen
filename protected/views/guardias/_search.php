@@ -55,7 +55,7 @@
 					<td>	
 					<?php echo $form->dropDownList($model,'dia_'.$i,
 					CHtml::listData(
-						Turnos::model()->findAll(),'id_turno','abreviatura'),array('class' => 'my-drop-down','prompt'=>'-',)); ?>
+						Turnos::model()->findAll(),'id_turno','abreviatura'),array('class' => 'my-drop-down',)); ?>
 					</td>	
 				<?php }
 			?>			

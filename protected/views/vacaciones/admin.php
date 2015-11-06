@@ -53,9 +53,9 @@ $('.search-form form').submit(function(){
             'name' => 'fecha_fin',
             'value' => 'date_format(date_create($data->fecha_fin), "d-m-Y")'
         ),
-		
-		array(
-			'class'=>'CButtonColumn',
-		),
+		 array(
+            'class'=>'CButtonColumn',
+            'template'=>'{view}{update}',
+        ),
 	),
 )); ?>

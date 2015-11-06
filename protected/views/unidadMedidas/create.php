@@ -8,7 +8,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Unidad de Medidas', 'url'=>array('index')),
 	array('label'=>'Gestionar Unidad de Medidas', 'url'=>array('admin')),
 );
 ?>

@@ -8,7 +8,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Medicamentos', 'url'=>array('index')),
 	array('label'=>'Crear Medicamento', 'url'=>array('create')),
 );
 

@@ -78,13 +78,10 @@ $('.search-form form').submit(function(){
             'editable_options'=>array('EN ESPERA'=>'-ELEGIR-','APROBADO'=>'APROBADO','RECHAZADO'=>'RECHAZADO'),
             'action'=>array('Comprobantes/ajaxeditcolumnPrada'),
         ),
-        /*EDITBOX
         array(
-            'name'=>'estado_med',
-            'class'=>'EEditableColumn', 'editable_type'=>'editbox',
-            'action'=>array('Comprobantes/ajaxeditcolumn'),
+            'class'=>'CButtonColumn',
+            'template'=>'{view}{update}',
         ),
-        */
 	),
 )); ?>
 

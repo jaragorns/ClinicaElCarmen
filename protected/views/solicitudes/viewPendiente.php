@@ -81,6 +81,11 @@ $this->menu=array(
             ),
       ),
     ));  
+    ?>
+    <div class="buttons" align='center'>
+    <?php echo CHtml::Button('Aceptar',  array("submit"=>array('adminPendiente'), "class"=>"btn btn-primary btn-large")); ?>
+    </div>
+    <?php 
   }else{ 
       $this->widget('zii.widgets.grid.CGridView', array(
       'id'=>'solicitudes-grid', 
@@ -125,8 +130,6 @@ $this->menu=array(
         $modelSolicitud = Solicitudes::model()->findByAttributes(array('id_solicitud'=>$model->id_solicitud)); 
         //obtengo la estacion de quien me hizo la solicitud y a donde voy a asignar por medio de la guardia.
         $estacion = Guardias::model()->findByPk($modelSolicitud->guardias_id_guardia)->id_estacion;
-
-        print_r($estacion);
   }
 
 function cantidadExistente($estacion, $id_medicamento) {

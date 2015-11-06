@@ -62,10 +62,5 @@ if(Yii::app()->user==NULL){
             'htmlOptions' => array('style' => 'text-align: center;'),
         ),
 		'consulta',
-		/*
-		array(
-			'class'=>'CButtonColumn',
-		),
-		*/
 	),
 )); ?>
