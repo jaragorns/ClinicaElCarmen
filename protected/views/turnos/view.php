@@ -3,8 +3,8 @@
 /* @var $model Turnos */
 
 $this->breadcrumbs=array(
-	'Turnos'=>array('index'),
-	$model->id_turno,
+	'Turnos',
+	$model->descripcion,
 );
 
 $this->menu=array(
@@ -15,7 +15,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Turno #<?php echo $model->id_turno; ?></h1>
+<h1>Turno <?php echo $model->descripcion; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

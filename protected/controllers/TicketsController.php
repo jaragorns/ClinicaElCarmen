@@ -32,6 +32,10 @@ class TicketsController extends Controller
 				'roles'=>array('Superadmin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('view','admin','adminHistorial','aprobar','rechazar'),
+				'roles'=>array('Jefe_Farmacia'),
+			),
+			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('view','create'),
 				'roles'=>array('Enfermera'),
 			),
@@ -69,6 +73,7 @@ class TicketsController extends Controller
 
 			if($model->save()){
 				//Notificar al admin del ticket generado
+				
 				$this->redirect(array('view','id'=>$model->id_ticket));
 			}
 		}

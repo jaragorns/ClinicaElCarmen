@@ -60,30 +60,52 @@
 		  	</tr>
 		  	<tr>
 			  	<td>
-					<?php echo $form->labelEx($model,'id_proveedor'); ?>
+					<?php  echo $form->labelEx($model,'id_proveedor'); ?>
 				</td>	
 				<td>
 					<?php
 						echo $form->hiddenField($model,'id_proveedor', array());
 
-						$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
-			    				'name'=>'name',
-			    				'value'=>'',
-			    				'source'=>$this->createUrl('Reportes/AutocompletePro'),
-			    				// additional javascript options for the autocomplete plugin
-			    				'options'=>array(
-			    					'minLength'=>'1',
-			            			'showAnim'=>'fold',
-			            			'select'=>"js:function(event, ui) { 
-										$('#Facturas_id_proveedor').val(ui.item.id_pro);
-									}"
-			    				),
-			    				'htmlOptions'=>array(
-									'style'=>'width:400px;',
-									'placeholder'=>'Nombre del Proveedor...',
-									'title'=>'Indique el nombre del Proveedor que desea consultar.'
-								),
-						));
+						if($model->id_proveedor!=''){
+
+							$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+				    				'name'=>'name',
+				    				'value'=>Proveedores::model()->findByAttributes(array('id_proveedor'=>$model->id_proveedor))->nombre,
+				    				'source'=>$this->createUrl('Reportes/AutocompletePro'),
+				    				// additional javascript options for the autocomplete plugin
+				    				'options'=>array(
+				    					'minLength'=>'1',
+				            			'showAnim'=>'fold',
+				            			'select'=>"js:function(event, ui) { 
+											$('#Facturas_id_proveedor').val(ui.item.id_pro);
+										}"
+				    				),
+				    				'htmlOptions'=>array(
+										'style'=>'width:400px;',
+										'placeholder'=>'Nombre del Proveedor...',
+										'title'=>'Indique el nombre del Proveedor que desea consultar.'
+									),
+							));
+						}else{
+							$this->widget('zii.widgets.jui.CJuiAutoComplete', array(
+				    				'name'=>'name',
+				    				'value'=>'',
+				    				'source'=>$this->createUrl('Reportes/AutocompletePro'),
+				    				// additional javascript options for the autocomplete plugin
+				    				'options'=>array(
+				    					'minLength'=>'1',
+				            			'showAnim'=>'fold',
+				            			'select'=>"js:function(event, ui) { 
+											$('#Facturas_id_proveedor').val(ui.item.id_pro);
+										}"
+				    				),
+				    				'htmlOptions'=>array(
+										'style'=>'width:400px;',
+										'placeholder'=>'Nombre del Proveedor...',
+										'title'=>'Indique el nombre del Proveedor que desea consultar.'
+									),
+							));
+						}
 					?> 
 					<?php echo $form->error($model,'id_proveedor'); ?>
 				</td>

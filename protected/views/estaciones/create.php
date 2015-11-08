@@ -3,12 +3,10 @@
 /* @var $model Estaciones */
 
 $this->breadcrumbs=array(
-	'Servicios'=>array('index'),
-	'Crear',
+	'Crear Servicio',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Servicios', 'url'=>array('index')),
 	array('label'=>'Gestionar Servicios', 'url'=>array('admin')),
 );
 ?>

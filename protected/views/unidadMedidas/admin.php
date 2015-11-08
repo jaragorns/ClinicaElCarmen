@@ -3,8 +3,7 @@
 /* @var $model UnidadMedidas */
 
 $this->breadcrumbs=array(
-	'Unidad de Medidas'=>array('index'),
-	'Gestionar',
+	'Gestionar Unidad de Medidas',
 );
 
 $this->menu=array(

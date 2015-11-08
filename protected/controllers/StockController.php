@@ -687,7 +687,7 @@ class StockController extends Controller
 		$criteria = new CDbCriteria;
 		$criteria->join = "RIGHT JOIN stock ON stock.id_medicamento = t.id_medicamento"; 
 
-		if(Yii::app()->user->role=="Farmaceuta"){
+		if(Yii::app()->user->role=="Farmaceuta" OR Yii::app()->user->role=="Jefe_Farmacia"){
 			$criteria->condition = "stock.cantidad > 0 AND id_estacion = 6";
 			$estacion = 6;
 		}else{
@@ -737,7 +737,7 @@ class StockController extends Controller
 	public function Asignar($model)
 	{
 
-		if(Yii::app()->user->role=="Farmaceuta"){
+		if(Yii::app()->user->role=="Farmaceuta" OR Yii::app()->user->role=="Jefe_Farmacia"){
 			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$model->id_medicamento." AND `id_estacion`= 6";
 		}else{
 			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$model->id_medicamento." AND `id_estacion`= ".SolicitudesController::verificarGuardia()->id_estacion;
@@ -759,7 +759,7 @@ class StockController extends Controller
 			$cantidad_nueva = $result['0']['cantidad'] - $model->cantidad;
 
 			//CANTIDAD NUEVA PARA EL SERVICIO QUE ASIGNO
-			if(Yii::app()->user->role=="Farmaceuta"){
+			if(Yii::app()->user->role=="Farmaceuta" OR Yii::app()->user->role=="Jefe_Farmacia"){
 				$sql = "UPDATE `stock` SET `cantidad`=".$cantidad_nueva." WHERE `id_medicamento` =".$model->id_medicamento." AND `id_estacion`= 6";
 				$execute = Yii::app()->db->createCommand($sql)->execute();
 				$estacion_origen = 6;

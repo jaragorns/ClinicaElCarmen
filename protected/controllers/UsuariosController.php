@@ -32,7 +32,7 @@ class UsuariosController extends Controller
 				'roles'=>array('Superadmin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('view','create','admin','update'),
+				'actions'=>array('view','admin','update'),
 				'roles'=>array('Jefe_Enfermeria','Presidente','Vicepresidente','Jefe_Farmacia'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
@@ -91,11 +91,6 @@ class UsuariosController extends Controller
 
 	            $model->save();
 	            
-	            //$command = Yii::app()->db->createCommand('SHOW TABLE STATUS LIKE "usuarios"');
-				//$res=$command->queryRow();      
-				//$next_id=$res['Auto_increment'];
-
-				//file_put_contents("archivo.txt", print_r(),true);
 				Yii::app()->authManager->assign($rol_user->itemname,$model->id);
 				Yii::app()->user->setFlash('success','Usuario creado.');
 				$this->redirect(array('view','id'=>$model->id));
@@ -120,8 +115,9 @@ class UsuariosController extends Controller
 	public function actionUpdate($id)
 	{
 		if($id == Yii::app()->user->id || Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente" || Yii::app()->user->role=="Jefe_Enfermeria"){
-			
+
 			if($id=='18716856' && Yii::app()->user->role!="Superadmin"){
+				echo "2";
 				Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
 				$this->render('view',array(
 					'model'=>$this->loadModel(Yii::app()->user->id),
@@ -131,34 +127,39 @@ class UsuariosController extends Controller
 			$model=$this->loadModel($id);
 
 			if($model->itemname=='Presidente' && Yii::app()->user->role!="Presidente"){
-				Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
-				$this->render('view',array(
-					'model'=>$this->loadModel(Yii::app()->user->id),
-				));
+				if(!(Yii::app()->user->role=="Superadmin")){
+					Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
+					$this->render('view',array(
+						'model'=>$this->loadModel(Yii::app()->user->id),
+					));
+				}
 			}
 			if($model->itemname=='Vicepresidente' && Yii::app()->user->role!="Vicepresidente"){
-				Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
-				$this->render('view',array(
-					'model'=>$this->loadModel(Yii::app()->user->id),
-				));
+				if(!(Yii::app()->user->role=="Superadmin")){
+					Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
+					$this->render('view',array(
+						'model'=>$this->loadModel(Yii::app()->user->id),
+					));
+				}
 			}
 			if($model->itemname=='Jefe_Farmacia' && Yii::app()->user->role!="Jefe_Farmacia"){
-				Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
-				$this->render('view',array(
-					'model'=>$this->loadModel(Yii::app()->user->id),
-				));
+				if(!(Yii::app()->user->role=="Superadmin")){
+					Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
+					$this->render('view',array(
+						'model'=>$this->loadModel(Yii::app()->user->id),
+					));
+				}
 			}
 			if($model->itemname=='Jefe_Enfermeria' && Yii::app()->user->role!="Jefe_Enfermeria"){
-				Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
-				$this->render('view',array(
-					'model'=>$this->loadModel(Yii::app()->user->id),
-				));
+				if(!(Yii::app()->user->role=="Superadmin")){
+					Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
+					$this->render('view',array(
+						'model'=>$this->loadModel(Yii::app()->user->id),
+					));
+				}
 			}
 
 		    $rol_user=Authassignment::model()->find($model->id);
-
-			// Uncomment the following line if AJAX validation is needed
-			// $this->performAjaxValidation($model);
 
 			if(isset($_POST['Usuarios']))
 			{

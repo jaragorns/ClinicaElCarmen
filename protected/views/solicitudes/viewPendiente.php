@@ -41,6 +41,12 @@ $this->menu=array(
 )); ?>
 <br>
 
+<p align="justify">
+<b>NOTA: </b><br>
+* En la casilla <b>ASIGNACION</b> debe hacer <b>CLICK</b> e ingresar la cantidad a asignar y <b>PRESIONAR LA TECLA ENTER.</b><br>
+* En la casilla <b>ESTADO</b> debe hacer <b>CLICK</b> y escoger una opción: <b>APROBAR</b> o <b>RECHAZAR</b> la solicitud.<br>
+</p>
+
 <?php 
 	$estacionSolicita = Guardias::model()->findByAttributes(array('id_guardia'=>$model->guardias_id_guardia))->id_estacion;
   
@@ -72,7 +78,7 @@ $this->menu=array(
               'class'=>'EEditableColumn', 'editable_type'=>'editbox',
               'action'=>array('Solicitudes/ajaxeditcolumnAsig'),
             ),
-             array(
+            array(
                 'name'=>'estado',
                 'value'=>'strtr($data->estado, array("0" => "Pendiente","1" => "Aprobado","2" => "Rechazado"))',
                 'class'=>'EEditableColumn', 'editable_type'=>'select',

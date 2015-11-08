@@ -3,12 +3,10 @@
 /* @var $model Turnos */
 
 $this->breadcrumbs=array(
-	'Turnos'=>array('index'),
-	'Crear',
+	'Crear Turnos',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Turnos', 'url'=>array('index')),
 	array('label'=>'Gestionar Turnos', 'url'=>array('admin')),
 );
 ?>

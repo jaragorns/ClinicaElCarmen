@@ -23,14 +23,27 @@
     </div>
 	<?php } ?>
 
-	<div class="rowcontact">
-		<?php //echo Yii::app()->user->role; ?>
-		<?php echo $form->labelEx($model,'id'); ?>
-	</div>
-	<div class="media">
-		<?php echo $form->textField($model,'id',array('placeholder'=>"19123876",'size'=>30,'maxlength'=>8)); ?>
-		<?php echo $form->error($model,'id'); ?>
-	</div>
+	<?php if(empty($model->id)){ ?>
+	
+		<div class="rowcontact">
+			<?php echo $form->labelEx($model,'id'); ?>
+		</div>
+		<div class="media">
+			<?php echo $form->textField($model,'id',array('placeholder'=>"19123876",'size'=>30,'maxlength'=>8)); ?>
+			<?php echo $form->error($model,'id'); ?>
+		</div>
+
+	<?php }else{ 
+			if(Yii::app()->user->role=="Superadmin" OR Yii::app()->user->role=="Presidente" OR Yii::app()->user->role=="Vicepresidente"){ ?>
+				<div class="rowcontact">
+					<?php echo $form->labelEx($model,'id'); ?>
+				</div>
+				<div class="media">
+					<?php echo $form->textField($model,'id',array('placeholder'=>"19123876",'size'=>30,'maxlength'=>8)); ?>
+					<?php echo $form->error($model,'id'); ?>
+				</div>
+		<?php } 
+	} ?>
 
 	<div class="rowcontact">
 		<?php //echo Yii::app()->user->role; ?>
@@ -49,35 +62,64 @@
 		<?php echo $form->error($model,'password'); ?>
 	</div>
 
-	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'cargo'); ?>
-	</div>
-	<div class="media">
-		<?php echo $form->textField($model,'cargo',array('placeholder'=>"Enfermera",'size'=>30,'maxlength'=>30)); ?>
-		<?php echo $form->error($model,'cargo'); ?>
-	</div>
+	<?php if(empty($model->cargo)){ ?>
+		<div class="rowcontact">
+			<?php echo $form->labelEx($model,'cargo'); ?>
+		</div>
+		<div class="media">
+			<?php echo $form->textField($model,'cargo',array('placeholder'=>"Enfermera",'size'=>30,'maxlength'=>30)); ?>
+			<?php echo $form->error($model,'cargo'); ?>
+		</div>
 
-	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'nombres'); ?>
-	</div>
-	<div class="media">
-		<?php echo $form->textField($model,'nombres',array('placeholder'=>"Maria",'size'=>30,'maxlength'=>30)); ?>
-		<?php echo $form->error($model,'nombres'); ?>
-	</div>
+		<div class="rowcontact">
+			<?php echo $form->labelEx($model,'nombres'); ?>
+		</div>
+		<div class="media">
+			<?php echo $form->textField($model,'nombres',array('placeholder'=>"Maria",'size'=>30,'maxlength'=>30)); ?>
+			<?php echo $form->error($model,'nombres'); ?>
+		</div>
 
-	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'apellidos'); ?>
-	</div>
-	<div class="media">
-		<?php echo $form->textField($model,'apellidos',array('placeholder'=>"Perez",'size'=>30,'maxlength'=>30)); ?>
-		<?php echo $form->error($model,'apellidos'); ?>
-	</div>
+		<div class="rowcontact">
+			<?php echo $form->labelEx($model,'apellidos'); ?>
+		</div>
+		<div class="media">
+			<?php echo $form->textField($model,'apellidos',array('placeholder'=>"Perez",'size'=>30,'maxlength'=>30)); ?>
+			<?php echo $form->error($model,'apellidos'); ?>
+		</div>
+	<?php }else{ 
+			if(Yii::app()->user->role=="Superadmin" OR Yii::app()->user->role=="Presidente" OR Yii::app()->user->role=="Vicepresidente"){ ?>
+				<div class="rowcontact">
+					<?php echo $form->labelEx($model,'cargo'); ?>
+				</div>
+				<div class="media">
+					<?php echo $form->textField($model,'cargo',array('placeholder'=>"Enfermera",'size'=>30,'maxlength'=>30)); ?>
+					<?php echo $form->error($model,'cargo'); ?>
+				</div>
+
+				<div class="rowcontact">
+					<?php echo $form->labelEx($model,'nombres'); ?>
+				</div>
+				<div class="media">
+					<?php echo $form->textField($model,'nombres',array('placeholder'=>"Maria",'size'=>30,'maxlength'=>30)); ?>
+					<?php echo $form->error($model,'nombres'); ?>
+				</div>
+
+				<div class="rowcontact">
+					<?php echo $form->labelEx($model,'apellidos'); ?>
+				</div>
+				<div class="media">
+					<?php echo $form->textField($model,'apellidos',array('placeholder'=>"Perez",'size'=>30,'maxlength'=>30)); ?>
+					<?php echo $form->error($model,'apellidos'); ?>
+				</div>
+		<?php }
+	} ?>
+
 
 	<div class="rowcontact">
 		<?php echo $form->labelEx($model,'telefono'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'telefono',array('placeholder'=>"04247801122",'size'=>12,'maxlength'=>11)); ?>
+		<?php echo $form->textField($model,'telefono',array('placeholder'=>"",'size'=>12,'maxlength'=>11)); ?>
 		<?php echo $form->error($model,'telefono'); ?>
 	</div>
 
@@ -85,7 +127,7 @@
 		<?php echo $form->labelEx($model,'email :'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'email',array('placeholder'=>"mariaperez@gmail.com",'size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->textField($model,'email',array('placeholder'=>"ejemplo@gmail.com",'size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 
@@ -103,7 +145,7 @@
 					'name'),
 				array(
 					'class' => 'my-drop-down',
-					'empty'=>'-- Seleccione un Rol --',
+					'prompt'=>'-- Seleccione un Rol --',
 				)
 			);
 		?> 

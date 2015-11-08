@@ -3,9 +3,7 @@
 /* @var $model UnidadMedidas */
 
 $this->breadcrumbs=array(
-	'Unidad de Medidas'=>array('index'),
-	$model->descripcion,
-	'Actualizar',
+	'Actualizar Unidad de Medidas',$model->descripcion,
 );
 
 $this->menu=array(

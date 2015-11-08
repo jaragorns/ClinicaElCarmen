@@ -3,8 +3,7 @@
 /* @var $model Medicamentos */
 
 $this->breadcrumbs=array(
-	'Medicamentos'=>array('index'),
-	'Gestionar',
+	'Gestionar Medicamentos',
 );
 
 $this->menu=array(

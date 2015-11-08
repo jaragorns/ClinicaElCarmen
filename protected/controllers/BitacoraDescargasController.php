@@ -28,7 +28,7 @@ class BitacoraDescargasController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete','descontar','submit'),
+				'actions'=>array('index','view','create','update','admin','delete','descontar','submit','adminDescargaPersonal'),
 				'roles'=>array('Superadmin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
@@ -36,7 +36,7 @@ class BitacoraDescargasController extends Controller
 				'roles'=>array('Jefe_Farmacia','Farmaceuta','Jefe_Enfermeria','Accionista','Administrador_Admin'),
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('admin','descontar','submit'),
+				'actions'=>array('admin','descontar','submit','adminDescargaPersonal'),
 				'roles'=>array('Enfermera'),
 			),
 			array('deny',  // deny all users
@@ -142,7 +142,18 @@ class BitacoraDescargasController extends Controller
 			'model'=>$model,
 		));
 	}
+	
+	public function actionadminDescargaPersonal()
+	{
+		$model=new BitacoraDescargas('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['BitacoraDescargas']))
+			$model->attributes=$_GET['BitacoraDescargas'];
 
+		$this->render('adminDescargaPersonal',array(
+			'model'=>$model,
+		));
+	}
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.

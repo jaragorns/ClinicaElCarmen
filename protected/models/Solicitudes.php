@@ -114,8 +114,8 @@ class Solicitudes extends CActiveRecord
 
 		$estacion = SolicitudesController::verificarGuardia(); 
 
-		if(!empty($estacion) || Yii::app()->user->role=="Farmaceuta"){
-			if(Yii::app()->user->role=="Farmaceuta")
+		if(!empty($estacion) OR Yii::app()->user->role=="Farmaceuta" OR Yii::app()->user->role=="Jefe_Farmacia"){
+			if(Yii::app()->user->role=="Farmaceuta" OR Yii::app()->user->role=="Jefe_Farmacia")
 				$estacion = 6;
 			else
 				$estacion = $estacion['id_estacion'];
@@ -153,7 +153,7 @@ class Solicitudes extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-			if(Yii::app()->user->role=="Farmaceuta"){
+			if(Yii::app()->user->role=="Farmaceuta" OR Yii::app()->user->role=="Jefe_Farmacia"){
 				$criteria->addCondition("estado=2");
 			}				
 			else{

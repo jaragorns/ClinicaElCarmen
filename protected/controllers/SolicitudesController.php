@@ -33,7 +33,7 @@ class SolicitudesController extends Controller
 			),
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('view','create','admin','autocomplete','adminPendiente','adminHistorial','viewPendiente','AjaxEditColumn', 'ajaxeditcolumnAsig'),
-				'roles'=>array('Enfermera','Farmaceuta'),
+				'roles'=>array('Enfermera','Farmaceuta','Jefe_Farmacia'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -446,13 +446,12 @@ class SolicitudesController extends Controller
 		$id_item_solicitud   = $_POST["keyvalue"];  
         $name       = $_POST["name"]; 		//ESTADO
         $old_value  = $_POST["old_value"];  //"0" => "Pendiente","1" => "Aprobado","2" => "Rechazado"
-        $new_value  = $_POST["new_value"];  //"0" => "Pendiente","1" => "Aprobado","2" => "Rechazado"
- 
-
+        $new_value  = $_POST["new_value"];  //"0" => "Pendiente","1" => "Aprobado","2" => "Rechazado"      	
+        
 	    //Do some stuff here, and return the value to be displayed..
         $model = ItemSolicitud::model()->findByPk($id_item_solicitud);
         
-        if(Yii::app()->user->role='Farmaceuta'){
+        if(Yii::app()->user->role=='Farmaceuta' OR Yii::app()->user->role=='Jefe_Farmacia'){
         	$band = true;
         }else{
         	$band = SolicitudesController::verificarGuardia()->id_estacion;
@@ -502,9 +501,13 @@ class SolicitudesController extends Controller
 		  		$solicitud = Solicitudes::model()->findByPk($model->id_solicitud);
 		  		$solicitud->saveAttributes(array('estado'=>2));
 		  	}
+
 		  	
-        }        
-		echo $new_value;	
+		  	
+        }   
+
+        echo $new_value;	
+		
     }
     
     public function actionAjaxEditColumnAsig(){
@@ -520,7 +523,7 @@ class SolicitudesController extends Controller
         //obtengo la estacion de quien me hizo la solicitud y a donde voy a asignar por medio de la guardia.
         $estacion = Guardias::model()->findByPk($modelSolicitud->guardias_id_guardia)->id_estacion;
 
-        if(Yii::app()->user->role='Farmaceuta'){
+        if(Yii::app()->user->role=='Farmaceuta' OR Yii::app()->user->role=='Jefe_Farmacia'){
         	$estacion_origen = 6;
         }else{
         	$estacion_origen = SolicitudesController::verificarGuardia()->id_estacion; 
@@ -533,27 +536,24 @@ class SolicitudesController extends Controller
       	//comparo que tenga cantidad suficiente en stock para asignar 
       	if($new_value <= $cantidad_stock){
       		//Creando registro en bitacora
-    	   	$band = $this->registro_bitacora($model->id_medicamento, $new_value, $estacion, $estacion_origen, $model->id_item_solicitud); 	
+    	   //	$band = $this->registro_bitacora($model->id_medicamento, $new_value, $estacion, $estacion_origen, $model->id_item_solicitud); 	
 
-    	   	if($band){
+    	  	/*if($band){
 				echo $new_value;
 			}else{
 				$old_value = BitacoraStock::model()->findByAttributes(array('id_item_solicitud'=>$model->id_item_solicitud))->cantidad; 
 				echo $old_value;
-			}
+			}*/
+			echo $new_value;
 	   	}else{
 	   		echo "0";
 	   	}
-
-      	
-
-       	
     }
 
     public function Asignar($id_medicamento, $cantidad_asignar, $estacion_destino, $estacion_origen)
 	{
 		
-		if(Yii::app()->user->role=="Farmaceuta"){
+		if(Yii::app()->user->role=="Farmaceuta" OR Yii::app()->user->role=="Jefe_Farmacia"){
 			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$id_medicamento." AND `id_estacion`= 6";
 		}else{
 			$sql = "SELECT `cantidad` FROM `stock` WHERE `id_medicamento` =".$id_medicamento." AND `id_estacion`= ".$estacion_origen;
@@ -569,7 +569,7 @@ class SolicitudesController extends Controller
 			$cantidad_nueva = $result['0']['cantidad'] - $cantidad_asignar;
 
 			//CANTIDAD NUEVA PARA EL SERVICIO QUE ASIGNO
-			if(Yii::app()->user->role=="Farmaceuta"){
+			if(Yii::app()->user->role=="Farmaceuta" OR Yii::app()->user->role=="Jefe_Farmacia"){
 				$sql = "UPDATE `stock` SET `cantidad`=".$cantidad_nueva." WHERE `id_medicamento` =".$id_medicamento." AND `id_estacion`= 6";
 				$execute = Yii::app()->db->createCommand($sql)->execute();
 			}else{
@@ -601,6 +601,7 @@ class SolicitudesController extends Controller
 		$model_bitacora->id_estacion_destino = $estacion_destino;
 		$model_bitacora->id_medicamento = $id_medicamento;
 		$model_bitacora->cantidad = $cantidad_asignar;
+		date_default_timezone_set("America/Caracas");
 		$model_bitacora->fecha = date('Y-m-d H:i:s');
 		$model_bitacora->id_item_solicitud = $item;
 		

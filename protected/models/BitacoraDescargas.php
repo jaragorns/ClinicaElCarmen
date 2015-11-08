@@ -118,6 +118,30 @@ class BitacoraDescargas extends CActiveRecord
 		));
 	}
 
+	public function searchDescargaPersonal()
+	{
+		// @todo Please modify the following code to remove attributes that should not be searched.
+
+		$criteria=new CDbCriteria;
+
+		//$criteria->join='LEFT JOIN Stock ON Stock.id_estacion='.SolicitudesController::verificarGuardia()->id_estacion;
+ 		$criteria->addCondition("id_guardia=".Guardias::model()->findByAttributes(array('id_usuario'=>Yii::app()->user->id))->id_guardia." AND estado=1");
+
+		$criteria->compare('id_bitacora',$this->id_bitacora);
+		$criteria->compare('fecha_hora',$this->fecha_hora,true);
+		$criteria->compare('cantidad',$this->cantidad);
+		$criteria->compare('estado',$this->estado);
+		$criteria->compare('id_stock',$this->id_stock);
+		$criteria->compare('id_guardia',$this->id_guardia);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+			'sort'=>array(
+				'defaultOrder' => 'estado DESC, fecha_hora DESC',
+			),
+		));
+	}
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 });
 ");
 ?>
-<?php if(Yii::app()->user->role=='Farmaceuta') { ?>
+<?php if(Yii::app()->user->role=='Farmaceuta' OR Yii::app()->user->role=='Jefe_Farmacia') { ?>
 	 	<h1>Solicitudes Pendientes en: FARMACIA</h1>
 <?php }else {?>
 	<h1>Solicitudes Pendientes en: <?php echo Estaciones::model()->findByAttributes(array('id_estacion'=>SolicitudesController::verificarGuardia()->id_estacion))->nombre;  ?></h1>

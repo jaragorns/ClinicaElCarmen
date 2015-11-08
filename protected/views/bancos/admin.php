@@ -49,7 +49,7 @@ $('.search-form form').submit(function(){
         ),
 		array(
             'name' => 'fecha_actualizacion',
-            'value' => 'date_format(date_create($data->fecha_actualizacion), "d-m-Y")',
+            'value' => 'date_format(date_create($data->fecha_actualizacion), "d-m-Y g:ia")',
             'htmlOptions' => array('style'=>'text-align: right;'),
         ),
 		 array(

@@ -73,6 +73,8 @@
 		<?php echo $form->error($model,'cantidad'); ?>
 	</div>
 
+	<?php if(Yii::app()->user->role=='Superadmin' OR Yii::app()->user->role=='Jefe_Farmacia'){?>
+
 	<div class="rowcontact">
 		<?php echo $form->labelEx($model,'precio_contado'); ?>
 	</div>
@@ -88,6 +90,8 @@
 		<?php echo $form->textField($model,'precio_seguro',array('placeholder'=>'388,45','size'=>20,'maxlength'=>9)); ?>
 		<?php echo $form->error($model,'precio_seguro'); ?>
 	</div>
+
+	<?php }?>
 
 	<div class="rowcontact">
 		<?php echo $form->labelEx($model,'iva'); ?>

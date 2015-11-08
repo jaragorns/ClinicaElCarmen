@@ -3,12 +3,10 @@
 /* @var $model Vacaciones */
 
 $this->breadcrumbs=array(
-	'Vacaciones'=>array('index'),
-	'Crear',
+	'Crear Vacaciones',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Vacaciones', 'url'=>array('index')),
 	array('label'=>'Gestionar Vacaciones', 'url'=>array('admin')),
 );
 ?>

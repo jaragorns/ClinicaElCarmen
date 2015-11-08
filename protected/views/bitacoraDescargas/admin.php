@@ -35,21 +35,21 @@ $('.search-form form').submit(function(){
 	'filter'=>$model,
 	'columns'=>array(
 		array(
-            'name'  => 'fecha_hora',
-            'value' => 'date_format(date_create($data->fecha_hora), "d-m-Y g:ia")',
-        ),
-		'cantidad',
-		array(
-			'header' => 'Medicamento',
-			'value' => 'Medicamentos::model()->findByAttributes(array("id_medicamento"=>Stock::model()->findByAttributes(array("id_stock"=>$data->id_stock))->id_medicamento))->nombre." (".UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>Medicamentos::model()->findByAttributes(array("id_medicamento"=>Stock::model()->findByAttributes(array("id_stock"=>$data->id_stock))->id_medicamento))->unidad_medida))->descripcion.")"'
+			'header' => 'Usuario',
+			'value' => 'Usuarios::model()->findByAttributes(array("id"=>Guardias::model()->findByAttributes(array("id_guardia"=>$data->id_guardia))->id_usuario))->NombreCompleto',
 		),
 		array(
 			'header' => 'Servicio',
 			'value' => 'Estaciones::model()->findByAttributes(array("id_estacion"=>Guardias::model()->findByAttributes(array("id_guardia"=>$data->id_guardia))->id_estacion))->nombre',
 		),
 		array(
-			'header' => 'Usuario',
-			'value' => 'Usuarios::model()->findByAttributes(array("id"=>Guardias::model()->findByAttributes(array("id_guardia"=>$data->id_guardia))->id_usuario))->NombreCompleto',
+			'header' => 'Medicamento',
+			'value' => 'Medicamentos::model()->findByAttributes(array("id_medicamento"=>Stock::model()->findByAttributes(array("id_stock"=>$data->id_stock))->id_medicamento))->nombre." (".UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>Medicamentos::model()->findByAttributes(array("id_medicamento"=>Stock::model()->findByAttributes(array("id_stock"=>$data->id_stock))->id_medicamento))->unidad_medida))->descripcion.")"'
 		),
+		'cantidad',
+		array(
+            'name'  => 'fecha_hora',
+            'value' => 'date_format(date_create($data->fecha_hora), "d-m-Y g:ia")',
+        ),
 	),
 )); ?>

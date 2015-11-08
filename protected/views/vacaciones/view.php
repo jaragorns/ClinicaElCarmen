@@ -8,7 +8,6 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Vacaciones', 'url'=>array('index')),
 	array('label'=>'Crear Vacaciones', 'url'=>array('create')),
 	array('label'=>'Modificar Vacaciones', 'url'=>array('update', 'id'=>$model->id_vacaciones)),
 	array('label'=>'Gestionar Vacaciones', 'url'=>array('admin')),

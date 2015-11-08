@@ -3,8 +3,7 @@
 /* @var $model Medicamentos */
 
 $this->breadcrumbs=array(
-	'Medicamentos'=>array('index'),
-	$model->nombre,
+	'Medicamentos',
 );
 
 $this->menu=array(
@@ -27,8 +26,14 @@ $this->menu=array(
             'value' => CHtml::encode(UnidadMedidas::model()->findByAttributes(array("id_unidad_medidas"=>$model->unidad_medida))->descripcion)
         ),
         'cantidad',
-		'precio_contado',
-		'precio_seguro',
+		array(
+			'name' =>'precio_contado',
+			'value' => str_replace(".",",",$model->precio_contado),
+		),
+		array(
+			'name' =>'precio_seguro',
+			'value' => str_replace(".",",",$model->precio_seguro),
+		),
 		'iva',
 	),
 )); ?>
