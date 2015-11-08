@@ -321,7 +321,7 @@ class GuardiasController extends Controller
 		if($mes==2 && esBisiesto($ano)==1)
 			$cantDias = 29; 
 
-		//estacion Coord. Enfermeria
+		//estacion Jefe_Enfermeria
 		$sqlEn = "SELECT * FROM guardias INNER JOIN usuarios ON id_usuario = id
 									   INNER JOIN estaciones ON guardias.id_estacion = estaciones.id_estacion
 						WHERE mes=".$mes." AND ano=".$ano." AND guardias.id_estacion = 1

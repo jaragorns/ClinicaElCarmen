@@ -218,3 +218,4 @@ pip-log.txt
 /assets
 protected/runtime/application.log
 *.php
+protected/runtime/application.log

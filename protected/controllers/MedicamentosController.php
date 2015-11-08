@@ -37,6 +37,10 @@ class MedicamentosController extends Controller
 			),
 			array('allow', 
 				'actions'=>array('view','admin'),
+				'roles'=>array('Jefe_Enfermeria'),
+			),
+			array('allow', 
+				'actions'=>array('view','admin'),
 				'roles'=>array('Accionista'),
 			),
 			array('deny',  // deny all users

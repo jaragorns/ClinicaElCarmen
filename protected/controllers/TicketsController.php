@@ -73,7 +73,20 @@ class TicketsController extends Controller
 
 			if($model->save()){
 				//Notificar al admin del ticket generado
-				
+				Yii::app()->controller->widget('ext.easy-mail.Mail', 
+      				array(
+			          'view' => 'testView',
+			          'params' => array(
+			              	'to' => array(
+			                 	'jonathan.silvamed@gmail.com' => 'CECCA'
+			              	),
+			             	'content' => array(
+			                 	'param1' => Estaciones::model()->findByAttributes(array('id_estacion'=>SolicitudesController::verificarGuardia()->id_estacion))->nombre,
+			                 	'paramN' => 'ValueN'
+			             	),
+			             	'subject' => 'Ticket Generado'
+			         	)
+     				)); 
 				$this->redirect(array('view','id'=>$model->id_ticket));
 			}
 		}
