@@ -60,18 +60,20 @@ class SiteController extends Controller
 			if($model->validate())
 			{
 				$name='=?UTF-8?B?'.base64_encode($model->name).'?=';
-				$subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
+				$subject='=?UTF-8?B?'.base64_encode($model->asunto).'?=';
 				$headers="From: $name <{$model->email}>\r\n".
 					"Reply-To: {$model->email}\r\n".
 					"MIME-Version: 1.0\r\n".
 					"Content-Type: text/plain; charset=UTF-8";
 
-				mail(Yii::app()->params['adminEmail'],$subject,$model->body,$headers);
+				mail(Yii::app()->params['adminEmail'],$subject,$model->cuerpo,$headers);
 				Yii::app()->user->setFlash('Contactenos','Thank you for contacting us. We will respond to you as soon as possible.');
 				$this->refresh();
 			}
 		}
-		$this->render('Contactenos',array('model'=>$model));
+		$this->render('Contactenos',[
+			'model'=>$model
+		]);
 	}
 
 	/**

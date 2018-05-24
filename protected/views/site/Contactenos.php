@@ -38,7 +38,7 @@ Si tiene alguna consulta o pregunta, por favor, rellene el siguiente formulario 
 	<?php echo $form->errorSummary($model,null,null,array("class"=>"alert alert-error")); ?>
 
 	<div class="rowcontact">
-		<?php echo $form->labelEx($model,'nombre:'); ?>
+		<?php echo $form->labelEx($model,'name'); ?>
 	</div>
 	<div class="media">
 			<?php echo $form->textField($model,'name'); ?>
@@ -57,16 +57,16 @@ Si tiene alguna consulta o pregunta, por favor, rellene el siguiente formulario 
 		<?php echo $form->labelEx($model,'asunto:'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'subject',array('size'=>60,'maxlength'=>128)); ?>
-		<?php echo $form->error($model,'subject'); ?>
+		<?php echo $form->textField($model,'asunto',array('size'=>60,'maxlength'=>128)); ?>
+		<?php echo $form->error($model,'asunto'); ?>
 	</div>
 
 	<div class="rowcontact">
 		<?php echo $form->labelEx($model,'cuerpo:'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textArea($model,'body',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'body'); ?>
+		<?php echo $form->textArea($model,'cuerpo',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->error($model,'cuerpo'); ?>
 	</div>
 
 	<?php if(CCaptcha::checkRequirements()): ?>

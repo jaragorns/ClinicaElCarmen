@@ -188,4 +188,8 @@ class Solicitudes extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	/*Guardias*/
+
+	
 }
