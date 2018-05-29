@@ -1,6 +1,6 @@
 <?php
-/* @var $this UsuariosController */
-/* @var $model Usuarios */
+/* @var $this GuardiasController */
+/* @var $model Guardias */
 /* @var $form CActiveForm */
 ?>
 
@@ -15,7 +15,7 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Todos los campos son requeridos.</p>
+	<p class="note">Campos con <span class="required">*</span> son requeridos.</p>
 
 	<?php if($form->errorSummary($model)!=""){ ?>
 	<div class="alert alert-info">
@@ -23,69 +23,115 @@
     </div>
 	<?php } ?>
 
-		<div class="rowcontact">
-		<label>Fecha</label>
-	</div>
-	<div class="media">
-		<?php 
-			$this->widget('zii.widgets.jui.CJuiDatePicker', 
-				array(
-					'attribute'=>'fecha',
-	                'model'=>$model,
-	                'value' => $model->fecha,
-	                'language'=> Yii::app()->language,
-	                'options'=>array (
-	                    'showSecond'=>true,
-	                    'dateFormat'=>'yy-mm-dd',
-	                ),  
-	            )   
-	        );
-		
-		?>
-		<?php echo $form->error($model,'fecha'); ?>
-	</div>
 	<div class="rowcontact">
-		<label>Enfermera</label>
+		<?php echo $form->labelEx($model,'mes'); ?>
 	</div>
 	<div class="media">
 		<?php
-			$models=Usuarios::model()->findAll(array(
-				'select'=>'id,apellidos,nombres',
-				'condition'=>'cargo="Enfermera"',
-				'order'=>'apellidos'
-			));  
-			$list = CHtml::listData($models,'id', 'NombreCompleto');
-			echo CHtml::dropDownList('id_usuario', $model, $list, array('empty' => 'Enfermera', 'class'=>"select_guardia"));
-		?>
-		<input type="hidden" name="id_usuario" value="11">
-	</div>
-	<div class="rowcontact">
-		<label>Servicio</label>
-	</div>
-	<div class="media">
-		<?php
-			$models=Estaciones::model()->findAll(array(
-					'select'=>'id_estacion,nombre'
-				));  
-				$list = CHtml::listData($models,'id_estacion', 'nombre');
-				echo CHtml::dropDownList('id_estacion', $model, $list, array('empty' => 'Servicio', 'class'=>"select_guardia"));
-
-		?>
-	</div>
-	<div class="rowcontact">
-		<label>Turno</label>
-	</div>
-	<div class="media">
-		<?php
-			$models=Turnos::model()->findAll(array(
-					'select'=>'id_turno, abreviatura',
-					'condition'=>'descripcion != "" '
-				));  
-				$list = CHtml::listData($models,'id_turno', 'abreviatura');
-				echo CHtml::dropDownList('id_turno', $model, $list, array('empty' => 'Turno', 'class'=>"select_guardia"));
-			?> 
+		$meses = array('1'=>'Enero','2'=>'Febrero', '3'=>'Marzo', '4'=>'Abril', '5'=>'Mayo', '6'=>'Junio', '7'=>'Julio', '8'=>'Agosto', '9'=>'Septiembre','10'=>'Octubre', '11'=>'Noviembre', '12'=>'Diciembre');
+		echo $form->dropDownList($model, 'mes', $meses, array(
+					'class' => 'my-drop-down',
+					'empty'=>'--Mes--',
+				));	 ?>
+		<?php echo $form->error($model,'mes'); ?>
 	</div>
 
+	<div class="rowcontact">
+		<?php echo $form->labelEx($model,'ano'); ?>
+	</div>
+	<div class="media">
+		<?php echo $form->textField($model,'ano',array('size'=>4,'maxlength'=>4)); ?>
+		<?php echo $form->error($model,'ano'); ?>
+	</div>
+
+	<table>
+		<tr>
+			<td><?php echo $form->labelEx($model,'id_usuario'); ?></td>
+			<td><?php echo $form->labelEx($model,'id_estacion'); ?></td>
+			<?php /*
+				for ($i=1; $i <=31 ; $i++) { ?>
+					<td><?php echo $form->labelEx($model,'dia_'.$i); ?>
+			</td>	
+			<?php } */ ?>	
+		</tr>
+		<tr>
+			<td>
+				<?php
+				echo $form->dropDownList($model,'id_usuario',
+				CHtml::listData(
+					Usuarios::model()->findAll(array(
+						'condition'=>'cargo = "Enfermera" OR cargo = "Jefe_Enfermera" ')),
+						'id','NombreCompleto'),	
+					array('class' => 'my-drop-down',
+						'prompt'=>'Enfermera:'
+						)); 
+				?>
+			</td>
+			<td>
+				<?php 
+				echo $form->dropDownList($model,'id_estacion',
+				CHtml::listData(
+					Estaciones::model()->findAll(array(
+						'condition'=>'nombre != "Farmacia"')),
+						'id_estacion','nombre'),	
+					array('class' => 'my-drop-down',
+						  'prompt'=>'Servicio:'
+						)); 
+						?>
+			</td>
+		</tr>
+	</table>
+	<br><br>
+
+	<table>
+		<tr>
+			<?php 
+				for ($i=1; $i <=15 ; $i++) { ?>
+					<td><?php echo $form->labelEx($model,'dia_'.$i); ?>
+			</td>	
+			<?php }  ?>	
+		</tr>
+		<tr>
+			<?php 
+			for ($i=1; $i <=15 ; $i++) { 
+				?>
+					<td><?php 
+					echo $form->dropDownList($model,'dia_'.$i,
+						CHtml::listData(
+						Turnos::model()->findAll(array(
+							'condition'=>'abreviatura != "V"')),
+						'id_turno','abreviatura'),	
+					array('class' => 'my-drop-down',
+							'prompt'=>'Turno'
+						)); ?> 
+					</td>	
+
+			<?php } ?>	
+		</tr>
+		<tr><td><br></td></tr>
+		<tr>
+			<?php 
+				for ($i=16; $i <=31 ; $i++) { ?>
+					<td><?php echo $form->labelEx($model,'dia_'.$i); ?>
+			</td>	
+			<?php }  ?>	
+		</tr>
+		<tr>
+			<?php 
+			for ($i=16; $i <=31 ; $i++) { 
+				?>
+					<td><?php echo $form->dropDownList($model,'dia_'.$i,
+						CHtml::listData(
+						Turnos::model()->findAll(array(
+							'condition'=>'abreviatura != "V"')),
+						'id_turno','abreviatura'),	
+					array('class' => 'my-drop-down',
+							'prompt'=>'Turno')); ?>
+					</td>	
+
+			<?php } ?>	
+		</tr>
+	</table>
 
 	<div class="buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? Yii::t('app','Create') : Yii::t('app','Save'),  array("class"=>"btn btn-primary btn-large")); ?>
