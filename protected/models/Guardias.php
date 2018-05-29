@@ -50,8 +50,10 @@
 class Guardias extends CActiveRecord
 {
 	/**
+
 	 * @return string the associated database table name
 	 */
+	public $rol_user;
 	public function tableName()
 	{
 		return 'guardias';
@@ -66,10 +68,10 @@ class Guardias extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id_usuario, id_estacion, mes, ano', 'required'),
-			array('id_usuario, id_estacion, dia_1, dia_2, dia_3, dia_4, dia_5, dia_6, dia_7, dia_8, dia_9, dia_10, dia_11, dia_12, dia_13, dia_14, dia_15, dia_16, dia_17, dia_18, dia_19, dia_20, dia_21, dia_22, dia_23, dia_24, dia_25, dia_26, dia_27, dia_28, dia_29, dia_30, dia_31, mes, ano', 'numerical', 'integerOnly'=>true),
+			//array('id_usuario, id_estacion, dia_1, dia_2, dia_3, dia_4, dia_5, dia_6, dia_7, dia_8, dia_9, dia_10, dia_11, dia_12, dia_13, dia_14, dia_15, dia_16, dia_17, dia_18, dia_19, dia_20, dia_21, dia_22, dia_23, dia_24, dia_25, dia_26, dia_27, dia_28, dia_29, dia_30, dia_31, mes, ano', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_guardia, id_usuario, id_estacion, dia_1, dia_2, dia_3, dia_4, dia_5, dia_6, dia_7, dia_8, dia_9, dia_10, dia_11, dia_12, dia_13, dia_14, dia_15, dia_16, dia_17, dia_18, dia_19, dia_20, dia_21, dia_22, dia_23, dia_24, dia_25, dia_26, dia_27, dia_28, dia_29, dia_30, dia_31, mes, ano', 'safe', 'on'=>'search'),
+			//array('id_guardia, id_usuario, id_estacion, dia_1, dia_2, dia_3, dia_4, dia_5, dia_6, dia_7, dia_8, dia_9, dia_10, dia_11, dia_12, dia_13, dia_14, dia_15, dia_16, dia_17, dia_18, dia_19, dia_20, dia_21, dia_22, dia_23, dia_24, dia_25, dia_26, dia_27, dia_28, dia_29, dia_30, dia_31, mes, ano', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -95,9 +97,9 @@ class Guardias extends CActiveRecord
 	{
 		return array(
 			'id_guardia' => 'Id Guardia',
-			'id_usuario' => 'Enfermera:',
+			'id_usuario' => 'Enfermera',
 			'id_estacion' => 'Servicio:',
-			'dia_1' => '1',
+			/*'dia_1' => '1',
 			'dia_2' => '2',
 			'dia_3' => '3',
 			'dia_4' => '4',
@@ -127,7 +129,7 @@ class Guardias extends CActiveRecord
 			'dia_28' => '28',
 			'dia_29' => '29',
 			'dia_30' => '30',
-			'dia_31' => '31',
+			'dia_31' => '31',*/
 			'mes' => 'Mes',
 			'ano' => 'Año',
 		);
@@ -165,7 +167,7 @@ class Guardias extends CActiveRecord
 		$criteria->compare('id_guardia',$this->id_guardia);
 		$criteria->compare('id_usuario',$this->id_usuario);
 		$criteria->compare('id_estacion',$this->id_estacion);
-		$criteria->compare('dia_1',$this->dia_1);
+		/*$criteria->compare('dia_1',$this->dia_1);
 		$criteria->compare('dia_2',$this->dia_2);
 		$criteria->compare('dia_3',$this->dia_3);
 		$criteria->compare('dia_4',$this->dia_4);
@@ -195,7 +197,7 @@ class Guardias extends CActiveRecord
 		$criteria->compare('dia_28',$this->dia_28);
 		$criteria->compare('dia_29',$this->dia_29);
 		$criteria->compare('dia_30',$this->dia_30);
-		$criteria->compare('dia_31',$this->dia_31);
+		$criteria->compare('dia_31',$this->dia_31);*/
 		$criteria->compare('mes',$this->mes);
 		$criteria->compare('ano',$this->ano);
 		

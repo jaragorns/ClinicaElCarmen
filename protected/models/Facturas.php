@@ -20,6 +20,7 @@ class Facturas extends CActiveRecord
 	/**
 	 * @return string the associated database table name
 	 */
+	public $total;
 	public function tableName()
 	{
 		return 'facturas';

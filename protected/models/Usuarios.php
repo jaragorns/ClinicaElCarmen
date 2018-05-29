@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This is the model class for table "usuarios".
  *
@@ -27,7 +26,6 @@ class Usuarios extends CActiveRecord
 	{
 		return 'usuarios';
 	}
-
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -48,7 +46,6 @@ class Usuarios extends CActiveRecord
 			array('description_role', 'safe', 'on'=>'search'),
 		);
 	}
-
 	/**
 	 * @return array relational rules.
 	 */
@@ -61,7 +58,6 @@ class Usuarios extends CActiveRecord
 			'roles' => array(self::BELONGS_TO, 'Authassignment', 'id'),
 		);
 	}
-
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -79,15 +75,13 @@ class Usuarios extends CActiveRecord
 			'description_role' => 'Rol',
 		);
 	}
-
 	/**
 	 * @return array to obtain full name 
 	 */
 	public function getNombreCompleto()
     {
-        return $this->nombres.' '.$this->apellidos;
+        return $this->apellidos.', '.$this->nombres;
     }
-
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 *
@@ -103,9 +97,7 @@ class Usuarios extends CActiveRecord
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
-
 		$criteria=new CDbCriteria;
-
 		$criteria->compare('id',$this->id);
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('password',$this->password,true);
@@ -114,7 +106,6 @@ class Usuarios extends CActiveRecord
 		$criteria->compare('apellidos',$this->apellidos,true);
 		$criteria->compare('telefono',$this->telefono,true);
 		$criteria->compare('email',$this->email,true);
-
 		$criteria->with = array('roles');
 		$criteria->compare('roles.itemname', $this->description_role, true );
 		
@@ -122,7 +113,6 @@ class Usuarios extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

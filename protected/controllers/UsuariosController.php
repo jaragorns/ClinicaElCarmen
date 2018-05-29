@@ -1,5 +1,4 @@
 <?php
-
 class UsuariosController extends Controller
 {
 	/**
@@ -7,7 +6,6 @@ class UsuariosController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
-
 	/**
 	 * @return array action filters
 	 */
@@ -18,7 +16,6 @@ class UsuariosController extends Controller
 			//'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
-
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -61,7 +58,6 @@ class UsuariosController extends Controller
 			));
 		}
 	}
-
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -70,25 +66,20 @@ class UsuariosController extends Controller
 	{
 		$model=new Usuarios;
 		$rol_user = new Authassignment;
-
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
 		//if(isset($_POST['Usuarios']))
 		if(!empty($_POST))
 		{
 			$rol_user->attributes=$_POST['Authassignment'][1];
+			$rol=Roles::model()->findByAttributes(['description'=> $rol_user->itemname]);
 			$model->attributes=$_POST['Usuarios'];
 			$rol_user->userid = Yii::app()->user->id;
 			$valid=$rol_user->validate();
 			if($valid)
 	        { 
-	           
-	            $itemname = $rol_user->itemname;
-	            $model->itemname = $itemname;
-
-	            $model->password = crypt($model->password.'salt');
-
+	           	$model->roles_id = $rol->id;
+	            $model->password = crypt($model->password,'!QSC"WDV#ed468j%&/=??///');
 	            $model->save();
 	            
 				Yii::app()->authManager->assign($rol_user->itemname,$model->id);
@@ -104,9 +95,7 @@ class UsuariosController extends Controller
 			'model'=>$model,
 			'rol_user'=>$rol_user,
 		));
-
 	}
-
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
@@ -115,7 +104,6 @@ class UsuariosController extends Controller
 	public function actionUpdate($id)
 	{
 		if($id == Yii::app()->user->id || Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente" || Yii::app()->user->role=="Jefe_Enfermeria"){
-
 			if($id=='18716856' && Yii::app()->user->role!="Superadmin"){
 				echo "2";
 				Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
@@ -123,10 +111,8 @@ class UsuariosController extends Controller
 					'model'=>$this->loadModel(Yii::app()->user->id),
 				));
 			}
-
 			$model=$this->loadModel($id);
-
-			if($model->itemname=='Presidente' && Yii::app()->user->role!="Presidente"){
+			if($model->cargo=='Presidente' && Yii::app()->user->role!="Presidente"){
 				if(!(Yii::app()->user->role=="Superadmin")){
 					Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
 					$this->render('view',array(
@@ -134,7 +120,7 @@ class UsuariosController extends Controller
 					));
 				}
 			}
-			if($model->itemname=='Vicepresidente' && Yii::app()->user->role!="Vicepresidente"){
+			if($model->cargo=='Vicepresidente' && Yii::app()->user->role!="Vicepresidente"){
 				if(!(Yii::app()->user->role=="Superadmin")){
 					Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
 					$this->render('view',array(
@@ -142,7 +128,7 @@ class UsuariosController extends Controller
 					));
 				}
 			}
-			if($model->itemname=='Jefe_Farmacia' && Yii::app()->user->role!="Jefe_Farmacia"){
+			if($model->cargo=='Jefe_Farmacia' && Yii::app()->user->role!="Jefe_Farmacia"){
 				if(!(Yii::app()->user->role=="Superadmin")){
 					Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
 					$this->render('view',array(
@@ -150,7 +136,7 @@ class UsuariosController extends Controller
 					));
 				}
 			}
-			if($model->itemname=='Jefe_Enfermeria' && Yii::app()->user->role!="Jefe_Enfermeria"){
+			if($model->cargo=='Jefe_Enfermeria' && Yii::app()->user->role!="Jefe_Enfermeria"){
 				if(!(Yii::app()->user->role=="Superadmin")){
 					Yii::app()->user->setFlash('error','Usted no tiene permiso para efectuar esa operación.');
 					$this->render('view',array(
@@ -158,37 +144,33 @@ class UsuariosController extends Controller
 					));
 				}
 			}
-
 		    $rol_user=Authassignment::model()->find($model->id);
-
 			if(isset($_POST['Usuarios']))
 			{
 				if(Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){
 		        	$rol_user->attributes=$_POST['Authassignment'][1];
+		    		$rol=Roles::model()->find('description'== $rol_user->itemname);
 		        }
 				$model->attributes=$_POST['Usuarios'];
-
-
-				print_r($model->attributes);
-
+				$rol_user->attributes=$_POST['Authassignment'][1];
+		    	$rol=Roles::model()->findByAttributes(['description'=> $rol_user->itemname]);
 				// Validate all three model
 				$rol_user->userid = Yii::app()->user->id;
-
-		        if($model->validate() AND $rol_user->validate()){       
-
+		        if($model->validate() AND $rol_user->validate()){
+					// print_r($rol->id);
+					// exit();
+					// die();
+		        	$model->roles_id = $rol->id;       
+		            $model->password = crypt($model->password,'!QSC"WDV#ed468j%&/=??///');
 		            $model->save();
-		            $model->password = crypt($model->password.'salt');
-
 					if(Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){
 						Yii::app()->authManager->revoke(Authassignment::model()->findByAttributes(array("userid"=>$model->id))->itemname,$model->id);
 						Yii::app()->authManager->assign($rol_user->itemname,$model->id);
-						$model->itemname = $rol_user->itemname;
+						$model->cargo = $rol_user->itemname;
 						$model->save();
 					}
-
 					Yii::app()->user->setFlash('success','Actualización de Datos Satisfactoria.');
 					$this->redirect(array('view','id'=>$model->id));
-
 		        }
 				
 			}
@@ -214,12 +196,10 @@ class UsuariosController extends Controller
 	{
 		Yii::app()->authManager->revoke(Authassignment::model()->findByAttributes(array("userid"=>$id))->itemname,$id);
 		$this->loadModel($id)->delete();
-
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
-
 	/**
 	 * Lists all models.
 	 */
@@ -230,26 +210,21 @@ class UsuariosController extends Controller
 		        'pageSize'=>5,
 		    ),
 		));
-
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
-
 		
 	}
-
 	/**
 	 * Manages all models.
 	 */
 	public function actionAdmin()
 	{
-
 		$model=new Usuarios('search');
 		$rol_user=Authassignment::model()->find($model->id);
 		
 		$model->unsetAttributes();  // clear any default values
 		$rol_user->unsetAttributes();
-
 		if(isset($_GET['Usuarios']))
 			$model->attributes=$_GET['Usuarios'];
 			
@@ -261,7 +236,6 @@ class UsuariosController extends Controller
 			'rol_user'=>$rol_user,
 		));
 	}
-
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
@@ -276,7 +250,6 @@ class UsuariosController extends Controller
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
-
 	/**
 	 * Performs the AJAX validation.
 	 * @param Usuarios $model the model to be validated

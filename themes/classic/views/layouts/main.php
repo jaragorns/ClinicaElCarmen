@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 
-	<title><?php echo CHtml::encode($this->pageTitle);?></title>
+    <title><?php echo CHtml::encode($this->pageTitle);?></title>
 
     <meta charset="UTF-8">
     <!-- CSS -->
