@@ -27,7 +27,7 @@
 		<?php echo $form->labelEx($model,'descripcion'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'descripcion',array('placeholder'=>'Miligramo','size'=>60,'maxlength'=>80)); ?>
+		<?php echo $form->textField($model,'descripcion',array('placeholder'=>'Miligramo','size'=>60,'maxlength'=>80, 'class'=>'uppercase')); ?>
 		<?php echo $form->error($model,'descripcion'); ?>
 	</div>
 
@@ -46,3 +46,10 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $('.uppercase').keyup(function(){
+	        $(this).val($(this).val().toUpperCase());
+	    });
+	});
+</script>

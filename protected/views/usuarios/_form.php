@@ -75,7 +75,7 @@
 			<?php echo $form->labelEx($model,'nombres'); ?>
 		</div>
 		<div class="media">
-			<?php echo $form->textField($model,'nombres',array('placeholder'=>"Maria",'size'=>30,'maxlength'=>30)); ?>
+			<?php echo $form->textField($model,'nombres',array('placeholder'=>"Maria",'size'=>30,'maxlength'=>30, 'class'=>'uppercase' )); ?>
 			<?php echo $form->error($model,'nombres'); ?>
 		</div>
 
@@ -83,7 +83,7 @@
 			<?php echo $form->labelEx($model,'apellidos'); ?>
 		</div>
 		<div class="media">
-			<?php echo $form->textField($model,'apellidos',array('placeholder'=>"Perez",'size'=>30,'maxlength'=>30)); ?>
+			<?php echo $form->textField($model,'apellidos',array('placeholder'=>"Perez",'size'=>30,'maxlength'=>30, 'class'=>'uppercase' )); ?>
 			<?php echo $form->error($model,'apellidos'); ?>
 		</div>
 	<?php }else{ 
@@ -100,7 +100,7 @@
 					<?php echo $form->labelEx($model,'nombres'); ?>
 				</div>
 				<div class="media">
-					<?php echo $form->textField($model,'nombres',array('placeholder'=>"Maria",'size'=>30,'maxlength'=>30)); ?>
+					<?php echo $form->textField($model,'nombres',array('placeholder'=>"Maria",'size'=>30,'maxlength'=>30, 'class'=>'uppercase' )); ?>
 					<?php echo $form->error($model,'nombres'); ?>
 				</div>
 
@@ -108,7 +108,7 @@
 					<?php echo $form->labelEx($model,'apellidos'); ?>
 				</div>
 				<div class="media">
-					<?php echo $form->textField($model,'apellidos',array('placeholder'=>"Perez",'size'=>30,'maxlength'=>30)); ?>
+					<?php echo $form->textField($model,'apellidos',array('placeholder'=>"Perez",'size'=>30,'maxlength'=>30, 'class'=>'uppercase' )); ?>
 					<?php echo $form->error($model,'apellidos'); ?>
 				</div>
 		<?php }
@@ -159,3 +159,10 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $('.uppercase').keyup(function(){
+	        $(this).val($(this).val().toUpperCase());
+	    });
+	});
+</script>

@@ -32,7 +32,7 @@
 		<?php echo $form->labelEx($model,'nombre'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'nombre',array('placeholder'=>'ATAMEL','size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->textField($model,'nombre',array('placeholder'=>'ATAMEL','size'=>45,'maxlength'=>45, 'class'=>'uppercase')); ?>
 		<?php echo $form->error($model,'nombre'); ?>
 	</div>
 
@@ -108,3 +108,10 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $('input[type=text]').keyup(function(){
+	        $(this).val($(this).val().toUpperCase());
+	    });
+	});
+</script>

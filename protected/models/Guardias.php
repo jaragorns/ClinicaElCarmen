@@ -40,6 +40,7 @@
  * @property integer $dia_31
  * @property integer $mes
  * @property integer $ano
+ * @property integer $fecha
  *
  * The followings are the available model relations:
  * @property BitacoraDescargas[] $bitacoraDescargases
@@ -71,7 +72,7 @@ class Guardias extends CActiveRecord
 			array('id_usuario, id_estacion, dia_1, dia_2, dia_3, dia_4, dia_5, dia_6, dia_7, dia_8, dia_9, dia_10, dia_11, dia_12, dia_13, dia_14, dia_15, dia_16, dia_17, dia_18, dia_19, dia_20, dia_21, dia_22, dia_23, dia_24, dia_25, dia_26, dia_27, dia_28, dia_29, dia_30, dia_31, mes, ano', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id_guardia, id_usuario, id_estacion, dia_1, dia_2, dia_3, dia_4, dia_5, dia_6, dia_7, dia_8, dia_9, dia_10, dia_11, dia_12, dia_13, dia_14, dia_15, dia_16, dia_17, dia_18, dia_19, dia_20, dia_21, dia_22, dia_23, dia_24, dia_25, dia_26, dia_27, dia_28, dia_29, dia_30, dia_31, mes, ano', 'safe', 'on'=>'search'),
+			array('id_guardia, id_usuario, id_estacion, dia_1, dia_2, dia_3, dia_4, dia_5, dia_6, dia_7, dia_8, dia_9, dia_10, dia_11, dia_12, dia_13, dia_14, dia_15, dia_16, dia_17, dia_18, dia_19, dia_20, dia_21, dia_22, dia_23, dia_24, dia_25, dia_26, dia_27, dia_28, dia_29, dia_30, dia_31, mes, ano, fecha', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -132,6 +133,7 @@ class Guardias extends CActiveRecord
 			'dia_31' => '31',
 			'mes' => 'Mes',
 			'ano' => 'Año',
+			'fecha' => 'Fecha',
 		);
 	}
 
@@ -200,6 +202,8 @@ class Guardias extends CActiveRecord
 		$criteria->compare('dia_31',$this->dia_31);
 		$criteria->compare('mes',$this->mes);
 		$criteria->compare('ano',$this->ano);
+		$criteria->compare('fecha',$this->fecha);
+		$criteria->compare('id_turno',$this->id_turno);
 		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria, 

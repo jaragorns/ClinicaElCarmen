@@ -127,11 +127,15 @@ class GuardiasController extends Controller
 					}
 									
 					if ($band==true) {
+						$model->fecha = $_POST['fecha'];
+						$model->id_turno = $_POST['id_turno'];
 						$model->save();
 						Yii::app()->user->setFlash('success','Guardia creada.');
 						$this->redirect(array('admin','mes'=>$model->mes,'ano'=>$model->ano));
 					}
 				}else{
+					$model->fecha = $_POST['fecha'];
+					$model->id_turno = $_POST['id_turno'];
 					$model->save();
 					Yii::app()->user->setFlash('success','Guardia creada.');
 					$this->redirect(array('admin','mes'=>$model->mes,'ano'=>$model->ano));

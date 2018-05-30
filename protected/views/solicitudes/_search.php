@@ -49,7 +49,7 @@
 	<div class="media">
 		<?php echo $form->dropDownList($model,'usuarios',
 				CHtml::listData(
-					Usuarios::model()->findAll(array('condition'=>'itemname=:itemname','params'=>array(':itemname'=>'Enfermera'))),
+					Usuarios::model()->findAll(array('condition'=>'cargo=:cargo','params'=>array(':cargo'=>'Enfermera'))),
 					'id','NombreCompleto'),	array('class' => 'my-drop-down','prompt'=>'Enfermera:',)); ?>
 	</div>
 
@@ -70,3 +70,10 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- search-form -->
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $('input[type=text]').keyup(function(){
+	        $(this).val($(this).val().toUpperCase());
+	    });
+	});
+</script>

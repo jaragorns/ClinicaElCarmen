@@ -446,3 +446,10 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $('input[type=text]').keyup(function(){
+	        $(this).val($(this).val().toUpperCase());
+	    });
+	});
+</script>

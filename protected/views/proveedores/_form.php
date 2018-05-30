@@ -27,7 +27,7 @@
 		<?php echo $form->labelEx($model,'nombre'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'nombre',array('placeholder'=>"Clínica El Carmen C.A.",'size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->textField($model,'nombre',array('placeholder'=>"Clínica El Carmen C.A.",'size'=>45,'maxlength'=>45, 'class'=>'uppercase')); ?>
 		<?php echo $form->error($model,'nombre'); ?>
 	</div>
 
@@ -51,7 +51,7 @@
 		<?php echo $form->labelEx($model,'direccion'); ?>
 	</div>
 	<div class="media">
-		<?php echo $form->textField($model,'direccion',array('placeholder'=>"Carrera 6, #6-56, San Juan de Colón",'size'=>45,'maxlength'=>45)); ?>
+		<?php echo $form->textField($model,'direccion',array('placeholder'=>"Carrera 6, #6-56, San Juan de Colón",'size'=>45,'maxlength'=>45, 'class'=>'uppercase')); ?>
 		<?php echo $form->error($model,'direccion'); ?>
 	</div>
 
@@ -70,3 +70,10 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $('.uppercase').keyup(function(){
+	        $(this).val($(this).val().toUpperCase());
+	    });
+	});
+</script>

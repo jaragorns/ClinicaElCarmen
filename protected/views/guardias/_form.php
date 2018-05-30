@@ -131,6 +131,8 @@
 
 			<?php } ?>	
 		</tr>
+		<input type="hidden" name="fecha" id="fecha" Value="">
+		<input type="hidden" name="id_turno" id="id_turno" value="">
 	</table>
 
 	<div class="buttons">
@@ -140,3 +142,18 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $('input[type=text]').keyup(function(){
+	        $(this).val($(this).val().toUpperCase());
+	    });
+	});
+	////////////////////////////
+	date = new Date();
+	$('#fecha').val(date.getFullYear()  + '/' + (date.getMonth() + 1) + '/' + date.getDate());
+	$('#Guardias_dia_1').change(function(){
+		turno = $('#Guardias_dia_1').val();
+		$('#id_turno').val(turno);
+	});
+	
+</script>

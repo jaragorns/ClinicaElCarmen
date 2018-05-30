@@ -115,3 +115,10 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- search-form -->
+<script type="text/javascript">
+	$(document).ready(function(){
+	    $('input[type=text]').keyup(function(){
+	        $(this).val($(this).val().toUpperCase());
+	    });
+	});
+</script>

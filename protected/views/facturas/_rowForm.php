@@ -52,3 +52,10 @@
             <?php echo $form->deleteRowButton($row_id, $key); ?>
         </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('input[type=text]').keyup(function(){
+            $(this).val($(this).val().toUpperCase());
+        });
+    });
+</script>
