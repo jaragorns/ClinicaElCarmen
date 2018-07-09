@@ -39,7 +39,7 @@
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('Rol')); ?>:</b>
 	<?php $itemname = strval($data->id); 
-	$val = Authassignment::model()->findByAttributes(array('userid'=>$data->id));
+	$val = AuthAssignment::model()->findByAttributes(array('userid'=>$data->id));
 	print_r($val['itemname']);
 	?>
 	<br />

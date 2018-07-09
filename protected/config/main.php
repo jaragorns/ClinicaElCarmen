@@ -9,8 +9,8 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Clínica El Carmen C.A.',
 	'theme'=>'classic',
-	'language' => 'es',
-	'sourceLanguage' => 'en',
+	//'language' => 'es',
+	//'sourceLanguage' => 'en',
 	'charset' => 'utf-8',
 	'timeZone'=>'GMT',
 	// preloading 'log' component
@@ -24,15 +24,15 @@ return array(
 		'application.modules.rights.components.dataproviders.*',
 	),
 
-	'modules'=>array(
-		// uncomment the following to enable the Gii tool
-		'gii'=>array(
-			'class'=>'system.gii.GiiModule',
-			'password'=>'admin',
-			// If removed, Gii defaults to localhost only. Edit carefully to taste.
-			'ipFilters'=>array('127.0.0.1','::1'),
-		),
-	),
+	 'modules'=>array(
+	// 	// uncomment the following to enable the Gii tool
+	 	'gii'=>array(
+	 		'class'=>'system.gii.GiiModule',
+	 		'password'=>'admin',
+	// 		// If removed, Gii defaults to localhost only. Edit carefully to taste.
+	 		'ipFilters'=>array('127.0.0.1','::1'),
+	 	),
+	 ),
 
 	// application components
 	'components'=>array(
@@ -70,6 +70,15 @@ return array(
             	'gii/<controller:\w+>/<action:\w+>'=>'gii/<controller>/<action>',
 			),
 		),
+		// 'db'=>array(
+		// 	'class' => 'CDbConnection',
+		// 	'connectionString' => 'mysql:host=localhost;dbname=c1310726_testdb',
+		// 	'emulatePrepare' => true,
+		// 	'username' => 'c1310726_testdb',
+		// 	'password' => 'gedone94NA',
+		// 	'charset' => 'utf8',
+		// 	'enableProfiling' => true,
+		// ),
 		'db'=>array(
 			'class' => 'CDbConnection',
 			'connectionString' => 'mysql:host=localhost;dbname=testdb',

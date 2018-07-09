@@ -3,7 +3,7 @@
 /* @var $model Authassignment */
 
 $this->breadcrumbs=array(
-	'Authassignments'=>array('index'),
+	'AuthAssignments'=>array('index'),
 	$model->itemname=>array('view','id'=>$model->itemname),
 	'Actualizar',
 );

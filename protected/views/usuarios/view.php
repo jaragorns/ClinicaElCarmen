@@ -36,7 +36,7 @@ $this->menu=array(
 		'email',
 		array(
 			'name' => 'description_role',
-			'value' => CHtml::encode(Authassignment::model()->findByAttributes(array('userid'=>$model->id))->itemname)
+			'value' => CHtml::encode(AuthAssignment::model()->findByAttributes(array('userid'=>$model->id))->itemname)
 		),
 	),
 )); ?>

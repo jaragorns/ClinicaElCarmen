@@ -65,13 +65,13 @@ class UsuariosController extends Controller
 	public function actionCreate()
 	{
 		$model=new Usuarios;
-		$rol_user = new Authassignment;
+		$rol_user = new AuthAssignment;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 		//if(isset($_POST['Usuarios']))
 		if(!empty($_POST))
 		{
-			$rol_user->attributes=$_POST['Authassignment'][1];
+			$rol_user->attributes=$_POST['AuthAssignment'][1];
 			$rol=Roles::model()->findByAttributes(['description'=> $rol_user->itemname]);
 			$model->attributes=$_POST['Usuarios'];
 			$rol_user->userid = Yii::app()->user->id;
@@ -144,15 +144,15 @@ class UsuariosController extends Controller
 					));
 				}
 			}
-		    $rol_user=Authassignment::model()->find($model->id);
+		    $rol_user=AuthAssignment::model()->find($model->id);
 			if(isset($_POST['Usuarios']))
 			{
 				if(Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){
-		        	$rol_user->attributes=$_POST['Authassignment'][1];
+		        	$rol_user->attributes=$_POST['AuthAssignment'][1];
 		    		$rol=Roles::model()->find('description'== $rol_user->itemname);
 		        }
 				$model->attributes=$_POST['Usuarios'];
-				$rol_user->attributes=$_POST['Authassignment'][1];
+				$rol_user->attributes=$_POST['AuthAssignment'][1];
 		    	$rol=Roles::model()->findByAttributes(['description'=> $rol_user->itemname]);
 				// Validate all three model
 				$rol_user->userid = Yii::app()->user->id;
@@ -164,7 +164,7 @@ class UsuariosController extends Controller
 		            $model->password = crypt($model->password,'!QSC"WDV#ed468j%&/=??///');
 		            $model->save();
 					if(Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){
-						Yii::app()->authManager->revoke(Authassignment::model()->findByAttributes(array("userid"=>$model->id))->itemname,$model->id);
+						Yii::app()->authManager->revoke(AuthAssignment::model()->findByAttributes(array("userid"=>$model->id))->itemname,$model->id);
 						Yii::app()->authManager->assign($rol_user->itemname,$model->id);
 						$model->cargo = $rol_user->itemname;
 						$model->save();
@@ -194,7 +194,7 @@ class UsuariosController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		Yii::app()->authManager->revoke(Authassignment::model()->findByAttributes(array("userid"=>$id))->itemname,$id);
+		Yii::app()->authManager->revoke(AuthAssignment::model()->findByAttributes(array("userid"=>$id))->itemname,$id);
 		$this->loadModel($id)->delete();
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -221,14 +221,14 @@ class UsuariosController extends Controller
 	public function actionAdmin()
 	{
 		$model=new Usuarios('search');
-		$rol_user=Authassignment::model()->find($model->id);
+		$rol_user=AuthAssignment::model()->find($model->id);
 		
 		$model->unsetAttributes();  // clear any default values
 		$rol_user->unsetAttributes();
 		if(isset($_GET['Usuarios']))
 			$model->attributes=$_GET['Usuarios'];
 			
-		/*if(isset($_GET['Authassignment']))
+		/*if(isset($_GET['AuthAssignment']))
 			$rol_user->attributes=$_POST['itemname'][1];
 		*/
 		$this->render('admin',array(

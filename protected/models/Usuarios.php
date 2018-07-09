@@ -55,7 +55,7 @@ class Usuarios extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'comprobantes' => array(self::HAS_MANY, 'Comprobantes', 'usuarios_userid'),
-			'roles' => array(self::BELONGS_TO, 'Authassignment', 'id'),
+			'roles' => array(self::BELONGS_TO, 'AuthAssignment', 'id'),
 		);
 	}
 	/**

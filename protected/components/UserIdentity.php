@@ -27,7 +27,7 @@ class UserIdentity extends CUserIdentity
 		else
 		{
 			$this->_id=$user->id;
-			$role = Authassignment::model()->findByAttributes(array('userid'=>$user->id))->itemname;
+			$role = AuthAssignment::model()->findByAttributes(array('userid'=>$user->id))->itemname;
 			$this->setState('role',$role);
 			$this->setState('nombres',$user->nombres);
 			$this->setState('apellidos',$user->apellidos);

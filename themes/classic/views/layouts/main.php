@@ -603,13 +603,16 @@
                     }if(Yii::app()->user->role=="Superadmin"){ ?>
                         <ul id="menu-mainmenu" class="nav navbar-nav">
                             <li id="menu-item-1" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1 dropdown">
-                                <a title="Usuarios" href="<?php echo Yii::app()->baseUrl;?>" data-toggle="dropdown" class="dropdown-toggle">Usuarios <span class="caret"></span></a>
+                                <a title="Usuarios" href="<?php echo Yii::app()->baseUrl;?>" data-toggle="dropdown" class="dropdown-toggle">Usuarios<span class="caret"></span></a>
                                 <ul role="menu" class=" dropdown-menu">
                                     <li id="menu-item-11" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-11">
                                         <a title="Registrar Usuario" href="<?php echo Yii::app()->baseUrl;?>/usuarios/create">Registrar Usuario</a>
                                     </li>
                                     <li id="menu-item-12" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12">
                                         <a title="Gestionar Usuarios" href="<?php echo Yii::app()->baseUrl;?>/usuarios/admin">Gestionar Usuarios</a>
+                                    </li>
+                                    <li id="menu-item-12" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12">
+                                        <a title="Gestionar Usuarios" href="#">store procedure</a>
                                     </li>
                                  </ul>
                             </li>

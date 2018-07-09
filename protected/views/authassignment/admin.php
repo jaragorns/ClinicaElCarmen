@@ -3,13 +3,13 @@
 /* @var $model Authassignment */
 
 $this->breadcrumbs=array(
-	'Authassignments'=>array('index'),
+	'AuthAssignments'=>array('index'),
 	'Gestionar',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Authassignment', 'url'=>array('index')),
-	array('label'=>'Crear Authassignment', 'url'=>array('create')),
+	array('label'=>'Listar AuthAssignment', 'url'=>array('index')),
+	array('label'=>'Crear AuthAssignment', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Gestionar Authassignments</h1>
+<h1>Gestionar AuthAssignments</h1>
 
 <p>
 También puede escribir un operador de comparación (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>

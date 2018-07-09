@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "authitem".
+ * This is the model class for table "AuthItem".
  *
- * The followings are the available columns in table 'authitem':
+ * The followings are the available columns in table 'AuthItem':
  * @property string $name
  * @property integer $type
  * @property string $description
@@ -11,18 +11,18 @@
  * @property string $data
  *
  * The followings are the available model relations:
- * @property Authassignment $authassignment
- * @property Authitemchild $authitemchild
- * @property Authitemchild[] $authitemchildren
+ * @property AuthAssignment $AuthAssignment
+ * @property AuthItemChild $AuthItemChild
+ * @property AuthItemChild[] $AuthItemChildren
  */
-class Authitem extends CActiveRecord
+class AuthItem extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'authitem';
+		return 'AuthItem';
 	}
 
 	/**
@@ -51,9 +51,9 @@ class Authitem extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'authassignment' => array(self::HAS_ONE, 'Authassignment', 'itemname'),
-			'authitemchild' => array(self::HAS_ONE, 'Authitemchild', 'parent'),
-			'authitemchildren' => array(self::HAS_MANY, 'Authitemchild', 'child'),
+			'AuthAssignment' => array(self::HAS_ONE, 'AuthAssignment', 'itemname'),
+			'AuthItemChild' => array(self::HAS_ONE, 'AuthItemChild', 'parent'),
+			'AuthItemChildren' => array(self::HAS_MANY, 'AuthItemChild', 'child'),
 		);
 	}
 
@@ -104,7 +104,7 @@ class Authitem extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Authitem the static model class
+	 * @return AuthItem the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

@@ -3,13 +3,13 @@
 /* @var $model Authassignment */
 
 $this->breadcrumbs=array(
-	'Authassignments'=>array('index'),
+	'AuthAssignments'=>array('index'),
 	'Crear',
 );
 
 $this->menu=array(
-	array('label'=>'Listar Authassignment', 'url'=>array('index')),
-	array('label'=>'Gestionar Authassignment', 'url'=>array('admin')),
+	array('label'=>'Listar AuthAssignment', 'url'=>array('index')),
+	array('label'=>'Gestionar AuthAssignment', 'url'=>array('admin')),
 );
 ?>
 

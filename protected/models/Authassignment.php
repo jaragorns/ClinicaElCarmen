@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "authassignment".
+ * This is the model class for table "AuthAssignment".
  *
- * The followings are the available columns in table 'authassignment':
+ * The followings are the available columns in table 'AuthAssignment':
  * @property string $itemname
  * @property string $userid
  * @property string $bizrule
@@ -12,14 +12,14 @@
  * The followings are the available model relations:
  * @property Authitem $itemname0
  */
-class Authassignment extends CActiveRecord
+class AuthAssignment extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'authassignment';
+		return 'AuthAssignment';
 	}
 
 	/**
@@ -96,7 +96,7 @@ class Authassignment extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Authassignment the static model class
+	 * @return AuthAssignment the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

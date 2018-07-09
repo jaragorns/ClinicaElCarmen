@@ -1,6 +1,6 @@
 <?php
 
-class AuthassignmentController extends Controller
+class AuthAssignmentController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -54,14 +54,14 @@ class AuthassignmentController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Authassignment;
+		$model=new AuthAssignment;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Authassignment']))
+		if(isset($_POST['AuthAssignment']))
 		{
-			$model->attributes=$_POST['Authassignment'];
+			$model->attributes=$_POST['AuthAssignment'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->itemname));
 		}
@@ -83,9 +83,9 @@ class AuthassignmentController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Authassignment']))
+		if(isset($_POST['AuthAssignment']))
 		{
-			$model->attributes=$_POST['Authassignment'];
+			$model->attributes=$_POST['AuthAssignment'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->itemname));
 		}
@@ -114,7 +114,7 @@ class AuthassignmentController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Authassignment');
+		$dataProvider=new CActiveDataProvider('AuthAssignment');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -125,10 +125,10 @@ class AuthassignmentController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Authassignment('search');
+		$model=new AuthAssignment('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Authassignment']))
-			$model->attributes=$_GET['Authassignment'];
+		if(isset($_GET['AuthAssignment']))
+			$model->attributes=$_GET['AuthAssignment'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -139,12 +139,12 @@ class AuthassignmentController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Authassignment the loaded model
+	 * @return AuthAssignment the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Authassignment::model()->findByPk($id);
+		$model=AuthAssignment::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -152,11 +152,11 @@ class AuthassignmentController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Authassignment $model the model to be validated
+	 * @param AuthAssignment $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='authassignment-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='AuthAssignment-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
