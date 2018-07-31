@@ -365,7 +365,7 @@ class SolicitudesController extends Controller
 		}
 	}
 
-	public function verificarGuardia(){
+	public static function verificarGuardia(){
 	
 		//asignacion zona horaria	
 		date_default_timezone_set("America/Caracas");

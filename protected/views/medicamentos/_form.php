@@ -53,9 +53,10 @@
 				$model,
 				'unidad_medida',
 				CHtml::listData(
-					Medicamentos::model()->findAll(),
-					'id_medicamentos',
-					'descripcion'),
+					UnidadMedidas::model()->findAll(),
+					'id_unidad_medidas',
+					'descripcion' 
+					),
 				array(
 					'class' => 'my-drop-down',
 					'empty'=>'-- Seleccione Unidad de Medida --',

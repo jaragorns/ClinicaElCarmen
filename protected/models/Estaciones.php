@@ -20,7 +20,7 @@ class Estaciones extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'estaciones';
+		return 'Estaciones';
 	}
 
 	/**

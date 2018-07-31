@@ -327,7 +327,7 @@ class GuardiasController extends Controller
 
 		//estacion Jefe_Enfermeria
 		$sqlEn = "SELECT * FROM guardias INNER JOIN usuarios ON id_usuario = id
-									   INNER JOIN estaciones ON guardias.id_estacion = estaciones.id_estacion
+									     INNER JOIN Estaciones ON guardias.id_estacion = Estaciones.id_estacion
 						WHERE mes=".$mes." AND ano=".$ano." AND guardias.id_estacion = 1
 						ORDER by guardias.id_estacion ";
 		$dataEn = Yii::app()->db->createCommand($sqlEn)->queryAll();
@@ -335,7 +335,7 @@ class GuardiasController extends Controller
 
 		//estacion Pabellon
 		$sqlP = "SELECT * FROM guardias INNER JOIN usuarios ON id_usuario = id
-									   INNER JOIN estaciones ON guardias.id_estacion = estaciones.id_estacion
+									    INNER JOIN Estaciones ON guardias.id_estacion = Estaciones.id_estacion
 						WHERE mes=".$mes." AND ano=".$ano." AND guardias.id_estacion = 2
 						ORDER by guardias.id_estacion ";
 		$dataP = Yii::app()->db->createCommand($sqlP)->queryAll();
@@ -343,7 +343,7 @@ class GuardiasController extends Controller
 
 		//estacion Emergencia
 		$sqlEm = "SELECT * FROM guardias INNER JOIN usuarios ON id_usuario = id
-									   INNER JOIN estaciones ON guardias.id_estacion = estaciones.id_estacion
+									     INNER JOIN Estaciones ON guardias.id_estacion = Estaciones.id_estacion
 						WHERE mes=".$mes." AND ano=".$ano." AND guardias.id_estacion = 3
 						ORDER by guardias.id_estacion ";
 		$dataEm = Yii::app()->db->createCommand($sqlEm)->queryAll();
@@ -351,7 +351,7 @@ class GuardiasController extends Controller
 
 		//estacion Hospitalizacion 1
 		$sqlH1 = "SELECT * FROM guardias INNER JOIN usuarios ON id_usuario = id
-									   INNER JOIN estaciones ON guardias.id_estacion = estaciones.id_estacion
+									     INNER JOIN Estaciones ON guardias.id_estacion = Estaciones.id_estacion
 						WHERE mes=".$mes." AND ano=".$ano." AND guardias.id_estacion = 4
 						ORDER by guardias.id_estacion ";
 		$dataH1 = Yii::app()->db->createCommand($sqlH1)->queryAll();
@@ -359,7 +359,7 @@ class GuardiasController extends Controller
 
 		//estacion Hospitalizacion 2
 		$sqlH2 = "SELECT * FROM guardias INNER JOIN usuarios ON id_usuario = id
-									   INNER JOIN estaciones ON guardias.id_estacion = estaciones.id_estacion
+									     INNER JOIN Estaciones ON guardias.id_estacion = Estaciones.id_estacion
 						WHERE mes=".$mes." AND ano=".$ano." AND guardias.id_estacion = 5
 						ORDER by guardias.id_estacion ";
 		$dataH2 = Yii::app()->db->createCommand($sqlH2)->queryAll();
@@ -367,7 +367,7 @@ class GuardiasController extends Controller
 
 		//estacion reserva
 		$sqlR = "SELECT * FROM guardias INNER JOIN usuarios ON id_usuario = id
-									   INNER JOIN estaciones ON guardias.id_estacion = estaciones.id_estacion
+									    INNER JOIN Estaciones ON guardias.id_estacion = Estaciones.id_estacion
 						WHERE mes=".$mes." AND ano=".$ano." AND guardias.id_estacion = 7
 						ORDER by guardias.id_estacion ";
 		$dataR = Yii::app()->db->createCommand($sqlR)->queryAll();
@@ -387,7 +387,7 @@ class GuardiasController extends Controller
 		if(!empty($dataEn)){
 		$html.='
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
-				<tr><td class="estacion"><b>'.$dataEn[0]['nombre'].'</b></td></tr>
+				<tr><td class="estacion"><b>'.$dataEn[0]['nombres'].'</b></td></tr>
 			</table>
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
 				<tr>
@@ -424,7 +424,7 @@ class GuardiasController extends Controller
 			if(!empty($dataP)){
 			$html.='
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
-				<tr><td class="estacion"><b>'.$dataP[0]['nombre'].'</b></td></tr>
+				<tr><td class="estacion"><b>'.$dataP[0]['nombres'].'</b></td></tr>
 			</table>
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
 				<tr>
@@ -461,7 +461,7 @@ class GuardiasController extends Controller
 			if(!empty($dataEm)){
 			$html.='
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
-				<tr><td class="estacion"><b>'.$dataEm[0]['nombre'].'</b></td></tr>
+				<tr><td class="estacion"><b>'.$dataEm[0]['nombres'].'</b></td></tr>
 			</table>
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
 				<tr>
@@ -498,7 +498,7 @@ class GuardiasController extends Controller
 			if(!empty($dataH1)){
 			$html.='
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
-				<tr><td class="estacion"><b>'.$dataH1[0]['nombre'].'</b></td></tr>
+				<tr><td class="estacion"><b>'.$dataH1[0]['nombres'].'</b></td></tr>
 			</table>
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
 				<tr>
@@ -535,7 +535,7 @@ class GuardiasController extends Controller
 			if(!empty($dataH2)){
 			$html.='
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
-				<tr><td class="estacion"><b>'.$dataH2[0]['nombre'].'</b></td></tr>
+				<tr><td class="estacion"><b>'.$dataH2[0]['nombres'].'</b></td></tr>
 			</table>
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
 				<tr>
@@ -572,7 +572,7 @@ class GuardiasController extends Controller
 			if(!empty($dataR)){
 			$html.='
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
-				<tr><td class="estacion"><b>'.$dataR[0]['nombre'].'</b></td></tr>
+				<tr><td class="estacion"><b>'.$dataR[0]['nombres'].'</b></td></tr>
 			</table>
 			<table width="100%" border="1" cellpadding="0" cellspacing="1" bordercolor="#000000" style="border-collapse:collapse;">
 				<tr>
@@ -637,6 +637,7 @@ function esBisiesto($year){
 } 
 function turno($value, $dataTurnos)
 {
+	$turno = 0;
 	$numRegistros = sizeof($dataTurnos);
 
 	for($i=0; $i<$numRegistros; $i++){

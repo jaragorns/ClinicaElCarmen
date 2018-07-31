@@ -75,7 +75,7 @@ $this->breadcrumbs=array(
 			<td><?php 
 			$this->widget('zii.widgets.jui.CJuiDatePicker',array(
 			    'name'=>'ffd',
-			    'language'=>Yii::app()->getLanguage(),
+			    //'language'=>Yii::app()->getLanguage(),
 			    'options'=>array(
 			        'showAnim'=>'fold',
 			        'changeMonth' => 'true', 
@@ -89,7 +89,7 @@ $this->breadcrumbs=array(
 			<td><?php 
 			$this->widget('zii.widgets.jui.CJuiDatePicker',array(
 			    'name'=>'ffh',
-			    'language'=>Yii::app()->getLanguage(),
+			    //'language'=>Yii::app()->getLanguage(),
 			    'options'=>array(
 			        'showAnim'=>'fold',
 			        'changeMonth' => 'true', 

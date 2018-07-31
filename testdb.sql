@@ -211,19 +211,19 @@ INSERT INTO `comprobantes` (`id_comprobante`, `num_comprobante`, `num_cheque`, `
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `estaciones`
+-- Estructura de tabla para la tabla `Estaciones`
 --
 
-CREATE TABLE `estaciones` (
+CREATE TABLE `Estaciones` (
   `id_estacion` int(11) NOT NULL,
   `nombre` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `estaciones`
+-- Volcado de datos para la tabla `Estaciones`
 --
 
-INSERT INTO `estaciones` (`id_estacion`, `nombre`) VALUES
+INSERT INTO `Estaciones` (`id_estacion`, `nombre`) VALUES
 (1, 'Hospitalización 1'),
 (2, 'Farmacia');
 
@@ -612,9 +612,9 @@ ALTER TABLE `comprobantes`
   ADD KEY `FK_USUARIOS` (`usuarios_username`);
 
 --
--- Indices de la tabla `estaciones`
+-- Indices de la tabla `Estaciones`
 --
-ALTER TABLE `estaciones`
+ALTER TABLE `Estaciones`
   ADD PRIMARY KEY (`id_estacion`);
 
 --
@@ -745,9 +745,9 @@ ALTER TABLE `comprobantes`
   MODIFY `id_comprobante` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `estaciones`
+-- AUTO_INCREMENT de la tabla `Estaciones`
 --
-ALTER TABLE `estaciones`
+ALTER TABLE `Estaciones`
   MODIFY `id_estacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -867,7 +867,7 @@ ALTER TABLE `facturas`
 -- Filtros para la tabla `guardias`
 --
 ALTER TABLE `guardias`
-  ADD CONSTRAINT `fk_guardia_estacion1` FOREIGN KEY (`id_estacion`) REFERENCES `estaciones` (`id_estacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_guardia_estacion1` FOREIGN KEY (`id_estacion`) REFERENCES `Estaciones` (`id_estacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_guardia_usuario1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `guardias_ibfk_1` FOREIGN KEY (`id_turno`) REFERENCES `turnos` (`id_turno`);
 
@@ -875,7 +875,7 @@ ALTER TABLE `guardias`
 -- Filtros para la tabla `inventario`
 --
 ALTER TABLE `inventario`
-  ADD CONSTRAINT `fk_inventario_estacion1` FOREIGN KEY (`id_estacion`) REFERENCES `estaciones` (`id_estacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_inventario_estacion1` FOREIGN KEY (`id_estacion`) REFERENCES `Estaciones` (`id_estacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_inventario_factura1` FOREIGN KEY (`id_factura`) REFERENCES `facturas` (`id_factura`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_inventario_medicamento1` FOREIGN KEY (`id_medicamento`) REFERENCES `medicamentos` (`id_medicamento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_inventario_usuario1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -884,7 +884,7 @@ ALTER TABLE `inventario`
 -- Filtros para la tabla `solicitudes`
 --
 ALTER TABLE `solicitudes`
-  ADD CONSTRAINT `fk_guardia_has_estacion_estacion1` FOREIGN KEY (`estacion_id_estacion`) REFERENCES `estaciones` (`id_estacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_guardia_has_estacion_estacion1` FOREIGN KEY (`estacion_id_estacion`) REFERENCES `Estaciones` (`id_estacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_solicitudes_guardias1` FOREIGN KEY (`guardias_id_guardia`) REFERENCES `guardias` (`id_guardia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_solicitudes_stock1` FOREIGN KEY (`stock_id_stock`) REFERENCES `stock` (`id_stock`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -892,7 +892,7 @@ ALTER TABLE `solicitudes`
 -- Filtros para la tabla `stock`
 --
 ALTER TABLE `stock`
-  ADD CONSTRAINT `fk_stock_estacion1` FOREIGN KEY (`id_estacion`) REFERENCES `estaciones` (`id_estacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_stock_estacion1` FOREIGN KEY (`id_estacion`) REFERENCES `Estaciones` (`id_estacion`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_stock_medicamento1` FOREIGN KEY (`id_medicamento`) REFERENCES `medicamentos` (`id_medicamento`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --

@@ -79,7 +79,8 @@ class UsuariosController extends Controller
 			if($valid)
 	        { 
 	           	$model->roles_id = $rol->id;
-	            $model->password = crypt($model->password,'!QSC"WDV#ed468j%&/=??///');
+	           	$model->itemname = $rol_user->itemname;
+	            $model->password = password_hash($model->password,PASSWORD_DEFAULT);
 	            $model->save();
 	            
 				Yii::app()->authManager->assign($rol_user->itemname,$model->id);
@@ -155,14 +156,14 @@ class UsuariosController extends Controller
 				$rol_user->attributes=$_POST['AuthAssignment'][1];
 		    	$rol=Roles::model()->findByAttributes(['description'=> $rol_user->itemname]);
 				// Validate all three model
-				$rol_user->userid = Yii::app()->user->id;
 		        if($model->validate() AND $rol_user->validate()){
-					// print_r($rol->id);
-					// exit();
-					// die();
+					$rol_user->userid = Yii::app()->user->id;
+					$rol_user->itemname = $rol_user->itemname;
+					$model->itemname = $rol_user->itemname;
 		        	$model->roles_id = $rol->id;       
-		            $model->password = crypt($model->password,'!QSC"WDV#ed468j%&/=??///');
+		            $model->password = password_hash($model->password,PASSWORD_DEFAULT);
 		            $model->save();
+
 					if(Yii::app()->user->role=="Superadmin" || Yii::app()->user->role=="Presidente" || Yii::app()->user->role=="Vicepresidente"){
 						Yii::app()->authManager->revoke(AuthAssignment::model()->findByAttributes(array("userid"=>$model->id))->itemname,$model->id);
 						Yii::app()->authManager->assign($rol_user->itemname,$model->id);

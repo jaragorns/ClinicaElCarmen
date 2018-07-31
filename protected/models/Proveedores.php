@@ -34,6 +34,7 @@ class Proveedores extends CActiveRecord
 		return array(
 			array('nombre, rif, telefono, direccion', 'required'),
 			array('nombre, telefono, direccion, email', 'length', 'max'=>45),
+			array('email', 'email'),
 			array('rif', 'length', 'max'=>10),
 			array('rif', 'unique', 
      			'className' => 'Proveedores',

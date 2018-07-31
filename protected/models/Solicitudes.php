@@ -112,7 +112,7 @@ class Solicitudes extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$estacion = SolicitudesController::verificarGuardia(); 
+		$estacion = SolicitudesController::verificarGuardia()->id_guardias; 
 
 		if(!empty($estacion) OR Yii::app()->user->role=="Farmaceuta" OR Yii::app()->user->role=="Jefe_Farmacia"){
 			if(Yii::app()->user->role=="Farmaceuta" OR Yii::app()->user->role=="Jefe_Farmacia")
